@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc2b2f19-3831-43a1-9cf9-ad12f89ee34e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1YpREf7LxxlR6zn97j877oaqeOu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/下载/fastjson-1.2.66.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc2b2f19-3831-43a1-9cf9-ad12f89ee34e" name="Default Changelist" comment="" />
+      <created>1583637438299</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583637438299</updated>
+      <workItem from="1583637441681" duration="612000" />
+      <workItem from="1583638104086" duration="366000" />
+      <workItem from="1583638741170" duration="2110000" />
+      <workItem from="1583661494990" duration="2367000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="85" key="FileChooserDialogImpl" timestamp="1583665103550">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="85" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1583665103550" />
+    <state x="121" y="0" key="SettingsEditor" timestamp="1583665109893">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1583665109893" />
+    <state x="336" y="168" key="com.intellij.ide.util.TipDialog" timestamp="1584006491879">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="336" y="168" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584006491879" />
+  </component>
+</project>
