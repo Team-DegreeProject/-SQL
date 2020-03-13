@@ -40,6 +40,14 @@ public class BPlusTree <T, V extends Comparable<V>>{
         if(t != null)
             this.root = t;
     }
+
+    //删除
+    public void delete(V key){
+        if(key == null){
+            return;
+        }
+        this.root.delete(key);
+    }
     public static int getOrder(){
         return Order;
     }

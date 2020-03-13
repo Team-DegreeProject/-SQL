@@ -1,6 +1,5 @@
 class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
-    //子节点
-    protected Node<T, V>[] childs;
+
     public NonLeafNode() {
         super();
         this.childs = new Node[BPlusTree.getmaxKeyNumber()];
@@ -20,10 +19,10 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
 
     @Override
     public Node<T, V> insert(T value, V key) {
-        System.out.println("当前节点key为:");
-        for(int j = 0; j < this.keyNumber; j++)
-            System.out.print(this.keys[j] + " ");
-            System.out.println();
+//        System.out.println("当前节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//            System.out.println();
         if(key.compareTo((V) this.keys[this.keyNumber - 1]) == 0) {
             return null;
         }
@@ -38,6 +37,20 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
         }
 
         return this.childs[i].insert(value, key);
+    }
+
+    @Override
+    public void delete(V key) {
+        int i = 0;
+        while(i < this.keyNumber){
+            if(key.compareTo((V) this.keys[i]) <= 0)
+                break;
+            i++;
+        }
+        if(key.compareTo((V) this.keys[this.keyNumber - 1]) > 0) {
+            return;
+        }
+        this.childs[i].delete(key);
     }
 
 
@@ -111,4 +124,169 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
         return parentNode.insertNode(this, tempNode, oldKey);
     }
 
+    public void deleteNode(){
+        int threshold=BPlusTree.getOrder()/2;
+        NonLeafNode left;
+        NonLeafNode right;
+        if(this.keyNumber>=threshold || this.parent==null){
+            return;
+        }else{
+            //找到此节点的兄弟节点
+            int i = 0;
+//            System.out.println("当前节点key为:");
+//            for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//            System.out.println();
+//
+//            System.out.println("父节点key为:");
+//            for(int j = 0; j < this.parent.keyNumber; j++)
+//                System.out.print(this.parent.keys[j] + " ");
+//            System.out.println();
+            while(((V)this.keys[this.keyNumber-1]).compareTo((V)this.parent.keys[i]) != 0){
+                i++;
+            }
+            //
+//            System.out.println("父父节点key为:");
+//            for(int j = 0; j < this.parent.keyNumber; j++)
+//                System.out.print(this.parent.keys[j] + " ");
+//            System.out.println();
+//            System.out.println("i: "+i+" parent keynumber: "+this.parent.keyNumber);
+
+            //
+            if(i>0 && i<(this.parent.keyNumber-1)){
+                left=(NonLeafNode) this.parent.childs[i-1];
+                right=(NonLeafNode) this.parent.childs[i+1];
+            }else if(i==0){
+                left=null;
+                right=(NonLeafNode) this.parent.childs[i+1];
+            }else{
+                left=(NonLeafNode) this.parent.childs[i-1];
+                right=null;
+            }
+        }
+        if(this.keyNumber<threshold && left!=null && left.keyNumber>threshold){
+            Object lendKey=left.keys[left.keyNumber-1];
+            Node lendChild=left.childs[left.keyNumber-1];
+            lendChild.parent=this;
+            left.keys[left.keyNumber-1]=null;
+            left.childs[left.keyNumber-1]=null;
+            left.keyNumber--;
+            changeParentKey(left);
+            for(int i=this.keyNumber;i>0;i--){
+                this.keys[i]=this.keys[i-1];
+                this.childs[i]=this.childs[i-1];
+            }
+            this.keys[0]=lendKey;
+            this.childs[0]=lendChild;
+            this.keyNumber++;
+//            System.out.println("caseA: ");
+        }else if(this.keyNumber<threshold && right!=null && right.keyNumber>threshold){
+            Object lendKey=right.keys[0];
+            Node lendChild=right.childs[0];
+            lendChild.parent=this;
+            this.keys[this.keyNumber]=lendKey;
+            this.childs[this.keyNumber]=lendChild;
+            this.keyNumber++;
+            changeParentKey(this);
+            for(int j=0;j<right.keyNumber-1;j++){
+                right.keys[j]=right.keys[j+1];
+                right.childs[j]=right.childs[j+1];
+            }
+            right.keyNumber--;
+//            System.out.println("caseB: ");
+        }else if(this.keyNumber<threshold && right!=null && right.keyNumber<=threshold){//合并子节点
+
+//            System.out.println("当前caseC节点key为:");
+//            for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//            System.out.println();
+//
+//            System.out.println("当前caseC右节点key为:");
+//            for(int j = 0; j < right.keyNumber; j++)
+//                System.out.print(right.keys[j] + " ");
+//            System.out.println();
+
+            Object tempKeys=new Object[BPlusTree.getmaxKeyNumber()];
+            Node[] tempChilds=new Node[BPlusTree.getmaxKeyNumber()];
+            System.arraycopy(right.keys, 0, tempKeys, this.keyNumber, right.keyNumber);
+            System.arraycopy(right.childs, 0, tempChilds, this.keyNumber, right.keyNumber);
+            System.arraycopy(this.keys, 0, tempKeys, 0, this.keyNumber);
+            System.arraycopy(this.childs, 0, tempChilds, 0, keyNumber);
+            System.arraycopy(tempKeys, 0, right.keys, 0, this.keyNumber+right.keyNumber);
+            System.arraycopy(tempChilds, 0, right.childs, 0, keyNumber+right.keyNumber);
+            right.keyNumber=right.keyNumber+this.keyNumber;
+            for(int i=0;i<right.keyNumber;i++){
+                right.childs[i].parent=right;
+            }
+            if(this.parent!=null){
+                //删除此节点对应的父节点的key和child
+                int j = 0;
+                while(j < this.parent.keyNumber){
+                    if(((V)this.keys[this.keyNumber-1]).compareTo((V) this.parent.keys[j]) == 0){
+                        break;
+                    }
+                    j++;
+                }
+                for(int x=j;x<this.parent.keyNumber-1;x++){
+                    this.parent.keys[x]=this.parent.keys[x+1];
+                    this.parent.childs[x]= this.parent.childs[x+1];
+                }
+                //判断父节点是否需要合并
+                NonLeafNode parentNode=(NonLeafNode) right.parent;
+                parentNode.deleteNode();
+            }
+//            System.out.println("caseC: ");
+        }else if(this.keyNumber<threshold && left!=null && left.keyNumber<=threshold){
+            Object tempKeys=new Object[BPlusTree.getmaxKeyNumber()];
+            Node[] tempChilds=new Node[BPlusTree.getmaxKeyNumber()];
+            System.arraycopy(left.keys, 0, tempKeys, 0, left.keyNumber);
+            System.arraycopy(left.childs, 0, tempChilds, 0, left.keyNumber);
+            System.arraycopy(this.keys, 0, tempKeys, left.keyNumber, this.keyNumber);
+            System.arraycopy(this.childs, 0, tempChilds, left.keyNumber, this.keyNumber);
+            System.arraycopy(tempKeys, 0, this.keys, 0, this.keyNumber+left.keyNumber);
+            System.arraycopy(tempChilds, 0, this.childs, 0, keyNumber+left.keyNumber);
+            this.keyNumber=left.keyNumber+this.keyNumber;
+            for(int i=0;i<this.keyNumber;i++){
+                this.childs[i].parent=this;
+            }
+            //删除左节点对应的父节点的key值和child
+            if(this.parent!=null){
+                int j = 0;
+                while(j < this.parent.keyNumber){
+                    if(((V)left.keys[left.keyNumber-1]).compareTo((V) this.parent.keys[j]) == 0){
+                        break;
+                    }
+                    j++;
+                }
+                for(int x=j;x<this.parent.keyNumber-1;x++){
+                    this.parent.keys[x]=this.parent.keys[x+1];
+                    this.parent.childs[x]= this.parent.childs[x+1];
+                }
+                this.parent.keyNumber--;
+                //判断父节点是否需要合并
+                NonLeafNode parentNode=(NonLeafNode) this.parent;
+                parentNode.deleteNode();
+            }
+//            System.out.println("caseD: ");
+        }
+    }
+
+    public void changeParentKey(Node node){
+        while (node.parent != null){
+            int j = 0;
+            while(j < node.parent.keyNumber){
+                if(((V)node.keys[node.keyNumber-1]).compareTo((V) node.parent.keys[j]) == 0){
+                    break;
+                }
+                j++;
+            }
+            node.parent.keys[j]=node.keys[node.keyNumber-1];
+            if(j==(node.parent.keyNumber-1)){
+                node = node.parent;
+            }
+            else {
+                break;
+            }
+        }
+    }
 }

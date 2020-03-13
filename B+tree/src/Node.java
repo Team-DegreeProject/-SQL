@@ -5,11 +5,11 @@ abstract class Node<T, V extends Comparable<V>>{
     protected Integer keyNumber;
     //键
     protected Object keys[];
-
+    //子节点
+    protected Node<T, V>[] childs;
     //构造方法
     public Node(){
         this.keys = new Object[BPlusTree.getmaxKeyNumber()];
-
         this.keyNumber = 0;
         this.parent = null;
     }
@@ -20,5 +20,6 @@ abstract class Node<T, V extends Comparable<V>>{
     //插入
     public abstract Node<T, V> insert(T value, V key);
 
-
+    //删除
+    public abstract void delete(V key);
 }
