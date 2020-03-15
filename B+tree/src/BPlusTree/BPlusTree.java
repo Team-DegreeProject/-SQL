@@ -1,3 +1,5 @@
+package BPlusTree;
+
 //T为值
 //V键值需要比较大小，所以要继承Comparable
 public class BPlusTree <T, V extends Comparable<V>>{
