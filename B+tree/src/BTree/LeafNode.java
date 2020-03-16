@@ -1,4 +1,4 @@
-package BPlusTree;
+package BTree;
 
 class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 

@@ -1,4 +1,4 @@
-package BPlusTree;
+package BTree;
 
 //T为值
 //V键值需要比较大小，所以要继承Comparable

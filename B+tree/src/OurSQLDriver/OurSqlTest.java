@@ -1,8 +1,8 @@
 package OurSQLDriver;
 
 
-import BPlusTree.BPlusTree;
-import BPlusTree.Product;
+import BTree.BPlusTree;
+import BTree.Product;
 
 public class OurSqlTest {
     public OurSqlTest(){
