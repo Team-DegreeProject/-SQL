@@ -1,5 +1,4 @@
 package OurSQLDriver;
-import java.io.IOException;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -21,11 +20,11 @@ import java.util.concurrent.Executor;
 
 public class OurSqlConnection implements Connection{
 
-	OurSqlTest test=null;
+	OurSqlBridge bridge=null;
 
 	public OurSqlConnection(){
 		System.out.println("stream ok");
-		test=new OurSqlTest();
+		bridge=new OurSqlBridge();
 	}
 
 	@Override

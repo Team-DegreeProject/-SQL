@@ -4,8 +4,8 @@ package OurSQLDriver;
 import BTree.BPlusTree;
 import BTree.Product;
 
-public class OurSqlTest {
-    public OurSqlTest(){
+public class OurSqlBridge {
+    public OurSqlBridge(){
         BPlusTree<Product, Integer> b = new BPlusTree<>(4);
         Product p;
         long time1 = System.nanoTime();

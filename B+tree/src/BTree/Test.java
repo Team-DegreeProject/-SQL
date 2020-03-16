@@ -15,6 +15,7 @@ public class Test {
         long time2 = System.nanoTime();
 
         Product p1 = b.select(345);
+        Product p2 = b.select(9999);
 
         long time3 = System.nanoTime();
 

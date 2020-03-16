@@ -10,7 +10,7 @@ public class main {
         String PASSWORD = "xxx";
         Connection conn=null;
         try {
-                Class.forName("OurSQLDriver.OurSqlDriver");
+            Class.forName("OurSQLDriver.OurSqlDriver");
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
