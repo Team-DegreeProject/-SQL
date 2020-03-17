@@ -29,7 +29,7 @@ public class BPlusTree <T, V extends Comparable<V>>{
     public T select(V key){
         T t = this.root.select(key);
         if(t == null){
-            System.out.println("Key "+key+" do not exist");
+//            System.out.println("Key "+key+" do not exist");
         }
         return t;
     }
