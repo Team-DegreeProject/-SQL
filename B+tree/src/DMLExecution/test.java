@@ -13,6 +13,8 @@ public class test {
             p = new Product(i, "test", 1.0 * i);
             b.insert(p, p.getId());
         }
+        //condition代表and block
+        //conditions代表OR块
         Stack condition = new Stack();
         Stack conditions=new Stack();
         Condition c1=new Condition("Price","<","200");

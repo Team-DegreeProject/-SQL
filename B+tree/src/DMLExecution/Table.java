@@ -29,6 +29,12 @@ public class Table {
 
         return true;
     }
+    /*
+    处理where 传入的为or和and相关操作
+    Stack<Condition>指的是并列的and操作
+    Stack<Stack<Condition>>指的是并列的Or操作
+    返回每个or之间所需要的合并的数据结构
+     */
     public Stack<BPlusTree> where(Stack<Stack<Condition>> conditions){
         Stack<BPlusTree> output=new Stack();
         while(!conditions.isEmpty()){
@@ -37,7 +43,11 @@ public class Table {
         return output;
     }
 
-
+    /*
+        处理where中并列的and操作
+        Stack<Condition> condition为并列的and操作存储为stack
+        返回每个and块执行后形成的树
+         */
     public  BPlusTree whereAnd(Stack<Condition> condition){
         BPlusTree<Product, Integer> re = b;
         while(!condition.isEmpty()) {

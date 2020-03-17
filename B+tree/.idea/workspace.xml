@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a74cd290-709f-4f96-ab61-f8e6f3763b3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BTree/BPlusTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BTree/BPlusTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DMLExecution/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMLExecution/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DMLExecution/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMLExecution/test.java" afterDir="false" />
     </list>
@@ -45,17 +42,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DMLExecution/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+            <state relative-caret-position="-267">
+              <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#180#181#0" expanded="true" />
                 <element signature="e#201#202#0" expanded="true" />
-                <element signature="e#2535#2536#0" expanded="true" />
-                <element signature="e#2563#2564#0" expanded="true" />
+                <element signature="e#2534#2535#0" expanded="true" />
+                <element signature="e#2562#2563#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DMLExecution/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+            <state relative-caret-position="175">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -158,9 +155,9 @@
         <option value="$PROJECT_DIR$/src/DMLExecution/Test.java" />
         <option value="$PROJECT_DIR$/src/BTree/Test.java" />
         <option value="$PROJECT_DIR$/src/DMLExecution/Condition.java" />
-        <option value="$PROJECT_DIR$/src/DMLExecution/test.java" />
         <option value="$PROJECT_DIR$/src/BTree/BPlusTree.java" />
         <option value="$PROJECT_DIR$/src/DMLExecution/Table.java" />
+        <option value="$PROJECT_DIR$/src/DMLExecution/test.java" />
       </list>
     </option>
   </component>
@@ -296,12 +293,12 @@
       <workItem from="1584106239193" duration="13000" />
       <workItem from="1584363149591" duration="3661000" />
       <workItem from="1584368382944" duration="4798000" />
-      <workItem from="1584426469925" duration="7615000" />
+      <workItem from="1584426469925" duration="8042000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16906000" />
+    <option name="totallyTimeSpent" value="17333000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -316,14 +313,14 @@
     <frame x="-7" y="-7" width="1455" height="935" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26413745" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26413745" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -482,26 +479,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DMLExecution/test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DMLExecution/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+        <state relative-caret-position="-267">
+          <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#180#181#0" expanded="true" />
             <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#2535#2536#0" expanded="true" />
-            <element signature="e#2563#2564#0" expanded="true" />
+            <element signature="e#2534#2535#0" expanded="true" />
+            <element signature="e#2562#2563#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DMLExecution/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
