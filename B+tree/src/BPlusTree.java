@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 //T为值
 //V键值需要比较大小，所以要继承Comparable
 public class BPlusTree <T, V extends Comparable<V>> {
@@ -26,6 +29,15 @@ public class BPlusTree <T, V extends Comparable<V>> {
     //查询
     public T select(V key) {
         T t = this.root.select(key);
+        if (t == null) {
+            System.out.println("Key " + key + " do not exist");
+        }
+        return t;
+    }
+
+    //范围查询
+    public Node selectRange(V key) {
+        Node t = this.root.selectRange(key);
         if (t == null) {
             System.out.println("Key " + key + " do not exist");
         }
@@ -61,22 +73,93 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return node;
     }
 
-    public Object[] getLeafNodes() {
-        Object[] products = new Object[200];
-        System.out.println("当前节点key为:");
+    public int getDataNumber(){
         LeafNode temp = this.getLeft();
-        int i = 0;
+        int count=0;
+        while(temp!=null){
+            count=count+temp.keyNumber;
+            temp=temp.right;
+        }
+        return count;
+    }
+
+    public List<Object> getDatas() {
+        List<Object> products = new ArrayList<>();
+        LeafNode temp = this.getLeft();
         while (temp != null) {
             for (int j = 0; j < temp.keyNumber; j++) {
-                System.out.print(temp.keys[j] + " ");
-                products[i] = temp.values[j];
+                products.add(temp.values[j]);
             }
-            System.out.print("--");
             temp = temp.right;
         }
-        System.out.println();
         return products;
     }
+
+    public List<Object> getBigDatas(V key) {
+        LeafNode node=(LeafNode) selectRange(key);
+        int low = 0;
+        int up = node.keyNumber;
+        int middle = (low + up) / 2;
+        while(low < up){
+            V middleKey = (V) node.keys[middle];
+            if(key.compareTo(middleKey) == 0)
+                break;
+            else if(key.compareTo(middleKey) < 0)
+                up = middle;
+            else
+                low = middle;
+            middle = (low + up) / 2;
+        }
+        List<Object> products = new ArrayList<>();
+        for(int i=middle;i<node.keyNumber;i++){
+            products.add(node.values[i]);
+        }
+        LeafNode temp = null;
+        if(node.right!=null){
+            temp=node.right;
+        }
+        while (temp != null) {
+            for (int j = 0; j < temp.keyNumber; j++) {
+                products.add(temp.values[j]);
+            }
+            temp = temp.right;
+        }
+        return products;
+    }
+
+
+    public List<Object> getSmallDatas(V key) {
+        LeafNode node=(LeafNode) selectRange(key);
+        int low = 0;
+        int up = node.keyNumber;
+        int middle = (low + up) / 2;
+        while(low < up){
+            V middleKey = (V) node.keys[middle];
+            if(key.compareTo(middleKey) == 0)
+                break;
+            else if(key.compareTo(middleKey) < 0)
+                up = middle;
+            else
+                low = middle;
+            middle = (low + up) / 2;
+        }
+        List<Object> products = new ArrayList<>();
+        for(int i=middle;i>=0;i--){
+            products.add(node.values[i]);
+        }
+        LeafNode temp=null;
+        if(node.left!=null){
+             temp= node.left;
+        }
+        while (temp != null) {
+            for (int j = temp.keyNumber-1; j >=0; j--) {
+                products.add(temp.values[j]);
+            }
+            temp = temp.left;
+        }
+        return products;
+    }
+
 
     public static int getOrder() {
         return Order;

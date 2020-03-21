@@ -18,6 +18,19 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
     }
 
     @Override
+    public Node selectRange(V key) {
+        int i = this.keyNumber-1;
+        while(i >=0){
+            if(key.compareTo((V) this.keys[i]) >= 0)
+                break;
+            i--;
+        }
+        if(i==(-1))
+            return null;
+        return this.childs[i].selectRange(key);
+    }
+
+    @Override
     public Node<T, V> insert(T value, V key) {
 //        System.out.println("当前节点key为:");
 //        for(int j = 0; j < this.keyNumber; j++)
@@ -166,7 +179,7 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
 //            System.out.println("key[0]: "+this.keys[0]+"  this.parent.keynumber: "+this.parent.keyNumber);
             while(((V)this.keys[0]).compareTo((V)this.parent.keys[i]) != 0){
                 i++;
-                System.out.println("i:  "+i);
+//                System.out.println("i:  "+i);
             }
 
             //

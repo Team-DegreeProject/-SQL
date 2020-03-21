@@ -32,6 +32,26 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         return null;
     }
 
+    @Override
+    public Node selectRange(V key) {
+        if(this.keyNumber <=0 || key.compareTo((V)this.keys[this.keyNumber-1])>0)
+            return null;
+        int low = 0;
+        int up = this.keyNumber;
+        int middle = (low + up) / 2;
+        while(low < up){
+            V middleKey = (V) this.keys[middle];
+            if(key.compareTo(middleKey) == 0)
+                return this;
+            else if(key.compareTo(middleKey) < 0)
+                up = middle;
+            else
+                low = middle;
+            middle = (low + up) / 2;
+        }
+        return null;
+    }
+
 
     @Override
     public Node<T, V> insert(T value, V key) {

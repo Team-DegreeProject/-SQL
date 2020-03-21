@@ -17,6 +17,9 @@ abstract class Node<T, V extends Comparable<V>>{
     //查找
     public abstract T select(V key);
 
+    //范围查找
+    public abstract Node selectRange(V key);
+
     //插入
     public abstract Node<T, V> insert(T value, V key);
 
