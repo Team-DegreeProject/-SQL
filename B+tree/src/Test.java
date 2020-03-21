@@ -5,21 +5,24 @@ public class Test {
         Product p;
         long time1 = System.nanoTime();
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 15; i >=0; i--) {
             p = new Product(i, "test", 1.0 * i);
             b.insert(p, p.getId());
         }
-
+        b.getNodes(b.getRoot());
+        System.out.println("++++++++++++++++++++++++++++++++++++++++");
         long time2 = System.nanoTime();
 
-        Product p1 = b.select(345);
+//        Product p1 = b.select(345);
 
         long time3 = System.nanoTime();
 
-        for (int i = 9999; i >=0; i--) {
+        for (int i = 15; i >=0; i--) {
             b.delete(i);
+            System.out.println("delete: "+i);
+            b.getNodes(b.getRoot());
+            System.out.println("++++++++++++++++++++++++++++++++++++++++");
         }
-
         long time4 = System.nanoTime();
 
         System.out.println("插入耗时: " + (time2 - time1));

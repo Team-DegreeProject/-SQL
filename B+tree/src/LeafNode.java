@@ -14,7 +14,7 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     //二分查找
     @Override
     public T select(V key) {
-        if(this.keyNumber <=0)
+        if(this.keyNumber <=0 || key.compareTo((V)this.keys[this.keyNumber-1])>0)
             return null;
         int low = 0;
         int up = this.keyNumber;
@@ -36,36 +36,48 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     @Override
     public Node<T, V> insert(T value, V key) {
         //找到插入数据位置
-        int i = 0;
-        while(i < this.keyNumber){
-            if(key.compareTo((V) this.keys[i]) < 0){
+
+        int i = this.keyNumber-1;
+        while(i >=0){
+            if(key.compareTo((V) this.keys[i]) > 0){
                 break;
             } else if(key.compareTo((V) this.keys[i]) == 0){
                 return null;
             }
-            i++;
+            i--;
         }
         //复制数组,完成添加
         Object tempKeys[] = new Object[BPlusTree.getmaxKeyNumber()];
         Object tempValues[] = new Object[BPlusTree.getmaxKeyNumber()];
-        System.arraycopy(this.keys, 0, tempKeys, 0, i);
-        System.arraycopy(this.values, 0, tempValues, 0, i);
-        System.arraycopy(this.keys, i, tempKeys, i + 1, this.keyNumber - i);
-        System.arraycopy(this.values, i, tempValues, i + 1, this.keyNumber - i);
-        tempKeys[i] = key;
-        tempValues[i] = value;
+        if(i==(-1)){
+            System.arraycopy(this.keys, 0, tempKeys, 1, this.keyNumber);
+            System.arraycopy(this.values, 0, tempValues, 1, this.keyNumber);
+            tempKeys[0] = key;
+            tempValues[0] = value;
+        }else{
+            System.arraycopy(this.keys, 0, tempKeys, 0, i+1);
+            System.arraycopy(this.values, 0, tempValues, 0, i+1);
+            System.arraycopy(this.keys, i+1, tempKeys, i + 2, this.keyNumber - i - 1);
+            System.arraycopy(this.values, i+1, tempValues, i + 2, this.keyNumber - i - 1);
+            tempKeys[i+1] = key;
+            tempValues[i+1] = value;
+        }
         this.keyNumber++;
 //            System.out.println("插入完成,当前节点key为:");
 //            for(int j = 0; j < this.keyNumber; j++)
 //                System.out.print(tempKeys[j] + " ");
 //            System.out.println();
-        //判断插入值是否超过父节点
-        if(i==(this.keyNumber-1)){
+        //判断插入值是否小于父节点
+        if(i==(-1)){
             Node node = this;
-            V tempkey=(V)tempKeys[this.keyNumber-1];
+//            System.out.println("999当前节点key为:");
+//            for(int j = 0; j < this.keyNumber; j++)
+//                System.out.print(node.keys[j] + " ");
+//            System.out.println();
+            V tempkey=(V)tempKeys[0];
             while (node.parent != null){
-                if(tempkey.compareTo((V)node.parent.keys[node.parent.keyNumber - 1]) > 0){
-                    node.parent.keys[node.parent.keyNumber - 1] = tempkey;
+                if(tempkey.compareTo((V)node.parent.keys[0]) < 0){
+                    node.parent.keys[0] = tempkey;
                     node = node.parent;
                 }
                 else {
@@ -76,7 +88,7 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         //保存该节点储存在父节点的key值
         V oldKey = null;
         if(this.keyNumber > 0)
-            oldKey = (V) tempKeys[this.keyNumber - 1];
+            oldKey = (V) tempKeys[0];
         //判断是否需要拆分
         //如果不需要拆分完成复制后直接返回
         if(this.keyNumber <= BPlusTree.getOrder()){
@@ -96,8 +108,10 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
             tempNode.parent = tempNonLeafNode;
             this.parent = tempNonLeafNode;
             oldKey = null;
+        }else{
+            tempNode.parent = this.parent;
         }
-        tempNode.parent = this.parent;
+
         System.arraycopy(tempKeys, middle, tempNode.keys, 0, tempNode.keyNumber);
         System.arraycopy(tempValues, middle, tempNode.values, 0, tempNode.keyNumber);
         //让原有叶子节点作为拆分的左半部分
@@ -108,29 +122,73 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         System.arraycopy(tempValues, 0, this.values, 0, middle);
         //刷新左右叶节点左右指针
         tempNode.right=this.right;
+        if(this.right!=null){
+            this.right.left=tempNode;
+        }
         this.right = tempNode;
         tempNode.left = this;
 
+
+//        System.out.println("当前叶节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//        System.out.println();
+//        System.out.println("oldkey "+oldKey);
         //将新节点插入到父节点
         NonLeafNode<T, V> parentNode = (NonLeafNode<T, V>)this.parent;
         return parentNode.insertNode(this, tempNode, oldKey);
     }
 
     @Override
-    public void delete(V key) {
-        //记录该节点最大key值
+    public boolean delete(V key) {
+
 //        System.out.println("删除： "+key+"   keynumber： "+this.keyNumber);
-        V oldKey=(V)this.keys[this.keyNumber-1];
+//        System.out.println("当前叶子节点key为:"+this);
+//        for(int z = 0; z < this.keyNumber; z++)
+//            System.out.print(this.keys[z] + " ");
+//        System.out.println();
+//        System.out.println("当前叶子节点父节点key为:");
+//        for(int z = 0; z < this.parent.keyNumber; z++)
+//            System.out.print(this.parent.keys[z] + " ");
+//        System.out.println();
+//        if(this.right!=null){
+//            System.out.println("当前叶子节点右节点key为:");
+//            for(int z = 0; z < this.right.keyNumber; z++)
+//                System.out.print(this.right.keys[z] + " ");
+//            System.out.println();
+//        }
+//        if(this.left!=null){
+//            System.out.println("当前叶子节点左节点key为:");
+//            for(int z = 0; z < this.left.keyNumber; z++)
+//                System.out.print(this.left.keys[z] + " ");
+//            System.out.println();
+//            System.out.println("当前叶子节点左节点父节点key为:");
+//            for(int z = 0; z < this.left.parent.keyNumber; z++)
+//                System.out.print(this.left.parent.keys[z] + " ");
+//            System.out.println();
+//            System.out.println("当前叶子节点左节点右节点key为:");
+//            for(int z = 0; z < this.left.right.keyNumber; z++)
+//                System.out.print(this.left.right.keys[z] + " ");
+//            System.out.println();
+//        }
+
+        //记录该节点最小key值
+        V oldKey=(V)this.keys[0];
         //找到删除数据位置
-        int i = 0;
-        while(i < this.keyNumber){
+        int i = this.keyNumber-1;
+        while(i >=0){
             if(key.compareTo((V) this.keys[i]) == 0){
                 break;
             }
-            i++;
+            i--;
         }
-        if(i==this.keyNumber){
-            return;
+        if(i==(-1)){
+            System.out.println("not exist");
+            return false;
+        }
+        //删除最后一个值
+        if((this.keyNumber==1 && this.parent!=null && this.parent.parent==null) || this.keyNumber==1 && this.parent==null){
+            return true;
         }
         //复制数组,完成删除
         Object tempKeys[] = new Object[BPlusTree.getmaxKeyNumber()];
@@ -145,29 +203,17 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
             System.arraycopy(tempKeys, 0, this.keys, 0, this.keyNumber);
             System.arraycopy(tempValues, 0, this.values, 0, this.keyNumber);
             //判断父节点key值是否需要改变
-            if(i==this.keyNumber){
+            if(i==0){
                 changeParentKey(this,oldKey);
 //                System.out.println("true");
             }
 //            System.out.println("case 0:  keynumber:"+this.keyNumber+"   oldkey: "+oldKey);
-        }else if(this.keyNumber<threshold && this.left!=null && this.left.parent==this.parent && this.left.keyNumber>threshold){
-            Object lendKey=this.left.keys[this.left.keyNumber-1];
-            Object lendValue=this.left.values[this.left.keyNumber-1];
-            this.left.keys[this.left.keyNumber-1]=null;
-            this.left.values[this.left.keyNumber-1]=null;
-            this.left.keyNumber--;
-            //改变父节点的key值
-            changeParentKey(this.left,(V)lendKey);
-            System.arraycopy(tempKeys, 0, this.keys, 1, this.keyNumber);
-            System.arraycopy(tempValues, 0, this.values, 1, this.keyNumber);
-            this.keys[0]=lendKey;
-            this.values[0]=lendValue;
-            this.keyNumber++;
-            //判断父节点key值是否需要改变
-            if(i==this.keyNumber){
-                changeParentKey(this,oldKey);
-            }
-//            System.out.println("case 1:  "+this.keyNumber);
+//            if(this.left!=null){
+//                System.out.println("当前叶子节点左节点key为@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:");
+//                for(int z = 0; z < this.left.keyNumber; z++)
+//                    System.out.print(this.left.keys[z] + " ");
+//                System.out.println();
+//            }
         }else if(this.keyNumber<threshold && this.right!=null && this.right.parent==this.parent && this.right.keyNumber>threshold){
             Object lendKey=this.right.keys[0];
             Object lendValue=this.right.values[0];
@@ -176,20 +222,48 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
                 this.right.values[j]=this.right.values[j+1];
             }
             this.right.keyNumber--;
+            //改变父节点的key值
+            changeParentKey(this.right,(V)lendKey);
             System.arraycopy(tempKeys, 0, this.keys, 0, this.keyNumber);
             System.arraycopy(tempValues, 0, this.values, 0, this.keyNumber);
             this.keys[this.keyNumber]=lendKey;
             this.values[this.keyNumber]=lendValue;
             this.keyNumber++;
-            //改变父节点key值
+            //判断父节点key值是否需要改变
+            if(i==0){
+                changeParentKey(this,oldKey);
+            }
+//            System.out.println("case 1:  "+this.keyNumber);
+        }else if(this.keyNumber<threshold && this.left!=null && this.left.parent==this.parent && this.left.keyNumber>threshold){
+            Object lendKey=this.left.keys[this.left.keyNumber-1];
+            Object lendValue=this.left.values[this.left.keyNumber-1];
+            this.left.keys[this.left.keyNumber-1]=null;
+            this.left.values[this.left.keyNumber-1]=null;
+            this.left.keyNumber--;
+            System.arraycopy(tempKeys, 0, this.keys, 1, this.keyNumber);
+            System.arraycopy(tempValues, 0, this.values, 1, this.keyNumber);
+            this.keys[0]=lendKey;
+            this.values[0]=lendValue;
+            this.keyNumber++;
+            //改变父节点的key值
             changeParentKey(this,oldKey);
 //            System.out.println("case 2:  "+this.keyNumber);
-        }else if(this.keyNumber<threshold && this.right!=null && this.right.parent==this.parent && this.right.keyNumber<=threshold){//合并子节点
-            System.arraycopy(this.right.keys, 0, tempKeys, this.keyNumber, this.right.keyNumber);
-            System.arraycopy(this.right.values, 0, tempValues, this.keyNumber, this.right.keyNumber);
-            System.arraycopy(tempKeys, 0, this.right.keys, 0, this.right.keyNumber+this.keyNumber);
-            System.arraycopy(tempValues, 0, this.right.values, 0, this.right.keyNumber+this.keyNumber);
-            this.right.keyNumber=this.right.keyNumber+this.keyNumber;
+        }else if(this.keyNumber<threshold && this.left!=null && this.left.parent==this.parent && this.left.keyNumber<=threshold){//合并子节点
+//            System.out.println("没合并前叶子节点key为:");
+//            for(int z = 0; z < this.keyNumber; z++)
+//                System.out.print(tempKeys[z] + " ");
+//            System.out.println();
+//            System.out.println("没合并前左叶子节点key为:");
+//            for(int z = 0; z < this.left.keyNumber; z++)
+//                System.out.print(this.left.keys[z] + " ");
+//            System.out.println();
+//            System.out.println("没合并前右叶子节点key为:");
+//            for(int z = 0; z < this.right.keyNumber; z++)
+//                System.out.print(this.right.keys[z] + " ");
+//            System.out.println();
+            System.arraycopy(tempKeys, 0, this.left.keys, this.left.keyNumber, this.keyNumber);
+            System.arraycopy(tempValues, 0, this.left.values, this.left.keyNumber, this.keyNumber);
+            this.left.keyNumber=this.left.keyNumber+this.keyNumber;
             if(this.parent!=null){
                 //删除此节点对应的父节点的key和child
                 int j = 0;
@@ -205,32 +279,39 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
                 }
                 this.parent.keyNumber--;
                 //判断父节点是否需要合并
-                NonLeafNode parentNode=(NonLeafNode) this.parent;
+//                System.out.println("当前叶子节点key为:");
+//                for(int z = 0; z < this.left.keyNumber; z++)
+//                    System.out.print(this.left.keys[z] + " ");
+//                System.out.println();
+//
+//                System.out.println("叶子父节点key为:");
+//                for(int z = 0; z < this.parent.keyNumber; z++)
+//                    System.out.print(this.parent.keys[z] + " ");
+//                System.out.println();
+                NonLeafNode parentNode=(NonLeafNode) this.left.parent;
                 parentNode.deleteNode();
             }
-            this.right.left=this.left;
-            if(this.left!=null){
-                this.left.right=this.right;
+            this.left.right=this.right;
+            if(this.right!=null){
+                this.right.left=this.left;
             }
 //            System.out.println("case 3:  "+this.keyNumber);
-        }else if(this.keyNumber<threshold && this.left!=null && this.left.parent==this.parent && this.left.keyNumber<=threshold){
-            System.arraycopy(this.left.keys, 0, this.keys, 0, this.left.keyNumber);
-            System.arraycopy(this.left.values, 0, this.values, 0, this.left.keyNumber);
-            System.arraycopy(tempKeys, 0, this.keys, this.left.keyNumber, this.keyNumber);
-            System.arraycopy(tempValues, 0, this.values, this.left.keyNumber, this.keyNumber);
+        }else if(this.keyNumber<threshold && this.right!=null && this.right.parent==this.parent && this.right.keyNumber<=threshold){
+            System.arraycopy(this.right.keys, 0, tempKeys, this.keyNumber, this.right.keyNumber);
+            System.arraycopy(this.right.values, 0, tempValues, this.keyNumber, this.right.keyNumber);
+            System.arraycopy(tempKeys, 0, this.keys, 0, this.keyNumber+this.right.keyNumber);
+            System.arraycopy(tempValues, 0, this.values, 0, this.keyNumber+this.right.keyNumber);
             //判断父节点key值是否需要改变
-            if(i==this.keyNumber){
-                this.keyNumber=this.left.keyNumber+this.keyNumber;
+            this.keyNumber=this.right.keyNumber+this.keyNumber;
+            if(i==0){
                 changeParentKey(this,oldKey);
-            }else{
-                this.keyNumber=this.left.keyNumber+this.keyNumber;
             }
 
-            //删除左节点对应的父节点的key值和child
+            //删除右节点对应的父节点的key值和child
             if(this.parent!=null){
                 int j = 0;
                 while(j < this.parent.keyNumber){
-                    if(((V)this.left.keys[this.left.keyNumber-1]).compareTo((V) this.parent.keys[j]) == 0){
+                    if(((V)this.right.keys[0]).compareTo((V) this.parent.keys[j]) == 0){
                         break;
                     }
                     j++;
@@ -250,8 +331,18 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
                 NonLeafNode parentNode=(NonLeafNode) this.parent;
                 parentNode.deleteNode();
             }
-            this.left=this.left.left;
+            if(this.right.right!=null){
+                this.right.right.left=this;
+            }
+            this.right=this.right.right;
+
 //            System.out.println("case 4:  "+this.keyNumber);
+//            if(this.left!=null){
+//                System.out.println("当前叶子节点左节点key为@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:");
+//                for(int z = 0; z < this.left.keyNumber; z++)
+//                    System.out.print(this.left.keys[z] + " ");
+//                System.out.println();
+//            }
         }
 //        System.out.println("当前节点key为:");
 //        for(int j = 0; j < this.keyNumber; j++)
@@ -262,12 +353,10 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 //        for(int j = 0; j < this.parent.keyNumber; j++)
 //            System.out.print(this.parent.keys[j] + " ");
 //        System.out.println();
-
+        return false;
     }
 
     public void changeParentKey(Node node, V key){
-
-
 
         while (node.parent != null){
 //            System.out.println("当前节点key为:");
@@ -286,14 +375,14 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
                 }
                 j++;
             }
-            node.parent.keys[j]=node.keys[node.keyNumber-1];
+            node.parent.keys[j]=node.keys[0];
 
 //            System.out.println("改变后fu节点key为:");
 //            for(int i = 0; i < node.parent.keyNumber; i++)
 //                System.out.print(node.parent.keys[i] + " ");
 //            System.out.println();
 
-            if(j==(node.parent.keyNumber-1)){
+            if(j==0){
                 node = node.parent;
             }
             else {
@@ -301,4 +390,11 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
             }
         }
     }
+    @Override
+    LeafNode<T, V> refreshLeft() {
+        if(this.keyNumber <= 0)
+            return null;
+        return this;
+    }
+
 }
