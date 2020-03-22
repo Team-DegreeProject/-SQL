@@ -1,6 +1,7 @@
 package DMLExecution;
 
 import BTree.BPlusTree;
+import BTree.BPlusTreeTool;
 import BTree.CglibBean;
 
 import java.util.ArrayList;
@@ -104,42 +105,42 @@ public class Table {
     }
 
 
-    /**
-     * 两个list的并集
-     * @param l1
-     * @param l2
-     * @return 并集
-     */
-    public  List mergeListOr(List l1,List l2){
-        if(l1!=null&&l2!=null){
-            l1.removeAll(l2);//l1中去掉两者共同有的数据
-            l2.addAll(l1);
-            return l2;
-        } else if (l1 == null&&l2==null) {
-            return null;
-        } else if(l1==null){
-            return l2;
-        }
-        return l1;
-    }
-
-    /**
-     * 两个list的交集
-     * @param l1
-     * @param l2
-     * @return 交集
-     */
-    public  List mergeListAnd(List l1,List l2){
-        if(l1!=null&&l2!=null){
-            l1.retainAll(l2);
-            return l1;
-        }else if(l1==null&&l2==null){
-            return null;
-        }else if(l1==null){
-            return l2;
-        }
-        return l1;
-    }
+//    /**
+//     * 两个list的并集
+//     * @param l1
+//     * @param l2
+//     * @return 并集
+//     */
+//    public  List mergeListOr(List l1,List l2){
+//        if(l1!=null&&l2!=null){
+//            l1.removeAll(l2);//l1中去掉两者共同有的数据
+//            l2.addAll(l1);
+//            return l2;
+//        } else if (l1 == null&&l2==null) {
+//            return null;
+//        } else if(l1==null){
+//            return l2;
+//        }
+//        return l1;
+//    }
+//
+//    /**
+//     * 两个list的交集
+//     * @param l1
+//     * @param l2
+//     * @return 交集
+//     */
+//    public  List mergeListAnd(List l1,List l2){
+//        if(l1!=null&&l2!=null){
+//            l1.retainAll(l2);
+//            return l1;
+//        }else if(l1==null&&l2==null){
+//            return null;
+//        }else if(l1==null){
+//            return l2;
+//        }
+//        return l1;
+//    }
 
     /**
      * 对于where中的最小块or进行的操作
@@ -156,11 +157,11 @@ public class Table {
         if(condition.containsKey('<')){
             list2=compareThreeType('<',(int)condition.get('<'));
             System.out.println(list2.isEmpty());
-            list3=mergeListOr(list1,list2);
+            list3=BPlusTreeTool.mergeListOr(list1,list2);
         }
         if(condition.containsKey('>')){
             list2=compareThreeType('>',(int)condition.get('>'));
-            list3=mergeListOr(list3,list2);
+            list3= BPlusTreeTool.mergeListOr(list3,list2);
         }
         return list3;
     }

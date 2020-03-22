@@ -3,7 +3,7 @@ package DMLExecution;
 import java.util.HashMap;
 
 public class DMLTool {
-    public static void addCondition(HashMap condition, char t, int num){
+    public static void andCondition(HashMap condition, char t, int num){
         if(t=='>'){
             if(condition.get('>')==null){
                 condition.put('>',num);

@@ -27,9 +27,9 @@ public class test {
 
         HashMap<Character, Integer> condition1=new HashMap();
         HashMap<String,HashMap> conditions=new HashMap();;
-//        DMLTool.addCondition(condition1,'<',300);
-//        DMLTool.addCondition(condition1,'>',100);
-//        DMLTool.addCondition(condition1,'>',200);
+//        DMLTool.andCondition(condition1,'<',300);
+//        DMLTool.andCondition(condition1,'>',100);
+//        DMLTool.andCondition(condition1,'>',200);
 //        System.out.println(condition1.get('>')+","+condition1.get('<'));
 //        conditions.put("and",condition1);
 
