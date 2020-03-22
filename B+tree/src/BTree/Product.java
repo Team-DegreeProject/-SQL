@@ -1,3 +1,5 @@
+package BTree;
+
 public class Product {
     private Integer id;
     private String name;
