@@ -15,10 +15,11 @@ public class Test {
         propertyMap.put("address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
 //        BTree.Product p;
-        CglibBean bean = new CglibBean(propertyMap);
+//        CglibBean bean = new CglibBean(propertyMap);
         long time1 = System.nanoTime();
 
         for (int i = 10000; i >=0; i--) {
+            CglibBean bean = new CglibBean(propertyMap);
             bean.setValue("id", i);
             bean.setValue("name", "test");
             bean.setValue("address", "789");
