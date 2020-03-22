@@ -171,6 +171,67 @@ public class BPlusTree <T, V extends Comparable<V>> {
     }
 
 
+
+    public List<Object> getMiddleDatas(V small,V big) {
+        LeafNode Snode=(LeafNode) selectRange(small);
+        LeafNode Bnode=(LeafNode) selectRange(big);
+        int low1 = 0;
+        int up1 = Snode.keyNumber;
+        int middle1 = (low1 + up1) / 2;
+        while(low1 < up1){
+            V middleKey = (V) Snode.keys[middle1];
+            if(small.compareTo(middleKey) == 0)
+                break;
+            else if(small.compareTo(middleKey) < 0)
+                up1 = middle1;
+            else
+                low1 = middle1;
+            middle1 = (low1 + up1) / 2;
+        }
+
+        int low2 = 0;
+        int up2 = Bnode.keyNumber;
+        int middle2 = (low2 + up2) / 2;
+        while(low2 < up2){
+            V middleKey = (V) Bnode.keys[middle2];
+            if(big.compareTo(middleKey) == 0)
+                break;
+            else if(big.compareTo(middleKey) < 0)
+                up2 = middle2;
+            else
+                low2 = middle2;
+            middle2 = (low2 + up2) / 2;
+        }
+
+        List<Object> products = new ArrayList<>();
+
+        if(Snode!=Bnode){
+            for(int i=middle1;i<Snode.keyNumber;i++){
+                products.add(Snode.values[i]);
+            }
+            LeafNode temp=null;
+            if(Snode.left!=null && Snode.left!=Bnode){
+                temp= Snode.left;
+            }
+            while (temp != null && temp!=Bnode) {
+                for (int j = temp.keyNumber-1; j >=0; j--) {
+                    products.add(temp.values[j]);
+                }
+                temp = temp.left;
+            }
+            for(int i=0;i<middle2;i++){
+                products.add(Bnode.values[i]);
+            }
+            return products;
+        }else{
+            for(int i=middle1;i<middle2;i++){
+                products.add(Snode.values[i]);
+            }
+            return products;
+        }
+
+    }
+
     public static int getOrder() {
         return Order;
     }
