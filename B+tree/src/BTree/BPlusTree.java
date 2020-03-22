@@ -28,11 +28,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
         this.root = new LeafNode<T, V>();
     }
 
-    /**
-     * 查询
-     * @param key
-     * @return
-     */
+    //查询
     public T select(V key) {
         T t = this.root.select(key);
         if (t == null) {
@@ -41,11 +37,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return t;
     }
 
-    /**
-     * 查询范围
-     * @param key
-     * @return
-     */
+    //范围查询
     public Node selectRange(V key) {
         Node t = this.root.selectRange(key);
         if (t == null) {
@@ -54,11 +46,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return t;
     }
 
-    /**
-     * 插入
-     * @param value
-     * @param key
-     */
+    //插入
     public void insert(T value, V key) {
         if (key == null)
             return;
@@ -67,10 +55,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
             this.root = t;
     }
 
-    /**
-     * 删除
-     * @param key
-     */
+    //删除
     public void delete(V key) {
         if (key == null) {
             return;
@@ -90,10 +75,6 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return node;
     }
 
-    /**
-     * 此表中所存的行数
-     * @return 行数
-     */
     public int getDataNumber(){
         LeafNode temp = this.getLeft();
         int count=0;
@@ -104,11 +85,6 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return count;
     }
 
-
-    /**
-     * 此表中所存的所有行
-     * @return 行的list
-     */
     public List<Object> getDatas() {
         List<Object> products = new ArrayList<>();
         LeafNode temp = this.getLeft();
@@ -121,10 +97,6 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return products;
     }
 
-    /**
-     * 返回所有叶结点
-     * @return 所有叶结点的list
-     */
     public  List<LeafNode> getLeafNodes(){
         List<LeafNode> leafnodes = new ArrayList<>();
         LeafNode temp = this.getLeft();
@@ -135,11 +107,6 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return leafnodes;
     }
 
-    /**
-     * 大于
-     * @param key
-     * @return 返回大于此key的CglibBean
-     */
     public List<Object> getBigDatas(V key) {
         LeafNode node=(LeafNode) selectRange(key);
         int low = 0;
@@ -172,11 +139,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return products;
     }
 
-    /**
-     * 小于
-     * @param key
-     * @return 返回小于此key的CglibBean
-     */
+
     public List<Object> getSmallDatas(V key) {
         LeafNode node=(LeafNode) selectRange(key);
         int low = 0;
@@ -210,12 +173,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
     }
 
 
-    /**
-     * 大于且小于
-     * @param small
-     * @param big
-     * @return 返回在范围内key的CglibBean
-     */
+
     public List<Object> getMiddleDatas(V small,V big) {
         LeafNode Snode=(LeafNode) selectRange(small);
         LeafNode Bnode=(LeafNode) selectRange(big);
@@ -254,14 +212,14 @@ public class BPlusTree <T, V extends Comparable<V>> {
                 products.add(Snode.values[i]);
             }
             LeafNode temp=null;
-            if(Snode.left!=null && Snode.left!=Bnode){
-                temp= Snode.left;
+            if(Snode.right!=null && Snode.right!=Bnode){
+                temp= Snode.right;
             }
             while (temp != null && temp!=Bnode) {
-                for (int j = temp.keyNumber-1; j >=0; j--) {
+                for (int j = 0; j <temp.keyNumber; j++) {
                     products.add(temp.values[j]);
                 }
-                temp = temp.left;
+                temp = temp.right;
             }
             for(int i=0;i<middle2;i++){
                 products.add(Bnode.values[i]);
@@ -276,18 +234,10 @@ public class BPlusTree <T, V extends Comparable<V>> {
 
     }
 
-    /**
-     * 每个叶结点的存储数量限制
-     * @return 返回order
-     */
     public static int getOrder() {
         return Order;
     }
 
-    /**
-     * 每个叶结点不能超过的存储数量，order+1
-     * @return 返回maxKeyNumber
-     */
     public static int getmaxKeyNumber() {
         return maxKeyNumber;
     }

@@ -15,22 +15,15 @@ public class Table {
     }
 
     public boolean delete(Stack condition){
-        where(condition);
-
-//        if(con.isEmpty()){
-//            System.out.println("There is no product needed to be deleted.");
-//            return false;
-//        }
-//        System.out.println(con.empty());
-//            BPlusTree<Product, Integer> tmp1=(BPlusTree<Product, Integer>)(con.pop());
-//            for(int i=0;i<300;i++){
-//                Product t=tmp1.select(i);
-//                if(t!=null){
-//                    System.out.println(t.getId()+","+t.getPrice());
-//                }
-//
-//            }
-
+        List list=where(condition);
+        if(list.isEmpty()){
+            System.out.println("There is no row needed to be deleted.");
+            return false;
+        }
+        for(int i=0;i<list.size();i++){
+            CglibBean d = (CglibBean) list.get(i);
+            b.delete((Integer) d.getValue("id"));
+        }
         return true;
     }
     /*
@@ -39,20 +32,19 @@ public class Table {
     Stack<Stack<Condition>>指的是并列的Or操作
     返回每个or之间所需要的合并的数据结构
      */
-    public void where(Stack<HashMap> conditions){
-        Stack<BPlusTree> output=new Stack();
+    public List<Object> where(Stack<HashMap> conditions){
 //        while(!conditions.isEmpty()){
 //            output.add(whereAnd(conditions.pop()));
 //        }
 //        return output;
-        whereAnd(conditions.pop());
+        return whereAnd(conditions.pop());
     }
 
-    /*
-        处理where中并列的and操作
-        Stack<Condition> condition为并列的and操作存储为stack
-        返回每个and块执行后形成的树
-         */
+    /**
+     *  对于where中的and进行操作
+     * @param condition 并列的><=
+     * @return 所得的List<CglibBean>
+     */
     public List<Object> whereAnd(HashMap condition){
         List<Object> list=null;
         if(condition.containsKey('=')){
@@ -99,12 +91,7 @@ public class Table {
             int big= (int) condition.get('>');
             list=b.getBigDatas(big);
         }
-        for(int i=0;i<list.size();i++){
-            CglibBean tmp= (CglibBean) list.get(i);
-            System.out.println(tmp.getValue("id")+","+tmp.getValue("name")+","+tmp.getValue("address"));
-        }
         return list;
-        //        return re;
     }
 
 
