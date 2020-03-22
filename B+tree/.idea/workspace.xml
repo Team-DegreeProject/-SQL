@@ -18,10 +18,15 @@
   <component name="ProjectId" id="1YbdLiwg0Y06n6u8ihVxmvefowg" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/cglib-nodep-2.2.2.jar!/" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\pass\学习\毕设\git\-SQL\B+tree\lib" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,6 +76,8 @@
       <workItem from="1584783664182" duration="20143000" />
       <workItem from="1584804545292" duration="77000" />
       <workItem from="1584804758139" duration="2359000" />
+      <workItem from="1584855209930" duration="55000" />
+      <workItem from="1584857662799" duration="1118000" />
     </task>
     <servers />
   </component>

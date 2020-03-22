@@ -95,6 +95,16 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return products;
     }
 
+    public  List<LeafNode> getLeafNodes(){
+        List<LeafNode> leafnodes = new ArrayList<>();
+        LeafNode temp = this.getLeft();
+        while (temp != null) {
+            leafnodes.add(temp);
+            temp = temp.right;
+        }
+        return leafnodes;
+    }
+
     public List<Object> getBigDatas(V key) {
         LeafNode node=(LeafNode) selectRange(key);
         int low = 0;
