@@ -1,3 +1,5 @@
+package BTree;
+
 import java.util.HashMap;
 
 public class Test {
@@ -10,7 +12,7 @@ public class Test {
         propertyMap.put("name", Class.forName("java.lang.String"));
         propertyMap.put("address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
-//        Product p;
+//        BTree.Product p;
         CglibBean bean = new CglibBean(propertyMap);
         long time1 = System.nanoTime();
 
@@ -19,7 +21,7 @@ public class Test {
             bean.setValue("name", "test");
             bean.setValue("address", "789");
             b.insert(bean,(Integer) bean.getValue("id"));
-//            p = new Product(i, "test", 1.0 * i);
+//            p = new BTree.Product(i, "test", 1.0 * i);
 //            b.insert(p, p.getId());
         }
         long time2 = System.nanoTime();
