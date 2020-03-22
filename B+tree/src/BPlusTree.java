@@ -210,14 +210,14 @@ public class BPlusTree <T, V extends Comparable<V>> {
                 products.add(Snode.values[i]);
             }
             LeafNode temp=null;
-            if(Snode.left!=null && Snode.left!=Bnode){
-                temp= Snode.left;
+            if(Snode.right!=null && Snode.right!=Bnode){
+                temp= Snode.right;
             }
             while (temp != null && temp!=Bnode) {
-                for (int j = temp.keyNumber-1; j >=0; j--) {
+                for (int j = 0; j <temp.keyNumber; j++) {
                     products.add(temp.values[j]);
                 }
-                temp = temp.left;
+                temp = temp.right;
             }
             for(int i=0;i<middle2;i++){
                 products.add(Bnode.values[i]);
