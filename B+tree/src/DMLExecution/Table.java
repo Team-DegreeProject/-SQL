@@ -14,7 +14,7 @@ public class Table {
         b= bt;
     }
 
-    public boolean delete(Stack condition){
+    public boolean delete(HashMap condition){
         List list=where(condition);
         if(list.isEmpty()){
             System.out.println("There is no row needed to be deleted.");
@@ -24,24 +24,33 @@ public class Table {
             CglibBean d = (CglibBean) list.get(i);
             b.delete((Integer) d.getValue("id"));
         }
+        System.out.println(list==null);
         return true;
-    }
-    /*
-    处理where 传入的为or和and相关操作
-    Stack<Condition>指的是并列的and操作
-    Stack<Stack<Condition>>指的是并列的Or操作
-    返回每个or之间所需要的合并的数据结构
-     */
-    public List<Object> where(Stack<HashMap> conditions){
-//        while(!conditions.isEmpty()){
-//            output.add(whereAnd(conditions.pop()));
-//        }
-//        return output;
-        return whereAnd(conditions.pop());
     }
 
     /**
-     *  对于where中的and进行操作
+     * 处理where，目前只能实现单独全是or和单独全是and，后续or和and的嵌套等待实现
+     * @param conditions
+     * @return 所有符合条件的CglibBean
+     */
+    public List<Object> where(HashMap conditions){
+        List list=null;
+        while(!conditions.isEmpty()){
+            HashMap<Character, Integer> conditionAnd= (HashMap<Character, Integer>) conditions.get("and");
+            HashMap<Character, Integer> conditionOr= (HashMap<Character, Integer>) conditions.get("or");
+            if(conditionAnd!=null){
+               list=whereAnd(conditionAnd);
+               conditions.remove("and");
+            }else{
+                list=whereOr(conditionOr);
+                conditions.remove("or");
+            }
+        }
+        return list;
+    }
+
+    /**
+     *  对于where中的最小块and进行操作
      * @param condition 并列的><=
      * @return 所得的List<CglibBean>
      */
@@ -95,8 +104,88 @@ public class Table {
     }
 
 
-    public  BPlusTree whereOr(Stack betweenAnd){
-         return null;
+    /**
+     * 两个list的并集
+     * @param l1
+     * @param l2
+     * @return 并集
+     */
+    public  List mergeListOr(List l1,List l2){
+        if(l1!=null&&l2!=null){
+            l1.removeAll(l2);//l1中去掉两者共同有的数据
+            l2.addAll(l1);
+            return l2;
+        } else if (l1 == null&&l2==null) {
+            return null;
+        } else if(l1==null){
+            return l2;
+        }
+        return l1;
+    }
+
+    /**
+     * 两个list的交集
+     * @param l1
+     * @param l2
+     * @return 交集
+     */
+    public  List mergeListAnd(List l1,List l2){
+        if(l1!=null&&l2!=null){
+            l1.retainAll(l2);
+            return l1;
+        }else if(l1==null&&l2==null){
+            return null;
+        }else if(l1==null){
+            return l2;
+        }
+        return l1;
+    }
+
+    /**
+     * 对于where中的最小块or进行的操作
+     * @param condition
+     * @return
+     */
+    public List whereOr(HashMap condition){
+        List<Object> list1=null;
+        List<Object> list2=null;
+        List<Object> list3=null;
+        if(condition.containsKey('=')){
+            list1=compareThreeType('=',(int)condition.get('='));
+        }
+        if(condition.containsKey('<')){
+            list2=compareThreeType('<',(int)condition.get('<'));
+            System.out.println(list2.isEmpty());
+            list3=mergeListOr(list1,list2);
+        }
+        if(condition.containsKey('>')){
+            list2=compareThreeType('>',(int)condition.get('>'));
+            list3=mergeListOr(list3,list2);
+        }
+        return list3;
+    }
+
+    /**
+     * 对于最小块Or中所需的比较拆分开返回list
+     * @param c
+     * @param num
+     * @return 对应的list
+     */
+    public List compareThreeType(Character c,int num){
+        List<Object> list=null;
+        if(c=='='){
+            CglibBean t=null;
+            t=b.select(num);
+            list = new ArrayList<>();
+            if(t!=null){
+                list.add(t);
+            }
+        }else if(c=='<'){
+            list=b.getSmallDatas(num);
+        }else{
+            list=b.getBigDatas(num);
+        }
+        return list;
     }
 
 }

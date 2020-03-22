@@ -25,13 +25,20 @@ public class test {
         }
 
 
-        HashMap<Character, Integer> condition=new HashMap();
-        Stack conditions=new Stack();
-        addCondition(condition,'<',300);
-        addCondition(condition,'>',100);
-        addCondition(condition,'>',200);
-        System.out.println(condition.get('>')+","+condition.get('<'));
-        conditions.add(condition);
+        HashMap<Character, Integer> condition1=new HashMap();
+        HashMap<String,HashMap> conditions=new HashMap();;
+//        DMLTool.addCondition(condition1,'<',300);
+//        DMLTool.addCondition(condition1,'>',100);
+//        DMLTool.addCondition(condition1,'>',200);
+//        System.out.println(condition1.get('>')+","+condition1.get('<'));
+//        conditions.put("and",condition1);
+
+        HashMap<Character, Integer> condition2=new HashMap();
+        DMLTool.orCondition(condition2,'<',100);
+        DMLTool.orCondition(condition2,'>',400);
+        DMLTool.orCondition(condition2,'<',200);
+        conditions.put("or",condition2);
+
         Table t=new Table(b);
         boolean delete=t.delete(conditions);
         System.out.println(delete);
@@ -45,32 +52,61 @@ public class test {
 
     }
 
-    public static void addCondition(HashMap condition,char t,int num){
-        if(t=='>'){
-            if(condition.get('>')==null){
-                condition.put('>',num);
-            }else{
-                int g=(int)condition.get('>');
-                if(num>g){
-                    condition.replace('>',num);
-                }
-            }
-        }else if(t=='<'){
-            if(condition.get('<')==null){
-                condition.put('<',num);
-            }else{
-                int g=(int)condition.get('<');
-                if(num<g){
-                    condition.replace('<',num);
-                }
-            }
-        }else if(t=='='){
-            if(condition.get('=')==null){
-                condition.put('=',num);
-            }else{
-                System.out.println("Warning:There are two =");
-            }
-        }
-
-    }
+//    public static void addCondition(HashMap condition,char t,int num){
+//        if(t=='>'){
+//            if(condition.get('>')==null){
+//                condition.put('>',num);
+//            }else{
+//                int g=(int)condition.get('>');
+//                if(num>g){
+//                    condition.replace('>',num);
+//                }
+//            }
+//        }else if(t=='<'){
+//            if(condition.get('<')==null){
+//                condition.put('<',num);
+//            }else{
+//                int g=(int)condition.get('<');
+//                if(num<g){
+//                    condition.replace('<',num);
+//                }
+//            }
+//        }else if(t=='='){
+//            if(condition.get('=')==null){
+//                condition.put('=',num);
+//            }else{
+//                System.out.println("Warning:There are two =");
+//            }
+//        }
+//
+//    }
+//
+//    public static void orCondition(HashMap condition,char t,int num){
+//        if(t=='>'){
+//            if(condition.get('>')==null){
+//                condition.put('>',num);
+//            }else{
+//                int g=(int)condition.get('>');
+//                if(num<g){
+//                    condition.replace('>',num);
+//                }
+//            }
+//        }else if(t=='<'){
+//            if(condition.get('<')==null){
+//                condition.put('<',num);
+//            }else{
+//                int g=(int)condition.get('<');
+//                if(num>g){
+//                    condition.replace('<',num);
+//                }
+//            }
+//        }else if(t=='='){
+//            if(condition.get('=')==null){
+//                condition.put('=',num);
+//            }else{
+//                System.out.println("Warning:There are two =");
+//            }
+//        }
+//
+//    }
 }
