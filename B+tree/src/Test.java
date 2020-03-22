@@ -11,21 +11,22 @@ public class Test {
         propertyMap.put("address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
 //        Product p;
-        CglibBean bean = new CglibBean(propertyMap);
+
         long time1 = System.nanoTime();
 
         for (int i = 10000; i >=0; i--) {
-            bean.setValue("id", i);
+            CglibBean bean = new CglibBean(propertyMap);
+            bean.setValue("id", new Integer(i));
             bean.setValue("name", "test");
             bean.setValue("address", "789");
             b.insert(bean,(Integer) bean.getValue("id"));
 //            p = new Product(i, "test", 1.0 * i);
 //            b.insert(p, p.getId());
         }
+        b.getNodes(b.getRoot());
         long time2 = System.nanoTime();
 
         CglibBean b1 = b.select(345);
-
         long time3 = System.nanoTime();
 
         for (int i = 10000; i >=0; i--) {
