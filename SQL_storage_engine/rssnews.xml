@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<table name="Student Information">
+<student>
+<name>n1</name>
+<id>id1</id>
+</student>
+<student>
+<name>n2</name>
+<id>id2</id>
+</student>
+</table>

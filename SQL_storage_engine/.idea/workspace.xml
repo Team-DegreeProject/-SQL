@@ -24,10 +24,24 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="E:/下载/fastjson-1.2.66.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../../大四（下）/毕业设计/Final Year Project/-SQL-ZJY" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="xmlwrittingTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="xmlwrittingTest" />
+      <module name="SQL_storage_engine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.xmlwrittingTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -43,6 +57,9 @@
       <workItem from="1583638104086" duration="366000" />
       <workItem from="1583638741170" duration="2110000" />
       <workItem from="1583661494990" duration="2367000" />
+      <workItem from="1584006490638" duration="180000" />
+      <workItem from="1584321490196" duration="5360000" />
+      <workItem from="1584581335963" duration="8289000" />
     </task>
     <servers />
   </component>
@@ -50,17 +67,41 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="85" key="FileChooserDialogImpl" timestamp="1583665103550">
+    <state x="233" y="4" key="#HTTP_Proxy" timestamp="1584329405471">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="85" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1583665103550" />
-    <state x="121" y="0" key="SettingsEditor" timestamp="1583665109893">
+    <state x="233" y="4" key="#HTTP_Proxy/0.0.1280.680@0.0.1280.680" timestamp="1584329405471" />
+    <state x="446" y="48" key="#com.intellij.ide.util.MemberChooser" timestamp="1584582790689">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1583665109893" />
-    <state x="336" y="168" key="com.intellij.ide.util.TipDialog" timestamp="1584006491879">
+    <state x="446" y="48" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1584582790689" />
+    <state x="421" y="85" key="FileChooserDialogImpl" timestamp="1584756347747">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="336" y="168" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584006491879" />
+    <state x="421" y="85" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584756347747" />
+    <state width="1237" height="91" key="GridCell.Tab.0.bottom" timestamp="1584843741823">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="91" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584843741823" />
+    <state width="1237" height="91" key="GridCell.Tab.0.center" timestamp="1584843741823">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="91" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584843741823" />
+    <state width="1237" height="91" key="GridCell.Tab.0.left" timestamp="1584843741822">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="91" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584843741822" />
+    <state width="1237" height="91" key="GridCell.Tab.0.right" timestamp="1584843741823">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="91" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584843741823" />
+    <state x="121" y="0" key="SettingsEditor" timestamp="1584329772463">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1584329772463" />
+    <state x="336" y="168" key="com.intellij.ide.util.TipDialog" timestamp="1584581420532">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="336" y="168" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584581420532" />
   </component>
 </project>
