@@ -1,0 +1,379 @@
+options {
+    static=false;
+    IGNORE_CASE=true;
+}
+
+PARSER_BEGIN(SqlParser)
+import java.util.List;
+import java.util.ArrayList;
+public class SqlParser {
+
+    private List<Token> tokens = new ArrayList<Token>();
+
+    public static void main(String[] args) throws Exception {
+        SqlParser parser = new SqlParser(System.in);
+        parser.parse();
+        System.out.println("sql is correct!");
+    }
+}
+PARSER_END(SqlParser)
+
+SKIP :
+{
+ " "|"\t"|"\r"|"\n"|"\f"
+}
+
+MORE :
+{
+ "//" : IN_SINGLE_LINE_COMMENT
+|
+ "/*" : IN_MULTI_LINE_COMMENT
+}
+
+<IN_SINGLE_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+    <SINGLE_LINE_COMMENT : "/r" | "/n" | "/r/n"> : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+<MULTI_LINE_COMMENT : "*/"> : DEFAULT
+}
+<IN_SINGLE_LINE_COMMENT,IN_MULTI_LINE_COMMENT>
+MORE :
+{
+<~[]>
+}
+
+TOKEN [IGNORE_CASE]:
+{
+<SELECT : "select">
+|
+<INSERT : "insert">
+|
+<UPDATE : "update">
+|
+<DELETE : "delete">
+}
+
+TOKEN [IGNORE_CASE]:
+{
+<AS : "as">
+|
+<ALL : "all">
+|
+<SET : "set">
+|
+<FROM : "from">
+|
+<INTO : "into">
+|
+<GROUP_BY : "group" ([" "])+ "by">
+|
+<ORDER_BY : "order" ([" "])+ "by">
+|
+<WHERE : "where">
+|
+<VALUES : "values">
+|
+<DISTINCT : "distinct">
+}
+
+TOKEN :
+{
+<LBRACKET : "(">
+|
+<RBRACKET : ")">
+|
+<EQ : "=">
+|
+<GT : ">=">
+|
+<LT : "<=">
+|
+<NE : "!=">
+|
+<OR : "or">
+|
+<AND : "and">
+|
+<LIKE : "like">
+|
+<BETWEEN : "between">
+}
+
+TOKEN :
+{
+<DOT : ".">
+|
+<ID : <LETTER> (<LETTER>|<DIGIT>)*>
+|
+<NUMBER: (<DIGIT>)+ (<DOT>(<DIGIT>)*)?>
+|
+<#LETTER : ["a"-"z","A"-"Z","_"]>
+|
+<#DIGIT : ["0"-"9"]>
+|
+<STRING : "/'" (~["/"])* ("///'")? (~["/"])* "/'">
+}
+
+TOKEN :
+{
+<STATEMENT_END : ";">
+|
+<END : "!!">
+}
+
+void parse() :
+{
+    Token t;
+    tokens = new ArrayList<Token>();
+}
+{
+    //***************SELECT************
+    <SELECT>
+    {
+        t = new Token();
+        t.image = "select";
+        System.out.println(t.image);
+        tokens.add(t);
+
+    }
+    (<DISTINCT> | <ALL>)?selectResultList()
+    <FROM>fromTables()where()(<STATEMENT_END> | <END>)
+
+    //***************INSERT************
+    |   //only support simple insert statement
+    <INSERT><INTO><ID> //TABLE NAME
+    <VALUES>
+    <LBRACKET><ID>(","<ID>)*<RBRACKET>(<STATEMENT_END> | <END>)
+
+    |<VALUES>
+    <LBRACKET>values() <RBRACKET>
+    (<STATEMENT_END> | <END>)
+
+    //***************UPDATE************
+    |<UPDATE><ID><SET>sets()( where() )?(<STATEMENT_END> | <END>)
+
+    //***************DELETE************
+    |
+
+    delete()
+}
+
+void saveToken(Token a) :
+{
+    Token t;
+}
+{
+    {
+        t = a;
+        System.out.println(t.image);
+        tokens.add(t);
+    }
+}
+
+void delete() :
+{
+    Token t;
+}
+{
+    {   System.out.println("------DELETE METHOD --------"); }
+    t =  <DELETE>
+    {
+        saveToken(t);
+    }
+    t =<FROM>
+    {
+        saveToken(t);
+    }
+    t = <ID>
+    {
+        saveToken(t);
+    }
+    (where() )?
+    (<STATEMENT_END> | <END>)
+}
+void where() :
+{}
+{
+    t = <WHERE>
+    {saveToken(t);}
+    multiCondition()
+    (orderBy() | groupBy())?
+}
+
+void multiCondition() :
+{}
+{
+
+ (
+    condition() | "(" condition() ")"
+ )
+
+ (
+     (<AND> | <OR>)
+    (
+        condition() | "(" condition() ")"
+    )
+ )*
+
+}
+
+void condition() :
+{}
+{
+ name()
+ (
+    simpleCondition()|betweenCondition()
+ )
+}
+
+void selectResultList() :
+{}
+{
+    selectResult()
+    (
+    ","
+    selectResult()
+    )*
+}
+
+void selectResult() :
+{}
+{
+    <ID>(<DOT><ID>)?(<AS><ID>)?
+}
+
+void fromTables() :
+{}
+{
+ table()
+ (
+    ","
+    table()
+ )*
+}
+
+void table() :
+{}
+{
+ <ID>
+ (<ID>)?
+}
+
+
+
+
+
+
+
+void simpleCondition() :
+{}
+{
+    (<EQ> | <GT> | <LT> | <NE> | <LIKE>)
+    rightCondition()
+}
+
+void betweenCondition() :
+{}
+{
+ <BETWEEN>
+ rightCondition()
+ <AND>
+ rightCondition()
+}
+
+void name() :
+{}
+{
+ <ID>
+ (
+    "."
+    <ID>
+ )?
+}
+
+void rightCondition() :
+{}
+{
+ <STRING>| <NUMBER>| function()
+}
+
+void function() :
+{}
+{
+ <ID> <LBRACKET> arguments() <RBRACKET>
+}
+
+void arguments() :
+{}
+{
+ (
+    argument()
+    (
+        ","
+     argument()
+    )*
+ )?
+}
+
+void argument() :
+{}
+{
+ <ID>
+ (
+    <STRING>|<NUMBER>
+ )
+}
+
+void values() :
+{}
+{
+     value()
+    (
+        ","
+        value()
+    )*
+}
+
+void value() :
+{}
+{
+ <STRING>|<NUMBER>
+}
+
+
+void orderBy() :
+{}
+{
+    <ORDER_BY>
+    name()
+}
+
+void groupBy() :
+{}
+{
+ <GROUP_BY>
+ name()
+}
+
+void sets() :
+{}
+{
+ set()
+ (
+    ","
+    set()
+ )*
+}
+
+void set() :
+{}
+{
+ <ID>
+ <EQ>
+ rightCondition()
+}
