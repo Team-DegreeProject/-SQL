@@ -21,11 +21,8 @@
     <session id="1639245269">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-<<<<<<< HEAD
           <entry key="project.closed" value="7" />
-=======
-          <entry key="project.closed" value="6" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="2" />
@@ -33,20 +30,15 @@
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="11" />
           <entry key="fxml" value="1" />
-<<<<<<< HEAD
           <entry key="java" value="88" />
           <entry key="jj" value="19" />
-=======
-          <entry key="java" value="87" />
-          <entry key="jj" value="16" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
           <entry key="jjt" value="1" />
           <entry key="txt" value="1" />
         </counts>
@@ -54,13 +46,8 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="11" />
-<<<<<<< HEAD
           <entry key="JAVA" value="88" />
           <entry key="JavaCC" value="20" />
-=======
-          <entry key="JAVA" value="87" />
-          <entry key="JavaCC" value="17" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="1" />
         </counts>
@@ -68,11 +55,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="303" />
-<<<<<<< HEAD
-          <entry key="jj" value="1773" />
-=======
-          <entry key="jj" value="1671" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+          <entry key="jj" value="1776" />
           <entry key="jjt" value="123" />
           <entry key="txt" value="7" />
         </counts>
@@ -80,11 +63,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="303" />
-<<<<<<< HEAD
-          <entry key="JavaCC" value="1896" />
-=======
-          <entry key="JavaCC" value="1794" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+          <entry key="JavaCC" value="1899" />
           <entry key="PLAIN_TEXT" value="7" />
         </counts>
       </usages-collector>
@@ -96,18 +75,15 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Try2/b.jj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-18">
+            <state relative-caret-position="252">
               <caret line="14" column="1" selection-end-line="14" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-=======
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         <entry file="file://$PROJECT_DIR$/test/SQLParseTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
@@ -122,9 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql.jj">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="-405">
-              <caret line="768" column="1" lean-forward="true" selection-start-line="733" selection-end-line="768" selection-end-column="1" />
+            <state relative-caret-position="13824">
+              <caret line="768" column="1" selection-start-line="733" selection-end-line="768" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -132,12 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Try2/Adder.jj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
+            <state relative-caret-position="450">
               <caret line="25" selection-start-line="25" selection-end-line="26" />
-=======
-            <state relative-caret-position="274">
-              <caret line="321" column="19" selection-start-line="321" selection-start-column="6" selection-end-line="321" selection-end-column="19" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
             </state>
           </provider>
         </entry>
@@ -145,13 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/try1/src/b.jj">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="126">
-              <caret line="208" column="5" lean-forward="true" selection-start-line="208" selection-start-column="5" selection-end-line="208" selection-end-column="5" />
-=======
-            <state relative-caret-position="353">
-              <caret line="314" column="36" selection-start-line="314" selection-start-column="36" selection-end-line="314" selection-end-column="36" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+            <state relative-caret-position="591">
+              <caret line="284" column="4" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -159,23 +125,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/try1/src/SqlParser.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="805">
+            <state relative-caret-position="3672">
               <caret line="204" column="15" selection-start-line="204" selection-start-column="15" selection-end-line="204" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#218#225#0" expanded="true" />
-=======
-            <state relative-caret-position="175">
-              <caret line="190" column="15" selection-start-line="190" selection-start-column="15" selection-end-line="190" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#218#225#0" expanded="true" />
-                <element signature="e#12793#12794#0" expanded="true" />
-                <element signature="e#12822#12823#0" expanded="true" />
-                <element signature="e#13354#13355#0" expanded="true" />
-                <element signature="e#13385#13386#0" expanded="true" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
               </folding>
             </state>
           </provider>
@@ -193,17 +146,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/try1/src/Token.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="414">
               <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql2.jj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
+            <state relative-caret-position="17082">
               <caret line="949" column="16" selection-start-line="949" selection-start-column="16" selection-end-line="949" selection-end-column="16" />
             </state>
           </provider>
@@ -218,8 +170,6 @@
           </provider>
         </entry>
       </file>
-=======
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -251,15 +201,9 @@
       <find>EQUALS_OPERATOR</find>
       <find>CREATE</find>
       <find>END</find>
-<<<<<<< HEAD
-=======
-      <find>system</find>
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       <find>DELETE</find>
       <find>TOKEN</find>
       <find>EQ</find>
-      <find>STRING</find>
-<<<<<<< HEAD
       <find>out</find>
       <find>save</find>
       <find>system</find>
@@ -268,8 +212,7 @@
       <find>&amp;</find>
       <find>,</find>
       <find>rightCondition</find>
-=======
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+      <find>STRING</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -334,15 +277,11 @@
       <select />
     </treeState>
   </component>
-<<<<<<< HEAD
-  <component name="ProjectFrameBounds" extendedState="6">
-=======
   <component name="ProjectFrameBounds" extendedState="7">
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1943" />
-    <option name="height" value="1043" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1944" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -370,7 +309,6 @@
             <path>
               <item name="OurFirstDB" type="b2602c69:ProjectViewProjectNode" />
               <item name="OurFirstDB" type="462c0819:PsiDirectoryNode" />
-<<<<<<< HEAD
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Parser_segments" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -383,8 +321,6 @@
             <path>
               <item name="OurFirstDB" type="b2602c69:ProjectViewProjectNode" />
               <item name="OurFirstDB" type="462c0819:PsiDirectoryNode" />
-=======
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
               <item name="try1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -401,8 +337,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -413,7 +349,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1584180847602" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SQLKV-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -524,20 +460,13 @@
       <workItem from="1583550442666" duration="31388000" />
       <workItem from="1584180904947" duration="285000" />
       <workItem from="1584181257838" duration="3979000" />
-<<<<<<< HEAD
       <workItem from="1584801705592" duration="28610000" />
-=======
-      <workItem from="1584801705592" duration="22579000" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+      <workItem from="1585049569342" duration="912000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="84032000" />
-=======
-    <option name="totallyTimeSpent" value="78001000" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+    <option name="totallyTimeSpent" value="84944000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -549,10 +478,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2061439" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20937753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -568,11 +497,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.10283688" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49393696" visible="true" weight="0.34042552" />
-=======
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49393696" visible="true" weight="0.2109929" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50606304" side_tool="true" weight="0.29078013" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.52708167" weight="0.44858155" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -625,10 +550,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-=======
-    <entry file="file://$PROJECT_DIR$/src/Try2/AdderTokenManager.class" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     <entry file="file://$PROJECT_DIR$/src/Try2/AdderTokenManager.java" />
     <entry file="file://$PROJECT_DIR$/src/Try2/AdderConstants.class" />
     <entry file="file://$PROJECT_DIR$/src/Try2/AdderConstants.java" />
@@ -656,165 +577,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/StatementType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/StreamTokenizerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="9" column="89" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-=======
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql2.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18288">
-          <caret line="1016" column="1" selection-start-line="996" selection-end-line="1016" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/GenericPreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/ExecPreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/StorablePreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/GenericParameterValueSet.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/GenericStorablePreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/GenericStatement.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/GenericParameter.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/ParameterValueSet.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/Statement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/PreparedStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-=======
-    <entry file="file://$PROJECT_DIR$/src/Try2/b.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-    <entry file="file://$PROJECT_DIR$/src/Try/a.jjt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="152" lean-forward="true" selection-end-line="152" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/execute/Statement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/execute/EmbedStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-882">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try/a.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="111" column="36" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try/SqlParserConstants.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try/SqlParserConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-=======
-    <entry file="file://$PROJECT_DIR$/src/Try2/Adder.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="25" selection-start-line="25" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/ParseException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try/SqlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="15" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try/b.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/StatementType.java" />
+    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/StreamTokenizerTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/Token.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/GenericPreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/ExecPreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/StorablePreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/GenericParameterValueSet.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/GenericStorablePreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/GenericStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/GenericParameter.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/ParameterValueSet.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/Statement.java" />
+    <entry file="file://$PROJECT_DIR$/src/sql/PreparedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/Try/a.jjt" />
+    <entry file="file://$PROJECT_DIR$/src/execute/Statement.java" />
+    <entry file="file://$PROJECT_DIR$/src/execute/EmbedStatement.java" />
+    <entry file="file://$PROJECT_DIR$/src/Try/a.jj" />
+    <entry file="file://$PROJECT_DIR$/src/Try/SqlParserConstants.class" />
+    <entry file="file://$PROJECT_DIR$/src/Try/SqlParserConstants.java" />
+    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/ParseException.java" />
+    <entry file="file://$PROJECT_DIR$/src/Try/SqlParser.java" />
+    <entry file="file://$PROJECT_DIR$/src/Try/b.jj" />
     <entry file="file://$PROJECT_DIR$/try1/src/SimpleCharStream.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -835,6 +619,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Try2/b.jj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/SQLParseTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -845,10 +636,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/try1/src/Token.java">
+    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql.jj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state relative-caret-position="13824">
+          <caret line="768" column="1" selection-start-line="733" selection-end-line="768" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Try2/Adder.jj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" selection-start-line="25" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/try1/src/SqlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3672">
+          <caret line="204" column="15" selection-start-line="204" selection-start-column="15" selection-end-line="204" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -859,33 +667,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/try1/src/SqlParser.java">
+    <entry file="file://$PROJECT_DIR$/try1/src/Token.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="805">
-          <caret line="204" column="15" selection-start-line="204" selection-start-column="15" selection-end-line="204" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#218#225#0" expanded="true" />
-=======
-        <state relative-caret-position="175">
-          <caret line="190" column="15" selection-start-line="190" selection-start-column="15" selection-end-line="190" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#218#225#0" expanded="true" />
-            <element signature="e#12793#12794#0" expanded="true" />
-            <element signature="e#12822#12823#0" expanded="true" />
-            <element signature="e#13354#13355#0" expanded="true" />
-            <element signature="e#13385#13386#0" expanded="true" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-          </folding>
+        <state relative-caret-position="414">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql2.jj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
+        <state relative-caret-position="17082">
           <caret line="949" column="16" selection-start-line="949" selection-start-column="16" selection-end-line="949" selection-end-column="16" />
         </state>
       </provider>
@@ -897,42 +688,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try2/b.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="14" column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret line="768" column="1" lean-forward="true" selection-start-line="733" selection-end-line="768" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Try2/Adder.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="25" selection-start-line="25" selection-end-line="26" />
-=======
-    <entry file="file://$PROJECT_DIR$/src/Parser_cc/parse_try1/sql.jj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="321" column="19" selection-start-line="321" selection-start-column="6" selection-end-line="321" selection-end-column="19" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/try1/src/b.jj">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="126">
-          <caret line="208" column="5" lean-forward="true" selection-start-line="208" selection-start-column="5" selection-end-line="208" selection-end-column="5" />
-=======
-        <state relative-caret-position="353">
-          <caret line="314" column="36" selection-start-line="314" selection-start-column="36" selection-end-line="314" selection-end-column="36" />
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
+        <state relative-caret-position="591">
+          <caret line="284" column="4" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
         </state>
       </provider>
     </entry>

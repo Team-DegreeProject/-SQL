@@ -61,7 +61,6 @@ public interface SqlParserConstants {
   /** RegularExpression Id. */
   int BETWEEN = 34;
   /** RegularExpression Id. */
-<<<<<<< HEAD
   int PERCENT = 35;
   /** RegularExpression Id. */
   int AMPERSAND = 36;
@@ -125,23 +124,6 @@ public interface SqlParserConstants {
   int STATEMENT_END = 65;
   /** RegularExpression Id. */
   int END = 66;
-=======
-  int DOT = 35;
-  /** RegularExpression Id. */
-  int ID = 36;
-  /** RegularExpression Id. */
-  int NUMBER = 37;
-  /** RegularExpression Id. */
-  int LETTER = 38;
-  /** RegularExpression Id. */
-  int DIGIT = 39;
-  /** RegularExpression Id. */
-  int STRING = 40;
-  /** RegularExpression Id. */
-  int STATEMENT_END = 41;
-  /** RegularExpression Id. */
-  int END = 42;
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -187,7 +169,6 @@ public interface SqlParserConstants {
     "\"and\"",
     "\"like\"",
     "\"between\"",
-<<<<<<< HEAD
     "\"%\"",
     "\"&\"",
     "\"\\\'\"",
@@ -213,9 +194,6 @@ public interface SqlParserConstants {
     "\"||\"",
     "\"->\"",
     "\"...\"",
-=======
-    "\".\"",
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     "<ID>",
     "<NUMBER>",
     "<LETTER>",
@@ -223,10 +201,6 @@ public interface SqlParserConstants {
     "<STRING>",
     "\";\"",
     "\"!!\"",
-<<<<<<< HEAD
-=======
-    "\",\"",
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   };
 
 }

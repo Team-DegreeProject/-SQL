@@ -84,7 +84,6 @@ TOKEN [IGNORE_CASE]:
 TOKEN :
 {
 <LBRACKET : "(">
-<<<<<<< HEAD
 |<RBRACKET : ")">
 |<EQ : "=">
 |<GT : ">=">
@@ -125,32 +124,6 @@ TOKEN :
 TOKEN :
 {
 
-=======
-|
-<RBRACKET : ")">
-|
-<EQ : "=">
-|
-<GT : ">=">
-|
-<LT : "<=">
-|
-<NE : "!=">
-|
-<OR : "or">
-|
-<AND : "and">
-|
-<LIKE : "like">
-|
-<BETWEEN : "between">
-}
-
-TOKEN :
-{
-<DOT : ".">
-|
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
 <ID : <LETTER> (<LETTER>|<DIGIT>)*>
 |
 <NUMBER: (<DIGIT>)+ (<DOT>(<DIGIT>)*)?>
@@ -222,10 +195,7 @@ void saveToken(Token a) :
 void delete() :
 {
     Token t;
-<<<<<<< HEAD
     tokens = new ArrayList<Token>();
-=======
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
 }
 {
     {   System.out.println("------DELETE METHOD --------"); }
@@ -237,20 +207,12 @@ void delete() :
     {
         saveToken(t);
     }
-<<<<<<< HEAD
 
     (t = <ASTERISK>|t = <ID> )
     {    saveToken(t);  }
 
     (where() )?
     {ExecuteStatement.delete(tokens);}
-=======
-    t = <ID>
-    {
-        saveToken(t);
-    }
-    (where() )?
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     (<STATEMENT_END> | <END>)
 }
 
@@ -307,16 +269,6 @@ void name() :
  )?
 }
 
-// Between ...  AND ... 条件语句
-void betweenCondition() :
-{Token t;}
-{
-    <BETWEEN>
-    rightCondition()
-    <AND>
-    rightCondition()
-}
-
 //简单条件
 void simpleCondition() :
 {Token t;}
@@ -329,25 +281,27 @@ void simpleCondition() :
 void rightCondition() :
 {Token t;}
 {
-<<<<<<< HEAD
     // “/” ，数字，功能
-=======
-// “/” ，数字，功能
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
- <STRING>| <NUMBER>| function()
+    <STRING>| <NUMBER>| function()
 }
+
+// Between ...  AND ... 条件语句
+void betweenCondition() :
+{Token t;}
+{
+    <BETWEEN>
+    rightCondition()
+    <AND>
+    rightCondition()
+}
+
 
 //功能方法
 void function() :
 {Token t;}
 {
-<<<<<<< HEAD
     //  id (（多）参数 )
      <ID> <LBRACKET> arguments() <RBRACKET>
-=======
-//  id (（多）参数 )
- <ID> <LBRACKET> arguments() <RBRACKET>
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
 }
 
 //（多）参数函数
@@ -411,7 +365,6 @@ void table() :
 
 
 
-<<<<<<< HEAD
 //void arguments() :
 //{}
 //{
@@ -423,34 +376,6 @@ void table() :
 //    )*
 // )?
 //}
-=======
-
-
-
-
-
-
-
-
-void rightCondition() :
-{}
-{
- <STRING>| <NUMBER>| function()
-}
-
-
-void arguments() :
-{}
-{
- (
-    argument()
-    (
-        ","
-     argument()
-    )*
- )?
-}
->>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
 
 
 
