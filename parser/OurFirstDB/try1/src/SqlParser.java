@@ -68,14 +68,22 @@ public class SqlParser implements SqlParserConstants {
       label_1:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+<<<<<<< HEAD
         case COMMA:
+=======
+        case 43:
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
           ;
           break;
         default:
           jj_la1[3] = jj_gen;
           break label_1;
         }
+<<<<<<< HEAD
         jj_consume_token(COMMA);
+=======
+        jj_consume_token(43);
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         jj_consume_token(ID);
       }
       jj_consume_token(RBRACKET);
@@ -156,12 +164,16 @@ public class SqlParser implements SqlParserConstants {
 
   final public void delete() throws ParseException {
     Token t;
+<<<<<<< HEAD
     tokens = new ArrayList<Token>();
+=======
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         System.out.println("------DELETE METHOD --------");
     t = jj_consume_token(DELETE);
         saveToken(t);
     t = jj_consume_token(FROM);
         saveToken(t);
+<<<<<<< HEAD
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ASTERISK:
       t = jj_consume_token(ASTERISK);
@@ -175,15 +187,25 @@ public class SqlParser implements SqlParserConstants {
       throw new ParseException();
     }
          saveToken(t);
+=======
+    t = jj_consume_token(ID);
+        saveToken(t);
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case WHERE:
       where();
       break;
     default:
+<<<<<<< HEAD
       jj_la1[10] = jj_gen;
       ;
     }
      ExecuteStatement.delete(tokens);
+=======
+      jj_la1[9] = jj_gen;
+      ;
+    }
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case STATEMENT_END:
       jj_consume_token(STATEMENT_END);
@@ -192,13 +214,20 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(END);
       break;
     default:
+<<<<<<< HEAD
       jj_la1[11] = jj_gen;
+=======
+      jj_la1[10] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
+<<<<<<< HEAD
 //where语句
+=======
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   final public void where() throws ParseException {
  Token t;
     t = jj_consume_token(WHERE);
@@ -215,20 +244,32 @@ public class SqlParser implements SqlParserConstants {
         groupBy();
         break;
       default:
+<<<<<<< HEAD
         jj_la1[12] = jj_gen;
+=======
+        jj_la1[11] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
     default:
+<<<<<<< HEAD
       jj_la1[13] = jj_gen;
+=======
+      jj_la1[12] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       ;
     }
   }
 
+<<<<<<< HEAD
 // 多条件并列的时�??
   final public void multiCondition() throws ParseException {
  Token t;
+=======
+  final public void multiCondition() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ID:
       condition();
@@ -239,7 +280,11 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(RBRACKET);
       break;
     default:
+<<<<<<< HEAD
       jj_la1[14] = jj_gen;
+=======
+      jj_la1[13] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -251,7 +296,11 @@ public class SqlParser implements SqlParserConstants {
         ;
         break;
       default:
+<<<<<<< HEAD
         jj_la1[15] = jj_gen;
+=======
+        jj_la1[14] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         break label_2;
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -262,7 +311,11 @@ public class SqlParser implements SqlParserConstants {
         jj_consume_token(OR);
         break;
       default:
+<<<<<<< HEAD
         jj_la1[16] = jj_gen;
+=======
+        jj_la1[15] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -276,16 +329,24 @@ public class SqlParser implements SqlParserConstants {
         jj_consume_token(RBRACKET);
         break;
       default:
+<<<<<<< HEAD
         jj_la1[17] = jj_gen;
+=======
+        jj_la1[16] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         jj_consume_token(-1);
         throw new ParseException();
       }
     }
   }
 
+<<<<<<< HEAD
 //小情况；小条�?
   final public void condition() throws ParseException {
  Token t;
+=======
+  final public void condition() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     name();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EQ:
@@ -299,14 +360,39 @@ public class SqlParser implements SqlParserConstants {
       betweenCondition();
       break;
     default:
+<<<<<<< HEAD
       jj_la1[18] = jj_gen;
+=======
+      jj_la1[17] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
+<<<<<<< HEAD
   final public void name() throws ParseException {
  Token t;
+=======
+  final public void selectResultList() throws ParseException {
+    selectResult();
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 43:
+        ;
+        break;
+      default:
+        jj_la1[18] = jj_gen;
+        break label_3;
+      }
+      jj_consume_token(43);
+      selectResult();
+    }
+  }
+
+  final public void selectResult() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case DOT:
@@ -317,6 +403,7 @@ public class SqlParser implements SqlParserConstants {
       jj_la1[19] = jj_gen;
       ;
     }
+<<<<<<< HEAD
   }
 
 // Between ...  AND ... 条件语句
@@ -331,6 +418,49 @@ public class SqlParser implements SqlParserConstants {
 //�?单条�?
   final public void simpleCondition() throws ParseException {
  Token t;
+=======
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case AS:
+      jj_consume_token(AS);
+      jj_consume_token(ID);
+      break;
+    default:
+      jj_la1[20] = jj_gen;
+      ;
+    }
+  }
+
+  final public void fromTables() throws ParseException {
+    table();
+    label_4:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 43:
+        ;
+        break;
+      default:
+        jj_la1[21] = jj_gen;
+        break label_4;
+      }
+      jj_consume_token(43);
+      table();
+    }
+  }
+
+  final public void table() throws ParseException {
+    jj_consume_token(ID);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ID:
+      jj_consume_token(ID);
+      break;
+    default:
+      jj_la1[22] = jj_gen;
+      ;
+    }
+  }
+
+  final public void simpleCondition() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EQ:
       jj_consume_token(EQ);
@@ -348,15 +478,43 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(LIKE);
       break;
     default:
+<<<<<<< HEAD
       jj_la1[20] = jj_gen;
+=======
+      jj_la1[23] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
     rightCondition();
   }
 
+<<<<<<< HEAD
   final public void rightCondition() throws ParseException {
  Token t;
+=======
+  final public void betweenCondition() throws ParseException {
+    jj_consume_token(BETWEEN);
+    rightCondition();
+    jj_consume_token(AND);
+    rightCondition();
+  }
+
+  final public void name() throws ParseException {
+    jj_consume_token(ID);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOT:
+      jj_consume_token(DOT);
+      jj_consume_token(ID);
+      break;
+    default:
+      jj_la1[24] = jj_gen;
+      ;
+    }
+  }
+
+  final public void rightCondition() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case STRING:
       jj_consume_token(STRING);
@@ -368,21 +526,30 @@ public class SqlParser implements SqlParserConstants {
       function();
       break;
     default:
+<<<<<<< HEAD
       jj_la1[21] = jj_gen;
+=======
+      jj_la1[25] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
+<<<<<<< HEAD
 //功能方法
   final public void function() throws ParseException {
  Token t;
+=======
+  final public void function() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     jj_consume_token(ID);
     jj_consume_token(LBRACKET);
     arguments();
     jj_consume_token(RBRACKET);
   }
 
+<<<<<<< HEAD
 //（多）参数函�?
   final public void arguments() throws ParseException {
  Token t;
@@ -400,18 +567,43 @@ public class SqlParser implements SqlParserConstants {
           break label_3;
         }
         jj_consume_token(COMMA);
+=======
+  final public void arguments() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ID:
+      argument();
+      label_5:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case 43:
+          ;
+          break;
+        default:
+          jj_la1[26] = jj_gen;
+          break label_5;
+        }
+        jj_consume_token(43);
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
         argument();
       }
       break;
     default:
+<<<<<<< HEAD
       jj_la1[23] = jj_gen;
+=======
+      jj_la1[27] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       ;
     }
   }
 
+<<<<<<< HEAD
 // �?组参�?
   final public void argument() throws ParseException {
  Token t;
+=======
+  final public void argument() throws ParseException {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case STRING:
@@ -421,12 +613,17 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(NUMBER);
       break;
     default:
+<<<<<<< HEAD
       jj_la1[24] = jj_gen;
+=======
+      jj_la1[28] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
+<<<<<<< HEAD
   final public void selectResultList() throws ParseException {
  Token t;
     System.out.println("------SELECT METHOD --------");
@@ -511,11 +708,14 @@ public class SqlParser implements SqlParserConstants {
 //    )*
 // )?
 //}
+=======
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   final public void values() throws ParseException {
     value();
     label_6:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+<<<<<<< HEAD
       case COMMA:
         ;
         break;
@@ -524,6 +724,16 @@ public class SqlParser implements SqlParserConstants {
         break label_6;
       }
       jj_consume_token(COMMA);
+=======
+      case 43:
+        ;
+        break;
+      default:
+        jj_la1[29] = jj_gen;
+        break label_6;
+      }
+      jj_consume_token(43);
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       value();
     }
   }
@@ -537,7 +747,11 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(NUMBER);
       break;
     default:
+<<<<<<< HEAD
       jj_la1[31] = jj_gen;
+=======
+      jj_la1[30] = jj_gen;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -558,6 +772,7 @@ public class SqlParser implements SqlParserConstants {
     label_7:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+<<<<<<< HEAD
       case COMMA:
         ;
         break;
@@ -566,6 +781,16 @@ public class SqlParser implements SqlParserConstants {
         break label_7;
       }
       jj_consume_token(COMMA);
+=======
+      case 43:
+        ;
+        break;
+      default:
+        jj_la1[31] = jj_gen;
+        break label_7;
+      }
+      jj_consume_token(43);
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       set();
     }
   }
@@ -585,6 +810,7 @@ public class SqlParser implements SqlParserConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
+<<<<<<< HEAD
   final private int[] jj_la1 = new int[33];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
@@ -602,6 +828,20 @@ public class SqlParser implements SqlParserConstants {
    }
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x0,0x0,0x6,0x0,0x6,0x6,0x0,0x6,0x0,0x0,0x0,0x6,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,};
+=======
+  final private int[] jj_la1 = new int[32];
+  static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
+  static {
+      jj_la1_init_0();
+      jj_la1_init_1();
+   }
+   private static void jj_la1_init_0() {
+      jj_la1_0 = new int[] {0x1010000,0x1010000,0x0,0x0,0x0,0x0,0x400000,0x0,0x807800,0x400000,0x0,0x300000,0x300000,0x2000000,0x80000000,0x80000000,0x2000000,0x78000000,0x0,0x0,0x8000,0x0,0x0,0x78000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x0,0x0,0x600,0x800,0x600,0x600,0x0,0x600,0x0,0x0,0x600,0x0,0x0,0x10,0x1,0x1,0x10,0x6,0x800,0x8,0x0,0x800,0x10,0x2,0x8,0x130,0x800,0x10,0x120,0x800,0x120,0x800,};
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
    }
 
   /** Constructor with InputStream. */
@@ -615,7 +855,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   /** Reinitialise. */
@@ -629,7 +873,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   /** Constructor. */
@@ -639,7 +887,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   /** Reinitialise. */
@@ -649,7 +901,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   /** Constructor with generated Token Manager. */
@@ -658,7 +914,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   /** Reinitialise. */
@@ -667,7 +927,11 @@ public class SqlParser implements SqlParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) jj_la1[i] = -1;
+=======
+    for (int i = 0; i < 32; i++) jj_la1[i] = -1;
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -718,12 +982,20 @@ public class SqlParser implements SqlParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
+<<<<<<< HEAD
     boolean[] la1tokens = new boolean[67];
+=======
+    boolean[] la1tokens = new boolean[44];
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
+<<<<<<< HEAD
     for (int i = 0; i < 33; i++) {
+=======
+    for (int i = 0; i < 32; i++) {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -732,6 +1004,7 @@ public class SqlParser implements SqlParserConstants {
           if ((jj_la1_1[i] & (1<<j)) != 0) {
             la1tokens[32+j] = true;
           }
+<<<<<<< HEAD
           if ((jj_la1_2[i] & (1<<j)) != 0) {
             la1tokens[64+j] = true;
           }
@@ -739,6 +1012,12 @@ public class SqlParser implements SqlParserConstants {
       }
     }
     for (int i = 0; i < 67; i++) {
+=======
+        }
+      }
+    }
+    for (int i = 0; i < 44; i++) {
+>>>>>>> 02132795fade886d1dce4b2ef2d7320d7926457a
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
