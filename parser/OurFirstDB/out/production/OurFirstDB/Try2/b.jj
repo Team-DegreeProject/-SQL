@@ -1,0 +1,71 @@
+options
+{
+    STATIC = false;
+  	LOOKAHEAD = 1;
+  	DEBUG_PARSER = false;
+  	DEBUG_LOOKAHEAD = false;
+  	DEBUG_TOKEN_MANAGER = false;
+  	ERROR_REPORTING = true;
+  	USER_TOKEN_MANAGER = false;
+  	USER_CHAR_STREAM = true;
+  	COMMON_TOKEN_ACTION = true;
+  	CACHE_TOKENS = true;
+  	UNICODE_INPUT = true;
+    JDK_VERSION = "1.5";
+}
+
+
+PARSER_BEGIN(Simple1)
+
+public class Simple1 {
+
+    //SQL文本
+    private String statementSQLText;
+    //参数数量
+    private int parameterNumber;
+    //默认的参数
+    private Object[] paramDefaults;
+
+    //初始化Statement
+    private void initStatement(String statementSQLText, Object[] paramDefaults) {
+        parameterNumber = 0;
+        this.statementSQLText = statementSQLText;
+        this.paramDefaults = paramDefaults;
+
+   }
+
+  /** Main entry point. */
+  public static void main(String args[]) throws ParseException {
+    Simple1 parser = new Simple1(System.in);
+    parser.Input();
+  }
+
+
+
+}
+
+
+PARSER_END(Simple1)
+/** Root production. */
+void Input() :
+{}
+{
+  MatchedBraces() ("\n"|"\r")* <EOF>
+}
+
+/** Brace matching production. */
+void MatchedBraces() :
+{}
+{
+  "{" [ MatchedBraces() ] "}"
+}
+
+
+TOKEN [IGNORE_CASE] ://不区分大小写的
+{//操作关键字
+	<ADD: "add">
+|	<ALTER: "alter">
+|	<AND: "and">
+|   <Select:"select">
+|   <From:"from">
+}
