@@ -1,3 +1,5 @@
+package BTree;
+
 abstract class Node<T, V extends Comparable<V>>{
     //父节点
     protected Node<T, V> parent;
