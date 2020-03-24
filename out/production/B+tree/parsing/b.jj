@@ -1,0 +1,430 @@
+options {
+    static=false;
+    IGNORE_CASE=true;
+}
+
+PARSER_BEGIN(SqlParser)
+import java.util.List;
+import java.util.ArrayList;
+import BTree.DMLExecution;
+public class SqlParser {
+
+    private List<Token> tokens = new ArrayList<Token>();
+
+    public static void main(String[] args) throws Exception {
+        SqlParser parser = new SqlParser(System.in);
+        parser.parse();
+        System.out.println("sql is correct!");
+    }
+}
+PARSER_END(SqlParser)
+
+SKIP :
+{
+ " "|"\t"|"\r"|"\n"|"\f"
+}
+
+MORE :
+{
+ "//" : IN_SINGLE_LINE_COMMENT
+|
+ "/*" : IN_MULTI_LINE_COMMENT
+}
+
+<IN_SINGLE_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+    <SINGLE_LINE_COMMENT : "/r" | "/n" | "/r/n"> : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+<MULTI_LINE_COMMENT : "*/"> : DEFAULT
+}
+<IN_SINGLE_LINE_COMMENT,IN_MULTI_LINE_COMMENT>
+MORE :
+{
+<~[]>
+}
+
+TOKEN [IGNORE_CASE]:
+{
+<SELECT : "select">
+|
+<INSERT : "insert">
+|
+<UPDATE : "update">
+|
+<DELETE : "delete">
+}
+
+TOKEN [IGNORE_CASE]:
+{
+<AS : "as">
+|
+<ALL : "all">
+|
+<SET : "set">
+|
+<FROM : "from">
+|
+<INTO : "into">
+|
+<GROUP_BY : "group" ([" "])+ "by">
+|
+<ORDER_BY : "order" ([" "])+ "by">
+|
+<WHERE : "where">
+|
+<VALUES : "values">
+|
+<DISTINCT : "distinct">
+}
+
+TOKEN :
+{
+<LBRACKET : "(">
+|<RBRACKET : ")">
+|<EQ : "=">
+|<GT : ">=">
+|<LT : "<=">
+|<NE : "!=">
+|<OR : "or">
+|<AND : "and">
+|<LIKE : "like">
+|<BETWEEN : "between">
+|	<PERCENT: "%">
+|	<AMPERSAND: "&">
+|	<QUOTE: "'">
+|	<LEFT_BRACE: "{">
+|	<RIGHT_BRACE: "}">
+|	<ASTERISK: "*">
+|	<HASH: "#">
+|	<PLUS_SIGN: "+">
+|	<COMMA: ",">
+|	<MINUS_SIGN: "-">
+|	<DOT: ".">
+|	<SOLIDUS: "/">
+|	<COLON: ":">
+|	<DOUBLE_COLON: "::">
+|	<LESS_THAN_OPERATOR: "<">
+|	<NOT_EQUALS_OPERATOR: "<>">
+|	<GREATER_THAN_OPERATOR: ">">
+|	<QUESTION_MARK: "?">
+|	<UNDERSCORE: "_">
+|	<VERTICAL_BAR: "|">
+|	<LEFT_BRACKET: "[">
+|	<RIGHT_BRACKET: "]">
+|	<CONCATENATION_OPERATOR: "||">
+|	<FIELD_REFERENCE: "->">
+|	<ELLIPSIS: "...">
+}
+
+
+TOKEN :
+{
+
+<ID : <LETTER> (<LETTER>|<DIGIT>)*>
+|
+<NUMBER: (<DIGIT>)+ (<DOT>(<DIGIT>)*)?>
+|
+<#LETTER : ["a"-"z","A"-"Z","_"]>
+|
+<#DIGIT : ["0"-"9"]>
+|
+<STRING : "/'" (~["/"])* ("///'")? (~["/"])* "/'">
+}
+
+TOKEN :
+{
+<STATEMENT_END : ";">
+|
+<END : "!!">
+}
+
+void parse() :
+{
+    Token t;
+    tokens = new ArrayList<Token>();
+}
+{
+    //***************SELECT************
+    <SELECT>
+    {
+        t = new Token();
+        t.image = "select";
+        System.out.println(t.image);
+        tokens.add(t);
+
+    }
+    (<DISTINCT> | <ALL>)?selectResultList()
+    <FROM>fromTables()where()(<STATEMENT_END> | <END>)
+
+    //***************INSERT************
+    |   //only support simple insert statement
+    <INSERT><INTO><ID> //TABLE NAME
+    <VALUES>
+    <LBRACKET><ID>(","<ID>)*<RBRACKET>(<STATEMENT_END> | <END>)
+
+    |<VALUES>
+    <LBRACKET>values() <RBRACKET>
+    (<STATEMENT_END> | <END>)
+
+    //***************UPDATE************
+    |<UPDATE><ID><SET>sets()( where() )?(<STATEMENT_END> | <END>)
+
+    //***************DELETE************
+    |
+
+    delete()
+}
+
+void saveToken(Token a) :
+{
+    Token t;
+}
+{
+    {
+        t = a;
+        System.out.println(t.image);
+        System.out.println(t.kind);
+        tokens.add(t);
+    }
+}
+
+void delete() :
+{
+    Token t;
+    tokens = new ArrayList<Token>();
+}
+{
+    {   System.out.println("------DELETE METHOD --------"); }
+    t =  <DELETE>
+    {
+        saveToken(t);
+    }
+    t =<FROM>
+    {
+        saveToken(t);
+    }
+
+    (t = <ASTERISK>|t = <ID> )
+    {    saveToken(t);  }
+
+    (where() )?
+    {ExecuteStatement.delete(tokens);}
+    (<STATEMENT_END> | <END>)
+}
+
+//where语句
+void where() :
+{Token t;}
+{
+    t = <WHERE>
+    {saveToken(t);}
+
+    multiCondition()
+    (orderBy() | groupBy())?
+}
+
+// 多条件并列的时候
+void multiCondition() :
+{Token t;}
+{
+
+ (
+    //好多个小条件
+    condition()
+    |
+    "(" condition() ")"
+ )
+
+ (
+    // 和或并好多个小条件
+     (<AND> | <OR>)
+    (
+        condition() | "(" condition() ")"
+    )
+ )*
+
+}
+
+//小情况；小条件
+void condition() :
+{Token t;}
+{
+ name()
+ (
+    simpleCondition()|betweenCondition()
+ )
+}
+
+void name() :
+{Token t;}
+{
+ <ID>
+ (
+    "."
+    <ID>
+ )?
+}
+
+//简单条件
+void simpleCondition() :
+{Token t;}
+{
+    //判断条件
+    (<EQ> | <GT> | <LT> | <NE> | <LIKE>)
+    rightCondition()
+}
+
+void rightCondition() :
+{Token t;}
+{
+    // “/” ，数字，功能
+    <STRING>| <NUMBER>| function()
+}
+
+// Between ...  AND ... 条件语句
+void betweenCondition() :
+{Token t;}
+{
+    <BETWEEN>
+    rightCondition()
+    <AND>
+    rightCondition()
+}
+
+
+//功能方法
+void function() :
+{Token t;}
+{
+    //  id (（多）参数 )
+     <ID> <LBRACKET> arguments() <RBRACKET>
+}
+
+//（多）参数函数
+void arguments() :
+{Token t;}
+{
+ (
+    argument()// 一组参数
+    (
+        ","
+     argument()
+    )* // 或者多组参数
+ )?
+}
+
+// 一组参数
+void argument() :
+{Token t;}
+{
+    // id ("/"或数字)
+ <ID>
+ (
+    <STRING>|<NUMBER>
+ )
+}
+
+void selectResultList() :
+{Token t;}
+{
+{   System.out.println("------SELECT METHOD --------"); }
+    selectResult()
+    (
+    ","
+    selectResult()
+    )*
+}
+
+void selectResult() :
+{Token t;}
+{
+    <ID>(<DOT><ID>)?(<AS><ID>)?
+}
+
+void fromTables() :
+{Token t;}
+{
+ table()
+ (
+    ","
+    table()
+ )*
+}
+
+void table() :
+{Token t;}
+{
+ <ID>
+ (<ID>)?
+}
+
+
+
+
+//void arguments() :
+//{}
+//{
+// (
+//    argument()
+//    (
+//        ","
+//     argument()
+//    )*
+// )?
+//}
+
+
+
+void values() :
+{}
+{
+     value()
+    (
+        ","
+        value()
+    )*
+}
+
+void value() :
+{}
+{
+ <STRING>|<NUMBER>
+}
+
+
+void orderBy() :
+{}
+{
+    <ORDER_BY>
+    name()
+}
+
+void groupBy() :
+{}
+{
+ <GROUP_BY>
+ name()
+}
+
+void sets() :
+{}
+{
+ set()
+ (
+    ","
+    set()
+ )*
+}
+
+void set() :
+{}
+{
+ <ID>
+ <EQ>
+ rightCondition()
+}
