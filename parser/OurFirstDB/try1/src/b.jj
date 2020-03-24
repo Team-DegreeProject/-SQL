@@ -84,30 +84,46 @@ TOKEN [IGNORE_CASE]:
 TOKEN :
 {
 <LBRACKET : "(">
-|
-<RBRACKET : ")">
-|
-<EQ : "=">
-|
-<GT : ">=">
-|
-<LT : "<=">
-|
-<NE : "!=">
-|
-<OR : "or">
-|
-<AND : "and">
-|
-<LIKE : "like">
-|
-<BETWEEN : "between">
+|<RBRACKET : ")">
+|<EQ : "=">
+|<GT : ">=">
+|<LT : "<=">
+|<NE : "!=">
+|<OR : "or">
+|<AND : "and">
+|<LIKE : "like">
+|<BETWEEN : "between">
+|	<PERCENT: "%">
+|	<AMPERSAND: "&">
+|	<QUOTE: "'">
+|	<LEFT_BRACE: "{">
+|	<RIGHT_BRACE: "}">
+|	<ASTERISK: "*">
+|	<HASH: "#">
+|	<PLUS_SIGN: "+">
+|	<COMMA: ",">
+|	<MINUS_SIGN: "-">
+|	<DOT: ".">
+|	<SOLIDUS: "/">
+|	<COLON: ":">
+|	<DOUBLE_COLON: "::">
+|	<LESS_THAN_OPERATOR: "<">
+|	<NOT_EQUALS_OPERATOR: "<>">
+|	<GREATER_THAN_OPERATOR: ">">
+|	<QUESTION_MARK: "?">
+|	<UNDERSCORE: "_">
+|	<VERTICAL_BAR: "|">
+|	<LEFT_BRACKET: "[">
+|	<RIGHT_BRACKET: "]">
+|	<CONCATENATION_OPERATOR: "||">
+|	<FIELD_REFERENCE: "->">
+|	<ELLIPSIS: "...">
 }
+
 
 TOKEN :
 {
-<DOT : ".">
-|
+
 <ID : <LETTER> (<LETTER>|<DIGIT>)*>
 |
 <NUMBER: (<DIGIT>)+ (<DOT>(<DIGIT>)*)?>
@@ -171,6 +187,7 @@ void saveToken(Token a) :
     {
         t = a;
         System.out.println(t.image);
+        System.out.println(t.kind);
         tokens.add(t);
     }
 }
@@ -178,6 +195,7 @@ void saveToken(Token a) :
 void delete() :
 {
     Token t;
+    tokens = new ArrayList<Token>();
 }
 {
     {   System.out.println("------DELETE METHOD --------"); }
@@ -189,31 +207,40 @@ void delete() :
     {
         saveToken(t);
     }
-    t = <ID>
-    {
-        saveToken(t);
-    }
+
+    (t = <ASTERISK>|t = <ID> )
+    {    saveToken(t);  }
+
     (where() )?
+    {ExecuteStatement.delete(tokens);}
     (<STATEMENT_END> | <END>)
 }
+
+//where语句
 void where() :
-{}
+{Token t;}
 {
     t = <WHERE>
     {saveToken(t);}
+
     multiCondition()
     (orderBy() | groupBy())?
 }
 
+// 多条件并列的时候
 void multiCondition() :
-{}
+{Token t;}
 {
 
  (
-    condition() | "(" condition() ")"
+    //好多个小条件
+    condition()
+    |
+    "(" condition() ")"
  )
 
  (
+    // 和或并好多个小条件
      (<AND> | <OR>)
     (
         condition() | "(" condition() ")"
@@ -222,8 +249,9 @@ void multiCondition() :
 
 }
 
+//小情况；小条件
 void condition() :
-{}
+{Token t;}
 {
  name()
  (
@@ -231,9 +259,78 @@ void condition() :
  )
 }
 
-void selectResultList() :
-{}
+void name() :
+{Token t;}
 {
+ <ID>
+ (
+    "."
+    <ID>
+ )?
+}
+
+// Between ...  AND ... 条件语句
+void betweenCondition() :
+{Token t;}
+{
+    <BETWEEN>
+    rightCondition()
+    <AND>
+    rightCondition()
+}
+
+//简单条件
+void simpleCondition() :
+{Token t;}
+{
+    //判断条件
+    (<EQ> | <GT> | <LT> | <NE> | <LIKE>)
+    rightCondition()
+}
+
+void rightCondition() :
+{Token t;}
+{
+    // “/” ，数字，功能
+ <STRING>| <NUMBER>| function()
+}
+
+//功能方法
+void function() :
+{Token t;}
+{
+    //  id (（多）参数 )
+     <ID> <LBRACKET> arguments() <RBRACKET>
+}
+
+//（多）参数函数
+void arguments() :
+{Token t;}
+{
+ (
+    argument()// 一组参数
+    (
+        ","
+     argument()
+    )* // 或者多组参数
+ )?
+}
+
+// 一组参数
+void argument() :
+{Token t;}
+{
+    // id ("/"或数字)
+ <ID>
+ (
+    <STRING>|<NUMBER>
+ )
+}
+
+void selectResultList() :
+{Token t;}
+{
+{   System.out.println("------SELECT METHOD --------"); }
     selectResult()
     (
     ","
@@ -242,13 +339,13 @@ void selectResultList() :
 }
 
 void selectResult() :
-{}
+{Token t;}
 {
     <ID>(<DOT><ID>)?(<AS><ID>)?
 }
 
 void fromTables() :
-{}
+{Token t;}
 {
  table()
  (
@@ -258,7 +355,7 @@ void fromTables() :
 }
 
 void table() :
-{}
+{Token t;}
 {
  <ID>
  (<ID>)?
@@ -267,67 +364,19 @@ void table() :
 
 
 
+//void arguments() :
+//{}
+//{
+// (
+//    argument()
+//    (
+//        ","
+//     argument()
+//    )*
+// )?
+//}
 
 
-
-void simpleCondition() :
-{}
-{
-    (<EQ> | <GT> | <LT> | <NE> | <LIKE>)
-    rightCondition()
-}
-
-void betweenCondition() :
-{}
-{
- <BETWEEN>
- rightCondition()
- <AND>
- rightCondition()
-}
-
-void name() :
-{}
-{
- <ID>
- (
-    "."
-    <ID>
- )?
-}
-
-void rightCondition() :
-{}
-{
- <STRING>| <NUMBER>| function()
-}
-
-void function() :
-{}
-{
- <ID> <LBRACKET> arguments() <RBRACKET>
-}
-
-void arguments() :
-{}
-{
- (
-    argument()
-    (
-        ","
-     argument()
-    )*
- )?
-}
-
-void argument() :
-{}
-{
- <ID>
- (
-    <STRING>|<NUMBER>
- )
-}
 
 void values() :
 {}

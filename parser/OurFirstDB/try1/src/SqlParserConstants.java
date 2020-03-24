@@ -61,21 +61,69 @@ public interface SqlParserConstants {
   /** RegularExpression Id. */
   int BETWEEN = 34;
   /** RegularExpression Id. */
-  int DOT = 35;
+  int PERCENT = 35;
   /** RegularExpression Id. */
-  int ID = 36;
+  int AMPERSAND = 36;
   /** RegularExpression Id. */
-  int NUMBER = 37;
+  int QUOTE = 37;
   /** RegularExpression Id. */
-  int LETTER = 38;
+  int LEFT_BRACE = 38;
   /** RegularExpression Id. */
-  int DIGIT = 39;
+  int RIGHT_BRACE = 39;
   /** RegularExpression Id. */
-  int STRING = 40;
+  int ASTERISK = 40;
   /** RegularExpression Id. */
-  int STATEMENT_END = 41;
+  int HASH = 41;
   /** RegularExpression Id. */
-  int END = 42;
+  int PLUS_SIGN = 42;
+  /** RegularExpression Id. */
+  int COMMA = 43;
+  /** RegularExpression Id. */
+  int MINUS_SIGN = 44;
+  /** RegularExpression Id. */
+  int DOT = 45;
+  /** RegularExpression Id. */
+  int SOLIDUS = 46;
+  /** RegularExpression Id. */
+  int COLON = 47;
+  /** RegularExpression Id. */
+  int DOUBLE_COLON = 48;
+  /** RegularExpression Id. */
+  int LESS_THAN_OPERATOR = 49;
+  /** RegularExpression Id. */
+  int NOT_EQUALS_OPERATOR = 50;
+  /** RegularExpression Id. */
+  int GREATER_THAN_OPERATOR = 51;
+  /** RegularExpression Id. */
+  int QUESTION_MARK = 52;
+  /** RegularExpression Id. */
+  int UNDERSCORE = 53;
+  /** RegularExpression Id. */
+  int VERTICAL_BAR = 54;
+  /** RegularExpression Id. */
+  int LEFT_BRACKET = 55;
+  /** RegularExpression Id. */
+  int RIGHT_BRACKET = 56;
+  /** RegularExpression Id. */
+  int CONCATENATION_OPERATOR = 57;
+  /** RegularExpression Id. */
+  int FIELD_REFERENCE = 58;
+  /** RegularExpression Id. */
+  int ELLIPSIS = 59;
+  /** RegularExpression Id. */
+  int ID = 60;
+  /** RegularExpression Id. */
+  int NUMBER = 61;
+  /** RegularExpression Id. */
+  int LETTER = 62;
+  /** RegularExpression Id. */
+  int DIGIT = 63;
+  /** RegularExpression Id. */
+  int STRING = 64;
+  /** RegularExpression Id. */
+  int STATEMENT_END = 65;
+  /** RegularExpression Id. */
+  int END = 66;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -121,7 +169,31 @@ public interface SqlParserConstants {
     "\"and\"",
     "\"like\"",
     "\"between\"",
+    "\"%\"",
+    "\"&\"",
+    "\"\\\'\"",
+    "\"{\"",
+    "\"}\"",
+    "\"*\"",
+    "\"#\"",
+    "\"+\"",
+    "\",\"",
+    "\"-\"",
     "\".\"",
+    "\"/\"",
+    "\":\"",
+    "\"::\"",
+    "\"<\"",
+    "\"<>\"",
+    "\">\"",
+    "\"?\"",
+    "\"_\"",
+    "\"|\"",
+    "\"[\"",
+    "\"]\"",
+    "\"||\"",
+    "\"->\"",
+    "\"...\"",
     "<ID>",
     "<NUMBER>",
     "<LETTER>",
@@ -129,7 +201,6 @@ public interface SqlParserConstants {
     "<STRING>",
     "\";\"",
     "\"!!\"",
-    "\",\"",
   };
 
 }
