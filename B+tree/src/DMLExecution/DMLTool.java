@@ -58,6 +58,5 @@ public class DMLTool {
                 System.out.println("Warning:There are two =");
             }
         }
-
     }
 }

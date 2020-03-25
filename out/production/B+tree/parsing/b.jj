@@ -5,7 +5,7 @@ options {
 
 PARSER_BEGIN(SqlParser)
 package parsing;
-import DMLExecution.ExecuteStatement;
+import DMLExecution.test;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -276,7 +276,7 @@ void delete() :
     (<STATEMENT_END> | <END>)
 
 
-    {ExecuteStatement.delete(sql);} // %%
+//    {test.testWhereAnd(sql);} // %%
 }
 
 //where语句

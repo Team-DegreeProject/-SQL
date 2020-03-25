@@ -81,4 +81,15 @@ public class BPlusTreeTool {
         }
         return l1;
     }
+
+    public static void printList(List list,String attribute){
+        for(int i=0;i<list.size();i++){
+            CglibBean c= (CglibBean) list.get(i);
+            System.out.println(c.getValue(attribute));
+        }
+    }
+    public static void printBPlusTree(BPlusTree b,String attribute){
+        List list=b.getDatas();
+        printList(list,attribute);
+    }
 }

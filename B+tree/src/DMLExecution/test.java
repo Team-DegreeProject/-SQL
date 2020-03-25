@@ -1,112 +1,54 @@
 package DMLExecution;
 
 import BTree.BPlusTree;
+import BTree.BPlusTreeTool;
 import BTree.CglibBean;
+import parsing.SqlParserConstants;
+import parsing.Token;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Stack;
 
-public class test {
+public class test implements OperationInterface {
     public static void main(String[] args) throws ClassNotFoundException {
+        testWhereAndOr();
+    }
+    public static void testcompare() throws ClassNotFoundException {
+        BPlusTree b=createTree();
+//        List list=Delete.compare(b,"address",EQ,"300");
+//        BPlusTreeTool.printList(list,"address");
+//        List list=Delete.compare(b,"id",EQ,300);
+//        BPlusTreeTool.printList(list,"id");
+//        List list=Delete.compare(b,"id",LESS_THAN_OPERATOR,300);
+//        BPlusTreeTool.printList(list,"id");
+        BPlusTree list=Delete.compare(b,"address",GREATER_THAN_OPERATOR,"300","id");
+        BPlusTreeTool.printBPlusTree(list,"address");
+    }
+
+    public static void testWhereAndOr() throws ClassNotFoundException {
+        BPlusTree b=createTree();
+        BPlusTree b1=Delete.compare(b,"id",GREATER_THAN_OPERATOR,400,"id");
+        BPlusTree b2=Delete.compare(b,"id",LESS_THAN_OPERATOR,100,"id");
+        BPlusTree b3=Delete.whereOr(b1,b2);
+        BPlusTreeTool.printBPlusTree(b3,"id");
+
+    }
+
+    public  static  BPlusTree createTree() throws ClassNotFoundException {
         HashMap propertyMap = new HashMap();
         propertyMap.put("id", Class.forName("java.lang.Integer"));
         propertyMap.put("name", Class.forName("java.lang.String"));
         propertyMap.put("address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
-//        BTree.Product p;
 
         for (int i = 500; i >=0; i--) {
             CglibBean bean = new CglibBean(propertyMap);
             bean.setValue("id", i);
-            bean.setValue("name", "test");
-            bean.setValue("address", "789");
+            bean.setValue("name", Integer.toString(i+1));
+            bean.setValue("address", Integer.toString(i+2));
             b.insert(bean,(Integer) bean.getValue("id"));
         }
-
-
-        HashMap<Character, Integer> condition1=new HashMap();
-        HashMap<String,HashMap> conditions=new HashMap();;
-//        DMLTool.andCondition(condition1,'<',300);
-//        DMLTool.andCondition(condition1,'>',100);
-//        DMLTool.andCondition(condition1,'>',200);
-//        System.out.println(condition1.get('>')+","+condition1.get('<'));
-//        conditions.put("and",condition1);
-
-        HashMap<Character, Integer> condition2=new HashMap();
-        DMLTool.orCondition(condition2,'<',100);
-        DMLTool.orCondition(condition2,'>',400);
-        DMLTool.orCondition(condition2,'<',200);
-        conditions.put("or",condition2);
-
-        Table t=new Table(b);
-        boolean delete=t.delete(conditions);
-        System.out.println(delete);
-
-         List list=b.getDatas();
-         for(int i=0;i<list.size();i++){
-             CglibBean c=(CglibBean)list.get(i);
-             System.out.println(c.getValue("id")+","+c.getValue("address"));
-         }
-
-
+        return b;
     }
 
-//    public static void addCondition(HashMap condition,char t,int num){
-//        if(t=='>'){
-//            if(condition.get('>')==null){
-//                condition.put('>',num);
-//            }else{
-//                int g=(int)condition.get('>');
-//                if(num>g){
-//                    condition.replace('>',num);
-//                }
-//            }
-//        }else if(t=='<'){
-//            if(condition.get('<')==null){
-//                condition.put('<',num);
-//            }else{
-//                int g=(int)condition.get('<');
-//                if(num<g){
-//                    condition.replace('<',num);
-//                }
-//            }
-//        }else if(t=='='){
-//            if(condition.get('=')==null){
-//                condition.put('=',num);
-//            }else{
-//                System.out.println("Warning:There are two =");
-//            }
-//        }
-//
-//    }
-//
-//    public static void orCondition(HashMap condition,char t,int num){
-//        if(t=='>'){
-//            if(condition.get('>')==null){
-//                condition.put('>',num);
-//            }else{
-//                int g=(int)condition.get('>');
-//                if(num<g){
-//                    condition.replace('>',num);
-//                }
-//            }
-//        }else if(t=='<'){
-//            if(condition.get('<')==null){
-//                condition.put('<',num);
-//            }else{
-//                int g=(int)condition.get('<');
-//                if(num>g){
-//                    condition.replace('<',num);
-//                }
-//            }
-//        }else if(t=='='){
-//            if(condition.get('=')==null){
-//                condition.put('=',num);
-//            }else{
-//                System.out.println("Warning:There are two =");
-//            }
-//        }
-//
-//    }
 }
