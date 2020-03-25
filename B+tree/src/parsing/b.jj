@@ -4,6 +4,7 @@ options {
 }
 
 PARSER_BEGIN(SqlParser)
+package parsing;
 import java.util.List;
 import java.util.ArrayList;
 import DMLExecution.ExecuteStatement;
@@ -213,7 +214,10 @@ void delete() :
     {    saveToken(t);  }
 
     (where() )?
-    {ExecuteStatement.delete(tokens);}
+    {
+//    Class class = Class.forName("ExecuteStatement");
+    ExecuteStatement.delete(tokens);
+    }
     (<STATEMENT_END> | <END>)
 }
 
