@@ -5,17 +5,22 @@ options {
 
 PARSER_BEGIN(SqlParser)
 package parsing;
+import DMLExecution.ExecuteStatement;
 import java.util.List;
 import java.util.ArrayList;
-import DMLExecution.ExecuteStatement;
+
 public class SqlParser {
 
-    private List<Token> tokens = new ArrayList<Token>();
+    private List<Object> sql = new ArrayList<Object>();
+    private List<Object> list = new ArrayList<Object>();
+    private ArrayList<Object> templist = new ArrayList<Object>();
 
     public static void main(String[] args) throws Exception {
         SqlParser parser = new SqlParser(System.in);
         parser.parse();
         System.out.println("sql is correct!");
+
+
     }
 }
 PARSER_END(SqlParser)
@@ -147,7 +152,7 @@ TOKEN :
 void parse() :
 {
     Token t;
-    tokens = new ArrayList<Token>();
+    sql = new ArrayList<Object>();
 }
 {
     //***************SELECT************
@@ -156,7 +161,7 @@ void parse() :
         t = new Token();
         t.image = "select";
         System.out.println(t.image);
-        tokens.add(t);
+        sql.add(t);
 
     }
     (<DISTINCT> | <ALL>)?selectResultList()
@@ -181,44 +186,97 @@ void parse() :
     delete()
 }
 
-void saveToken(Token a) :
+//把Token存到sql里
+void saveTokenInSQL(Token a) :
 {
     Token t;
 }
 {
     {
         t = a;
-        System.out.println(t.image);
-        System.out.println(t.kind);
-        tokens.add(t);
+        System.out.println(t.image+" : "+t.kind);
+        sql.add(t);
+    }
+}
+
+//把list存到sql里
+void saveListInSQL(List<Object> a) :
+{}
+{
+    {
+        sql.add(a);
+    }
+}
+
+//把Token存到list里
+void saveTokenInList(Token a,List<Object> l) :
+{
+    Token t;
+}
+{
+    {
+        t = a;
+        System.out.println("------->"+t.image+" : "+t.kind);
+        l.add(t);
+    }
+}
+
+//把TempList存到list里
+void saveTempListInList(List<Object> temp,List<Object> l) :
+{}
+{
+    {
+        System.out.print("  list is : ");
+        for (Object object : temp)
+        {
+            System.out.println(object);
+        }
+        System.out.println("");
+
+        l.add(temp);
+    }
+}
+
+
+void show() :
+{}
+{
+    {
+        System.out.println("----------STRUCTURE----------");
+        for (Object object : sql)
+        {
+            System.out.println(object);
+        }
+
     }
 }
 
 void delete() :
 {
     Token t;
-    tokens = new ArrayList<Token>();
+    sql = new ArrayList<Object>();
 }
 {
     {   System.out.println("------DELETE METHOD --------"); }
     t =  <DELETE>
     {
-        saveToken(t);
+        saveTokenInSQL(t);
     }
     t =<FROM>
     {
-        saveToken(t);
+        saveTokenInSQL(t);
     }
 
     (t = <ASTERISK>|t = <ID> )
-    {    saveToken(t);  }
+    {    saveTokenInSQL(t);  }
 
     (where() )?
-    {
-//    Class class = Class.forName("ExecuteStatement");
-    ExecuteStatement.delete(tokens);
-    }
+
+    {   show(); }
     (<STATEMENT_END> | <END>)
+
+
+    {ExecuteStatement.delete(sql);} // %%
 }
 
 //where语句
@@ -226,7 +284,8 @@ void where() :
 {Token t;}
 {
     t = <WHERE>
-    {saveToken(t);}
+    {   saveTokenInSQL(t);   }
+
 
     multiCondition()
     (orderBy() | groupBy())?
@@ -234,7 +293,11 @@ void where() :
 
 // 多条件并列的时候
 void multiCondition() :
-{Token t;}
+{
+    Token t;
+    int i = 0;// i = 0 表示只有一个condition；=1 表示有多个condition
+    list = new ArrayList<Object>();
+}
 {
 
  (
@@ -246,20 +309,39 @@ void multiCondition() :
 
  (
     // 和或并好多个小条件
-     (<AND> | <OR>)
+    (     t = <AND>  {   saveTokenInList(t,list); i = 1; }
+        | t = <OR>   {   saveTokenInList(t,list); i = 1;}
+    )
+
     (
         condition() | "(" condition() ")"
     )
  )*
+    {
+        if( i == 0)
+        {
+           list = templist;
+           saveListInSQL(list);
+           System.out.println("Only one condition");
+        }
+        else
+        {
+           saveListInSQL(list);
+        }
+    }
 
 }
 
 //小情况；小条件
 void condition() :
-{Token t;}
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
 {
  name()
  (
+    //加减乘除+right   // between & and
     simpleCondition()|betweenCondition()
  )
 }
@@ -267,11 +349,16 @@ void condition() :
 void name() :
 {Token t;}
 {
- <ID>
+ t = <ID>
+ {
+    //templist.add(t);
+    saveTokenInList(t,templist);
+ }
  (
     "."
     <ID>
  )?
+
 }
 
 //简单条件
@@ -279,7 +366,9 @@ void simpleCondition() :
 {Token t;}
 {
     //判断条件
-    (<EQ> | <GT> | <LT> | <NE> | <LIKE>)
+    (t = <EQ>       {   saveTokenInList(t,templist);   }    |   t =  <GT> {   saveTokenInList(t,templist);   }
+    |t =  <LT>      {   saveTokenInList(t,templist);   }    |   t =  <NE> {   saveTokenInList(t,templist);   }
+    |t =  <LIKE>    {   saveTokenInList(t,templist);   })
     rightCondition()
 }
 
@@ -287,7 +376,57 @@ void rightCondition() :
 {Token t;}
 {
     // “/” ，数字，功能
-    <STRING>| <NUMBER>| function()
+      t = <STRING>
+          {
+              saveTokenInList(t,templist);
+//              if( list.size() == 0)
+//              {
+////                  list = templist;
+////                  saveListInSQL(list);
+//              }
+//              else
+//              {
+                saveTempListInList(templist,list);
+//              }
+
+          }
+    | t = <NUMBER>
+          {
+               saveTokenInList(t,templist);
+//               if( list.size() == 0)
+//               {
+//                   //list = templist;
+//                   //saveListInSQL(list);
+//               }
+//               else
+//               {
+                    saveTempListInList(templist,list);
+//               }
+          }
+
+    | function()
+}
+
+//功能方法
+void function() :
+{Token t;}
+{
+    //  id (（多）参数 )
+     t = <ID>
+     {
+        saveTokenInList(t,templist);
+//        if( list.size() == 0)
+//        {
+////            System.out.println("Only one condition");
+////            list = templist;
+////            saveListInSQL(list);
+//        }
+//        else
+//        {
+            saveTempListInList(templist,list);
+//        }
+     }
+     (<LBRACKET> arguments() <RBRACKET>)?
 }
 
 // Between ...  AND ... 条件语句
@@ -301,13 +440,7 @@ void betweenCondition() :
 }
 
 
-//功能方法
-void function() :
-{Token t;}
-{
-    //  id (（多）参数 )
-     <ID> <LBRACKET> arguments() <RBRACKET>
-}
+
 
 //（多）参数函数
 void arguments() :
