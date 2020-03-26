@@ -7,9 +7,9 @@ import table.type.SqlConstant;
 
 import java.util.List;
 
-public class Delete implements SqlConstant {
+public class DeleteStatement implements SqlConstant {
     BPlusTree<CglibBean, Integer> b ;
-    public Delete(BPlusTree bt){
+    public DeleteStatement(BPlusTree bt){
         b= bt;
     }
 

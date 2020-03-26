@@ -18,7 +18,6 @@ public class CreateStatement implements SqlConstant {
     public CreateStatement(){}
 
     public void createImpl(){
-        System.out.println("here");
         TableDescriptor table=null;
         if(statement==null){
             return;
@@ -31,21 +30,18 @@ public class CreateStatement implements SqlConstant {
             String columnName=(String)att.get(0);
             int type=(int)att.get(1);
             DataTypeDescriptor dataType= new DataTypeDescriptor(type);
-            ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType,table);
+            ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType);
+            System.out.println(column.getColumnName());
             columns.add(column);
         }
         table=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
-        result(table);
+        table.setTableInColumnDescriptor(table);
+        table.printColumnName();
+        ColumnDescriptor cd=table.getColumnDescriptorList().getColumnDescriptor(1);
+        System.out.println(cd.getTableDescriptor()==null);
     }
 
-    public void result(TableDescriptor t){
-        String[] columns=t.getColumnNamesArray();
-        System.out.println(columns.length);
-        for(int i=0;i<columns.length;i++){
-            System.out.println(columns[i]);
-        }
 
-    }
 
 
 

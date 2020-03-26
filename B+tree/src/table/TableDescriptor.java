@@ -3,6 +3,8 @@ package table;
 import table.column.ColumnDescriptor;
 import table.BTree.BPlusTree;
 
+import java.util.List;
+
 public class TableDescriptor implements TableSchema {
 
 
@@ -86,7 +88,7 @@ public class TableDescriptor implements TableSchema {
         int size = getNumberOfColumns();
         String[] s = new String[size];
         for (int i = 0; i < size; i++) {
-            s[i] = getColumnDescriptor(i + 1).getColumnName();
+            s[i] = getColumnDescriptor(i).getColumnName();
         }
         return s;
     }
@@ -116,5 +118,21 @@ public class TableDescriptor implements TableSchema {
         return maxColumnID;
     }
 
+
+    public void setTableInColumnDescriptor(TableDescriptor t){
+        List l=getColumnDescriptorList();
+        for(int i=0;i<l.size();i++){
+            ColumnDescriptor temp= (ColumnDescriptor) l.get(i);
+            temp.setTableDescriptor(t);
+        }
+    }
+
+    public void printColumnName(){
+        String[] columns=this.getColumnNamesArray();
+        System.out.println(columns.length);
+        for(int i=0;i<columns.length;i++){
+            System.out.println(columns[i]);
+        }
+    }
 }
 

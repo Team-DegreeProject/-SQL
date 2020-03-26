@@ -16,6 +16,7 @@ public class SqlConstantImpl implements SqlConstant{
         sqlMap.put(101,"table.type.Char");
         sqlMap.put(102,"table.type.VarChar");
         sqlMap.put(103,"java.util.Date");
+        sqlMap.put(104,"table.TableDescriptor");
     }
 
 

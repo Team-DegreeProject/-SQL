@@ -1,8 +1,7 @@
-package Table.Column;
+package table.column;
 
 
-import Table.Column.DataTypeDescriptor;
-import Table.TableDescriptor;
+import table.TableDescriptor;
 
 public class ColumnDescriptor{
 
@@ -10,11 +9,11 @@ public class ColumnDescriptor{
     private String columnName;
     private int columnPosition;
     private DataTypeDescriptor columnType;
-    private long autoincStart;
-    private long autoincInc;
-    private long autoincValue;
-    private boolean autoincCycle;
-    private Object columnDefaultValue;
+    private long autoincStart=0;
+    private long autoincInc=0;
+    private long autoincValue=0;
+    private boolean autoincCycle=false;
+    private Object columnDefaultValue=null;
 
 
     /**
@@ -58,9 +57,28 @@ public class ColumnDescriptor{
         this.autoincCycle = autoincCycle;
     }
 
+    public ColumnDescriptor(String columnName, int columnPosition,
+                             DataTypeDescriptor columnType, TableDescriptor table) {
+        this.columnName = columnName;
+        this.columnPosition = columnPosition;
+        this.columnType = columnType;
+        if (table != null) {
+            this.table = table;
+        }
+        this.autoincStart = autoincStart;
+        this.autoincValue = autoincStart;
+        this.autoincInc = autoincInc;
+        this.autoincCycle = autoincCycle;
+    }
+
 //    long autoinc_create_or_modify_Start_Increment = -1;
 
-
+    public ColumnDescriptor(String columnName, int columnPosition,
+                            DataTypeDescriptor columnType) {
+        this.columnName = columnName;
+        this.columnPosition = columnPosition;
+        this.columnType = columnType;
+    }
 
 
 
@@ -125,4 +143,6 @@ public class ColumnDescriptor{
     public void setTableDescriptor(TableDescriptor tableDescriptor) {
         this.table = tableDescriptor;
     }
+
+    public TableDescriptor getTableDescriptor(){ return table; }
 }

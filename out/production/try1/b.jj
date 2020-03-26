@@ -10,7 +10,7 @@ public class SqlParser {
 
     private List<Token> tokens = new ArrayList<Token>();
 
-    public static void main(String[] args) throws Exception {
+    public static void Test.TestDriver(String[] args) throws Exception {
         SqlParser parser = new SqlParser(System.in);
         parser.parse();
         System.out.println("sql is correct!");

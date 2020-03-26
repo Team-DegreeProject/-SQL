@@ -1,20 +1,25 @@
-package Table.Column;
+package table.column;
 
-import Table.Type.SqlConstant;
+import table.type.SqlConstant;
 
 public class DataTypeDescriptor implements SqlConstant {
 
     public DataTypeDescriptor() {
     }
 
-    public DataTypeDescriptor(int typeId, boolean isNullable, int maximumWidth) {
+    public DataTypeDescriptor(int typeId) {
 
+    }
+
+    public DataTypeDescriptor(int typeId, boolean isNullable) {
+        this.typeId = typeId;
+        this.isNullable = isNullable;
     }
 
     public int typeId;
     private int precision;
     private int scale;
-    private boolean isNullable;
+    private boolean isNullable=true;
     private int maximumWidth;
 
     public DataTypeDescriptor(int typeId, int precision, int scale, boolean isNullable, int maximumWidth) {
