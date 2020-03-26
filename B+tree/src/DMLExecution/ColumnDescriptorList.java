@@ -1,0 +1,36 @@
+package DMLExecution;
+
+import java.util.ArrayList;
+
+public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
+
+    public ColumnDescriptor elementAt(int n) {
+        return get(n);
+    }
+
+    /**
+     * 根据表id和列id获取列相关描述
+     */
+    public ColumnDescriptor getColumnDescriptor(UUID tableID, int columnID) {
+        ColumnDescriptor returnValue = null;
+        for (ColumnDescriptor columnDescriptor : this) {
+            if ((columnID == columnDescriptor.getPosition()) && tableID.equals(columnDescriptor.getReferencingUUID())) {
+                returnValue = columnDescriptor;
+                break;
+            }
+        }
+        return returnValue;
+    }
+
+    public ColumnDescriptor getColumnDescriptor(UUID tableID, String columnName) {
+        ColumnDescriptor returnValue = null;
+        for (ColumnDescriptor columnDescriptor : this) {
+            if (columnName.equals(columnDescriptor.getColumnName()) &&
+                    tableID.equals(columnDescriptor.getReferencingUUID())) {
+                returnValue = columnDescriptor;
+                break;
+            }
+        }
+        return returnValue;
+    }
+}
