@@ -17,10 +17,10 @@ public class CreateStatement implements SqlConstant {
     }
     public CreateStatement(){}
 
-    public void createImpl(){
+    public TableDescriptor createImpl(){
         TableDescriptor table=null;
         if(statement==null){
-            return;
+            return null;
         }
         String tableName=(String)statement.get(0);
         ColumnDescriptorList columns=new ColumnDescriptorList();
@@ -31,14 +31,13 @@ public class CreateStatement implements SqlConstant {
             int type=(int)att.get(1);
             DataTypeDescriptor dataType= new DataTypeDescriptor(type);
             ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType);
-            System.out.println(column.getColumnName());
             columns.add(column);
         }
         table=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
         table.setTableInColumnDescriptor(table);
         table.printColumnName();
         ColumnDescriptor cd=table.getColumnDescriptorList().getColumnDescriptor(1);
-        System.out.println(cd.getTableDescriptor()==null);
+        return table;
     }
 
 

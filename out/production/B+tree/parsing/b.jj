@@ -6,9 +6,9 @@ options {
 PARSER_BEGIN(SqlParser)
 
 package parsing;
+import execution.ExecuteStatement;
 import java.util.List;
 import java.util.ArrayList;
-import execution.ExecuteStatament;
 
 public class SqlParser {
 

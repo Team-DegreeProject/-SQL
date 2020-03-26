@@ -90,6 +90,16 @@ public class TableDescriptor implements TableSchema {
         for (int i = 0; i < size; i++) {
             s[i] = getColumnDescriptor(i).getColumnName();
         }
+
+        return s;
+    }
+
+    public int[] getColumnIdsArray() {
+        int size = getNumberOfColumns();
+        int[] s = new int[size];
+        for (int i = 0; i < size; i++) {
+            s[i] = getColumnDescriptor(i).getType().typeId;
+        }
         return s;
     }
 
@@ -131,7 +141,12 @@ public class TableDescriptor implements TableSchema {
         String[] columns=this.getColumnNamesArray();
         System.out.println(columns.length);
         for(int i=0;i<columns.length;i++){
-            System.out.println(columns[i]);
+            System.out.print(columns[i]);
+            if(i!=columns.length-1){
+                System.out.print(",");
+            }else{
+                System.out.println(";");
+            }
         }
     }
 }

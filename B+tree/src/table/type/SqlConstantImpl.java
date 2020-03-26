@@ -5,19 +5,25 @@ import java.util.Map;
 
 public class SqlConstantImpl implements SqlConstant{
 
-    Map sqlMap = new HashMap();
+    protected Map<Integer,String> sqlMap = new HashMap();
 
-    public SqlConstantImpl(){
-        constructMap();
-    }
+    public SqlConstantImpl(){ constructMap(); }
+
+    public final static int INT=100;
+    public final static int CHAR=101;
+    public final static int VARCHAR=102;
+    public final static int DATE=103;
+    public final static int TABLE_DESCRIPTOR=104;
 
     private void constructMap(){
-        sqlMap.put(100,"java.lang.Integer");
-        sqlMap.put(101,"table.type.Char");
-        sqlMap.put(102,"table.type.VarChar");
-        sqlMap.put(103,"java.util.Date");
-        sqlMap.put(104,"table.TableDescriptor");
+        sqlMap.put(INT,"java.lang.Integer");
+        sqlMap.put(CHAR,"table.type.Char");
+        sqlMap.put(VARCHAR,"table.type.VarChar");
+        sqlMap.put(DATE,"java.util.Date");
+        sqlMap.put(TABLE_DESCRIPTOR,"table.TableDescriptor");
     }
+
+
 
 
 }
