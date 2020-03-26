@@ -11,10 +11,10 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
     /**
      * 根据表id和列id获取列相关描述
      */
-    public ColumnDescriptor getColumnDescriptor(UUID tableID, int columnID) {
+    public ColumnDescriptor getColumnDescriptor(int columnID) {
         ColumnDescriptor returnValue = null;
         for (ColumnDescriptor columnDescriptor : this) {
-            if ((columnID == columnDescriptor.getPosition()) && tableID.equals(columnDescriptor.getReferencingUUID())) {
+            if ((columnID == columnDescriptor.getPosition())) {
                 returnValue = columnDescriptor;
                 break;
             }
@@ -22,11 +22,10 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return returnValue;
     }
 
-    public ColumnDescriptor getColumnDescriptor(UUID tableID, String columnName) {
+    public ColumnDescriptor getColumnDescriptor(String columnName) {
         ColumnDescriptor returnValue = null;
         for (ColumnDescriptor columnDescriptor : this) {
-            if (columnName.equals(columnDescriptor.getColumnName()) &&
-                    tableID.equals(columnDescriptor.getReferencingUUID())) {
+            if (columnName.equals(columnDescriptor.getColumnName()) ) {
                 returnValue = columnDescriptor;
                 break;
             }

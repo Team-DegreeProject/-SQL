@@ -4,11 +4,9 @@ import BTree.BPlusTree;
 import BTree.BPlusTreeTool;
 import BTree.CglibBean;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Delete implements OperationInterface {
+public class Delete implements SqlConstant {
     BPlusTree<CglibBean, Integer> b ;
     public Delete(BPlusTree bt){
         b= bt;

@@ -3,13 +3,10 @@ package DMLExecution;
 import BTree.BPlusTree;
 import BTree.BPlusTreeTool;
 import BTree.CglibBean;
-import parsing.SqlParserConstants;
-import parsing.Token;
 
 import java.util.HashMap;
-import java.util.List;
 
-public class test implements OperationInterface {
+public class test implements SqlConstant {
     public static void main(String[] args) throws ClassNotFoundException {
         testWhereAndOr();
     }
