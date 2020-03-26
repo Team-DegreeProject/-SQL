@@ -2,19 +2,105 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="356604e1-8860-49f7-a90d-96dc25d49175" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/parsing/b.jj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/DMLTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/DMLTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/B+tree/DMLExecution/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DMLExecution/DMLTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMLExecution/DMLTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DMLExecution/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMLExecution/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DMLExecution/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DMLExecution/test.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-737753267">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="1" />
+          <entry key="java" value="2" />
+          <entry key="jj" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="1" />
+          <entry key="JAVA" value="2" />
+          <entry key="JavaCC" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="2" />
+          <entry key="jj" value="144" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="2" />
+          <entry key="JavaCC" value="144" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/parsing/b.jj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="350" column="2" lean-forward="true" selection-start-line="350" selection-start-column="2" selection-end-line="350" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/ParseException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="66" column="62" selection-start-line="66" selection-start-column="62" selection-end-line="66" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#6147#0" expanded="true" />
+                <element signature="e#1813#1814#0" expanded="true" />
+                <element signature="e#1830#1831#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
+                <element signature="e#1932#1933#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#276#284#0" expanded="true" />
+                <element signature="e#333#341#0" expanded="true" />
+                <element signature="e#6527#6535#0" expanded="true" />
+                <element signature="e#8212#8220#0" expanded="true" />
+                <element signature="e#16462#16463#0" expanded="true" />
+                <element signature="e#16491#16492#0" expanded="true" />
+                <element signature="e#17023#17024#0" expanded="true" />
+                <element signature="e#17054#17055#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/SimpleCharStream.class">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -26,29 +112,108 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>mergeListOr</find>
+      <find>DISTINCT</find>
+      <find>templist</find>
+      <find>----</find>
+      <find>PRIVA</find>
+      <find>SQL</find>
+      <find>TEMPLIST</find>
+      <find>right</find>
+      <find>set</find>
+      <find>templist = t</find>
+      <find>orderBy</find>
+      <find>name</find>
+      <find>groupBy()</find>
+      <find>groupBy</find>
+      <find>betweenCondition</find>
+      <find>Condition</find>
+      <find>sets</find>
+      <find>between</find>
+      <find>name(</find>
+      <find>saveTokenInSQL(t);</find>
+      <find>saveTokenInSQL</find>
+      <find>SETS</find>
+      <find>SET</find>
+      <find>rightCondition</find>
+      <find>ORDERBY</find>
+      <find>list = templist</find>
+      <find>ORDER</find>
+      <find>condition</find>
+      <find>delete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/parsing/SqlParser.java" />
+        <option value="$PROJECT_DIR$/src/parsing/b.jj" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="949" />
+    <option name="width" value="980" />
+    <option name="height" value="1031" />
+  </component>
   <component name="ProjectId" id="1YbdLiwg0Y06n6u8ihVxmvefowg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="B+tree" type="b2602c69:ProjectViewProjectNode" />
+              <item name="B+tree" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="B+tree" type="b2602c69:ProjectViewProjectNode" />
+              <item name="B+tree" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="B+tree" type="b2602c69:ProjectViewProjectNode" />
+              <item name="B+tree" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="parsing" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../dynamicClass" />
+    <property name="last_opened_file_path" value="D:/../dynamicClass" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\pass\学习\毕设\git\-SQL\B+tree\lib" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Git\-SQL\B+tree\src\BTree" />
       <recent name="E:\Git\-SQL\B+tree\src" />
       <recent name="E:\Git\-SQL\B+tree\src\OurSQLDriver" />
       <recent name="E:\Git\-SQL\B+tree\src\DMLExecution" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\final_project\B+tree\src\parsing" />
+      <recent name="D:\pass\学习\毕设\git\-SQL\B+tree\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -91,6 +256,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.main" />
+      <item itemvalue="Application.test" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.main" />
@@ -132,7 +302,82 @@
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="5469000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16572352" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.44937834" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/parsing/SimpleCharStream.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/ParseException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="66" column="62" selection-start-line="66" selection-start-column="62" selection-end-line="66" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#6147#0" expanded="true" />
+            <element signature="e#1813#1814#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+            <element signature="e#1932#1933#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#276#284#0" expanded="true" />
+            <element signature="e#333#341#0" expanded="true" />
+            <element signature="e#6527#6535#0" expanded="true" />
+            <element signature="e#8212#8220#0" expanded="true" />
+            <element signature="e#16462#16463#0" expanded="true" />
+            <element signature="e#16491#16492#0" expanded="true" />
+            <element signature="e#17023#17024#0" expanded="true" />
+            <element signature="e#17054#17055#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/b.jj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="350" column="2" lean-forward="true" selection-start-line="350" selection-start-column="2" selection-end-line="350" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
