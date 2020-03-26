@@ -18,12 +18,15 @@ public class CglibBean {
      */
     public BeanMap beanMap = null;
 
+    public Map propertyMap;
+
     public CglibBean() {
         super();
     }
 
     @SuppressWarnings("unchecked")
     public CglibBean(Map propertyMap) {
+        this.propertyMap=propertyMap;
         this.object = generateBean(propertyMap);
         this.beanMap = BeanMap.create(this.object);
     }
@@ -36,7 +39,6 @@ public class CglibBean {
     public void setValue(String property, Object value) {
         beanMap.put(property, value);
     }
-
     /**
      * 通过属性名得到属性值
      * @param property 属性名

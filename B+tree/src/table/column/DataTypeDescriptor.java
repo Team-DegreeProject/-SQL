@@ -8,7 +8,7 @@ public class DataTypeDescriptor implements SqlConstant {
     }
 
     public DataTypeDescriptor(int typeId) {
-
+        this.typeId = typeId;
     }
 
     public DataTypeDescriptor(int typeId, boolean isNullable) {

@@ -1,7 +1,7 @@
 package test;
 
 import execution.CreateStatement;
-import system.UserTableList;
+import table.Table;
 import table.TableDescriptor;
 
 import java.util.ArrayList;
@@ -9,9 +9,8 @@ import java.util.List;
 
 public class TestCreate {
     public static void main(String[] args) throws ClassNotFoundException {
-        TableDescriptor t=create();
+        Table t=create();
         System.out.println("----------------");
-//        UserTableList.createTable(t);
     }
 
     public  static List createStatment() {
@@ -36,12 +35,11 @@ public class TestCreate {
         return list;
     }
 
-    public static TableDescriptor create(){
+    public static Table create() throws ClassNotFoundException {
         List list=createStatment();
         CreateStatement c=new CreateStatement(list);
-        TableDescriptor t=c.createImpl();
+        Table t=c.createImpl();
         return t;
-        //CreateStatement
     }
 
 }

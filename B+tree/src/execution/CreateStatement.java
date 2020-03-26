@@ -1,6 +1,7 @@
 package execution;
 
 import table.ColumnDescriptorList;
+import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
@@ -17,8 +18,8 @@ public class CreateStatement implements SqlConstant {
     }
     public CreateStatement(){}
 
-    public TableDescriptor createImpl(){
-        TableDescriptor table=null;
+    public Table createImpl() throws ClassNotFoundException {
+        TableDescriptor td=null;
         if(statement==null){
             return null;
         }
@@ -28,21 +29,17 @@ public class CreateStatement implements SqlConstant {
         for(int i=0;i<attribute.size();i++){
             List att= (List) attribute.get(i);
             String columnName=(String)att.get(0);
-            int type=(int)att.get(1);
+            int type=(Integer) att.get(1);
             DataTypeDescriptor dataType= new DataTypeDescriptor(type);
             ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType);
             columns.add(column);
         }
-        table=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
-        table.setTableInColumnDescriptor(table);
-        table.printColumnName();
-        ColumnDescriptor cd=table.getColumnDescriptorList().getColumnDescriptor(1);
+        td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
+        td.setTableInColumnDescriptor(td);
+        td.printColumnName();
+        ColumnDescriptor cd=td.getColumnDescriptorList().getColumnDescriptor(1);
+        Table table=new Table(td);
         return table;
     }
-
-
-
-
-
 
 }

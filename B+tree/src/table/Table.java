@@ -14,13 +14,16 @@ public class Table extends SqlConstantImpl {
     private  BPlusTree tree;
     private HashMap propertyMap;
     public Table(){}
-    public Table(TableDescriptor td,BPlusTree b){
+    public Table(TableDescriptor td,BPlusTree b) throws ClassNotFoundException {
         this.td=td;
-        tree = new BPlusTree<>(4);;
+        tree = new BPlusTree<>(4);
+        createTable(td);
     }
     public Table(TableDescriptor td) throws ClassNotFoundException {
         this.td=td;
+        tree = new BPlusTree<>(4);;
         createTable(td);
+
     }
 
     public void setTableDescriptor(TableDescriptor td) { this.td = td; }
@@ -29,7 +32,7 @@ public class Table extends SqlConstantImpl {
 
     public TableDescriptor getTableDescriptor(){return td;}
 
-    public BPlusTree setTree() { return this.tree; }
+    public BPlusTree getTree() { return this.tree; }
 
     public HashMap createTable(TableDescriptor table) throws ClassNotFoundException {
         propertyMap = new HashMap();
@@ -37,20 +40,20 @@ public class Table extends SqlConstantImpl {
         for(int i=0;i<list.size();i++){
             ColumnDescriptor cd=list.getColumnDescriptor(i);
             DataTypeDescriptor dtd=cd.getType();
+            System.out.println(cd.getColumnName()+"--->"+sqlMap.get(dtd.typeId));
             propertyMap.put(cd.getColumnName(), Class.forName(sqlMap.get(dtd.typeId)));
         }
         return propertyMap;
     }
 
-    public boolean insertRows(List attributes, List types,List values,String primaryKey) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        if(attributes.size()!=values.size()){
+    public boolean insertRows(String[] attributes,List values,String primaryKey) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        if(attributes.length!=values.size()){
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
         }
-        for(int i=0;i<attributes.size();i++){
-            int att=(int)types.get(i);
-            Object obj = Class.forName(sqlMap.get(att)).newInstance();
-            insertAnAttribute((String) attributes.get(i),obj,primaryKey);
+        for(int i=0;i<attributes.length;i++){
+//            Object obj = Class.forName(sqlMap.get(att)).newInstance();
+            insertAnAttribute(attributes[i],values.get(i),primaryKey);
         }
         return true;
     }
@@ -58,5 +61,9 @@ public class Table extends SqlConstantImpl {
         CglibBean bean = new CglibBean(propertyMap);
         bean.setValue(attribute, value);
         tree.insert(bean,(Integer) bean.getValue(primaryKey));
+    }
+
+    public int size(){
+        return tree.getDataNumber();
     }
 }
