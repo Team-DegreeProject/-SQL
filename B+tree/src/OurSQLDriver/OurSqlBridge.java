@@ -1,8 +1,8 @@
 package OurSQLDriver;
 
 
-import BTree.BPlusTree;
-import BTree.Product;
+import Table.BTree.BPlusTree;
+import Table.BTree.Product;
 
 public class OurSqlBridge {
     public OurSqlBridge(){

@@ -7,7 +7,7 @@ options{
 
 PARSER_BEGIN(Adder)
 public class Adder{
-    public static void main(String[] args)  throws ParseException, TokenMgrError{
+    public static void Test.TestDriver(String[] args)  throws ParseException, TokenMgrError{
         Adder adder= new Adder(System.in);
         int val = adder.Start();
         System.out.println(val);

@@ -35,7 +35,7 @@ public class Simple1 {
    }
 
   /** Main entry point. */
-  public static void main(String args[]) throws ParseException {
+  public static void Test.TestDriver(String args[]) throws ParseException {
     Simple1 parser = new Simple1(System.in);
     parser.Input();
   }
