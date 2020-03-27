@@ -17,6 +17,11 @@ public class VarChar implements Comparable<VarChar>{
         }
     }
 
+    public VarChar(String str){
+        length=-2;
+        string=str;
+    }
+
     @Override
     public int compareTo(VarChar o) {
         int re=this.string.compareTo(o.string);

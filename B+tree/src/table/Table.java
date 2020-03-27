@@ -51,16 +51,13 @@ public class Table extends SqlConstantImpl {
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
         }
-        for(int i=0;i<attributes.length;i++){
-//            Object obj = Class.forName(sqlMap.get(att)).newInstance();
-            insertAnAttribute(attributes[i],values.get(i),primaryKey);
-        }
-        return true;
-    }
-    public void insertAnAttribute(String attribute, Object value,String primaryKey){
         CglibBean bean = new CglibBean(propertyMap);
-        bean.setValue(attribute, value);
+        for(int i=0;i<attributes.length;i++){
+            bean.setValue(attributes[i], values.get(i));
+            System.out.println(attributes[i]+"--->>"+values.get(i));
+        }
         tree.insert(bean,(Integer) bean.getValue(primaryKey));
+        return true;
     }
 
     public int size(){

@@ -2,6 +2,7 @@ package table.BTree;
 
 import net.sf.cglib.beans.BeanGenerator;
 import net.sf.cglib.beans.BeanMap;
+import table.TableDescriptor;
 
 import java.util.Iterator;
 import java.util.Map;

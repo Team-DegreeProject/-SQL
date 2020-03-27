@@ -31,9 +31,7 @@ public class User {
         return userName;
     }
 
-    public UserAccessedTable getUserAccessedTable() {
-        return userAccessedTable;
-    }
+    public UserAccessedTable getUserAccessedTable() { return userAccessedTable; }
 
     public void setUserAccessedTable(UserAccessedTable usa) {
         this.userAccessedTable = usa;

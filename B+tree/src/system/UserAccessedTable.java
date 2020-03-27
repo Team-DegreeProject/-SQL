@@ -2,19 +2,16 @@ package system;
 
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
-import table.BTree.CglibBean;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-import table.type.SqlConstantImpl;
+import table.type.VarChar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static table.TableSchema.BASE_TABLE_TYPE;
 import static table.TableSchema.SYSTEM_TABLE_TYPE;
 
 public class UserAccessedTable {
@@ -36,14 +33,14 @@ public class UserAccessedTable {
 
     public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TableDescriptor td=t.getTableDescriptor();
-        String userName=user.getUserName();
+        VarChar userName=new VarChar(user.getUserName());
         int id=length+1;
         length++;
         List values=new ArrayList();
         values.add(id);
         values.add(userName);
-        values.add(t);
-        String[] attributes=td.getColumnNamesArray();
+        values.add(td);
+        String[] attributes=userAccessedTable.getTableDescriptor().getColumnNamesArray();
         String primaryKey="id";
         return userAccessedTable.insertRows(attributes,values,primaryKey);
     }
@@ -85,8 +82,11 @@ public class UserAccessedTable {
     }
 
     public void printUserAccessedTable(){
-//        userAccessedTable.getTableDescriptor().printColumnName();
         BPlusTree b=userAccessedTable.getTree();
         BPlusTreeTool.printBPlusTree(b);
     }
+
+    public Table getUserAccessedTable(){ return userAccessedTable; }
+
+    public void setUserAccessedTable(Table userAccessedTable){ this.userAccessedTable=userAccessedTable; }
 }
