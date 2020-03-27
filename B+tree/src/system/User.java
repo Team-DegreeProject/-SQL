@@ -3,16 +3,11 @@ package system;
 public class User {
     private String userName;
     private int userId;
-    private UserAccessedTable userAccessedTable;
-    public User(){}
-    public User(int id,String name){
+    private UserAccessedDatabases userAccessedDatabases;
+    public User(int id,String name) throws ClassNotFoundException {
         userId=id;
         userName=name;
-        try {
-            userAccessedTable=new UserAccessedTable();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        userAccessedDatabases=new UserAccessedDatabases();
     }
 
     public void setUserId(int userId) {
@@ -31,9 +26,11 @@ public class User {
         return userName;
     }
 
-    public UserAccessedTable getUserAccessedTable() { return userAccessedTable; }
+    public void setUserAccessedDatabases(UserAccessedDatabases userAccessedDatabases) {
+        this.userAccessedDatabases = userAccessedDatabases;
+    }
 
-    public void setUserAccessedTable(UserAccessedTable usa) {
-        this.userAccessedTable = usa;
+    public UserAccessedDatabases getUserAccessedDatabases() {
+        return userAccessedDatabases;
     }
 }

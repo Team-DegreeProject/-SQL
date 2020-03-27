@@ -8,12 +8,7 @@ public class SqlConstantImpl implements SqlConstant{
     protected Map<Integer,String> sqlMap = new HashMap();
 
     public SqlConstantImpl(){ constructMap(); }
-
-    public final static int INT=100;
-    public final static int CHAR=101;
-    public final static int VARCHAR=102;
-    public final static int DATE=103;
-    public final static int TABLE_DESCRIPTOR=104;
+    public final static int TABLE_DESCRIPTOR=500;
 
     private void constructMap(){
         sqlMap.put(INT,"java.lang.Integer");
@@ -21,6 +16,9 @@ public class SqlConstantImpl implements SqlConstant{
         sqlMap.put(VARCHAR,"table.type.VarChar");
         sqlMap.put(DATE,"java.util.Date");
         sqlMap.put(TABLE_DESCRIPTOR,"table.TableDescriptor");
+        sqlMap.put(USER,"system.User");
+        sqlMap.put(STRING,"java.lang.String");
+        sqlMap.put(TABLE,"table.Table");
     }
 
 

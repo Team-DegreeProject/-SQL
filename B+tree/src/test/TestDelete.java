@@ -1,6 +1,6 @@
 package test;
 
-import execution.DeleteStatement;
+import execution.table.DeleteStatement;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;

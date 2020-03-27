@@ -8,9 +8,9 @@ public class Test {
 
         // 设置类成员属性
         HashMap propertyMap = new HashMap();
-        propertyMap.put("id", Class.forName("java.lang.Integer"));
-        propertyMap.put("name", Class.forName("java.lang.String"));
-        propertyMap.put("address", Class.forName("java.lang.String"));
+        propertyMap.put("Id", Class.forName("java.lang.Integer"));
+        propertyMap.put("Name", Class.forName("java.lang.String"));
+        propertyMap.put("Address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
 //        Product p;
 
@@ -18,10 +18,10 @@ public class Test {
 
         for (int i = 10000; i >=0; i--) {
             CglibBean bean = new CglibBean(propertyMap);
-            bean.setValue("id", new Integer(i));
-            bean.setValue("name", "test");
-            bean.setValue("address", "789");
-            b.insert(bean,(Integer) bean.getValue("id"));
+            bean.setValue("Id", new Integer(i));
+            bean.setValue("Name", "test");
+            bean.setValue("Address", "789");
+            b.insert(bean,(Integer) bean.getValue("Id"));
 //            p = new Product(i, "test", 1.0 * i);
 //            b.insert(p, p.getId());
         }

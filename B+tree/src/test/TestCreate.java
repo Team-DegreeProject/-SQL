@@ -1,8 +1,7 @@
 package test;
 
-import execution.CreateStatement;
+import execution.table.CreateStatement;
 import table.Table;
-import table.TableDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;

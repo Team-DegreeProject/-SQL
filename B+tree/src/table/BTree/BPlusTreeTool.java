@@ -117,7 +117,6 @@ public class BPlusTreeTool {
                         System.out.println(";");
                     }
                 }
-//                System.out.println("here");
             }
             for(int j=0;j<attribute.size();j++){
                 System.out.print(c.getValue(attribute.get(j)));
@@ -131,7 +130,9 @@ public class BPlusTreeTool {
     }
 
     public static void printBPlusTree(BPlusTree b){
+        System.out.println("-------------------------------------------------------");
         List list=b.getDatas();
         printList(list);
+        System.out.println("-------------------------------------------------------");
     }
 }

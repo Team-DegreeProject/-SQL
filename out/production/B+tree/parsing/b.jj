@@ -6,15 +6,14 @@ options {
 PARSER_BEGIN(SqlParser)
 
 package parsing;
-import execution.ExecuteStatement;
 import java.util.List;
 import java.util.ArrayList;
 
 public class SqlParser {
 
-    private List<Object> sql = new ArrayList<Object>();
-    private List<Object> list = new ArrayList<Object>();
-    private ArrayList<Object> templist = new ArrayList<Object>();
+    private List<Object> sql = new ArrayList<Object>(); // sql最外层语句
+    private List<Object> list = new ArrayList<Object>();//
+    private List<Object> templist = new ArrayList<Object>();
 
     public static void main(String[] args) throws Exception {
         SqlParser parser = new SqlParser(System.in);
@@ -28,7 +27,7 @@ PARSER_END(SqlParser)
 
 SKIP :
 {
- " "|"\t"|"\r"|"\n"|"\f"
+ " "|"\t"|"\r"|"\n"|"\f"|"  "
 }
 
 MORE :
@@ -57,38 +56,310 @@ MORE :
 
 TOKEN [IGNORE_CASE]:
 {
-<SELECT : "select">
-|
-<INSERT : "insert">
-|
-<UPDATE : "update">
-|
-<DELETE : "delete">
-}
+<ADD: "add">
+|	<ALL: "all">
+|	<ALLOCATE: "allocate">
+|	<ALTER: "alter">
+|	<AND: "and">
+|	<ANY: "any">
+|	<ARE: "are">
+|	<AS: "as">
+|	<ASC: "asc">
+|	<ASSERTION: "assertion">
+|	<AT: "at">
+|	<AUTHORIZATION: "authorization">
+|	<AVG: "avg">
+|	<BEGIN: "begin">
+|	<BETWEEN: "between">
+|	<BINARY: "binary">
+|	<BIT: "bit">
+|	<BOTH: "both">
+|	<BY: "by">
+|	<CASCADE: "cascade">
+|	<CASCADED: "cascaded">
+|	<CASE: "case">
+|	<CAST: "cast">
+|	<CHAR: "char">
+|	<CHARACTER: "character">
+|	<CHARACTER_LENGTH: "character_length">
+|	<CHECK: "check">
+|	<CLOSE: "close">
+|	<COALESCE: "coalesce">
+|	<COLLATE: "collate">
+|	<COLLATION: "collation">
+|	<COLUMN: "column">
+|	<COMMIT: "commit">
+|	<CONNECT: "connect">
+|	<CONNECTION: "connection">
+|	<CONSTRAINT: "constraint">
+|	<CONSTRAINTS: "constraints">
+|	<CONTINUE: "continue">
+|	<CONVERT: "convert">
+|	<CORRESPONDING: "corresponding">
+|	<COUNT: "count">
+|	<CREATE: "create">
+|	<CROSS: "cross">
+|	<CURRENT: "current">
+|	<CURRENT_DATE: "current_date">
+|	<CURRENT_TIME: "current_time">
+|	<CURRENT_TIMESTAMP: "current_timestamp">
+|	<CURRENT_USER: "current_user">
+|	<CURSOR: "cursor">
+|	<D: "d">
+|	<DEALLOCATE: "deallocate">
+|	<DEC: "dec">
+|	<DECIMAL: "decimal">
+|	<DECLARE: "declare">
+|	<_DEFAULT: "default">
+|	<DEFERRABLE: "deferrable">
+|	<DEFERRED: "deferred">
+|	<DELETE: "delete">
+|	<DESC: "desc">
+|	<DESCRIBE: "describe">
+|	<DIAGNOSTICS: "diagnostics">
+|	<DISCONNECT: "disconnect">
+|	<DISTINCT: "distinct">
+|	<DOUBLE: "double">
+|	<DROP: "drop">
+|	<ELSE: "else">
+|	<ENDEXEC: "end-exec">
+|	<ESCAPE: "escape">
+|	<EXCEPT: "except">
+|	<EXCEPTION: "exception">
+|	<EXEC: "exec">
+|	<EXECUTE: "execute">
+|	<EXISTS: "exists">
+|	<EXTERNAL: "external">
+|	<FALSE: "false">
+|	<FETCH: "fetch">
+|	<FIRST: "first">
+|	<FLOAT: "float">
+|	<FOR: "for">
+|	<FOREIGN: "foreign">
+|	<FOUND: "found">
+|	<FROM: "from">
+|	<FULL: "full">
+|	<FUNCTION: "function">
+|	<GET: "get">
+|	<GLOBAL: "global">
+|	<GO: "go">
+|	<GOTO: "goto">
+|	<GRANT: "grant">
+|	<GROUP: "group">
+|	<HAVING: "having">
+|	<HOUR: "hour">
+|	<IDENTITY: "identity">
+|	<IMMEDIATE: "immediate">
+|	<IN: "in">
+|	<INDICATOR: "indicator">
+|	<INITIALLY: "initially">
+|	<INNER: "inner">
+|	<INPUT: "input">
+|	<INSENSITIVE: "insensitive">
+|	<INSERT: "insert">
+|	<INT: "int">
+|	<INTEGER: "integer">
+|	<INTERSECT: "intersect">
+|	<INTO: "into">
+|	<IS: "is">
+|	<ISOLATION: "isolation">
+|	<JOIN: "join">
+|	<KEY: "key">
+|	<LAST: "last">
+|	<LEADING: "leading">
+|	<LEFT: "left">
+|	<LIKE: "like">
+|	<LOWER: "lower">
+|	<MATCH: "match">
+|	<MAX: "max">
+|	<MIN: "min">
+|	<MINUTE: "minute">
+|	<MODULE: "module">
+|	<NATIONAL: "national">
+|	<NATURAL: "natural">
+|	<NCHAR: "nchar">
+|	<NEXT: "next">
+|	<NO: "no">
+|	<NOT: "not">
+|	<NULL: "null">
+|	<NULLIF: "nullif">
+|	<NUMERIC: "numeric">
+|	<OF: "of">
+|	<ON: "on">
+|	<ONLY: "only">
+|	<OPEN: "open">
+|	<OPTION: "option">
+|	<OR: "or">
+|	<ORDER: "order">
+|	<OUTER: "outer">
+|	<OUTPUT: "output">
+|	<OVERLAPS: "overlaps">
+|	<PAD: "pad">
+|	<PARTIAL: "partial">
+|	<PREPARE: "prepare">
+|	<PRESERVE: "preserve">
+|	<PRIMARY: "primary">
+|	<PRIOR: "prior">
+|	<PRIVILEGES: "privileges">
+|	<PROCEDURE: "procedure">
+|	<PUBLIC: "public">
+|	<READ: "read">
+|	<REAL: "real">
+|	<REFERENCES: "references">
+|	<RELATIVE: "relative">
+|	<RESTRICT: "restrict">
+|	<REVOKE: "revoke">
+|   <RENAME:"rename">
+|   <USE:"use">
+|   <SHOW :"show">
+|	<RIGHT: "right">
+|	<ROLLBACK: "rollback">
+|	<ROWS: "rows">
+|	<SCHEMA: "schema">
+|	<SCROLL: "scroll">
+|	<SECOND: "second">
+|	<SELECT: "select">
+|	<SESSION_USER: "session_user">
+|	<SET: "set">
+|	<SMALLINT: "smallint">
+|	<SOME: "some">
+|	<SPACE: "space">
+|	<SQL: "sql">
+|	<SQLCODE: "sqlcode">
+|	<SQLERROR: "sqlerror">
+|	<SQLSTATE: "sqlstate">
+|	<SUBSTRING: "substring">
+|	<SUM: "sum">
+|	<SYSTEM_USER: "system_user">
+|	<T: "t">
+|	<TABLE: "table">
+|	<TEMPORARY: "temporary">
+|	<TIMEZONE_HOUR: "timezone_hour">
+|	<TIMEZONE_MINUTE: "timezone_minute">
+|	<TO: "to">
+|	<TRANSACTION: "transaction">
+|	<TRANSLATE: "translate">
+|	<TRANSLATION: "translation">
+|	<TRAILING: "trailing">
+|	<TRIM: "trim">
+|	<TRUE: "true">
+|	<TS: "ts">
+|	<UNION: "union">
+|	<UNIQUE: "unique">
+|	<UNKNOWN: "unknown">
+|	<UPDATE: "update">
+|	<UPPER: "upper">
+|	<USER: "user">
+|	<USING: "using">
+|	<VALUE: "value">
+|	<VALUES: "values">
+|	<VARBINARY: "varbinary">
+|	<VARCHAR: "varchar">
+|	<VARYING: "varying">
+|	<VIEW: "view">
+|	<WHENEVER: "whenever">
+|	<WHERE: "where">
+|   <WINDOW: "window">
+|	<WITH: "with">
+|	<WORK: "work">
+|	<WRITE: "write">
+|	<YEAR: "year">
 
+}
+TOKEN [IGNORE_CASE] :
+{
+    <ABS: "abs">
+|    <ABSVAL: "absval">
+|	<ACTION: "action">
+|	<ALWAYS: "always">
+|	<BLOB: "blob">
+  |	<C: "c">
+  | <CALLED: "called">
+|	<CLOB: "clob">
+  |	<COBOL: "cobol">
+|	<COMMITTED: "committed">
+|   <CONCAT: "concat">
+|	<CONTAINS: "contains">
+|	<CYCLE: "cycle">
+|	<DATA: "data">
+|	<DATE: "date">
+|	<DAY: "day">
+|	<DEFINER: "definer">
+|	<DETERMINISTIC: "deterministic">
+|   <DYNAMIC: "dynamic">
+|   <ENFORCED: "enforced">
+|	<FORTRAN: "fortran">
+|   <GENERATED: "generated">
+|	<IDENTITY_VAL_LOCAL: "identity_val_local">
+|	<INCREMENT: "increment">
+|	<INITIAL: "initial">
+|   <INOUT: "inout">
+|	<INTERVAL: "interval">
+|	<INVOKER: "invoker">
+|	<LANGUAGE: "language">
+|	<LARGE: "large">
+|	<LENGTH: "length">
+|	<LEVEL: "level">
+|	<LIMIT: "limit">
+|	<LOCKS: "locks">
+|	<LOCKSIZE: "locksize">
+|	<LOGGED: "logged">
+|	<MATCHED: "matched">
+|	<MAXVALUE: "maxvalue">
+|	<MERGE: "merge">
+|	<MINVALUE: "minvalue">
+|       <MOD: "mod">
+|	<MODIFIES: "modifies">
+|	<MODIFY: "modify">
+|	<MONTH: "month">
+|	<_MORE: "more">
+|	<MUMPS: "mumps">
+|	<NCLOB: "nclob">
+|	<NULLABLE: "nullable">
+|	<NULLS: "nulls">
+|	<OBJECT: "object">
+|	<OFFSET: "offset">
+|	<PASCAL: "pascal">
+|	<PLI: "pli">
+|	<PRECISION: "precision">
+|	<RELEASE: "release">
+|	<REPEATABLE: "repeatable">
+|	<RESTART: "restart">
+|	<RETURNS: "returns">
+|	<ROLLUP: "rollup">
+|	<ROW: "row">
+|	<SAVEPOINT: "savepoint">
+|	<SCALE: "scale">
+|	<SECURITY: "security">
+|	<SERIALIZABLE: "serializable">
+|	<SQL_TSI_FRAC_SECOND: "sql_tsi_frac_second">
+|	<SQL_TSI_SECOND: "sql_tsi_second">
+|	<SQL_TSI_MINUTE: "sql_tsi_minute">
+|	<SQL_TSI_HOUR: "sql_tsi_hour">
+|	<SQL_TSI_DAY: "sql_tsi_day">
+|	<SQL_TSI_WEEK: "sql_tsi_week">
+|	<SQL_TSI_MONTH: "sql_tsi_month">
+|	<SQL_TSI_QUARTER: "sql_tsi_quarter">
+|	<SQL_TSI_YEAR: "sql_tsi_year">
+|	<START: "start">
+|	<STATEMENT: "statement">
+|	<SYNONYM: "synonym">
+|	<THEN: "then">
+|	<TIME: "time">
+|	<TIMESTAMP: "timestamp">
+|	<TIMESTAMPADD: "timestampadd">
+|	<TIMESTAMPDIFF: "timestampdiff">
+|	<TRUNCATE: "truncate">
+|	<TYPE: "type">
+|	<UNCOMMITTED: "uncommitted">
+|	<USAGE: "usage">
+|	<WHEN: "when">
+|	<DERBYPLAN: "--sqlkvplan">
+}
 TOKEN [IGNORE_CASE]:
 {
-<AS : "as">
-|
-<ALL : "all">
-|
-<SET : "set">
-|
-<FROM : "from">
-|
-<INTO : "into">
-|
 <GROUP_BY : "group" ([" "])+ "by">
-|
-<ORDER_BY : "order" ([" "])+ "by">
-|
-<WHERE : "where">
-|
-<VALUES : "values">
-|
-<DISTINCT : "distinct">
-|
-<IN: "in">
+|<ORDER_BY : "order" ([" "])+ "by">
 }
 
 TOKEN :
@@ -99,10 +370,6 @@ TOKEN :
 |<GT : ">=">
 |<LT : "<=">
 |<NE : "!=">
-|<OR : "or">
-|<AND : "and">
-|<LIKE : "like">
-|<BETWEEN : "between">
 |	<PERCENT: "%">
 |	<AMPERSAND: "&">
 |	<QUOTE: "'"| "\"">
@@ -130,11 +397,38 @@ TOKEN :
 |	<ELLIPSIS: "...">
 }
 
+TOKEN [IGNORE_CASE] :
+{
+	<BOOLEAN: "boolean">
+|	<CALL: "call">
+|	<CURDATE: "curdate">
+|	<CURRENT_ROLE: "current_role">
+|	<CURTIME: "curtime">
+|   <DATABASE: "database">
+|	<GET_CURRENT_CONNECTION: "getCurrentConnection">
+|	<EXPLAIN: "explain">
+|   <BIGINT: "bigint">
+|	<LONG: "long">
+|	<LTRIM: "ltrim">
+|	<NONE: "none">
+|	<OVER: "over">
+|	<ROLE: "role">
+|	<ROWNUMBER: "row_number">
+|	<RTRIM: "rtrim">
+|	<SUBSTR:	"substr">
+|	<XML:	"xml">
+|	<XMLEXISTS:	"xmlexists">
+|	<XMLPARSE:	"xmlparse">
+|	<XMLQUERY:	"xmlquery">
+|	<XMLSERIALIZE:	"xmlserialize">
+}
 
 TOKEN :
 {
 
-<ID : <LETTER> (<LETTER>|<DIGIT>)*>
+<ID : <LETTER> (<LETTER>|<DIGIT>)* >
+|
+<NAME: <ID> ( "." <ID>)?>
 |
 <NUMBER: (<DIGIT>)+ (<DOT>(<DIGIT>)*)?>
 |
@@ -160,8 +454,31 @@ void parse() :
     sql = new ArrayList<Object>();
 }
 {
-    //***************SELECT************
-    <SELECT>
+
+    //***************1	CREATE ************
+    //1.1.1	CREATE DATABASE testdb；
+    t = <CREATE>   create(t)
+
+
+    //***************2	DROP************
+    //2.1.1	DROP DATABSE databse_name;
+    |t = <DROP>   drop(t)
+
+    //***************3	RENAME************
+    //3.1.1	RENAME DATABSE old_name TO new_name
+    |t = <RENAME>   rename(t)
+
+    //***************4	USE************
+    //4.1.1	USE database_name
+    |t = <USE>   use(t)
+
+
+    //***************5 SELECT************
+    //5.1.1	SHOW DATABASE
+    |t = <SHOW>   show(t)
+
+
+    |<SELECT>
     {
         t = new Token();
         t.image = "select";
@@ -176,7 +493,7 @@ void parse() :
     |   //only support simple insert statement
     <INSERT><INTO><ID> //TABLE NAME
     <VALUES>
-    <LBRACKET><ID>(","<ID>)*<RBRACKET>(<STATEMENT_END> | <END>)
+    <LBRACKET><NAME>(","<NAME>)*<RBRACKET>(<STATEMENT_END> | <END>)
 
     |<VALUES>
     <LBRACKET>values() <RBRACKET>
@@ -241,7 +558,7 @@ void saveTempListInList(List<Object> temp,List<Object> l) :
 }
 
 
-void show() :
+void showStructure() :
 {}
 {
     {
@@ -250,7 +567,61 @@ void show() :
         {
             System.out.println(object);
         }
+    }
+}
 
+
+void create(Token d) :
+{
+    Token t;
+    sql = new ArrayList<Object>();
+}
+{
+    {
+        t=d;
+        System.out.println("------CREATE METHOD --------");
+        saveTokenInSQL(t);
+    }
+    (       ////1.1.1	CREATE DATABASE testdb；
+            t =<DATABASE>
+            {
+                saveTokenInSQL(t);
+            }
+            t = <ID>
+            {
+                saveTokenInSQL(t);
+            }
+
+        |   t =<TABLE>
+            {
+                saveTokenInSQL(t);
+            }
+            t = <ID>
+            {
+                 saveTokenInSQL(t);
+                 createTable();
+            }
+    )
+
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+    //{ExecuteStatement.delete(sql);} // %%
+    // {test.testWhereAnd(sql);} // %%
+
+}
+
+////1.1.1	CREATE TABLE table_name
+//  //( 	column_name_1 data_type default value column_constraint,
+//  //column_name_2 data_type default value column_constraint,
+//  //...,
+//  //table_constraint	 );
+void createTable() :
+{Token t;}
+{
+    t =<TABLE>
+    {
+        saveTokenInSQL(t);
     }
 }
 
@@ -275,7 +646,7 @@ void delete(Token d) :
 
     (where() )?
 
-    {   show(); }
+    {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
 
@@ -286,6 +657,101 @@ void delete(Token d) :
 
 }
 
+//2.1.1	DROP DATABSE databse_name;
+void drop(Token d):
+{
+     Token t;
+     sql = new ArrayList<Object>();
+}
+{
+    {
+         t=d;
+         System.out.println("------DROP METHOD --------");
+         saveTokenInSQL(t);
+
+     }
+    t =<DATABASE>
+    {
+         saveTokenInSQL(t);
+    }
+    t = <ID>
+    {
+         saveTokenInSQL(t);
+    }
+
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+     //{ExecuteStatement.delete(sql);} // %%
+    //    {test.testWhereAnd(sql);} // %%
+}
+
+//3.1.1	RENAME DATABSE old_name TO new_name
+void rename(Token d):
+{
+    Token t;
+    sql = new ArrayList<Object>();}
+{
+    {
+         t=d;
+         System.out.println("------RENAME METHOD --------");
+         saveTokenInSQL(t);
+     }
+    t =<DATABASE>   {saveTokenInSQL(t);}
+    t = <ID>        {saveTokenInSQL(t);}
+    t = <TO>        {saveTokenInSQL(t);}
+    t = <ID>        {saveTokenInSQL(t);}
+
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+         //{ExecuteStatement.delete(sql);} // %%
+        //    {test.testWhereAnd(sql);} // %%
+
+}
+//5.1.1	SHOW DATABASE;
+void show(Token d):
+{
+    Token t;
+    sql = new ArrayList<Object>();}
+{
+    {
+         t=d;
+         System.out.println("------SHWO METHOD --------");
+         saveTokenInSQL(t);
+    }
+    t =<DATABASE>   {saveTokenInSQL(t);}
+
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+         //{ExecuteStatement.delete(sql);} // %%
+        //    {test.testWhereAnd(sql);} // %%
+
+
+}
+//4.1.1	USE database_name
+void use(Token d):
+{
+    Token t;
+    sql = new ArrayList<Object>();}
+{
+    {
+         t=d;
+         System.out.println("------USE METHOD --------");
+         saveTokenInSQL(t);
+    }
+
+    t = <ID>    {saveTokenInSQL(t);}
+
+    {   showStructure(); }
+        (<STATEMENT_END> | <END>)
+
+    //{ExecuteStatement.delete(sql);} // %%
+    //    {test.testWhereAnd(sql);} // %%
+}
+
+
 //where语句
 void where() :
 {Token t;}
@@ -295,7 +761,9 @@ void where() :
 
 
     multiCondition()
-    (orderBy() | groupBy())?
+
+    (groupBy() ) ?
+    (orderBy() ) ?
 }
 
 // 多条件并列的时候
@@ -369,6 +837,11 @@ void betweenCondition() :
 void in () :
 {
     Token t;
+    // 新建一个临时的templist1存放小括号内容（）    --->templist1
+    // a in （templiste1）    --->condition ----> templist
+    //condition存放在templist中 conditon
+    //只有一个condition的时候 list = templist
+    //muticondition ---> list 放在sql中
     List<Object>templist1 = new ArrayList<Object>();
 }
 {
@@ -388,21 +861,20 @@ void in () :
     {
             //templist.add(t);
          saveTempListInList(templist1,templist);
+         saveTempListInList(templist,list);
     }
 }
 
+// 用于
 void name() :
 {Token t;}
 {
- t = <ID>
+  (t =<NAME>|t = <ID>)
  {
     //templist.add(t);
     saveTokenInList(t,templist);
  }
- (
-    "."
-    <ID>
- )?
+
 
 }
 
@@ -546,20 +1018,22 @@ void value() :
  <STRING>|<NUMBER>
 }
 
+void groupBy() :
+{Token t;}
+{
+    t = <GROUP_BY>               {   saveTokenInSQL(t);   }
+    (t = <ID>|t = <NAME>)        {    saveTokenInSQL(t);  }
+}
+
 
 void orderBy() :
-{}
+{Token t;}
 {
-    <ORDER_BY>
-    name()
+    t = <ORDER_BY>  {   saveTokenInSQL(t);   }
+    t = <ID>        {    saveTokenInSQL(t);  }
 }
 
-void groupBy() :
-{}
-{
- <GROUP_BY>
- name()
-}
+
 
 void sets() :
 {}

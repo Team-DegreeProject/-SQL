@@ -1,6 +1,7 @@
 package table;
 
 import table.BTree.BPlusTree;
+import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
@@ -51,13 +52,27 @@ public class Table extends SqlConstantImpl {
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
         }
+        System.out.println("att "+attributes.length);
         CglibBean bean = new CglibBean(propertyMap);
         for(int i=0;i<attributes.length;i++){
             bean.setValue(attributes[i], values.get(i));
             System.out.println(attributes[i]+"--->>"+values.get(i));
         }
-        tree.insert(bean,(Integer) bean.getValue(primaryKey));
+//        System.out.println("id "+bean.getValue("User"));
+//        System.out.println("tree "+tree.getDataNumber());
+//        System.out.println("primaey Key "+bean.getValue(primaryKey));
+        tree.insert(bean, (Comparable) bean.getValue(primaryKey));
+//        System.out.println("tree "+tree.getDataNumber());
         return true;
+    }
+
+    public void printTable(){
+        System.out.println("||"+td.getName()+"||");
+//        System.out.println("|"+td.getName()+"|");
+//        System.out.println("---");
+        BPlusTreeTool.printBPlusTree(tree);
+
+
     }
 
     public int size(){
