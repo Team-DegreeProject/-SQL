@@ -1,5 +1,7 @@
 package table.BTree;
 
+import table.Table;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -134,5 +136,19 @@ public class BPlusTreeTool {
         List list=b.getDatas();
         printList(list);
         System.out.println("-------------------------------------------------------");
+    }
+
+    public static List<CglibBean> getParticularAttribute(Table t, String attribute, Object value){
+        BPlusTree b=t.getTree();
+        List<CglibBean> returnlist=new ArrayList();
+        List list=b.getDatas();
+        for(int i=0;i<list.size();i++){
+            CglibBean c= (CglibBean) list.get(i);
+            Object att=c.getValue(attribute);
+            if(att.equals(value)){
+                returnlist.add(c);
+            }
+        }
+        return returnlist;
     }
 }

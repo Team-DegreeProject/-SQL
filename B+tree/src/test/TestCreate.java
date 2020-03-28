@@ -2,9 +2,12 @@ package test;
 
 import execution.table.CreateStatement;
 import table.Table;
+import table.type.VarChar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static parsing.SqlParserConstants.*;
 
 public class TestCreate {
     public static void main(String[] args) throws ClassNotFoundException {
@@ -19,12 +22,12 @@ public class TestCreate {
         List v2=new ArrayList();
         List v3=new ArrayList();
         v1.add("id");
-        v1.add(100);
+        v1.add(INT);
         v2.add("name");
-        v2.add(101);
+        v2.add(STRING);
         v2.add("3");
         v3.add("addr");
-        v3.add(102);
+        v3.add(STRING);
         v3.add("5");
         variant.add(v1);
         variant.add(v2);

@@ -1,17 +1,11 @@
 package test;
 
 import execution.database.CreateDatabaseStatement;
-import execution.table.CreateStatement;
 import system.User;
 import system.UserAccessedDatabases;
-import system.UserAccessedTable;
-import table.BTree.BPlusTree;
-import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
+import table.Database;
 import table.Table;
-import table.TableDescriptor;
-import table.type.VarChar;
-import static table.type.SqlConstantImpl.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,19 +14,19 @@ public class UserTest {
         User user=new User(0,"root");
         UserAccessedDatabases usa=user.getUserAccessedDatabases();
         usa.setUser(user);
-        Table t=create();
+        Database t=create();
+        System.out.println("------------------");
+        insertTable(t);
         System.out.println("------------------");
         boolean insertAtable=usa.insertDatabase(t);
         Table databaseList=usa.getUserAccessedDatabase();
         databaseList.printTable();
-//        BPlusTree b=table.getTree();
-//        List l=b.getDatas();
-//        CglibBean c= (CglibBean) l.get(0);
-//        VarChar username= (VarChar) c.getValue("user");
-//        System.out.println(username.getString());
-//        TableDescriptor td=(TableDescriptor)c.getValue("table");
-//        System.out.println(td.getName());
-
+        System.out.println("------------------");
+        List<CglibBean> list=databaseList.getTree().getDatas();
+        CglibBean c=list.get(0);
+        Database db= (Database) c.getValue("database");
+        printDatabase(db);
+        System.out.println("------------------");
 
     }
 
@@ -44,11 +38,20 @@ public class UserTest {
         return list;
     }
 
-    public static Table create() throws ClassNotFoundException {
+    public static Database create() throws ClassNotFoundException {
         List list=createDatabaseStatment();
         CreateDatabaseStatement c=new CreateDatabaseStatement(list);
-        Table t=c.createImpl();
+        Database t=c.createImpl();
         return t;
+    }
+
+    public static void insertTable(Database db) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Table t=TestCreate.create();
+        db.insertTable(t);
+    }
+    public static void printDatabase(Database db){
+        Table t=db.getDatabase();
+        t.printTable();
     }
 
 

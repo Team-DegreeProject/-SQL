@@ -3,11 +3,11 @@ package system;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
 import table.ColumnDescriptorList;
+import table.Database;
 import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-import table.type.VarChar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +41,11 @@ public class UserAccessedDatabases {
         DataTypeDescriptor user= new DataTypeDescriptor(USER,false);
         column=new ColumnDescriptor("user",1,user);
         columns.add(column);
-        DataTypeDescriptor t= new DataTypeDescriptor(TABLE,false);
+        DataTypeDescriptor t= new DataTypeDescriptor(DATABASE,false);
         column=new ColumnDescriptor("database",2,t);
+        columns.add(column);
+        DataTypeDescriptor tn= new DataTypeDescriptor(STRING,false);
+        column=new ColumnDescriptor("databasename",3,tn);
         columns.add(column);
         tableDescriptor =new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns);
         tableDescriptor .setTableInColumnDescriptor(tableDescriptor);
@@ -51,13 +54,14 @@ public class UserAccessedDatabases {
         return userAccessedDatabase;
     }
 
-    public boolean insertDatabase(Table database) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        int id=length+1;
+    public boolean insertDatabase(Database database) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int id=length;
         length++;
         List values=new ArrayList();
         values.add(id);
         values.add(user);
         values.add(database);
+        values.add(database.getDatabaseName());
         String primaryKey="id";
         String[] attributes=userAccessedDatabase.getTableDescriptor().getColumnNamesArray();
         return userAccessedDatabase.insertRows(attributes,values,primaryKey);
