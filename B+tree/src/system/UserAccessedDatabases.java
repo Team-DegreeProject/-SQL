@@ -47,7 +47,8 @@ public class UserAccessedDatabases {
         DataTypeDescriptor tn= new DataTypeDescriptor(STRING,false);
         column=new ColumnDescriptor("databasename",3,tn);
         columns.add(column);
-        tableDescriptor =new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns);
+        String[] primaryKey={"id"};
+        tableDescriptor =new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns,primaryKey);
         tableDescriptor .setTableInColumnDescriptor(tableDescriptor);
         tableDescriptor .printColumnName();
         userAccessedDatabase=new Table(tableDescriptor);
@@ -64,7 +65,7 @@ public class UserAccessedDatabases {
         values.add(database.getDatabaseName());
         String primaryKey="id";
         String[] attributes=userAccessedDatabase.getTableDescriptor().getColumnNamesArray();
-        return userAccessedDatabase.insertRows(attributes,values,primaryKey);
+        return userAccessedDatabase.insertRows(attributes,values);
     }
 
     public void returnUserAccessedDatabaseNames(){

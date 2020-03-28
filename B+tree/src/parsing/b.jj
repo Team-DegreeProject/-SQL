@@ -706,7 +706,7 @@ void rename(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         //{ExecuteStatement.delete(sql);} // %%
+         {ExecuteStatement.renameDatabase(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 }
@@ -726,7 +726,7 @@ void show(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         //{ExecuteStatement.delete(sql);} // %%
+         {ExecuteStatement.showDatabase(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 

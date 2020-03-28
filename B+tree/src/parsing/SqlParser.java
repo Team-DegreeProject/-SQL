@@ -357,6 +357,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+          ExecuteStatement.renameDatabase(sql);
   }
 
 //5.1.1	SHOW DATABASE;
@@ -381,6 +382,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+          ExecuteStatement.showDatabase(sql);
   }
 
 //4.1.1	USE database_name

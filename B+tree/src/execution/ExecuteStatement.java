@@ -1,28 +1,27 @@
 package execution;
 
 import execution.database.CreateDatabaseStatement;
-import execution.table.CreateStatement;
-import parsing.Token;
+import execution.database.RenameDatabaseStatement;
+import execution.database.ShowDatabaseStatement;
 import system.User;
 import system.UserAccessedDatabases;
 import table.Database;
-import table.Table;
-
 import java.util.List;
 
 public class ExecuteStatement {
+    public static User user;//%%
+    public static UserAccessedDatabases uad;//%%
     public static void delete(List tokens){
         System.out.println("tokens");
     }
     public static void createDatabase(List tokens){
-        UserAccessedDatabases usa=setUser();
-        CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
-        Database db= null;
         try {
-            db = cds.createImpl();
-            boolean insertAtable=usa.insertDatabase(db);
-            Table databaseList=usa.getUserAccessedDatabase();
-            databaseList.printTable();
+            uad=setUser();//%%
+            CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
+            Database db= null;
+            db = cds.createDatabaseImpl();
+            ShowDatabaseStatement sds=new ShowDatabaseStatement();
+            sds.showDatabaseStatementImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -30,17 +29,49 @@ public class ExecuteStatement {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-//        Token t= (Token) tokens.get(2);
-//        System.out.println("image:"+t.image+",value:"+t.getValue()+";id:"+t.kind);
-//        System.out.println("CreateTableTokens");
+    }
+
+    public static void renameDatabase(List tokens){
+        try {
+            uad=setUser();
+            CreateDatabaseStatement c=new CreateDatabaseStatement();//%%
+            Database d=c.createDatabaseImpl(1);
+            ShowDatabaseStatement sds=new ShowDatabaseStatement();
+            sds.showDatabaseStatementImpl();
+            RenameDatabaseStatement renameDatabaseStatement=new RenameDatabaseStatement(tokens);
+            renameDatabaseStatement.renameDatabaseImpl();
+            sds.showDatabaseStatementImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showDatabase(List tokens){
+        try {
+            uad=setUser();
+            CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
+            Database d=cds.createDatabaseImpl(1);
+            ShowDatabaseStatement sds=new ShowDatabaseStatement();
+            sds.showDatabaseStatementImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
     }
 
     public static UserAccessedDatabases setUser(){
-        User user=new User(0,"root");
-        UserAccessedDatabases usa=user.getUserAccessedDatabases();
-        usa.setUser(user);
-        return usa;
+        user=new User(0,"root");
+        uad=user.getUserAccessedDatabases();
+        uad.setUser(user);
+        return uad;
     }
 
 

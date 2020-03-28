@@ -34,7 +34,8 @@ public class CreateStatement implements SqlConstant {
             ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType);
             columns.add(column);
         }
-        td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
+        String[] pk=null;
+        td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns,pk);
         td.setTableInColumnDescriptor(td);
         td.printColumnName();
         ColumnDescriptor cd=td.getColumnDescriptorList().getColumnDescriptor(1);

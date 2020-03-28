@@ -11,15 +11,12 @@ import static table.TableSchema.BASE_TABLE_TYPE;
 public class Database {
     private  int id=0;
     private  Table database;
-    private  String databaseName;
     public Database(Table t){
         database=t;
-        databaseName=t.getTableDescriptor().getName();
     }
 
     public Database(String databasename) throws ClassNotFoundException {
         createDatabase(databasename);
-        databaseName=databasename;
     }
 
     public boolean createDatabase(String databasename) throws ClassNotFoundException {
@@ -34,7 +31,8 @@ public class Database {
         columns.add(columnId);
         columns.add(columnTable);
         columns.add(columnTableName);
-        td=new TableDescriptor(databasename,BASE_TABLE_TYPE,columns);
+        String[] primaryKey={"id"};
+        td=new TableDescriptor(databasename,BASE_TABLE_TYPE,columns,primaryKey);
         td.setTableInColumnDescriptor(td);
         td.printColumnName();
         database=new Table(td);
@@ -50,11 +48,11 @@ public class Database {
     }
 
     public String getDatabaseName() {
-        return databaseName;
+        return this.database.getTableDescriptor().getName();
     }
 
     public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
+        this.database.getTableDescriptor().setTableName(databaseName);
     }
 
     public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -62,10 +60,10 @@ public class Database {
         values.add(id);
         values.add(t);
         values.add(t.getTableDescriptor().getName());
-        String primaryKey="id";
+        String[] primaryKey={"id"};
         id++;
         String[] attributes=database.getTableDescriptor().getColumnNamesArray();
-        return database.insertRows(attributes,values,primaryKey);
+        return database.insertRows(attributes,values);
 
     }
 }

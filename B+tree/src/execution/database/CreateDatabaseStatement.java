@@ -1,5 +1,6 @@
 package execution.database;
 
+import execution.ExecuteStatement;
 import parsing.Token;
 import table.Database;
 
@@ -12,28 +13,22 @@ public class CreateDatabaseStatement{
     }
     public CreateDatabaseStatement(){}
 
-    public Database createImpl() throws ClassNotFoundException {
-//        TableDescriptor td=null;
+    public Database createDatabaseImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         if(statement==null){
             return null;
         }
         String databaseName=  ((Token)statement.get(2)).image;
         Database db=new Database(databaseName);
-//        ColumnDescriptorList columns=new ColumnDescriptorList();
-//        String databaseName=(String)statement.get(2);
-//        DataTypeDescriptor dataType= new DataTypeDescriptor(INT);
-//        ColumnDescriptor columnId=new ColumnDescriptor("id",0,dataType);
-//        dataType= new DataTypeDescriptor(TABLE);
-//        ColumnDescriptor columnTable=new ColumnDescriptor("table",1,dataType);
-//        dataType= new DataTypeDescriptor(STRING);
-//        ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",2,dataType);
-//        columns.add(columnId);
-//        columns.add(columnTable);
-//        columns.add(columnTableName);
-//        td=new TableDescriptor(databaseName,BASE_TABLE_TYPE,columns);
-//        td.setTableInColumnDescriptor(td);
-//        td.printColumnName();
-//        Table table=new Table(td);
+//        UserAccessedDatabases usa= ExecuteStatement.uad;
+        ExecuteStatement.uad.insertDatabase(db);
+        return db;
+    }
+
+    public Database createDatabaseImpl(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+//        TableDescriptor td=null;
+        String databasename="test";
+        Database db=new Database(databasename);
+        ExecuteStatement.uad.insertDatabase(db);
         return db;
     }
 

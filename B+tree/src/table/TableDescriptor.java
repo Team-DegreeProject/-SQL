@@ -22,42 +22,47 @@ public class TableDescriptor implements TableSchema {
 //    private int tableType;
     private BPlusTree dataDictionary;
     private int schema;
+    private String[] primaryKey;
 
 
 
 
-    public TableDescriptor(BPlusTree dataDictionary, String tableName,  char lockGranularity,int schema) {
+    public TableDescriptor(BPlusTree dataDictionary, String tableName, char lockGranularity,int schema,String[] primaryKey) {
         this.dataDictionary=dataDictionary;
         this.tableName = tableName;
 //        this.tableType = tableType;
         this.lockGranularity = lockGranularity;
         this.columnDescriptorList = new ColumnDescriptorList();
         this.schema=schema;
+        this.primaryKey=primaryKey;
     }
 
-    public TableDescriptor( String tableName, char lockGranularity,int schema) {
+    public TableDescriptor( String tableName, char lockGranularity,int schema,String[] primaryKey) {
         this.dataDictionary=null;
         this.tableName = tableName;
 //        this.tableType = tableType;
         this.lockGranularity = lockGranularity;
         this.columnDescriptorList = new ColumnDescriptorList();
         this.schema=schema;
+        this.primaryKey=primaryKey;
     }
 
-    public TableDescriptor( String tableName,  char lockGranularity,int schema,ColumnDescriptorList columnDescriptorList) {
+    public TableDescriptor( String tableName,  char lockGranularity,int schema,ColumnDescriptorList columnDescriptorList,String[] primaryKey) {
         this.dataDictionary=null;
 //        this.tableName = tableName;
         this.lockGranularity = lockGranularity;
         this.columnDescriptorList = columnDescriptorList;
         this.schema=schema;
+        this.primaryKey=primaryKey;
     }
 
-    public TableDescriptor( String tableName,int schema,ColumnDescriptorList columnDescriptorList) {
+    public TableDescriptor( String tableName,int schema,ColumnDescriptorList columnDescriptorList,String[] primaryKey) {
         this.dataDictionary=null;
         this.tableName = tableName;
 //        this.tableType = tableType;
         this.columnDescriptorList = columnDescriptorList;
         this.schema=schema;
+        this.primaryKey=primaryKey;
     }
 
 
@@ -148,6 +153,22 @@ public class TableDescriptor implements TableSchema {
                 System.out.println(";");
             }
         }
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public void setPrimaryKey(String[] primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public String[] getPrimaryKey() {
+        return primaryKey;
     }
 }
 

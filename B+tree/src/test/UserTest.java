@@ -38,10 +38,10 @@ public class UserTest {
         return list;
     }
 
-    public static Database create() throws ClassNotFoundException {
+    public static Database create() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         List list=createDatabaseStatment();
         CreateDatabaseStatement c=new CreateDatabaseStatement(list);
-        Database t=c.createImpl();
+        Database t=c.createDatabaseImpl();
         return t;
     }
 

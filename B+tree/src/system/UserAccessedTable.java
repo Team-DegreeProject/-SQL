@@ -41,8 +41,7 @@ public class UserAccessedTable {
         values.add(userName);
         values.add(td);
         String[] attributes=userAccessedTable.getTableDescriptor().getColumnNamesArray();
-        String primaryKey="id";
-        return userAccessedTable.insertRows(attributes,values,primaryKey);
+        return userAccessedTable.insertRows(attributes,values);
     }
 
 
@@ -56,12 +55,11 @@ public class UserAccessedTable {
         DataTypeDescriptor user= new DataTypeDescriptor(102,false);//int
         column=new ColumnDescriptor("user",1,user);
         columns.add(column);
-        table=new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns);
-        table.setTableInColumnDescriptor(table);
         DataTypeDescriptor t= new DataTypeDescriptor(104,false);//int
         column=new ColumnDescriptor("table",2,t);
         columns.add(column);
-        table=new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns);
+        String[] pk={"id"};
+        table=new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns,pk);
         table.setTableInColumnDescriptor(table);
         table.printColumnName();
         return table;
