@@ -2,6 +2,7 @@
 package parsing;
 import java.util.List;
 import java.util.ArrayList;
+import execution.ExecuteStatement;
 
 public class SqlParser implements SqlParserConstants {
 
@@ -255,6 +256,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+      ExecuteStatement.createDatabase(sql);
   }
 
 ////1.1.1	CREATE TABLE table_name

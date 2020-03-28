@@ -4,10 +4,14 @@ public class User {
     private String userName;
     private int userId;
     private UserAccessedDatabases userAccessedDatabases;
-    public User(int id,String name) throws ClassNotFoundException {
+    public User(int id,String name) {
         userId=id;
         userName=name;
-        userAccessedDatabases=new UserAccessedDatabases();
+        try {
+            userAccessedDatabases=new UserAccessedDatabases();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setUserId(int userId) {

@@ -1,5 +1,6 @@
 package execution.database;
 
+import parsing.Token;
 import table.Database;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class CreateDatabaseStatement{
         if(statement==null){
             return null;
         }
-        String databaseName=(String)statement.get(2);
+        String databaseName=  ((Token)statement.get(2)).image;
         Database db=new Database(databaseName);
 //        ColumnDescriptorList columns=new ColumnDescriptorList();
 //        String databaseName=(String)statement.get(2);

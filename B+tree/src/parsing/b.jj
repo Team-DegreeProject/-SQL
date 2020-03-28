@@ -8,6 +8,7 @@ PARSER_BEGIN(SqlParser)
 package parsing;
 import java.util.List;
 import java.util.ArrayList;
+import execution.ExecuteStatement;
 
 public class SqlParser {
 
@@ -607,7 +608,7 @@ void create(Token d) :
     (<STATEMENT_END> | <END>)
 
     //{ExecuteStatement.delete(sql);} // %%
-    // {test.testWhereAnd(sql);} // %%
+     {ExecuteStatement.createDatabase(sql);} // %%
 
 }
 
@@ -653,7 +654,7 @@ void delete(Token d) :
 
     //{ExecuteStatement.delete(sql);} // %%
 
-//    {test.testWhereAnd(sql);} // %%
+//    {ExecuteStatement.createDatabase(sql);} // %%
 
 }
 
