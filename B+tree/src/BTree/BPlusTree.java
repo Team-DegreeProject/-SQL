@@ -256,6 +256,21 @@ public class BPlusTree <T, V extends Comparable<V>> {
         }
     }
 
+    public List<Object> getNonLeafNodes(Node temp,List<Object> list) {
+//        System.out.println("temp.keynumber:" + temp.keyNumber);
+
+        if (temp instanceof NonLeafNode) {
+            list.add(temp);
+            if(temp.childs[0] instanceof NonLeafNode){
+                for (int i = temp.keyNumber - 1; i >= 0; i--) {
+                    getNonLeafNodes(temp.childs[i],list);
+                }
+            }
+        }
+        return list;
+    }
+
+
     public Node<T, V> getRoot() {
         return root;
     }
