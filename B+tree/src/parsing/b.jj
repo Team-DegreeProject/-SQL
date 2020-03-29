@@ -683,7 +683,7 @@ void drop(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-     //{ExecuteStatement.delete(sql);} // %%
+     {ExecuteStatement.dropDatabase(sql);} // %%
     //    {test.testWhereAnd(sql);} // %%
 }
 
@@ -748,7 +748,7 @@ void use(Token d):
     {   showStructure(); }
         (<STATEMENT_END> | <END>)
 
-    //{ExecuteStatement.delete(sql);} // %%
+    {ExecuteStatement.useDatabase(sql);} // %%
     //    {test.testWhereAnd(sql);} // %%
 }
 

@@ -46,7 +46,7 @@ public class Table extends SqlConstantImpl {
         return propertyMap;
     }
 
-    public boolean insertRows(String[] attributes,List values) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public boolean insertRows(String[] attributes,List values){
         if(attributes.length!=values.size()){
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
@@ -55,7 +55,7 @@ public class Table extends SqlConstantImpl {
         CglibBean bean = new CglibBean(propertyMap);
         for(int i=0;i<attributes.length;i++){
             bean.setValue(attributes[i], values.get(i));
-            System.out.println(attributes[i]+"--->>"+values.get(i));
+//            System.out.println(attributes[i]+"--->>"+values.get(i));
         }
         tree.insert(bean, (Comparable) bean.getValue(td.getPrimaryKey()[0]));//双primarykey
         return true;
@@ -63,9 +63,9 @@ public class Table extends SqlConstantImpl {
 
     public void printTable(){
         System.out.println("||"+td.getName()+"||");
+        System.out.println("-------------------------------------------------------");
+        td.printColumnName();
         BPlusTreeTool.printBPlusTree(tree);
-
-
     }
 
     public boolean updateTable(List attributes,List values,Table t){
@@ -80,27 +80,23 @@ public class Table extends SqlConstantImpl {
         BPlusTree newTree=new BPlusTree();
         List list1=t.getTree().getDatas();
         List list2=tree.getDatas();
-//        for(int i=0;i<list1.size();i++){
-//            CglibBean c1= (CglibBean) list1.get(i);
-//            for(int k=0;k<list2.size();k++){
-//                CglibBean c2=(CglibBean)list2.get(k);
-//                if(c1.equals(c2)){
-//                    for(int j=0;j<attributes.size();j++){
-//                        c2.setValue((String) attributes.get(j),values.get(j));
-//                    }
-//                }
-//                newTree.insert(c2, (Comparable) c2.getValue(td.getPrimaryKey()[0]));
-//            }
-//        }
         for(int i=0;i<list1.size();i++){
             CglibBean c= (CglibBean) list1.get(i);
             for(int j=0;j<attributes.size();j++){
                 c.setValue((String) attributes.get(j),values.get(j));
             }
         }
-//        tree=newTree;
         return true;
+    }
 
+    public void deleteRows(Table t){
+        List<CglibBean> list=t.getTree().getDatas();
+        String primaryKey=t.getTableDescriptor().getPrimaryKey()[0];//%
+        for(int i=0;i<t.size();i++){
+            CglibBean c=list.get(i);
+            Comparable pk= (Comparable) c.getValue(primaryKey);
+            tree.delete(pk);
+        }
     }
 
     public int size(){

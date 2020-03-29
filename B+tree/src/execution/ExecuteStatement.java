@@ -1,8 +1,6 @@
 package execution;
 
-import execution.database.CreateDatabaseStatement;
-import execution.database.RenameDatabaseStatement;
-import execution.database.ShowDatabaseStatement;
+import execution.database.*;
 import system.User;
 import system.UserAccessedDatabases;
 import table.Database;
@@ -18,8 +16,7 @@ public class ExecuteStatement {
         try {
             uad=setUser();//%%
             CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
-            Database db= null;
-            db = cds.createDatabaseImpl();
+            cds.createDatabaseImpl();
             ShowDatabaseStatement sds=new ShowDatabaseStatement();
             sds.showDatabaseStatementImpl();
         } catch (ClassNotFoundException e) {
@@ -64,7 +61,41 @@ public class ExecuteStatement {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void dropDatabase(List tokens){
+        try {
+            uad=setUser();
+            CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
+            Database d=cds.createDatabaseImpl(1);
+            ShowDatabaseStatement sds=new ShowDatabaseStatement();
+            sds.showDatabaseStatementImpl();
+            DropDatabaseStatement dds=new DropDatabaseStatement(tokens);
+            dds.dropDatabaseStatementImpl();
+            sds.showDatabaseStatementImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void useDatabase(List tokens){
+        try {
+            uad=setUser();
+            CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
+            Database d=cds.createDatabaseImpl(1);
+            UseDatabaseStatement uds=new UseDatabaseStatement(tokens);
+            uds.useDatabaseStatementImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public static UserAccessedDatabases setUser(){

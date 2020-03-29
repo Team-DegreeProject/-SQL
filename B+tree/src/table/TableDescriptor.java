@@ -144,7 +144,6 @@ public class TableDescriptor implements TableSchema {
 
     public void printColumnName(){
         String[] columns=this.getColumnNamesArray();
-        System.out.println(columns.length);
         for(int i=0;i<columns.length;i++){
             System.out.print(columns[i]);
             if(i!=columns.length-1){

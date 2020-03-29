@@ -327,6 +327,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+      ExecuteStatement.dropDatabase(sql);
   }
 
 //3.1.1	RENAME DATABSE old_name TO new_name
@@ -407,6 +408,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+     ExecuteStatement.useDatabase(sql);
   }
 
 //where语句
