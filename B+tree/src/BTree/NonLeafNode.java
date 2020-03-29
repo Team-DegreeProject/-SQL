@@ -6,6 +6,14 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
         super();
         this.childs = new Node[BPlusTree.getmaxKeyNumber()];
     }
+
+    public NonLeafNode(Node parent,Node[] childs,int keyNumber,Object[] keys){
+        this.parent=parent;
+        this.childs=childs;
+        this.keyNumber=keyNumber;
+        this.keys=keys;
+    }
+
     @Override
     public T select(V key) {
         int i = this.keyNumber-1;

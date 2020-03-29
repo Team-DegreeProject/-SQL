@@ -13,6 +13,12 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         this.right = null;
     }
 
+    public LeafNode(Node parent,Object[] values,int keyNumber,Object[] keys){
+        this.parent=parent;
+        this.values=values;
+        this.keyNumber=keyNumber;
+        this.keys=keys;
+    }
     //二分查找
     @Override
     public T select(V key) {
