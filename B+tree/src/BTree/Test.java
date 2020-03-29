@@ -1,6 +1,8 @@
 package BTree;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
@@ -30,13 +32,26 @@ public class Test {
         CglibBean b1 = b.select(345);
         long time3 = System.nanoTime();
 
-        for (int i = 10000; i >=0; i--) {
-            b.delete(i);
-        }
+//        for (int i = 10000; i >=0; i--) {
+//            b.delete(i);
+//        }
         long time4 = System.nanoTime();
 
         System.out.println("插入耗时: " + (time2 - time1));
         System.out.println("查询耗时: " + (time3 - time2));
         System.out.println("删除耗时: " + (time4 - time3));
+
+
+        List<Object> data=b.getDatas();
+        SecondIndex <Object,Integer> m=new SecondIndex<>();
+        Map<Object,List<Integer>> testmap=m.createIndex(data,"id","address");
+        for (Object entry : testmap.keySet()) {
+            System.out.println("key : " + entry);
+            List templist=(List)testmap.get(entry);
+            System.out.println("value: ");
+            for(int j=0;j<templist.size();j++){
+                System.out.print(templist.get(j)+"  ");
+            }
+        }
     }
 }
