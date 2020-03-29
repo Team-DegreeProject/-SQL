@@ -35,7 +35,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../dynamicClass" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -63,7 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BTree.Test" />
       <module name="B+tree" />
@@ -93,8 +93,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.main" />
         <item itemvalue="Application.Test" />
+        <item itemvalue="Application.main" />
         <item itemvalue="Application.test" />
       </list>
     </recent_temporary>
@@ -129,6 +129,8 @@
       <workItem from="1584864820002" duration="2751000" />
       <workItem from="1584933081127" duration="1088000" />
       <workItem from="1585051140671" duration="132000" />
+      <workItem from="1585317453616" duration="347000" />
+      <workItem from="1585455948536" duration="2157000" />
     </task>
     <servers />
   </component>

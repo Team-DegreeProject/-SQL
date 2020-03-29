@@ -13,7 +13,6 @@ public class Test {
         propertyMap.put("address", Class.forName("java.lang.String"));
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
 //        Product p;
-
         long time1 = System.nanoTime();
 
         for (int i = 10000; i >=0; i--) {
