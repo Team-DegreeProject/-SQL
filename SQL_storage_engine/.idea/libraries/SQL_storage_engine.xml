@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="SQL_storage_engine">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cglib-nodep-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jdom-2.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
