@@ -20,4 +20,15 @@ public class LockTable {
     public LockTableUnit getCurrentUnit(){
         return  unitsList.get(0);
     }
+
+    public ArrayList<LockTableUnit> traverseList(String tableName){
+        //根据table的名字来遍历这个列表，从而看看这个列表中的到底有没有这个table上锁的信息
+        ArrayList<LockTableUnit> resultUnitList = new ArrayList<>();
+        for(int i = 0; i<unitsList.size(); i++){
+            if(unitsList.get(i).getName() == tableName){
+                resultUnitList.add(unitsList.get(i));
+            }
+        }
+        return resultUnitList;
+    }
 }

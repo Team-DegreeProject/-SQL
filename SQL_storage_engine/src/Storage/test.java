@@ -1,6 +1,7 @@
 package Storage;
 
 import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,13 @@ public class test {
         Student root = new Student("root",100);
         root.setNext(map.get(1));
         map.get(1).setNext(map.get(0));
-        System.out.println(root.next.next.getId());
+
+
+        ArrayList<String> testlist = new ArrayList<>();
+        testlist.add("first");
+        testlist.add("second");
+        System.out.println(testlist.get(0));
+        testlist.remove(0);
+        System.out.println(testlist.get(0));
     }
 }
