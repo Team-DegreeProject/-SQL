@@ -1,8 +1,7 @@
 package test;
 
-import execution.table.CreateStatement;
+import execution.table.CreateTableStatement;
 import table.Table;
-import table.type.VarChar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class TestCreate {
 
     public static Table create() throws ClassNotFoundException {
         List list=createStatment();
-        CreateStatement c=new CreateStatement(list);
+        CreateTableStatement c=new CreateTableStatement(list);
         Table t=c.createImpl();
         return t;
     }

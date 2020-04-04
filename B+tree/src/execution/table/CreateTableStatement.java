@@ -1,5 +1,6 @@
 package execution.table;
 
+import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
@@ -11,24 +12,23 @@ import java.util.List;
 
 import static table.TableSchema.*;
 
-public class CreateStatement implements SqlConstant {
+public class CreateTableStatement implements SqlConstant {
     List statement=null;
-    public CreateStatement(List l){
+    public CreateTableStatement(List l){
         statement=l;
     }
-    public CreateStatement(){}
 
     public Table createImpl() throws ClassNotFoundException {
         TableDescriptor td=null;
         if(statement==null){
             return null;
         }
-        String tableName=(String)statement.get(0);
+        String tableName=((Token)statement.get(2)).image;
+        List attributes= (List) statement.get(3);
         ColumnDescriptorList columns=new ColumnDescriptorList();
-        List attribute= (List) statement.get(1);
-        for(int i=0;i<attribute.size();i++){
-            List att= (List) attribute.get(i);
-            String columnName=(String)att.get(0);
+        for(int i=0;i<attributes.size();i++){
+            List att= (List) attributes.get(i);
+            String columnName=((Token)att.get(0)).image;
             int type=(Integer) att.get(1);
             DataTypeDescriptor dataType= new DataTypeDescriptor(type);
             ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataType);
@@ -41,6 +41,19 @@ public class CreateStatement implements SqlConstant {
         ColumnDescriptor cd=td.getColumnDescriptorList().getColumnDescriptor(1);
         Table table=new Table(td);
         return table;
+        return null;
+    }
+
+    public void analyseOneRow(List tokens){
+        String columnName=((Token)tokens.get(0)).image;
+        for(int i=1;i<tokens.size();i++){
+            Token t= (Token) tokens.get(i);
+            System.out.println(t.kind);
+        }
+    }
+
+    public Object checkType(){
+
     }
 
 }

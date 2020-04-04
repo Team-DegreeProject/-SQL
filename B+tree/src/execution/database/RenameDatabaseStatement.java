@@ -3,11 +3,9 @@ package execution.database;
 import execution.ExecuteStatement;
 import execution.table.WhereStatament;
 import parsing.Token;
-import system.User;
 import table.BTree.CglibBean;
 import table.Database;
 import table.Table;
-import table.TableDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,24 +2,19 @@ package table.type;
 
 public class VarChar implements Comparable<VarChar>{
     private String string=null;
-    private int length=-1;
+    private int scale=-1;
 
     public VarChar(){
 
     }
 
     public VarChar(int l,String str){
-        length=l;
-        if(str.length()<=length){
+        scale=l;
+        if(str.length()<=scale){
             string=str;
         }else{
-            string=str.substring(0,length);
+            string=str.substring(0,scale);
         }
-    }
-
-    public VarChar(String str){
-        length=-2;
-        string=str;
     }
 
     @Override
@@ -29,7 +24,7 @@ public class VarChar implements Comparable<VarChar>{
     }
 
     public int getLength(){
-        return length;
+        return scale;
     }
 
     public String getString() {
@@ -37,7 +32,7 @@ public class VarChar implements Comparable<VarChar>{
     }
 
     public void setLength(int length) {
-        this.length = length;
+        this.scale = length;
     }
 
     public void setString(String string) {

@@ -8,7 +8,11 @@ PARSER_BEGIN(SqlParser)
 package parsing;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.InputStream;
 import execution.ExecuteStatement;
+
 
 public class SqlParser {
 
@@ -17,9 +21,33 @@ public class SqlParser {
     private List<Object> templist = new ArrayList<Object>();
 
     public static void main(String[] args) throws Exception {
-        SqlParser parser = new SqlParser(System.in);
-        parser.parse();
-        System.out.println("sql is correct!");
+
+//        InputStream input = System.in;
+//        InputStream input1;
+//        input1 = input;
+//        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+//        String str;
+//        str = br.readLine();
+        System.out.println("INPUT THE SQL SENTENCE");
+        System.out.println("-----------------------------------------------------------");
+
+//        SqlParser parser = new SqlParser(input);
+//        parser.parse();
+//        System.out.println("sql is correct!");
+
+        while(true)
+        {
+
+            SqlParser parser = new SqlParser(System.in);
+            parser.parse();
+            System.out.println("sql is correct!");
+            System.out.println();
+            System.out.println("-----------------------------------------------------------");
+            System.out.println();
+            System.out.println();
+
+
+        }
 
 
     }
@@ -273,12 +301,14 @@ TOKEN [IGNORE_CASE] :
 |    <ABSVAL: "absval">
 |	<ACTION: "action">
 |	<ALWAYS: "always">
+|<AFTER:"after">
 |	<BLOB: "blob">
   |	<C: "c">
   | <CALLED: "called">
 |	<CLOB: "clob">
   |	<COBOL: "cobol">
 |	<COMMITTED: "committed">
+|   <COMMENT:"comment">
 |   <CONCAT: "concat">
 |	<CONTAINS: "contains">
 |	<CYCLE: "cycle">
@@ -356,11 +386,15 @@ TOKEN [IGNORE_CASE] :
 |	<USAGE: "usage">
 |	<WHEN: "when">
 |	<DERBYPLAN: "--sqlkvplan">
+|   <AUTO_INCREMENT:"auto_increment">
+|   <INDEX:"index">
 }
 TOKEN [IGNORE_CASE]:
 {
 <GROUP_BY : "group" ([" "])+ "by">
 |<ORDER_BY : "order" ([" "])+ "by">
+|<PRIMARY_KEY: "primary" ([" "])+ "key">
+|<NOT_NULL: "not" ([" "])+ "null">
 }
 
 TOKEN :
@@ -371,21 +405,21 @@ TOKEN :
 |<GT : ">=">
 |<LT : "<=">
 |<NE : "!=">
-|	<PERCENT: "%">
-|	<AMPERSAND: "&">
-|	<QUOTE: "'"| "\"">
-|	<LEFT_BRACE: "{">
-|	<RIGHT_BRACE: "}">
-|	<ASTERISK: "*">
-|	<HASH: "#">
-|	<PLUS_SIGN: "+">
-|	<COMMA: ",">
-|	<MINUS_SIGN: "-">
-|	<DOT: ".">
-|	<SOLIDUS: "/">
-|	<COLON: ":">
-|	<DOUBLE_COLON: "::">
-|	<LESS_THAN_OPERATOR: "<">
+|<PERCENT: "%">
+|<AMPERSAND: "&">
+|<QUOTE: "'" | "\"">
+|<LEFT_BRACE: "{">
+|<RIGHT_BRACE: "}">
+|<ASTERISK: "*">
+|<HASH: "#">
+|<PLUS_SIGN: "+">
+|<COMMA: ",">
+|<MINUS_SIGN: "-">
+|<DOT: ".">
+|<SOLIDUS: "/">
+|<COLON: ":">
+|<DOUBLE_COLON: "::">
+|<LESS_THAN_OPERATOR: "<">
 |	<NOT_EQUALS_OPERATOR: "<>">
 |	<GREATER_THAN_OPERATOR: ">">
 |	<QUESTION_MARK: "?">
@@ -427,7 +461,7 @@ TOKEN [IGNORE_CASE] :
 TOKEN :
 {
 
-<ID : <LETTER> (<LETTER>|<DIGIT>)* >
+<ID :  <LETTER> (<LETTER>|<DIGIT>)*>
 |
 <NAME: <ID> ( "." <ID>)?>
 |
@@ -440,6 +474,15 @@ TOKEN :
 <STRING : "/'" (~["/"])* ("///'")? (~["/"])* "/'">
 |
 <TEXT : <QUOTE><LETTER> (<LETTER>|<DIGIT>)* <QUOTE> >
+//|
+//<DATATYPE : (<VARCHAR>|<CHAR>)  (<LBRACKET><NUMBER><RBRACKET>)?|<BLOB>
+//    |(<INT>|<BIGINT>)   (<LBRACKET><NUMBER><RBRACKET>)?|<REAL>
+//    | <FLOAT>|(<DOUBLE>|<DECIMAL>)(<LBRACKET><NUMBER><COMMA><NUMBER><RBRACKET>)?
+//    |<DATE>|<TIMESTAMP>|<TIME>|<YEAR>  >
+//|
+//<COLUMN_CONSTRATION:<NOT><NULL>|<PRIMARY><KEY>|<AUTO_INCREMENT>|<INCREMENT>|<COMMENT>>
+//|
+//<TABLE_CONSTRATION>
 }
 
 TOKEN :
@@ -455,30 +498,28 @@ void parse() :
     sql = new ArrayList<Object>();
 }
 {
-
-    //***************1	CREATE ************
+    //***************1	CREATE ************************************************
     //1.1.1	CREATE DATABASE testdb；
+    //1.1.1	CREATE TABLE table_name	();
     t = <CREATE>   create(t)
 
-
-    //***************2	DROP************
+    //***************2	DROP***************************************************
     //2.1.1	DROP DATABSE databse_name;
     |t = <DROP>   drop(t)
 
-    //***************3	RENAME************
+    //***************3	RENAME*************************************************
     //3.1.1	RENAME DATABSE old_name TO new_name
     |t = <RENAME>   rename(t)
 
-    //***************4	USE************
+    //***************4	USE****************************************************
     //4.1.1	USE database_name
     |t = <USE>   use(t)
 
-
-    //***************5 SELECT************
+    //***************5 SHOW**************************************************
     //5.1.1	SHOW DATABASE
     |t = <SHOW>   show(t)
 
-
+    //***************6 SELECT**************************************************
     |<SELECT>
     {
         t = new Token();
@@ -490,21 +531,22 @@ void parse() :
     (<DISTINCT> | <ALL>)?selectResultList()
     <FROM>fromTables()where()(<STATEMENT_END> | <END>)
 
-    //***************INSERT************
-    |   //only support simple insert statement
-    <INSERT><INTO><ID> //TABLE NAME
-    <VALUES>
-    <LBRACKET><NAME>(","<NAME>)*<RBRACKET>(<STATEMENT_END> | <END>)
+    //***************ALTER*******************************************************
+    |t = <ALTER>    alter(t)
 
-    |<VALUES>
-    <LBRACKET>values() <RBRACKET>
-    (<STATEMENT_END> | <END>)
+    //***************INSERT*******************************************************
+    |
+    //only support simple insert statement
+    t = <INSERT>    insert(t)
 
-    //***************UPDATE************
-    |<UPDATE><ID><SET>sets()( where() )?(<STATEMENT_END> | <END>)
 
-    //***************DELETE************
+    //***************UPDATE*******************************************************
+    |t = <UPDATE>   update(t)
+
+    //***************DELETE*******************************************************
     |t = <DELETE>   delete(t)
+     //***************TRUNCATE*******************************************************
+    |t = <TRUNCATE>   truncate(t)
 }
 
 //把Token存到sql里
@@ -563,6 +605,7 @@ void showStructure() :
 {}
 {
     {
+        System.out.println();
         System.out.println("----------STRUCTURE----------");
         for (Object object : sql)
         {
@@ -570,7 +613,59 @@ void showStructure() :
         }
     }
 }
+void insert(Token d) :
+{
+    Token t;
+    sql = new ArrayList<Object>();
+    list = new ArrayList<Object>();
+    int i = 0;//用于标记column的数量，用于和后面的value个数匹配判断
+}
+{
+    {
+        t=d;
+        System.out.println("------INSERT METHOD --------");
+        saveTokenInSQL(t);
+    }
+    (       //2.1.1	INSERT INTO table1 (column1, coulumn2,…) VALUES (value1, value2 , …);//value = number or text;
+            t =<INTO>
+            {
+                saveTokenInSQL(t);
+            }
+            t =<ID> //TABLE NAME
+            {
+                 saveTokenInSQL(t);
+            }
+            (
+                <LBRACKET>
+                    (t =<NAME>{saveTokenInList(t,list);i++;}|t =<ID>{saveTokenInList(t,list);i++;})
 
+                    (   ","
+                        (t =<NAME>{saveTokenInList(t,list);i++;}|t =<ID>{saveTokenInList(t,list);i++;})
+                    )*
+                <RBRACKET>
+            )?  //2.1.2	INSERT INTO table1 VALUES (value1, value2,…)
+                //没有明确table的插入column名字时，默认全插，valuse的个数需要和table的column数目统一
+                //需要接口获得个数，暂时不做这个判断
+            //{saveTempListInList(templist,list);}
+            {saveTempListInList(list,sql);}
+            t =<VALUES>
+            {
+                  saveTokenInSQL(t);
+            }
+            <LBRACKET>
+                  multivalues(i)
+            <RBRACKET>
+
+            (<STATEMENT_END> | <END>)
+    )
+
+    {   showStructure(); }
+    //(<STATEMENT_END> | <END>)
+
+    //{ExecuteStatement.delete(sql);} // %%
+    // {test.testWhereAnd(sql);} // %%
+
+}
 
 void create(Token d) :
 {
@@ -600,15 +695,16 @@ void create(Token d) :
             t = <ID>
             {
                  saveTokenInSQL(t);
-                 createTable();
+
             }
+            createTable()
     )
 
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-    //{ExecuteStatement.delete(sql);} // %%
-     {ExecuteStatement.createDatabase(sql);} // %%
+    {ExecuteStatement.createDatabase(sql);} // %%
+    // {test.testWhereAnd(sql);} // %%
 
 }
 
@@ -618,12 +714,106 @@ void create(Token d) :
 //  //...,
 //  //table_constraint	 );
 void createTable() :
+{Token t;
+
+}
+{
+    <LBRACKET>
+
+        (createLine())
+        (
+            (",")
+            (
+                createLine()
+                |
+                (   table_constration() )*
+            )
+
+        )*  //|(table_constration())?
+
+    <RBRACKET>
+    {saveTempListInList(list,sql);}
+}
+
+void createLine():
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+    t=<ID>        {saveTokenInList(t,templist);}
+    dataType()
+
+    (columnConstration())?
+
+    {saveTempListInList(templist,list);}
+}
+
+void dataType():
+{
+    Token t;
+}
+{
+     (  t = <VARCHAR> {saveTokenInList(t,templist);}|t = <CHAR> {saveTokenInList(t,templist);})
+            (   t = <LBRACKET>
+                t = <NUMBER>    {saveTokenInList(t,templist);}
+                t = <RBRACKET>
+            )?
+     |t = <BLOB>    {saveTokenInList(t,templist);}
+     |(t = <INT>{saveTokenInList(t,templist);}|t = <BIGINT>{saveTokenInList(t,templist);})
+            (   t = <LBRACKET>
+                t = <NUMBER>{saveTokenInList(t,templist);}
+                t = <RBRACKET>
+            )?
+     |t = <REAL>    {saveTokenInList(t,templist);}
+     |t = <FLOAT>   {saveTokenInList(t,templist);}
+     |(t = <DOUBLE> {saveTokenInList(t,templist);}|t = <DECIMAL>{saveTokenInList(t,templist);})
+            (   t = <LBRACKET>
+                t = <NUMBER>    {saveTokenInList(t,templist);}
+                t = <COMMA>
+                t = <NUMBER>    {saveTokenInList(t,templist);}
+                t = <RBRACKET>
+            )?
+     |t = <DATE>        {saveTokenInList(t,templist);}
+     |t = <TIMESTAMP>   {saveTokenInList(t,templist);}
+     |t = <TIME>        {saveTokenInList(t,templist);}
+     |t = <YEAR>        {saveTokenInList(t,templist);}
+
+    //{saveTempListInList(templist1,templist);}
+
+
+}
+
+void columnConstration():
 {Token t;}
 {
-    t =<TABLE>
-    {
-        saveTokenInSQL(t);
-    }
+    (
+     t = <NOT_NULL>{saveTokenInList(t,templist);}
+    |t = <PRIMARY_KEY>{saveTokenInList(t,templist);}
+    |t = <AUTO_INCREMENT>{saveTokenInList(t,templist);}
+    |t = <INCREMENT>{saveTokenInList(t,templist);}
+    |t = <COMMENT>{saveTokenInList(t,templist);}
+
+    )+
+
+}
+void table_constration():
+{Token t;
+templist = new ArrayList<Object>();}
+{
+
+    t = <INDEX>     {saveTokenInList(t,templist);}
+
+    |t = <PRIMARY_KEY> {saveTokenInList(t,templist);}
+
+    ("("
+        (
+            (t = <ID>|t = <NAME>)   {saveTokenInList(t,templist);}
+
+            (<COMMA> (t = <ID>|t = <NAME>)   {saveTokenInList(t,templist);})*
+        )
+    ")")?
+    {saveTempListInList(templist,list);}
 }
 
 void delete(Token d) :
@@ -647,14 +837,41 @@ void delete(Token d) :
 
     (where() )?
 
-    {   showStructure(); }
+    showStructure()
     (<STATEMENT_END> | <END>)
 
 
 
     //{ExecuteStatement.delete(sql);} // %%
 
-//    {ExecuteStatement.createDatabase(sql);} // %%
+//    {test.testWhereAnd(sql);} // %%
+
+}
+void truncate(Token d) :
+{
+    Token t;
+    sql = new ArrayList<Object>();
+}
+{
+    {
+        t=d;
+        System.out.println("------TRUNCATE METHOD --------");
+        saveTokenInSQL(t);
+    }
+
+   ( t = <ID>| t = <NAME>)
+   {    saveTokenInSQL(t);  }
+
+
+
+    showStructure()
+    (<STATEMENT_END> | <END>)
+
+
+
+    //{ExecuteStatement.delete(sql);} // %%
+
+//    {test.testWhereAnd(sql);} // %%
 
 }
 
@@ -663,26 +880,33 @@ void drop(Token d):
 {
      Token t;
      sql = new ArrayList<Object>();
+     t=d;
+     System.out.println("------DROP METHOD --------");
+     saveTokenInSQL(t);
 }
 {
-    {
-         t=d;
-         System.out.println("------DROP METHOD --------");
-         saveTokenInSQL(t);
+    (
+         t =<DATABASE>{ saveTokenInSQL(t);}
 
-     }
-    t =<DATABASE>
-    {
-         saveTokenInSQL(t);
-    }
-    t = <ID>
-    {
-         saveTokenInSQL(t);
-    }
+        (
+            t = <ID>{ saveTokenInSQL(t);}
+        )
 
-    {   showStructure(); }
-    (<STATEMENT_END> | <END>)
+        |t =<TABLE>{ saveTokenInSQL(t);}
+        (
+            name()
+            (   ","
+            //(t = <ID>|t = <NAME>){ saveTokenInSQL(t);})*
+                name()
+            )*
 
+            {list =templist;}
+//        {saveTempListInList(templist,list);}
+            {saveTempListInList(list,sql);}
+        )
+        (<STATEMENT_END> | <END>)
+        showStructure()
+    )
      {ExecuteStatement.dropDatabase(sql);} // %%
     //    {test.testWhereAnd(sql);} // %%
 }
@@ -698,7 +922,7 @@ void rename(Token d):
          System.out.println("------RENAME METHOD --------");
          saveTokenInSQL(t);
      }
-    t =<DATABASE>   {saveTokenInSQL(t);}
+    (t =<DATABASE> {saveTokenInSQL(t);})?
     t = <ID>        {saveTokenInSQL(t);}
     t = <TO>        {saveTokenInSQL(t);}
     t = <ID>        {saveTokenInSQL(t);}
@@ -706,7 +930,7 @@ void rename(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.renameDatabase(sql);} // %%
+       {ExecuteStatement.renameDatabase(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 }
@@ -726,7 +950,7 @@ void show(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.showDatabase(sql);} // %%
+        {ExecuteStatement.showDatabase(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 
@@ -748,8 +972,142 @@ void use(Token d):
     {   showStructure(); }
         (<STATEMENT_END> | <END>)
 
-    {ExecuteStatement.useDatabase(sql);} // %%
+    {ExecuteStatement.useDatabase(sql);}// %%
     //    {test.testWhereAnd(sql);} // %%
+}
+
+//3	UPDATE
+  //3.1	UPDATE table SET column1 = value1, column2 = value2 WHERE condition;
+  //3.2	UPDATE table SET column1 =	(SELECT a From b WHERE c = “e”);
+  //3.3	UPDATE table INNER JOIN table1 ON table.column1 = table2.column1 SET table.column2 = table1.coulmn2,… (WHERE);
+void update(Token d):
+{
+    Token t;
+    sql = new ArrayList<Object>();}
+{
+    {
+         t=d;
+         System.out.println("------UPDATE METHOD --------");
+         saveTokenInSQL(t);
+     }
+
+    t = <ID>        {saveTokenInSQL(t);}
+    ( innerJoin() )?
+    t = <SET>        {saveTokenInSQL(t);}
+    sets()
+    ( where() )?
+
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+         //{ExecuteStatement.delete(sql);} // %%
+        //    {test.testWhereAnd(sql);} // %%
+
+}
+
+void alter(Token d):
+{
+    Token t;
+    sql = new ArrayList<Object>();}
+{
+    {
+         t=d;
+         System.out.println("------ALTER METHOD --------");
+         saveTokenInSQL(t);
+     }
+
+    t = <TABLE>                 {saveTokenInSQL(t);}
+    (
+        (t = <NAME> |t = <ID> )       {saveTokenInSQL(t);}
+
+       ( t = <ADD>                 {saveTokenInSQL(t);}
+        (
+            (createLine())
+            (
+             ","
+                t = <ADD>                 {saveTokenInSQL(t);}
+                (createLine())
+
+            )*
+        )
+
+        |
+
+        t = <MODIFY>                 {saveTokenInSQL(t);}
+        (
+            (createLine())
+        )
+
+        |
+        t = <DROP>  dropColumn(t)
+        (
+            (
+                ","
+                t = <DROP>
+                dropColumn(t)
+
+            )*
+        )
+       )
+       // {saveTempListInList(list,sql);}
+    )
+    //{saveTempListInList(templist,sql);}
+    {saveTempListInList(list,sql);}
+    {   showStructure(); }
+    (<STATEMENT_END> | <END>)
+
+         //{ExecuteStatement.delete(sql);} // %%
+        //    {test.testWhereAnd(sql);} // %%
+
+}
+void dropColumn(Token d):
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+        {   t=d;
+            saveTokenInList(t,templist);}
+       t =<COLUMN>{   saveTokenInList(t,templist);}
+       (
+           ( t = <ID>|t = <NAME>){   saveTokenInList(t,templist);}
+       )
+       {saveTempListInList(templist,list);}
+}
+
+
+void add():
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+
+        t = <NAME> |t = <ID>        {saveTokenInSQL(t);}
+        (dataType())?
+        (   columnConstration())?
+        (
+            t = <AFTER>                 {saveTokenInSQL(t);}
+            (t = <NAME> |t = <ID>  )      {saveTokenInSQL(t);}
+        )?
+}
+
+
+void innerJoin():
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+    t = <INNER> {saveTokenInSQL(t);}
+    t = <JOIN>  {saveTokenInSQL(t);}
+    t = <ID>    {saveTokenInSQL(t);}
+    t = <ON>    {saveTokenInSQL(t);}
+    t = <NAME>  {saveTokenInList(t,templist);}
+    t = <EQ>    {saveTokenInList(t,templist);}
+    t = <NAME>  {saveTokenInList(t,templist);}
+    {saveTempListInList(templist,sql);}
+
 }
 
 
@@ -870,9 +1228,8 @@ void in () :
 void name() :
 {Token t;}
 {
-  (t =<NAME>|t = <ID>)
+  (t = <ID>|t =<NAME>|t =<TEXT>)
  {
-    //templist.add(t);
     saveTokenInList(t,templist);
  }
 
@@ -901,6 +1258,11 @@ void rightCondition() :
               saveTempListInList(templist,list);
           }
     | t = <NUMBER>
+          {
+               saveTokenInList(t,templist);
+               saveTempListInList(templist,list);
+          }
+    | t = <NAME>
           {
                saveTokenInList(t,templist);
                saveTempListInList(templist,list);
@@ -1001,22 +1363,52 @@ void table() :
 // )?
 //}
 
-
-
-void values() :
-{}
+void multivalues(int a) ://2.2.1	INSERT INTO table1 VALUES (value1, value2,…), (value1, value2,…),…;
+{int i;}
 {
-     value()
+    {i = a;}
+     values(i){saveTempListInList(list,sql);}
     (
         ","
-        value()
+        values(i){saveTempListInList(list,sql);}
     )*
+
+}
+
+void values(int a) ://2.2.1	INSERT INTO table1 VALUES (value1, value2,…);
+{
+    list = new ArrayList<Object>();
+    int i  = 0;
+    int k =a;
+
+}
+{
+    (<RBRACKET>)?
+    value(){saveTempListInList(templist,list); i++;}
+    (
+        (",")
+        value(){saveTempListInList(templist,list);i++;}
+    )*
+    (<LBRACKET>)?
+
+    {
+        System.out.println("coulmn number："+k);
+        System.out.println("value number："+i);
+        if(k!=0 & k>i)
+        {
+            jj_consume_token(COMMA);
+            System.out.println("INSDERT GRAMMAR WRONG");
+        }
+    }
+
 }
 
 void value() :
-{}
+{Token t;
+templist = new ArrayList<Object>();}
 {
- <STRING>|<NUMBER>
+    t = <TEXT>{saveTokenInList(t,templist);}
+    |t = <NUMBER>{saveTokenInList(t,templist);}
 }
 
 void groupBy() :
@@ -1037,19 +1429,39 @@ void orderBy() :
 
 
 void sets() :
-{}
+{
+    Token t;
+    int i = 0;// i = 0 表示只有一个condition；=1 表示有多个condition
+    list = new ArrayList<Object>();
+}
 {
  set()
  (
     ","
-    set()
+    set() {i = 1;}
  )*
+
+ {
+         if( i == 0)
+         {
+            list = templist;
+            saveListInSQL(list);
+            System.out.println("Only one set");
+         }
+         else
+         {
+            saveListInSQL(list);
+         }
+     }
 }
 
 void set() :
-{}
 {
- <ID>
- <EQ>
- rightCondition()
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+    (t = <ID>|t = <NAME>)     {saveTokenInList(t,templist);}
+    t = <EQ>     {saveTokenInList(t,templist);}
+    rightCondition()
 }

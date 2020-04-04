@@ -8,6 +8,7 @@ import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
+import table.type.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +35,24 @@ public class UserAccessedDatabases {
     public Table databaseList() throws ClassNotFoundException {
         TableDescriptor tableDescriptor =null;
         String tableName="UserPermissionDatabaseScope";
+        ColumnDescriptorList primaryKey=new ColumnDescriptorList();
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor id= new DataTypeDescriptor(INT,false);
-        ColumnDescriptor column=new ColumnDescriptor("id",0,id);
+        ColumnDescriptor column=new ColumnDescriptor("id",1,id);
+        primaryKey.add(column);
         columns.add(column);
         DataTypeDescriptor user= new DataTypeDescriptor(USER,false);
-        column=new ColumnDescriptor("user",1,user);
+        column=new ColumnDescriptor("user",2,user);
         columns.add(column);
         DataTypeDescriptor t= new DataTypeDescriptor(DATABASE,false);
-        column=new ColumnDescriptor("database",2,t);
+        column=new ColumnDescriptor("database",3,t);
         columns.add(column);
         DataTypeDescriptor tn= new DataTypeDescriptor(STRING,false);
-        column=new ColumnDescriptor("databasename",3,tn);
+        column=new ColumnDescriptor("databasename",4,tn);
         columns.add(column);
-        String[] primaryKey={"id"};
+        DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
+        column=new ColumnDescriptor("primary key",0,tp);
+        columns.add(column);
         tableDescriptor =new TableDescriptor(tableName,SYSTEM_TABLE_TYPE,columns,primaryKey);
         tableDescriptor .setTableInColumnDescriptor(tableDescriptor);
         tableDescriptor .printColumnName();
@@ -58,14 +63,15 @@ public class UserAccessedDatabases {
     public boolean insertDatabase(Database database) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int id=length;
         length++;
+        PrimaryKey pk=new PrimaryKey();
+        pk.addPrimaryKey(id);
         List values=new ArrayList();
+        values.add(pk);
         values.add(id);
         values.add(user);
         values.add(database);
         values.add(database.getDatabaseName());
-        String primaryKey="id";
-        String[] attributes=userAccessedDatabase.getTableDescriptor().getColumnNamesArray();
-        return userAccessedDatabase.insertRows(attributes,values);
+        return userAccessedDatabase.insertRows(values);
     }
 
     public void returnUserAccessedDatabaseNames(){

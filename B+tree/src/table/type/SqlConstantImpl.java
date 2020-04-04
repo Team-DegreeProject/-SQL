@@ -21,6 +21,7 @@ public class SqlConstantImpl implements SqlConstant{
         sqlMap.put(STRING,"java.lang.String");
         sqlMap.put(TABLE,"table.Table");
         sqlMap.put(DATABASE,"table.Database");
+        sqlMap.put(PRIMARY_KEY,"table.type.PrimaryKey");
     }
 
 

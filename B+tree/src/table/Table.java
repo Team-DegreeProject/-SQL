@@ -5,6 +5,7 @@ import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
+import table.type.PrimaryKey;
 import table.type.SqlConstantImpl;
 
 import java.util.HashMap;
@@ -46,7 +47,8 @@ public class Table extends SqlConstantImpl {
         return propertyMap;
     }
 
-    public boolean insertRows(String[] attributes,List values){
+    public boolean insertRows(List values){
+        String[] attributes=td.getColumnNamesArray();
         if(attributes.length!=values.size()){
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
@@ -57,14 +59,13 @@ public class Table extends SqlConstantImpl {
             bean.setValue(attributes[i], values.get(i));
 //            System.out.println(attributes[i]+"--->>"+values.get(i));
         }
-        tree.insert(bean, (Comparable) bean.getValue(td.getPrimaryKey()[0]));//双primarykey
+        tree.insert(bean, (Comparable) bean.getValue("primary key"));//双primarykey
         return true;
     }
 
     public void printTable(){
         System.out.println("||"+td.getName()+"||");
         System.out.println("-------------------------------------------------------");
-        td.printColumnName();
         BPlusTreeTool.printBPlusTree(tree);
     }
 
@@ -77,24 +78,28 @@ public class Table extends SqlConstantImpl {
             System.out.println("The number of attributes is not equal to the number of values.");
             return false;
         }
-        BPlusTree newTree=new BPlusTree();
         List list1=t.getTree().getDatas();
-        List list2=tree.getDatas();
+        ColumnDescriptorList pkn=t.td.getPrimaryKey();
         for(int i=0;i<list1.size();i++){
             CglibBean c= (CglibBean) list1.get(i);
             for(int j=0;j<attributes.size();j++){
                 c.setValue((String) attributes.get(j),values.get(j));
             }
+            PrimaryKey pk=new PrimaryKey();
+            for(int k=0;k<pkn.size();k++){
+                Comparable com= (Comparable) c.getValue( pkn.elementAt(k).getColumnName());
+                pk.addPrimaryKey(com);
+            }
+            c.setValue("primary key",pk);
         }
         return true;
     }
 
     public void deleteRows(Table t){
         List<CglibBean> list=t.getTree().getDatas();
-        String primaryKey=t.getTableDescriptor().getPrimaryKey()[0];//%
         for(int i=0;i<t.size();i++){
             CglibBean c=list.get(i);
-            Comparable pk= (Comparable) c.getValue(primaryKey);
+            Comparable pk= (Comparable) c.getValue("primary key");
             tree.delete(pk);
         }
     }

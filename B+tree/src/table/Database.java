@@ -2,6 +2,8 @@ package table;
 
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
+import table.type.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +23,21 @@ public class Database {
 
     public boolean createDatabase(String databasename) throws ClassNotFoundException {
         TableDescriptor td=null;
+        ColumnDescriptorList primaryKey=new ColumnDescriptorList();
         ColumnDescriptorList columns=new ColumnDescriptorList();
-        DataTypeDescriptor dataType= new DataTypeDescriptor(INT);
-        ColumnDescriptor columnId=new ColumnDescriptor("id",0,dataType);
-        dataType= new DataTypeDescriptor(TABLE);
-        ColumnDescriptor columnTable=new ColumnDescriptor("table",1,dataType);
-        dataType= new DataTypeDescriptor(STRING);
-        ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",2,dataType);
+        DataTypeDescriptor dataType= new DataTypeDescriptor(INT,false);
+        ColumnDescriptor columnId=new ColumnDescriptor("id",1,dataType);
+        dataType= new DataTypeDescriptor(TABLE,false);
+        ColumnDescriptor columnTable=new ColumnDescriptor("table",2,dataType);
+        dataType= new DataTypeDescriptor(STRING,false);
+        ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",3,dataType);
+        DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
+        ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
+        columns.add(columnp);
         columns.add(columnId);
         columns.add(columnTable);
         columns.add(columnTableName);
-        String[] primaryKey={"id"};
+        primaryKey.add(columnId);
         td=new TableDescriptor(databasename,BASE_TABLE_TYPE,columns,primaryKey);
         td.setTableInColumnDescriptor(td);
         td.printColumnName();
@@ -57,13 +63,15 @@ public class Database {
 
     public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         List values=new ArrayList();
+        PrimaryKey pk=new PrimaryKey();
+        pk.addPrimaryKey(id);
+        values.add(pk);
         values.add(id);
         values.add(t);
         values.add(t.getTableDescriptor().getName());
-        String[] primaryKey={"id"};
         id++;
         String[] attributes=database.getTableDescriptor().getColumnNamesArray();
-        return database.insertRows(attributes,values);
+        return database.insertRows(values);
 
     }
 }

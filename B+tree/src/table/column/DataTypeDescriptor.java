@@ -4,8 +4,6 @@ import table.type.SqlConstant;
 
 public class DataTypeDescriptor implements SqlConstant {
 
-    public DataTypeDescriptor() {
-    }
 
     public DataTypeDescriptor(int typeId) {
         this.typeId = typeId;
@@ -16,11 +14,19 @@ public class DataTypeDescriptor implements SqlConstant {
         this.isNullable = isNullable;
     }
 
+
     public int typeId;
     private int precision;
     private int scale;
     private boolean isNullable=true;
     private int maximumWidth;
+    private boolean primaryKey=false;
+
+    public DataTypeDescriptor(int typeId, boolean isNullable,boolean primaryKey) {
+        this.typeId = typeId;
+        this.isNullable = isNullable;
+        this.primaryKey=true;
+    }
 
     public DataTypeDescriptor(int typeId, int precision, int scale, boolean isNullable, int maximumWidth) {
         this.typeId = typeId;
@@ -48,11 +54,8 @@ public class DataTypeDescriptor implements SqlConstant {
     }
 
     /**
-     * Returns the number of digits to the right of the decimal for
-     * the datatype, if applicable.
-     *
-     * @return The number of digits to the right of the decimal for
-     * the datatype.  Returns zero for non-numeric datatypes.
+     * 返回范围 例如int（8）返回8
+     * @return
      */
     public int getScale() {
         return scale;
@@ -85,5 +88,12 @@ public class DataTypeDescriptor implements SqlConstant {
         return tokenImage[typeId];
     }
 
+    public void setPrimaryKey(boolean primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public boolean isPrimaryKey() {
+        return primaryKey;
+    }
 }
 

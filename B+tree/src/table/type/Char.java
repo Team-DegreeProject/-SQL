@@ -2,7 +2,7 @@ package table.type;
 
 public class Char implements Comparable<Char> {
     private String string=null;
-    private int length=-1;
+    private int scale=-1;
     private int realLength=0;
 
     public Char(){
@@ -10,14 +10,14 @@ public class Char implements Comparable<Char> {
     }
 
     public Char(int l,String str){
-        length=l;
-        int difference=length-str.length();
+        scale=l;
+        int difference=scale-str.length();
         if(difference<0){
-            string=str.substring(0,length);
-            realLength=length;
+            string=str.substring(0,scale);
+            realLength=scale;
         }else if(difference==0){
             string=str;
-            realLength=length;
+            realLength=scale;
         }else{
             string=str;
             for(int i=0;i<difference;i++){
@@ -42,11 +42,11 @@ public class Char implements Comparable<Char> {
     }
 
     public void setLength(int length) {
-        this.length = length;
+        this.scale= length;
     }
 
     public int getLength() {
-        return length;
+        return scale;
     }
 
     public int getRealLength() {
@@ -54,7 +54,7 @@ public class Char implements Comparable<Char> {
     }
 
     public Boolean hasBlankChars() {
-        if(realLength<length){
+        if(realLength<scale){
             return true;
         }else{
             return false;

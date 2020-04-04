@@ -112,14 +112,15 @@ public class BPlusTreeTool {
                     attribute.add(att);
                 }
                 first=false;
-//                for(int j=0;j<attribute.size();j++){
-//                    System.out.print(attribute.get(j));
-//                    if(j!=attribute.size()-1){
-//                        System.out.print(",");
-//                    }else{
-//                        System.out.println(";");
-//                    }
-//                }
+                for(int j=0;j<attribute.size();j++){
+                    System.out.print(attribute.get(j));
+                    if(j!=attribute.size()-1){
+                        System.out.print(",");
+                    }else{
+                        System.out.println(";");
+                    }
+                }
+                System.out.println("-------------------------------------");
             }
             for(int j=0;j<attribute.size();j++){
                 System.out.print(c.getValue(attribute.get(j)));
