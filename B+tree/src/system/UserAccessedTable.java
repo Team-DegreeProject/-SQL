@@ -7,7 +7,7 @@
 //import table.TableDescriptor;
 //import table.column.ColumnDescriptor;
 //import table.column.DataTypeDescriptor;
-//import table.type.VarChar;
+//import table.type.text.SqlVarChar;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -33,7 +33,7 @@
 //
 //    public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 //        TableDescriptor td=t.getTableDescriptor();
-//        VarChar userName=new VarChar(user.getUserName());
+//        SqlVarChar userName=new SqlVarChar(user.getUserName());
 //        int id=length+1;
 //        length++;
 //        List values=new ArrayList();

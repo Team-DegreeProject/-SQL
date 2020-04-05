@@ -9,10 +9,9 @@ import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.PrimaryKey;
-
+import table.type.number.SqlInt;
 import java.util.ArrayList;
 import java.util.List;
-
 import static table.TableSchema.SYSTEM_TABLE_TYPE;
 import static table.type.SqlConstantImpl.*;
 
@@ -64,10 +63,11 @@ public class UserAccessedDatabases {
         int id=length;
         length++;
         PrimaryKey pk=new PrimaryKey();
-        pk.addPrimaryKey(id);
+        SqlInt sqlid=new SqlInt(id);
+        pk.addPrimaryKey(sqlid);
         List values=new ArrayList();
         values.add(pk);
-        values.add(id);
+        values.add(sqlid);
         values.add(user);
         values.add(database);
         values.add(database.getDatabaseName());

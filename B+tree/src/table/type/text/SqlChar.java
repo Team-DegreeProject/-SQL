@@ -1,15 +1,15 @@
-package table.type;
+package table.type.text;
 
-public class Char implements Comparable<Char> {
+public class SqlChar implements Comparable<SqlChar> {
     private String string=null;
     private int scale=-1;
     private int realLength=0;
 
-    public Char(){
+    public SqlChar(){
 
     }
 
-    public Char(int l,String str){
+    public SqlChar(int l, String str){
         scale=l;
         int difference=scale-str.length();
         if(difference<0){
@@ -28,7 +28,7 @@ public class Char implements Comparable<Char> {
     }
 
     @Override
-    public int compareTo(Char o) {
+    public int compareTo(SqlChar o) {
         int re=this.string.compareTo(o.string);
         return re;
     }
@@ -61,5 +61,8 @@ public class Char implements Comparable<Char> {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return string.toString();
+    }
 }

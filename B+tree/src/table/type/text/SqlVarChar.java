@@ -1,14 +1,14 @@
-package table.type;
+package table.type.text;
 
-public class VarChar implements Comparable<VarChar>{
+public class SqlVarChar implements Comparable<SqlVarChar>{
     private String string=null;
     private int scale=-1;
 
-    public VarChar(){
+    public SqlVarChar(){
 
     }
 
-    public VarChar(int l,String str){
+    public SqlVarChar(int l, String str){
         scale=l;
         if(str.length()<=scale){
             string=str;
@@ -18,7 +18,7 @@ public class VarChar implements Comparable<VarChar>{
     }
 
     @Override
-    public int compareTo(VarChar o) {
+    public int compareTo(SqlVarChar o) {
         int re=this.string.compareTo(o.string);
         return re;
     }
@@ -39,5 +39,8 @@ public class VarChar implements Comparable<VarChar>{
         this.string = string;
     }
 
-
+    @Override
+    public String toString() {
+        return string.toString();
+    }
 }

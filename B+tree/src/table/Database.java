@@ -3,10 +3,9 @@ package table;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.PrimaryKey;
-
+import table.type.number.SqlInt;
 import java.util.ArrayList;
 import java.util.List;
-
 import static parsing.SqlParserConstants.*;
 import static table.TableSchema.BASE_TABLE_TYPE;
 
@@ -64,9 +63,10 @@ public class Database {
     public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         List values=new ArrayList();
         PrimaryKey pk=new PrimaryKey();
-        pk.addPrimaryKey(id);
+        SqlInt sqlid=new SqlInt(id);
+        pk.addPrimaryKey(sqlid);
         values.add(pk);
-        values.add(id);
+        values.add(sqlid);
         values.add(t);
         values.add(t.getTableDescriptor().getName());
         id++;
