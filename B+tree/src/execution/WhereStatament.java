@@ -1,4 +1,4 @@
-package execution.table;
+package execution;
 
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
@@ -28,7 +28,7 @@ public class WhereStatament {
         return t;
     }
 
-    public static Table compare(Table table, String attribute, int type, Comparable compare, String primaryKey) throws ClassNotFoundException {
+    public static Table compare(Table table, String attribute, int type, Comparable compare) throws ClassNotFoundException {
         BPlusTree b=table.getTree();
         BPlusTree returnTree=new BPlusTree();
         List btree=b.getDatas();
@@ -38,7 +38,7 @@ public class WhereStatament {
                     CglibBean temp= (CglibBean) btree.get(i);
                     Comparable c= (Comparable) temp.getValue(attribute);
                     if(c.compareTo(compare)==0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
+                        returnTree.insert(temp, (Comparable) temp.getValue("primary key"));
                     }
                 }
                 break;
@@ -48,7 +48,7 @@ public class WhereStatament {
                     CglibBean temp= (CglibBean) btree.get(i);
                     Comparable c= (Comparable) temp.getValue(attribute);
                     if(c.compareTo(compare)<0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
+                        returnTree.insert(temp, (Comparable) temp.getValue("primary key"));
                     }
                 }
                 break;
@@ -57,7 +57,7 @@ public class WhereStatament {
                     CglibBean temp= (CglibBean) btree.get(i);
                     Comparable c= (Comparable) temp.getValue(attribute);
                     if(c.compareTo(compare)>0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
+                        returnTree.insert(temp, (Comparable) temp.getValue("primary key"));
                     }
                 }
                 break;
@@ -65,4 +65,6 @@ public class WhereStatament {
         Table t=new Table(table.getTableDescriptor(),returnTree);
         return t;
     }
+
+
 }

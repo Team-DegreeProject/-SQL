@@ -1,7 +1,7 @@
 package execution.database;
 
 import execution.ExecuteStatement;
-import execution.table.WhereStatament;
+import execution.WhereStatament;
 import parsing.Token;
 import table.BTree.CglibBean;
 import table.Database;
@@ -25,7 +25,7 @@ public class RenameDatabaseStatement {
         att.add("database");
         att.add("databasename");
         Table usa=ExecuteStatement.uad.getUserAccessedDatabase();
-        Table change=WhereStatament.compare(usa,"databasename",EQ,databaseName,"id");
+        Table change=WhereStatament.compare(usa,"databasename",EQ,databaseName);
         List list= (List) change.getTree().getDatas();
         CglibBean c= (CglibBean) list.get(0);
         Database database= (Database) c.getValue("database");

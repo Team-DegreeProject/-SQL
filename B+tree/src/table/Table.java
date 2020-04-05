@@ -22,7 +22,7 @@ public class Table extends SqlConstantImpl {
     }
     public Table(TableDescriptor td) throws ClassNotFoundException {
         this.td=td;
-        tree = new BPlusTree<>(4);;
+        tree = new BPlusTree<>(4);
         createTable(td);
 
     }
@@ -106,6 +106,11 @@ public class Table extends SqlConstantImpl {
 
     public int size(){
         return tree.getDataNumber();
+    }
+
+    public boolean cleanAllData(){
+        tree = new BPlusTree<>(4);
+        return true;
     }
 
 }

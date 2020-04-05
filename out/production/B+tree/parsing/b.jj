@@ -868,7 +868,7 @@ void truncate(Token d) :
     (<STATEMENT_END> | <END>)
 
 
-
+//    {ExecuteStatement.createDatabase(sql);}
     //{ExecuteStatement.delete(sql);} // %%
 
 //    {test.testWhereAnd(sql);} // %%

@@ -1,7 +1,7 @@
 package execution.database;
 
 import execution.ExecuteStatement;
-import execution.table.WhereStatament;
+import execution.WhereStatament;
 import parsing.Token;
 import table.BTree.CglibBean;
 import table.Database;
@@ -21,11 +21,12 @@ public class UseDatabaseStatement {
         ExecuteStatement.uad.printUserAccessedDatabase();
         Table table=ExecuteStatement.uad.getUserAccessedDatabase();
         String databaseName=((Token)statement.get(1)).image;
-        Table t=WhereStatament.compare(table,"databasename",EQ,databaseName,"id");
+        Table t=WhereStatament.compare(table,"databasename",EQ,databaseName);
         ExecuteStatement.uad.printUserAccessedDatabase();
         CglibBean c= (CglibBean) t.getTree().getDatas().get(0);
-        Database db= (Database) c.getValue("database");
-        db.getDatabase().printTable();
+        Database database= (Database) c.getValue("database");
+        database.getDatabase().printTable();
+        ExecuteStatement.db=database;
         return true;
     }
 }

@@ -1,7 +1,7 @@
 package execution.database;
 
 import execution.ExecuteStatement;
-import execution.table.WhereStatament;
+import execution.WhereStatament;
 import parsing.Token;
 import table.Table;
 
@@ -20,7 +20,7 @@ public class DropDatabaseStatement {
             return false;
         }
         String databaseName=((Token)statement.get(2)).image;
-        Table delete=WhereStatament.compare(ExecuteStatement.uad.getUserAccessedDatabase(),"databasename",EQ,databaseName,"id");
+        Table delete=WhereStatament.compare(ExecuteStatement.uad.getUserAccessedDatabase(),"databasename",EQ,databaseName);
         ExecuteStatement.uad.getUserAccessedDatabase().deleteRows(delete);
         return true;
     }
