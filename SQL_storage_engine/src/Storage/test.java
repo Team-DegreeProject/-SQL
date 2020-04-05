@@ -1,5 +1,8 @@
 package Storage;
 
+import BTree.BPlusTree;
+import Configuration.Configuration;
+
 import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,5 +27,9 @@ public class test {
         System.out.println(testlist.get(0));
         testlist.remove(0);
         System.out.println(testlist.get(0));
+
+
+        alterUnit testUnit = new alterUnit("niubitable", Configuration.CREATE,new BPlusTree());
+        System.out.println("the result is : "+testUnit.getAlterType().equals(Configuration.CREATE));
     }
 }
