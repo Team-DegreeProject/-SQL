@@ -20,20 +20,20 @@ public class TestDelete implements SqlConstant {
 //        BPlusTreeTool.printList(list,"id");
 //        List list=DeleteStatement.compare(b,"id",LESS_THAN_OPERATOR,300);
 //        BPlusTreeTool.printList(list,"id");
-        BPlusTree list= DeleteStatement.compare(b,"address",GREATER_THAN_OPERATOR,"300","id");
+        BPlusTree list= DeleteStatement.compare(b,"address",LQ,"300","id");
         BPlusTreeTool.printBPlusTree(list,"address");
     }
 
     public static void testWhereAndOr() throws ClassNotFoundException {
         BPlusTree b=createTree();
-        BPlusTree b1= DeleteStatement.compare(b,"id",GREATER_THAN_OPERATOR,400,"id");
-        BPlusTree b2= DeleteStatement.compare(b,"id",LESS_THAN_OPERATOR,100,"id");
+        BPlusTree b1= DeleteStatement.compare(b,"id",LQ,400,"id");
+        BPlusTree b2= DeleteStatement.compare(b,"id",RQ,100,"id");
         BPlusTree b3= DeleteStatement.whereOr(b1,b2);
         BPlusTreeTool.printBPlusTree(b3,"id");
 
     }
 
-    public  static  BPlusTree createTree() throws ClassNotFoundException {
+    public  static BPlusTree createTree() throws ClassNotFoundException {
         HashMap propertyMap = new HashMap();
         propertyMap.put("id", Class.forName("java.lang.Integer"));
         propertyMap.put("name", Class.forName("java.lang.String"));

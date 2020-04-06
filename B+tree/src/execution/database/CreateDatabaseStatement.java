@@ -23,12 +23,12 @@ public class CreateDatabaseStatement{
         return true;
     }
 
-    public Database createDatabaseImpl(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-//        TableDescriptor td=null;
-        String databasename="test";
-        Database db=new Database(databasename);
-        ExecuteStatement.uad.insertDatabase(db);
-        return db;
-    }
+//    public Database createDatabaseImpl(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+////        TableDescriptor td=null;
+//        String databasename="test";
+//        Database db=new Database(databasename);
+//        ExecuteStatement.uad.insertDatabase(db);
+//        return db;
+//    }
 
 }

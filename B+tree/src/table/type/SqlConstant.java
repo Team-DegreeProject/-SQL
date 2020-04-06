@@ -1,6 +1,6 @@
 package table.type;
-import parsing.SqlParserConstants;
 
+import parsing.SqlParserConstants;
 public interface SqlConstant extends SqlParserConstants {
 
 }
