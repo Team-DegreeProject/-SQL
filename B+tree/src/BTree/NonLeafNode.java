@@ -42,24 +42,22 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
 
     @Override
     public Node<T, V> insert(T value, V key) {
-//        System.out.println("当前节点key为:");
+//        System.out.println("当前非叶节点key为:");
 //        for(int j = 0; j < this.keyNumber; j++)
 //            System.out.print(this.keys[j] + " ");
 //            System.out.println();
-
+//        System.out.println("当前非叶节点插入： "+ key);
         int i = this.keyNumber-1;
         while(i >=0){
-            if(key.compareTo((V) this.keys[i]) > 0){
+            if(key.compareTo((V) this.keys[i]) >= 0){
                 break;
-            }else if(key.compareTo((V) this.keys[i]) > 0){
-                return null;
             }
             i--;
         }
         if(key.compareTo((V) this.keys[0]) < 0) {
             i++;
         }
-
+//        System.out.println("当前非叶节点i： "+ i);
         return this.childs[i].insert(value, key);
     }
 
@@ -103,6 +101,11 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
 //        System.out.print(this.keys[j] + " ");
 //        System.out.println();
 //        System.out.println(key);
+//        System.out.println("当前非叶节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//        System.out.println();
+//        System.out.println("当前非叶节点插入： "+ key);
         int i = 0;
         while(key.compareTo((V)this.keys[i]) != 0){
             i++;
