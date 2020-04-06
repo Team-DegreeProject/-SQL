@@ -16,8 +16,8 @@ public class DataTypeDescriptor implements SqlConstant {
 
 
     public int typeId;
-    private int precision;
-    private int scale;
+    private int precision=-1;
+    private int scale=-1;
     private boolean isNullable=true;
     private int maximumWidth;
     private boolean primaryKey=false;
@@ -95,5 +95,26 @@ public class DataTypeDescriptor implements SqlConstant {
     public boolean isPrimaryKey() {
         return primaryKey;
     }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public void setNullable(boolean nullable) {
+        isNullable = nullable;
+    }
+
+    public void setPrecision(int precision) {
+        this.precision = precision;
+    }
+
+    public void setMaximumWidth(int maximumWidth) {
+        this.maximumWidth = maximumWidth;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
 }
 

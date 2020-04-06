@@ -155,5 +155,9 @@ public class TableDescriptor implements TableSchema {
     public ColumnDescriptorList getPrimaryKey() {
         return primaryKey;
     }
+
+    public void setColumnDescriptorList(ColumnDescriptorList columnDescriptorList) {
+        this.columnDescriptorList = columnDescriptorList;
+    }
 }
 

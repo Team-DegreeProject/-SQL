@@ -21,13 +21,15 @@ public class DropTableStatement {
     }
 
     public boolean dropTableImpl() throws ClassNotFoundException {
-        for(int i=2;i<statement.size();i++){
-            String name=((Token)statement.get(i)).image;
-            Table database=ExecuteStatement.db.getDatabase();
+        Table database=ExecuteStatement.db.getDatabase();
+        List names= (List) statement.get(2);
+        for(int i=0;i<names.size();i++){
+            String name=((Token)names.get(i)).image;
             TableDescriptor td=database.getTableDescriptor();
             Table delete= WhereStatament.compare(database,"tablename",EQ,name);
             database.deleteRows(delete);
         }
+        database.printTable();
         return true;
     }
 }

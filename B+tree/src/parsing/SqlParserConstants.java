@@ -631,41 +631,41 @@ public interface SqlParserConstants {
   /** RegularExpression Id. */
   int LT = 319;
   /** RegularExpression Id. */
-  int NE = 320;
+  int LQ = 320;
   /** RegularExpression Id. */
-  int PERCENT = 321;
+  int RQ = 321;
   /** RegularExpression Id. */
-  int AMPERSAND = 322;
+  int NE = 322;
   /** RegularExpression Id. */
-  int QUOTE = 323;
+  int PERCENT = 323;
   /** RegularExpression Id. */
-  int LEFT_BRACE = 324;
+  int AMPERSAND = 324;
   /** RegularExpression Id. */
-  int RIGHT_BRACE = 325;
+  int QUOTE = 325;
   /** RegularExpression Id. */
-  int ASTERISK = 326;
+  int LEFT_BRACE = 326;
   /** RegularExpression Id. */
-  int HASH = 327;
+  int RIGHT_BRACE = 327;
   /** RegularExpression Id. */
-  int PLUS_SIGN = 328;
+  int ASTERISK = 328;
   /** RegularExpression Id. */
-  int COMMA = 329;
+  int HASH = 329;
   /** RegularExpression Id. */
-  int MINUS_SIGN = 330;
+  int PLUS_SIGN = 330;
   /** RegularExpression Id. */
-  int DOT = 331;
+  int COMMA = 331;
   /** RegularExpression Id. */
-  int SOLIDUS = 332;
+  int MINUS_SIGN = 332;
   /** RegularExpression Id. */
-  int COLON = 333;
+  int DOT = 333;
   /** RegularExpression Id. */
-  int DOUBLE_COLON = 334;
+  int SOLIDUS = 334;
   /** RegularExpression Id. */
-  int LESS_THAN_OPERATOR = 335;
+  int COLON = 335;
   /** RegularExpression Id. */
-  int NOT_EQUALS_OPERATOR = 336;
+  int DOUBLE_COLON = 336;
   /** RegularExpression Id. */
-  int GREATER_THAN_OPERATOR = 337;
+  int NOT_EQUALS_OPERATOR = 337;
   /** RegularExpression Id. */
   int QUESTION_MARK = 338;
   /** RegularExpression Id. */
@@ -741,9 +741,11 @@ public interface SqlParserConstants {
   /** RegularExpression Id. */
   int TEXT = 374;
   /** RegularExpression Id. */
-  int STATEMENT_END = 375;
+  int LIKETEXT = 375;
   /** RegularExpression Id. */
-  int END = 376;
+  int STATEMENT_END = 376;
+  /** RegularExpression Id. */
+  int END = 377;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -1074,6 +1076,8 @@ public interface SqlParserConstants {
     "\"=\"",
     "\">=\"",
     "\"<=\"",
+    "\">\"",
+    "\"<\"",
     "\"!=\"",
     "\"%\"",
     "\"&\"",
@@ -1089,9 +1093,7 @@ public interface SqlParserConstants {
     "\"/\"",
     "\":\"",
     "\"::\"",
-    "\"<\"",
     "\"<>\"",
-    "\">\"",
     "\"?\"",
     "\"_\"",
     "\"|\"",
@@ -1129,6 +1131,7 @@ public interface SqlParserConstants {
     "<DIGIT>",
     "<STRING>",
     "<TEXT>",
+    "<LIKETEXT>",
     "\";\"",
     "\"!!\"",
   };

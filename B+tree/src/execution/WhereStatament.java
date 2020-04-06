@@ -43,7 +43,7 @@ public class WhereStatament {
                 }
                 break;
             }
-            case LESS_THAN_OPERATOR:
+            case RQ:
                 for(int i=0;i<btree.size();i++){
                     CglibBean temp= (CglibBean) btree.get(i);
                     Comparable c= (Comparable) temp.getValue(attribute);
@@ -52,7 +52,7 @@ public class WhereStatament {
                     }
                 }
                 break;
-            case GREATER_THAN_OPERATOR:
+            case LQ:
                 for(int i=0;i<btree.size();i++){
                     CglibBean temp= (CglibBean) btree.get(i);
                     Comparable c= (Comparable) temp.getValue(attribute);

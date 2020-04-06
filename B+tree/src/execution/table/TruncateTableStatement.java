@@ -1,9 +1,7 @@
 package execution.table;
 
 import execution.ExecuteStatement;
-import execution.WhereStatament;
 import parsing.Token;
-import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.Table;
@@ -30,8 +28,8 @@ public class TruncateTableStatement {
         }
         for(int i=0;i<cl.size();i++){
             CglibBean c=cl.get(i);
-            Table t= (Table) c.getValue("table");
-            t.cleanAllData();
+//            Table t= (Table) c.getValue("table");
+//            t.cleanAllData();
         }
         return true;
 
