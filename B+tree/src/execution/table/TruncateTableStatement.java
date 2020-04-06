@@ -8,8 +8,6 @@ import table.Table;
 
 import java.util.List;
 
-import static parsing.SqlParserConstants.EQ;
-
 //4 TRUNCATE TABLE 删除表中所有数据
 //4.1 TRUNCATE tbname；
 public class TruncateTableStatement {

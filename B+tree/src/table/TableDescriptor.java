@@ -1,8 +1,6 @@
 package table;
 
 import table.column.ColumnDescriptor;
-import table.BTree.BPlusTree;
-import table.type.PrimaryKey;
 
 import java.util.List;
 

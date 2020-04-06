@@ -33,7 +33,7 @@ public class TestDelete implements SqlConstant {
 
     }
 
-    public  static  BPlusTree createTree() throws ClassNotFoundException {
+    public  static BPlusTree createTree() throws ClassNotFoundException {
         HashMap propertyMap = new HashMap();
         propertyMap.put("id", Class.forName("java.lang.Integer"));
         propertyMap.put("name", Class.forName("java.lang.String"));

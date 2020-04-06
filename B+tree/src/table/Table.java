@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Table extends SqlConstantImpl {
     private TableDescriptor td;
-    private  BPlusTree tree;
+    private BPlusTree tree;
     private HashMap propertyMap = new HashMap();
     public Table(){}
     public Table(TableDescriptor td,BPlusTree b) throws ClassNotFoundException {

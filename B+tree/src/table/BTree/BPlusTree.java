@@ -108,130 +108,118 @@ public class BPlusTree <T, V extends Comparable<V>> {
     }
 
     public List<Object> getBigDatas(V key) {
+        List<Object> products = new ArrayList<>();
         LeafNode node=(LeafNode) selectRange(key);
-        int low = 0;
-        int up = node.keyNumber;
-        int middle = (low + up) / 2;
-        while(low < up){
-            V middleKey = (V) node.keys[middle];
-            if(key.compareTo(middleKey) == 0)
-                break;
-            else if(key.compareTo(middleKey) < 0)
-                up = middle;
-            else
-                low = middle;
-            middle = (low + up) / 2;
-        }
-        List<Object> products = new ArrayList<>();
-        for(int i=middle;i<node.keyNumber;i++){
-            products.add(node.values[i]);
-        }
-        LeafNode temp = null;
-        if(node.right!=null){
-            temp=node.right;
-        }
-        while (temp != null) {
-            for (int j = 0; j < temp.keyNumber; j++) {
-                products.add(temp.values[j]);
+        if(node.keyNumber==0){
+            LeafNode temp = null;
+            if(node.right!=null){
+                temp=node.right;
             }
-            temp = temp.right;
-        }
-        return products;
-    }
-
-
-    public List<Object> getSmallDatas(V key) {
-        LeafNode node=(LeafNode) selectRange(key);
-        int low = 0;
-        int up = node.keyNumber;
-        int middle = (low + up) / 2;
-        while(low < up){
-            V middleKey = (V) node.keys[middle];
-            if(key.compareTo(middleKey) == 0)
-                break;
-            else if(key.compareTo(middleKey) < 0)
-                up = middle;
-            else
-                low = middle;
-            middle = (low + up) / 2;
-        }
-        List<Object> products = new ArrayList<>();
-        for(int i=middle;i>=0;i--){
-            products.add(node.values[i]);
-        }
-        LeafNode temp=null;
-        if(node.left!=null){
-             temp= node.left;
-        }
-        while (temp != null) {
-            for (int j = temp.keyNumber-1; j >=0; j--) {
-                products.add(temp.values[j]);
-            }
-            temp = temp.left;
-        }
-        return products;
-    }
-
-
-
-    public List<Object> getMiddleDatas(V small,V big) {
-        LeafNode Snode=(LeafNode) selectRange(small);
-        LeafNode Bnode=(LeafNode) selectRange(big);
-        int low1 = 0;
-        int up1 = Snode.keyNumber;
-        int middle1 = (low1 + up1) / 2;
-        while(low1 < up1){
-            V middleKey = (V) Snode.keys[middle1];
-            if(small.compareTo(middleKey) == 0)
-                break;
-            else if(small.compareTo(middleKey) < 0)
-                up1 = middle1;
-            else
-                low1 = middle1;
-            middle1 = (low1 + up1) / 2;
-        }
-
-        int low2 = 0;
-        int up2 = Bnode.keyNumber;
-        int middle2 = (low2 + up2) / 2;
-        while(low2 < up2){
-            V middleKey = (V) Bnode.keys[middle2];
-            if(big.compareTo(middleKey) == 0)
-                break;
-            else if(big.compareTo(middleKey) < 0)
-                up2 = middle2;
-            else
-                low2 = middle2;
-            middle2 = (low2 + up2) / 2;
-        }
-
-        List<Object> products = new ArrayList<>();
-
-        if(Snode!=Bnode){
-            for(int i=middle1;i<Snode.keyNumber;i++){
-                products.add(Snode.values[i]);
-            }
-            LeafNode temp=null;
-            if(Snode.right!=null && Snode.right!=Bnode){
-                temp= Snode.right;
-            }
-            while (temp != null && temp!=Bnode) {
-                for (int j = 0; j <temp.keyNumber; j++) {
+            while (temp != null) {
+                for (int j = 0; j < temp.keyNumber; j++) {
                     products.add(temp.values[j]);
                 }
                 temp = temp.right;
             }
-            for(int i=0;i<middle2;i++){
-                products.add(Bnode.values[i]);
+            return products;
+        }else{
+            int i;
+            for(i=0;i<node.keyNumber;i++){
+                if(key.compareTo((V) node.keys[i])<=0){
+                    break;
+                }
+            }
+            if(i==node.keyNumber){
+                LeafNode temp = null;
+                if(node.right!=null){
+                    temp=node.right;
+                }
+                while (temp != null) {
+                    for (int j = 0; j < temp.keyNumber; j++) {
+                        products.add(temp.values[j]);
+                    }
+                    temp = temp.right;
+                }
+                return products;
+            }else{
+                for(int j=i;j<node.keyNumber;j++){
+                    products.add(node.values[j]);
+                }
+                LeafNode temp = null;
+                if(node.right!=null){
+                    temp=node.right;
+                }
+                while (temp != null) {
+                    for (int j = 0; j < temp.keyNumber; j++) {
+                        products.add(temp.values[j]);
+                    }
+                    temp = temp.right;
+                }
+                return products;
+            }
+        }
+    }
+
+
+    public List<Object> getSmallDatas(V key) {
+        List<Object> products = new ArrayList<>();
+        LeafNode node=(LeafNode) selectRange(key);
+        if(node.keyNumber==0){
+            LeafNode temp=null;
+            if(node.left!=null){
+                temp= node.left;
+            }
+            while (temp != null) {
+                for (int j = temp.keyNumber-1; j >=0; j--) {
+                    products.add(temp.values[j]);
+                }
+                temp = temp.left;
             }
             return products;
         }else{
-            for(int i=middle1;i<middle2;i++){
-                products.add(Snode.values[i]);
+            int i;
+            for(i=node.keyNumber-1;i>=0;i--){
+                if(key.compareTo((V) node.keys[i])>=0){
+                    break;
+                }
             }
-            return products;
+            if(i==-1){
+                LeafNode temp=null;
+                if(node.left!=null){
+                    temp= node.left;
+                }
+                while (temp != null) {
+                    for (int j = temp.keyNumber-1; j >=0; j--) {
+                        products.add(temp.values[j]);
+                    }
+                    temp = temp.left;
+                }
+                return products;
+            }else{
+                for(int j=i;j>=0;j--){
+                    products.add(node.values[j]);
+                }
+                LeafNode temp=null;
+                if(node.left!=null){
+                    temp= node.left;
+                }
+                while (temp != null) {
+                    for (int j = temp.keyNumber-1; j >=0; j--) {
+                        products.add(temp.values[j]);
+                    }
+                    temp = temp.left;
+                }
+                return products;
+            }
         }
+    }
 
+    public List<Object> getMiddleDatas(V small,V big) {
+        List<Object> bigger = new ArrayList<>();
+        List<Object> smaller = new ArrayList<>();
+        bigger=getBigDatas(small);
+        smaller=getSmallDatas(big);
+        return BPlusTreeTool.mergeListAnd(bigger,smaller);
     }
 
     public static int getOrder() {
@@ -245,7 +233,7 @@ public class BPlusTree <T, V extends Comparable<V>> {
     public void getNodes(Node temp) {
 //        System.out.println("temp.keynumber:" + temp.keyNumber);
         for (int z = 0; z < temp.keyNumber; z++) {
-            System.out.print(temp.keys[z] + " ");
+            System.out.print(temp.keys[z] + ", ");
 
         }
         System.out.println();
@@ -255,6 +243,21 @@ public class BPlusTree <T, V extends Comparable<V>> {
             }
         }
     }
+
+    public List<Object> getNonLeafNodes(Node temp,List<Object> list) {
+//        System.out.println("temp.keynumber:" + temp.keyNumber);
+
+        if (temp instanceof NonLeafNode) {
+            list.add(temp);
+            if(temp.childs[0] instanceof NonLeafNode){
+                for (int i = temp.keyNumber - 1; i >= 0; i--) {
+                    getNonLeafNodes(temp.childs[i],list);
+                }
+            }
+        }
+        return list;
+    }
+
 
     public Node<T, V> getRoot() {
         return root;
