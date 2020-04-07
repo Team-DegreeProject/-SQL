@@ -2,9 +2,10 @@ package table;
 
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
+import table.type.PrimaryKey;
+import table.type.number.SqlInt;
 import java.util.ArrayList;
 import java.util.List;
-
 import static parsing.SqlParserConstants.*;
 import static table.TableSchema.BASE_TABLE_TYPE;
 
@@ -21,17 +22,21 @@ public class Database {
 
     public boolean createDatabase(String databasename) throws ClassNotFoundException {
         TableDescriptor td=null;
+        ColumnDescriptorList primaryKey=new ColumnDescriptorList();
         ColumnDescriptorList columns=new ColumnDescriptorList();
-        DataTypeDescriptor dataType= new DataTypeDescriptor(INT);
-        ColumnDescriptor columnId=new ColumnDescriptor("id",0,dataType);
-        dataType= new DataTypeDescriptor(TABLE);
-        ColumnDescriptor columnTable=new ColumnDescriptor("table",1,dataType);
-        dataType= new DataTypeDescriptor(STRING);
-        ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",2,dataType);
+        DataTypeDescriptor dataType= new DataTypeDescriptor(INT,false);
+        ColumnDescriptor columnId=new ColumnDescriptor("id",1,dataType);
+        dataType= new DataTypeDescriptor(TABLE,false);
+        ColumnDescriptor columnTable=new ColumnDescriptor("table",2,dataType);
+        dataType= new DataTypeDescriptor(STRING,false);
+        ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",3,dataType);
+        DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
+        ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
+        columns.add(columnp);
         columns.add(columnId);
         columns.add(columnTable);
         columns.add(columnTableName);
-        String[] primaryKey={"id"};
+        primaryKey.add(columnId);
         td=new TableDescriptor(databasename,BASE_TABLE_TYPE,columns,primaryKey);
         td.setTableInColumnDescriptor(td);
         td.printColumnName();
@@ -57,13 +62,19 @@ public class Database {
 
     public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         List values=new ArrayList();
-        values.add(id);
+        PrimaryKey pk=new PrimaryKey();
+        SqlInt sqlid=new SqlInt(id);
+        pk.addPrimaryKey(sqlid);
+        values.add(pk);
+        values.add(sqlid);
         values.add(t);
         values.add(t.getTableDescriptor().getName());
-        String[] primaryKey={"id"};
         id++;
         String[] attributes=database.getTableDescriptor().getColumnNamesArray();
-        return database.insertRows(attributes,values);
+        return database.insertRows(values);
+    }
 
+    public void printDatabase(){
+        database.printTable();
     }
 }

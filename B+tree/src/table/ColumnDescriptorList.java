@@ -3,6 +3,7 @@ package table;
 import table.column.ColumnDescriptor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
 
@@ -34,4 +35,11 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         }
         return returnValue;
     }
+
+    public void addColumns(List<ColumnDescriptor> list){
+        for(int i=0;i<list.size();i++){
+            this.add(list.get(i));
+        }
+    }
+
 }

@@ -8,12 +8,14 @@ public class ColumnDescriptor{
     private TableDescriptor table;
     private String columnName;
     private int columnPosition;
-    private DataTypeDescriptor columnType;
+    private DataTypeDescriptor columnType=null;
     private long autoincStart=0;
     private long autoincInc=0;
     private long autoincValue=0;
     private boolean autoincCycle=false;
     private Object columnDefaultValue=null;
+    private boolean isNullable=true;
+    private boolean primaryKey=false;
 
 
     /**

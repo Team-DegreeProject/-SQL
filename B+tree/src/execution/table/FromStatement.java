@@ -11,6 +11,7 @@ import java.util.List;
 public class FromStatement {
 
     public static List<Table> from(Table database,String tableName){
+
         BPlusTree databaseTable=database.getTree();
         List<Table> tables=new ArrayList<>();
         List<CglibBean> list=BPlusTreeTool.getParticularAttribute(database,"tablename",tableName);

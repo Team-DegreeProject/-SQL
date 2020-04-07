@@ -1,7 +1,6 @@
 package table;
 
 import table.column.ColumnDescriptor;
-import table.BTree.BPlusTree;
 
 import java.util.List;
 
@@ -20,15 +19,16 @@ public class TableDescriptor implements TableSchema {
     private String indexStatsUpdateReason;
     private String tableName;
 //    private int tableType;
-    private BPlusTree dataDictionary;
     private int schema;
-    private String[] primaryKey;
+    private ColumnDescriptorList primaryKey;
+    /**
+     * 根据表描述获取列描述
+     */
+    ColumnDescriptorList columnDescriptorList;
 
 
 
-
-    public TableDescriptor(BPlusTree dataDictionary, String tableName, char lockGranularity,int schema,String[] primaryKey) {
-        this.dataDictionary=dataDictionary;
+    public TableDescriptor(String tableName, char lockGranularity,int schema,ColumnDescriptorList primaryKey) {
         this.tableName = tableName;
 //        this.tableType = tableType;
         this.lockGranularity = lockGranularity;
@@ -37,18 +37,8 @@ public class TableDescriptor implements TableSchema {
         this.primaryKey=primaryKey;
     }
 
-    public TableDescriptor( String tableName, char lockGranularity,int schema,String[] primaryKey) {
-        this.dataDictionary=null;
-        this.tableName = tableName;
-//        this.tableType = tableType;
-        this.lockGranularity = lockGranularity;
-        this.columnDescriptorList = new ColumnDescriptorList();
-        this.schema=schema;
-        this.primaryKey=primaryKey;
-    }
 
-    public TableDescriptor( String tableName,  char lockGranularity,int schema,ColumnDescriptorList columnDescriptorList,String[] primaryKey) {
-        this.dataDictionary=null;
+    public TableDescriptor( String tableName,  char lockGranularity,int schema,ColumnDescriptorList columnDescriptorList,ColumnDescriptorList primaryKey) {
 //        this.tableName = tableName;
         this.lockGranularity = lockGranularity;
         this.columnDescriptorList = columnDescriptorList;
@@ -56,8 +46,7 @@ public class TableDescriptor implements TableSchema {
         this.primaryKey=primaryKey;
     }
 
-    public TableDescriptor( String tableName,int schema,ColumnDescriptorList columnDescriptorList,String[] primaryKey) {
-        this.dataDictionary=null;
+    public TableDescriptor( String tableName,int schema,ColumnDescriptorList columnDescriptorList,ColumnDescriptorList primaryKey) {
         this.tableName = tableName;
 //        this.tableType = tableType;
         this.columnDescriptorList = columnDescriptorList;
@@ -65,11 +54,6 @@ public class TableDescriptor implements TableSchema {
         this.primaryKey=primaryKey;
     }
 
-
-    /**
-     * 根据表描述获取列描述
-     */
-    ColumnDescriptorList columnDescriptorList;
 
     public ColumnDescriptorList getColumnDescriptorList() {
         return columnDescriptorList;
@@ -162,12 +146,16 @@ public class TableDescriptor implements TableSchema {
         this.tableName = tableName;
     }
 
-    public void setPrimaryKey(String[] primaryKey) {
+    public void setPrimaryKey(ColumnDescriptorList primaryKey) {
         this.primaryKey = primaryKey;
     }
 
-    public String[] getPrimaryKey() {
+    public ColumnDescriptorList getPrimaryKey() {
         return primaryKey;
+    }
+
+    public void setColumnDescriptorList(ColumnDescriptorList columnDescriptorList) {
+        this.columnDescriptorList = columnDescriptorList;
     }
 }
 
