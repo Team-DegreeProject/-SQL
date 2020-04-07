@@ -31,4 +31,13 @@ public class LockTable {
         }
         return resultUnitList;
     }
+
+    public void unlock(String tableName){
+        for(LockTableUnit eachUnit: unitsList){
+            if(eachUnit.getName().equals(tableName)){
+                unitsList.remove(eachUnit);
+                break;
+            }
+        }
+    }
 }
