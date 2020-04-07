@@ -10,6 +10,7 @@ import org.jdom2.input.SAXBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,12 +21,31 @@ public class TreeLoader {
 
     }
 
-    public BPlusTree loadFromFile(String tableName) throws JDOMException, IOException, ClassNotFoundException {
+    public ArrayList<BPlusTree> loadAllFile() throws JDOMException, IOException, ClassNotFoundException {
+        ArrayList<BPlusTree> resultList = new ArrayList<>();
+        File file = new File("data/");
+        File[] files = file.listFiles();
+        for (File file2 : files) {
+            if (file2.isDirectory()) {
+                //System.out.println("文件夹:" + file2.getPath().substring(4));
+                File datafile = new File(file2.getPath()+XMLUtils.getFileName(file2.getPath())+".txt");
+                String filepath = file2.getPath()+XMLUtils.getFileName(file2.getPath())+".xml";
+                System.out.println("filepath is : "+filepath);
+                resultList.add(loadFromFile(filepath));
+            } else {
+
+            }
+        }
+        return resultList;
+    }
+
+    public BPlusTree loadFromFile(String filepath) throws JDOMException, IOException, ClassNotFoundException {
         BPlusTree<CglibBean,String> resultTree = new BPlusTree<>();
         SAXBuilder saxBuilder = new SAXBuilder();
         //你也可以将demo.xml放在resources目录下，然后通过下面方式获取
         //InputStream resourceAsStream = JDOMParseXml.class.getClassLoader().getResourceAsStream("demo.xml");
-        Document document1 = saxBuilder.build(new File("data/test/"+tableName+".xml"));
+//        Document document1 = saxBuilder.build(new File("data/"+tableName+"/"+tableName+".xml"));
+        Document document1 = saxBuilder.build(new File(filepath));
         Element rootElement = document1.getRootElement();
         List<Element> elementList = rootElement.getChildren();
         for (Element element : elementList) {
