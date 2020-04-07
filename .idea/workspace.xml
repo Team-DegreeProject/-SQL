@@ -16,7 +16,7 @@
   <component name="RunManager">
     <configuration name="SqlParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="parsing.SqlParser" />
-      <module name="B+tree" />
+      <module name="OurSql" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="parsing.*" />
