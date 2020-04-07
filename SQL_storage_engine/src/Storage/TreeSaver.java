@@ -102,7 +102,14 @@ public class TreeSaver {
         //4.创建XMLOutputter的对象
         XMLOutputter outputter=new XMLOutputter(format);
         //5.利用outputter将document对象转换成xml文档
-        outputter.output(document, new FileOutputStream(new File("test.xml")));
+
+        //测试命名和创建文件夹
+        String tn = "test";
+        File targetFile = new File(tn+".xml");
+        File test = new File("data/"+tn);
+        //创建文件夹
+        test.mkdir();
+        outputter.output(document, new FileOutputStream(new File("data/"+tn+"/"+tn+".xml")));
         }
 
 

@@ -20,12 +20,12 @@ public class TreeLoader {
 
     }
 
-    public BPlusTree loadFromFile(String fileName) throws JDOMException, IOException, ClassNotFoundException {
+    public BPlusTree loadFromFile(String tableName) throws JDOMException, IOException, ClassNotFoundException {
         BPlusTree<CglibBean,String> resultTree = new BPlusTree<>();
         SAXBuilder saxBuilder = new SAXBuilder();
         //你也可以将demo.xml放在resources目录下，然后通过下面方式获取
         //InputStream resourceAsStream = JDOMParseXml.class.getClassLoader().getResourceAsStream("demo.xml");
-        Document document1 = saxBuilder.build(new File("test.xml"));
+        Document document1 = saxBuilder.build(new File("data/test/"+tableName+".xml"));
         Element rootElement = document1.getRootElement();
         List<Element> elementList = rootElement.getChildren();
         for (Element element : elementList) {
