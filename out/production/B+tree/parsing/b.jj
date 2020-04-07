@@ -1127,7 +1127,7 @@ void alter(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {TableStatements.alterTable(sql);} // %%
+         {ExecuteStatement.alter(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 }

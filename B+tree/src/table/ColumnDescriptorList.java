@@ -42,4 +42,16 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         }
     }
 
+    public void dropColumn(String columnName){
+        ColumnDescriptor returnValue = null;
+        for (ColumnDescriptor columnDescriptor : this) {
+            if (columnName.equals(columnDescriptor.getColumnName()) ) {
+                returnValue = columnDescriptor;
+                break;
+            }
+        }
+        this.remove(returnValue);
+    }
+
+
 }

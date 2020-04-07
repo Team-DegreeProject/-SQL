@@ -1,18 +1,15 @@
 package execution;
 
 import execution.database.*;
-import execution.table.CreateTableStatement;
-import execution.table.DropTableStatement;
-import execution.table.RenameTableStatement;
-import execution.table.TableStatements;
+import execution.table.*;
+import parsing.SqlParserConstants;
 import parsing.Token;
 import system.User;
 import system.UserAccessedDatabases;
 import table.Database;
 import java.util.List;
 
-import static parsing.SqlParserConstants.DATABASE;
-import static parsing.SqlParserConstants.TABLE;
+import static parsing.SqlParserConstants.*;
 
 public class ExecuteStatement {
 
@@ -63,6 +60,10 @@ public class ExecuteStatement {
         }else{
             TableStatements.dropTable(tokens);
         }
+    }
+
+    public static void alter(List tokens){
+        TableStatements.alterTable(tokens);
     }
 
 

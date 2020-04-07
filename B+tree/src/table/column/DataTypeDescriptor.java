@@ -4,22 +4,10 @@ import table.type.SqlConstant;
 
 public class DataTypeDescriptor implements SqlConstant {
 
-
-    public DataTypeDescriptor(int typeId) {
-        this.typeId = typeId;
-    }
-
-    public DataTypeDescriptor(int typeId, boolean isNullable) {
-        this.typeId = typeId;
-        this.isNullable = isNullable;
-    }
-
-
-    public int typeId;
+    private int typeId;
     private int precision=-1;
     private int scale=-1;
     private boolean isNullable=true;
-    private int maximumWidth;
     private boolean primaryKey=false;
 
     public DataTypeDescriptor(int typeId, boolean isNullable,boolean primaryKey) {
@@ -28,19 +16,13 @@ public class DataTypeDescriptor implements SqlConstant {
         this.primaryKey=true;
     }
 
-    public DataTypeDescriptor(int typeId, int precision, int scale, boolean isNullable, int maximumWidth) {
+    public DataTypeDescriptor(int typeId) {
         this.typeId = typeId;
-        this.precision = precision;
-        this.scale = scale;
-        this.isNullable = isNullable;
-        this.maximumWidth = maximumWidth;
     }
 
-
-
-
-    public int getMaximumWidth() {
-        return maximumWidth;
+    public DataTypeDescriptor(int typeId, boolean isNullable) {
+        this.typeId = typeId;
+        this.isNullable = isNullable;
     }
 
     /**
@@ -106,10 +88,6 @@ public class DataTypeDescriptor implements SqlConstant {
 
     public void setPrecision(int precision) {
         this.precision = precision;
-    }
-
-    public void setMaximumWidth(int maximumWidth) {
-        this.maximumWidth = maximumWidth;
     }
 
     public void setTypeId(int typeId) {

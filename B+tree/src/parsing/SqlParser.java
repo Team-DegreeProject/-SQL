@@ -1108,7 +1108,7 @@ templist = new ArrayList<Object>();
       jj_consume_token(-1);
       throw new ParseException();
     }
-          TableStatements.alterTable(sql);
+          ExecuteStatement.alter(sql);
   }
 
   final public void dropColumn(Token d) throws ParseException {

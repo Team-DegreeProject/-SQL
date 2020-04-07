@@ -1,6 +1,9 @@
 package execution.table;
 
+import parsing.Token;
 import java.util.List;
+import static parsing.SqlParserConstants.*;
+
 
 public class TableStatements {
 
@@ -40,8 +43,23 @@ public class TableStatements {
     public static void alterTable(List tokens){
         try {
             AlterTableStatement alterTableStatement=new AlterTableStatement(tokens);
-            alterTableStatement.alterTableColumnStatement();
-        } catch (ClassNotFoundException e) {
+            Object o=tokens.get(3);
+            if(o instanceof Token){
+                int type=((Token)tokens.get(3)).kind;
+                if (type == MODIFY) {
+                    alterTableStatement.alterModifyImpl();
+                }
+            }else if (o instanceof List){
+                List<List> l= (List) tokens.get(3);
+                int t=((Token)l.get(0).get(0)).kind;
+                if(t== ADD){
+                    alterTableStatement.alterTableAddColumnStatement();
+                }else if (t==DROP){
+                    alterTableStatement.alterTableDropImpl();
+                }
+
+            }
+        }catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

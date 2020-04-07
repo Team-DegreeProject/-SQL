@@ -6,19 +6,16 @@ import java.util.List;
 
 public class TableDescriptor implements TableSchema {
 
-
-    public static final char DEFAULT_LOCK_GRANULARITY = ROW_LOCK_GRANULARITY;
-
     //表所对应的conglom的标识
-    private volatile long tableConglomNumber = -1;
+//    private volatile long tableConglomNumber = -1;
 
-    private char lockGranularity;
-    private boolean onCommitDeleteRows; //true means on commit delete rows, false means on commit preserve rows of temporary table.
-    private boolean onRollbackDeleteRows; //true means on rollback delete rows. This is the only value supported.
-    private boolean indexStatsUpToDate = true;
-    private String indexStatsUpdateReason;
+    private char lockGranularity=ROW_LOCK_GRANULARITY;
+//    private boolean onCommitDeleteRows; //true means on commit delete rows, false means on commit preserve rows of temporary table.
+//    private boolean onRollbackDeleteRows; //true means on rollback delete rows. This is the only value supported.
+//    private boolean indexStatsUpToDate = true;
+//    private String indexStatsUpdateReason;
     private String tableName;
-//    private int tableType;
+    //    private int tableType;
     private int schema;
     private ColumnDescriptorList primaryKey;
     /**
@@ -87,7 +84,7 @@ public class TableDescriptor implements TableSchema {
         int size = getNumberOfColumns();
         int[] s = new int[size];
         for (int i = 0; i < size; i++) {
-            s[i] = getColumnDescriptor(i).getType().typeId;
+            s[i] = getColumnDescriptor(i).getType().getTypeId();
         }
         return s;
     }
@@ -156,6 +153,16 @@ public class TableDescriptor implements TableSchema {
 
     public void setColumnDescriptorList(ColumnDescriptorList columnDescriptorList) {
         this.columnDescriptorList = columnDescriptorList;
+    }
+
+    public void updatePriamryKey(){
+        primaryKey=new ColumnDescriptorList();
+        for(int i=0;i<columnDescriptorList.size();i++){
+            ColumnDescriptor cd=columnDescriptorList.get(i);
+            if(cd.getType().isPrimaryKey()){
+                primaryKey.add(cd);
+            }
+        }
     }
 }
 

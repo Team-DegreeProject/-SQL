@@ -14,8 +14,6 @@ public class ColumnDescriptor{
     private long autoincValue=0;
     private boolean autoincCycle=false;
     private Object columnDefaultValue=null;
-    private boolean isNullable=true;
-    private boolean primaryKey=false;
 
 
     /**
@@ -147,4 +145,7 @@ public class ColumnDescriptor{
     }
 
     public TableDescriptor getTableDescriptor(){ return table; }
+
+
+
 }
