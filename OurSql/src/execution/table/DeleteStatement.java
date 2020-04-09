@@ -45,57 +45,6 @@ public class DeleteStatement implements SqlConstant {
 //    }
 
 
-    public static BPlusTree whereAnd(BPlusTree b1,BPlusTree b2){
-        BPlusTree returnTree=BPlusTreeTool.mergeTreeAnd(b1,b2);
-        return returnTree;
-    }
-
-
-    public static BPlusTree whereOr(BPlusTree b1,BPlusTree b2){
-        BPlusTree returnTree=BPlusTreeTool.mergeTreeOr(b1,b2);
-        return returnTree;
-    }
-//    public static BPlusTree compare(BPlusTree b,List list){
-//
-//    }
-
-    public static BPlusTree compare(BPlusTree b,String attribute,int type,Comparable compare,String primaryKey){
-        BPlusTree returnTree=new BPlusTree();
-        List btree=b.getDatas();
-        switch (type){
-            case EQ:{
-                for(int i=0;i<btree.size();i++){
-                    CglibBean temp= (CglibBean) btree.get(i);
-                    Comparable c= (Comparable) temp.getValue(attribute);
-                    if(c.compareTo(compare)==0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
-                    }
-                }
-                break;
-            }
-            case RQ:
-                for(int i=0;i<btree.size();i++){
-                    CglibBean temp= (CglibBean) btree.get(i);
-                    Comparable c= (Comparable) temp.getValue(attribute);
-                    if(c.compareTo(compare)<0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
-                    }
-                }
-                break;
-            case LQ:
-                for(int i=0;i<btree.size();i++){
-                    CglibBean temp= (CglibBean) btree.get(i);
-                    Comparable c= (Comparable) temp.getValue(attribute);
-                    if(c.compareTo(compare)>0){
-                        returnTree.insert(temp, (Comparable) temp.getValue(primaryKey));
-                    }
-                }
-                break;
-        }
-        return returnTree;
-    }
-
-
 //    public List compareThreeType(Character c,int num){
 //        List<Object> list=null;
 //        if(c=='='){

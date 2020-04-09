@@ -1,5 +1,6 @@
 package execution;
 
+import execution.data.DataStatements;
 import execution.database.*;
 import execution.table.*;
 import parsing.SqlParserConstants;
@@ -65,6 +66,12 @@ public class ExecuteStatement {
     public static void alter(List tokens){
         TableStatements.alterTable(tokens);
     }
+
+    public static void insert(List tokens){
+        DataStatements.insertData(tokens);
+    }
+
+    public static void delete(List tokens){DataStatements.deleteData(tokens);}
 
 
 

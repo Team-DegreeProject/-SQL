@@ -1,5 +1,6 @@
 package table;
 
+import parsing.Token;
 import table.column.ColumnDescriptor;
 
 import java.util.ArrayList;
@@ -53,5 +54,21 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         this.remove(returnValue);
     }
 
+
+    public boolean checkHavePrimaryKey(List<Token> columnNames) {
+        for (ColumnDescriptor columnDescriptor : this) {
+            boolean in=false;
+            for(int i=0;i<columnNames.size();i++){
+                String columnName=columnNames.get(i).image;
+                if (columnName.equals(columnDescriptor.getColumnName()) ) {
+                    in=true;
+                }
+            }
+            if(!in){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

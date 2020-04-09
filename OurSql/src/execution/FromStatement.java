@@ -1,5 +1,6 @@
-package execution.table;
+package execution;
 
+import parsing.Token;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
@@ -7,6 +8,8 @@ import table.Table;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static parsing.SqlParserConstants.EQ;
 
 public class FromStatement {
 
@@ -20,6 +23,12 @@ public class FromStatement {
             tables.add((Table) c.getValue("table"));
         }
         return tables;
+    }
+
+    public static Table from(String name) throws ClassNotFoundException {
+        Table database= ExecuteStatement.db.getDatabase();
+        Table t= (Table) ((CglibBean)((List)WhereStatament.compare(database,"tablename",EQ,name).getTree().getDatas()).get(0)).getValue("table");
+        return t;
     }
 
 }

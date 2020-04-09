@@ -704,7 +704,7 @@ void insert(Token d) :
     {   showStructure(); }
     //(<STATEMENT_END> | <END>)
 
-    //{ExecuteStatement.delete(sql);} // %%
+    {ExecuteStatement.insert(sql);} // %%
     // {test.testWhereAnd(sql);} // %%
 
 }

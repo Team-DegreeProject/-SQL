@@ -7,19 +7,20 @@ import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-import table.type.PrimaryKey;
 import table.type.SqlConstant;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static execution.table.DMLTool.analyseOneRow;
+import static execution.DMLTool.analyseOneRow;
 import static table.TableSchema.BASE_TABLE_TYPE;
 
 public class CreateTableStatement implements SqlConstant {
+
     List statement;
     ColumnDescriptorList columns;
     ColumnDescriptorList primaryKeys;
+
     public CreateTableStatement(List l){
         statement=l;
         columns=new ColumnDescriptorList();
@@ -27,7 +28,9 @@ public class CreateTableStatement implements SqlConstant {
     }
 
     public Table createImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List pk=new ArrayList();
+        DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
+        ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
+        columns.add(columnp);
         TableDescriptor td=null;
         if(statement==null){
             return null;
@@ -41,27 +44,20 @@ public class CreateTableStatement implements SqlConstant {
 //            String columnName=((Token)att.get(0)).image;
 //            int type=(Integer) att.get(1);
 //            DataTypeDescriptor dataType= new DataTypeDescriptor(type);
-            ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataTypeDescriptor);
+            ColumnDescriptor column=new ColumnDescriptor(columnName,i+1,dataTypeDescriptor);
             columns.add(column);
             if(dataTypeDescriptor.isPrimaryKey()){
                 primaryKeys.add(column);
             }
         }
-//        String[] pk=null;
         td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns,primaryKeys);
         td.setTableInColumnDescriptor(td);
-//        ColumnDescriptor cd=td.getColumnDescriptorList().getColumnDescriptor(1);
         Table table=new Table(td);
         ExecuteStatement.db.insertTable(table);
         td.printColumnName();
         table.printTable();
-//        return table;
-        return null;
+        return table;
     }
 
-
-//    public Object checkType(){
-//
-//    }
 
 }

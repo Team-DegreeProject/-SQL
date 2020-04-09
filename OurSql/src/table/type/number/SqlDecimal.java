@@ -1,14 +1,22 @@
 package table.type.number;
 
+import table.type.SqlType;
+
 import java.math.BigDecimal;
 
-public class SqlDecimal implements Comparable<SqlDecimal>{
-    private BigDecimal data;
+public class SqlDecimal implements Comparable<SqlDecimal>, SqlType {
+    private BigDecimal data=new BigDecimal(0);
     private int scale=-1;
     private int precision=-1;
 
     public SqlDecimal(BigDecimal data){
+
         this.data=data;
+        try {
+            changeRange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public SqlDecimal(BigDecimal data,int scale,int precision){
@@ -44,6 +52,11 @@ public class SqlDecimal implements Comparable<SqlDecimal>{
 
     public void setData(BigDecimal data) {
         this.data = data;
+        try {
+            changeRange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPrecision(int precision) {
@@ -69,5 +82,10 @@ public class SqlDecimal implements Comparable<SqlDecimal>{
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public void setValue(Object o) {
+        setData(new BigDecimal((Double) o));
     }
 }

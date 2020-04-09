@@ -1,14 +1,21 @@
 package table.type.number;
 
+import table.type.SqlType;
+
 import java.math.BigDecimal;
 
-public class SqlDouble implements Comparable<SqlDouble>{
+public class SqlDouble implements Comparable<SqlDouble>, SqlType {
     private int scale=-1;
     private int precision=-1;
-    private Double data;
+    private Double data=0.0;
 
     public SqlDouble(double d){
         data=d;
+        try {
+            changeRange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public SqlDouble(double d,int scale,int precision){
@@ -41,6 +48,11 @@ public class SqlDouble implements Comparable<SqlDouble>{
 
     public void setData(double data) {
         this.data = data;
+        try {
+            changeRange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setScale(int scale) {
@@ -71,5 +83,10 @@ public class SqlDouble implements Comparable<SqlDouble>{
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public void setValue(Object o) {
+        setData((double)o);
     }
 }

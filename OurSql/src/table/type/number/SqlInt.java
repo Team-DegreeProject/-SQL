@@ -1,13 +1,18 @@
 package table.type.number;
 
-public class SqlInt implements Comparable<SqlInt>{
+import table.type.SqlType;
+
+public class SqlInt implements Comparable<SqlInt>, SqlType {
 
     private int scale=-1;
-    private Integer data;
+    private Integer data=0;
 
     public SqlInt(int data){
         this.data=data;
+        changeRange();
     }
+
+    public SqlInt(){}
 
     public SqlInt(int data, int scale){
         this.data=data;
@@ -57,6 +62,7 @@ public class SqlInt implements Comparable<SqlInt>{
 
     public void setData(int data) {
         this.data = data;
+        changeRange();
     }
 
     public void setScale(int scale) {
@@ -72,5 +78,10 @@ public class SqlInt implements Comparable<SqlInt>{
     @Override
     public String toString() {
         return intToString();
+    }
+
+    @Override
+    public void setValue(Object o) {
+        setData((int)o);
     }
 }

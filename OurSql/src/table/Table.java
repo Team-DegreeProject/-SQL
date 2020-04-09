@@ -8,11 +8,13 @@ import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.PrimaryKey;
 import table.type.SqlConstantImpl;
-
+import table.type.SqlType;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import static execution.table.DMLTool.analyseOneRow;
+import static execution.DMLTool.analyseOneRow;
 
 public class Table extends SqlConstantImpl {
     private TableDescriptor td;
@@ -27,7 +29,6 @@ public class Table extends SqlConstantImpl {
         this.td=td;
         tree = new BPlusTree<>(4);
         createTable(td);
-
     }
 
     public void setTableDescriptor(TableDescriptor td) { this.td = td; }
@@ -48,8 +49,8 @@ public class Table extends SqlConstantImpl {
         }
         return propertyMap;
     }
-
-    public boolean insertRows(List values){
+//已知所有值以固定顺序排列好,通常用为插入系统表格
+    public boolean insertARow(List values){
         String[] attributes=td.getColumnNamesArray();
         if(attributes.length!=values.size()){
             System.out.println("The number of attributes is not equal to the number of values.");
@@ -58,16 +59,58 @@ public class Table extends SqlConstantImpl {
         CglibBean bean = new CglibBean(propertyMap);
         for(int i=0;i<attributes.length;i++){
             bean.setValue(attributes[i], values.get(i));
-//            System.out.println(attributes[i]+"--->>"+values.get(i));
         }
         tree.insert(bean, (Comparable) bean.getValue("primary key"));//双primarykey
+        return true;
+    }
+
+
+
+    public void insertRows(List<Token> attributes,List list,int start) throws InstantiationException, IllegalAccessException {
+       for(int i=start;i<list.size();i++){
+           List<List<Token>> l= (List<List<Token>>) list.get(i);
+           insertARow(attributes,l);
+       }
+    }
+
+    public boolean insertARow(List<Token> attributes,List<List<Token>> values) throws IllegalAccessException, InstantiationException {
+        if(attributes.size()!=values.size()){
+            System.out.println("The number of attributes is not equal to the number of values.");
+            return false;
+        }
+        boolean checkPk=td.getPrimaryKey().checkHavePrimaryKey(attributes);
+        if(checkPk==false){
+            System.out.println("There is no enough primaryKey values.");
+            return false;
+        }
+        int number=values.get(0).size();
+        for(int j=0;j<number;j++){
+            PrimaryKey pk=new PrimaryKey();
+            CglibBean bean = new CglibBean(propertyMap);
+            for(int i=0;i<attributes.size();i++){
+                String name=attributes.get(i).image;
+                String v=values.get(i).get(j).image;
+                Class c= (Class) propertyMap.get(name);
+                SqlType value=(SqlType)c.newInstance();
+                value.setValue(v);
+                ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
+                if(cd!=null){
+                    pk.addPrimaryKey((Comparable) value);
+                    System.out.println("primary key: "+value);
+                }
+                bean.setValue(name, value);
+                System.out.println(name+"--->>"+value+"--->>");
+            }
+            bean.setValue("primary key",pk);
+            tree.insert(bean, (Comparable) bean.getValue("primary key"));//双primarykey
+        }
         return true;
     }
 
     public void printTable(){
         System.out.println("||"+td.getName()+"||");
         System.out.println("-------------------------------------------------------");
-        BPlusTreeTool.printBPlusTree(tree);
+        BPlusTreeTool.printBPlusTree(tree,td);
     }
 
     public boolean updateTable(List attributes,List values,Table t){

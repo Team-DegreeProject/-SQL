@@ -1,6 +1,7 @@
 package execution.table;
 
 import execution.ExecuteStatement;
+import execution.FromStatement;
 import execution.WhereStatament;
 import parsing.Token;
 import table.BTree.CglibBean;
@@ -11,7 +12,7 @@ import table.column.DataTypeDescriptor;
 
 import java.util.List;
 
-import static execution.table.DMLTool.analyseOneRow;
+import static execution.DMLTool.analyseOneRow;
 import static parsing.SqlParserConstants.*;
 
 public class AlterTableStatement {
@@ -32,8 +33,7 @@ public class AlterTableStatement {
     public boolean alterTableAddColumnStatement() throws ClassNotFoundException {
         String name=((Token)statement.get(2)).image;
         List<List> newColumns= (List) statement.get(3);
-        Table database= ExecuteStatement.db.getDatabase();
-        Table change= (Table) ((CglibBean)((List)WhereStatament.compare(database,"tablename",EQ,name).getTree().getDatas()).get(0)).getValue("table");
+        Table change= FromStatement.from(name);
         ColumnDescriptorList primaryKeys=change.getTableDescriptor().getPrimaryKey();
         ColumnDescriptorList columns=new ColumnDescriptorList();
         int size=change.getTableDescriptor().getMaxColumnID()+1;
@@ -57,8 +57,7 @@ public class AlterTableStatement {
     public boolean alterModifyImpl() throws ClassNotFoundException {
         String name=((Token)statement.get(2)).image;
         List<List> newColumns= (List) statement.get(4);
-        Table database= ExecuteStatement.db.getDatabase();
-        Table change= (Table) ((CglibBean)((List)WhereStatament.compare(database,"tablename",EQ,name).getTree().getDatas()).get(0)).getValue("table");
+        Table change= FromStatement.from(name);
         change.modifyColumns(newColumns);
         change.getTableDescriptor().printColumnName();
         return true;
@@ -73,8 +72,7 @@ public class AlterTableStatement {
     public boolean alterTableDropImpl() throws ClassNotFoundException {
         String name=((Token)statement.get(2)).image;
         List<List> newColumns= (List) statement.get(3);
-        Table database= ExecuteStatement.db.getDatabase();
-        Table change= (Table) ((CglibBean)((List)WhereStatament.compare(database,"tablename",EQ,name).getTree().getDatas()).get(0)).getValue("table");
+        Table change= FromStatement.from(name);
         change.dropColumns(newColumns);
         change.getTableDescriptor().printColumnName();
         return true;

@@ -1,4 +1,4 @@
-package execution.table;
+package execution;
 
 import parsing.Token;
 import table.column.DataTypeDescriptor;

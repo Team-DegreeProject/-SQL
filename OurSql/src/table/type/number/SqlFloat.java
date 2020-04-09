@@ -6,7 +6,9 @@ package table.type.number;
 //FLOAT(size,d) 带有浮动小数点的小数字。在括号中规定最大位数。在 d 参数中规定小数点右侧的最大位数。
 
 
-public class SqlFloat implements Comparable<SqlFloat>{
+import table.type.SqlType;
+
+public class SqlFloat implements Comparable<SqlFloat>, SqlType {
     private Float data;
 
     public SqlFloat(float f){
@@ -30,5 +32,10 @@ public class SqlFloat implements Comparable<SqlFloat>{
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public void setValue(Object o) {
+        setData((float)o);
     }
 }
