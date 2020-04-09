@@ -11,8 +11,9 @@ public class SqlDate extends Date implements SqlType {
         super(year, month, day);
     }
 
+
     @Override
-    public void setValue(Object o) {
+    public void setValue(String o) {
 
     }
 }

@@ -23,8 +23,8 @@ public class DeleteDataStatement {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
         List condition= (List) statement.get(4);
-        String attribute= (String) condition.get(0);
-        int type=(int)condition.get(1);
+        String attribute=((Token)condition.get(0)).image;
+        int type=Integer.parseInt(((Token)condition.get(1)).image);
         Comparable value= (Comparable) condition.get(2);
         Table change= WhereStatament.compare(table,attribute,type,value);
         table.deleteRows(change);

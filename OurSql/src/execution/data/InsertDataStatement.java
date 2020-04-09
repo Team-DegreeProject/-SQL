@@ -27,10 +27,8 @@ public class InsertDataStatement {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
         List<Token> attibutes= (List<Token>) statement.get(3);
-        List<List<Token>> values= (List<List<Token>>) statement.get(5);
-        Boolean b=table.insertRows(attibutes,values);
+        table.insertRows(attibutes,statement,5);
         table.printTable();
-        System.out.println(b);
-        return b;
+        return true;
     }
 }

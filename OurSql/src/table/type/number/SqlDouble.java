@@ -86,7 +86,7 @@ public class SqlDouble implements Comparable<SqlDouble>, SqlType {
     }
 
     @Override
-    public void setValue(Object o) {
-        setData((double)o);
+    public void setValue(String o) {
+        setData(Double.parseDouble(o));
     }
 }

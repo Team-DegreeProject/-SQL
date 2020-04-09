@@ -85,7 +85,7 @@ public class SqlDecimal implements Comparable<SqlDecimal>, SqlType {
     }
 
     @Override
-    public void setValue(Object o) {
-        setData(new BigDecimal((Double) o));
+    public void setValue(String o) {
+        setData(new BigDecimal(Double.parseDouble(o)));
     }
 }

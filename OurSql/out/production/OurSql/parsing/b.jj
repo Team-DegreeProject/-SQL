@@ -694,9 +694,9 @@ void insert(Token d) :
             {
                   saveTokenInSQL(t);
             }
-            <LBRACKET>
+//            <LBRACKET>
                   multivalues(i)
-            <RBRACKET>
+//            <RBRACKET>
 
             (<STATEMENT_END> | <END>)
     )
@@ -902,7 +902,7 @@ void delete(Token d) :
 
 
 
-    //{ExecuteStatement.delete(sql);} // %%
+    {ExecuteStatement.delete(sql);} // %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -1505,18 +1505,18 @@ void values(int a) ://2.2.1	INSERT INTO table1 VALUES (value1, value2,…);
 
 }
 {
-    (<RBRACKET>)?
+    (<LBRACKET>)//?
     value(){saveTempListInList(templist,list); i++;}
     (
         (",")
         value(){saveTempListInList(templist,list);i++;}
     )*
-    (<LBRACKET>)?
+    (<RBRACKET>) //?
 
     {
         System.out.println("coulmn number："+k);
         System.out.println("value number："+i);
-        if(k!=0 & k>i)
+        if(k!=0 & k!=i)
         {
             jj_consume_token(COMMA);
             System.out.println("INSDERT GRAMMAR WRONG");

@@ -51,7 +51,7 @@ public class SqlReal implements Comparable<SqlReal>, SqlType {
     }
 
     @Override
-    public void setValue(Object o) {
-        setData((float)o);
+    public void setValue(String o) {
+        setData(Float.parseFloat(o));
     }
 }

@@ -8,8 +8,9 @@ public class SqlYear extends Date implements SqlType {
         super(year,0, 0);
     }
 
+
     @Override
-    public void setValue(Object o) {
+    public void setValue(String o) {
 
     }
 }

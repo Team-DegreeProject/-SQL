@@ -10,8 +10,10 @@ public class SqlTime extends Time implements SqlType {
         super(hour, minute, second);
     }
 
+
+
     @Override
-    public void setValue(Object o) {
+    public void setValue(String o) {
 
     }
 }

@@ -81,7 +81,7 @@ public class SqlInt implements Comparable<SqlInt>, SqlType {
     }
 
     @Override
-    public void setValue(Object o) {
-        setData((int)o);
+    public void setValue(String o) {
+        setData(Integer.parseInt(o));
     }
 }

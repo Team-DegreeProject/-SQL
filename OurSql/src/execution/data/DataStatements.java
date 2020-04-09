@@ -16,4 +16,13 @@ public class DataStatements {
             e.printStackTrace();
         }
     }
+
+    public static void deleteData(List tokens){
+        try {
+            DeleteDataStatement deleteDataStatement=new DeleteDataStatement(tokens);
+            deleteDataStatement.deleteDataImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -10,8 +10,10 @@ public class SqlTimeStamp extends Timestamp implements SqlType {
         super(year, month, date, hour, minute, second, nano);
     }
 
+
+
     @Override
-    public void setValue(Object o) {
+    public void setValue(String o) {
 
     }
 }
