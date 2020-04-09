@@ -99,7 +99,7 @@ public class Table extends SqlConstantImpl {
                     System.out.println("primary key: "+value);
                 }
                 bean.setValue(name, value);
-                System.out.println(name+"--->>"+value+"--->>");
+                System.out.println(name+"--->>"+value);
             }
             bean.setValue("primary key",pk);
             tree.insert(bean, (Comparable) bean.getValue("primary key"));//双primarykey
@@ -153,6 +153,7 @@ public class Table extends SqlConstantImpl {
         for(int i=0;i<t.size();i++){
             CglibBean c=list.get(i);
             Comparable pk= (Comparable) c.getValue("primary key");
+            System.out.println(pk);
             tree.delete(pk);
         }
     }
@@ -231,5 +232,9 @@ public class Table extends SqlConstantImpl {
         this.tree=newTree;
         td.updatePriamryKey();
         updatePrimaryKey();
+    }
+
+    public HashMap getPropertyMap(){
+        return propertyMap;
     }
 }

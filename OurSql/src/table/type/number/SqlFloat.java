@@ -8,7 +8,7 @@ package table.type.number;
 
 import table.type.SqlType;
 
-public class SqlFloat implements Comparable<SqlFloat>, SqlType {
+public class SqlFloat implements  SqlType {
     private Float data;
 
     public SqlFloat(float f){
@@ -24,10 +24,6 @@ public class SqlFloat implements Comparable<SqlFloat>, SqlType {
     }
 
 
-    @Override
-    public int compareTo(SqlFloat o) {
-        return this.data.compareTo(o.data);
-    }
 
     @Override
     public String toString() {
@@ -37,5 +33,10 @@ public class SqlFloat implements Comparable<SqlFloat>, SqlType {
     @Override
     public void setValue(String o) {
         setData(Float.parseFloat(o));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.data.compareTo(((SqlFloat)o).data);
     }
 }

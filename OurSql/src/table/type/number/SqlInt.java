@@ -2,7 +2,7 @@ package table.type.number;
 
 import table.type.SqlType;
 
-public class SqlInt implements Comparable<SqlInt>, SqlType {
+public class SqlInt implements SqlType {
 
     private int scale=-1;
     private Integer data=0;
@@ -71,11 +71,6 @@ public class SqlInt implements Comparable<SqlInt>, SqlType {
 
 
     @Override
-    public int compareTo(SqlInt o) {
-        return this.data.compareTo(o.data);
-    }
-
-    @Override
     public String toString() {
         return intToString();
     }
@@ -83,5 +78,10 @@ public class SqlInt implements Comparable<SqlInt>, SqlType {
     @Override
     public void setValue(String o) {
         setData(Integer.parseInt(o));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.data.compareTo(((SqlInt)o).data);
     }
 }

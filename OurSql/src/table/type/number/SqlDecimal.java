@@ -4,7 +4,7 @@ import table.type.SqlType;
 
 import java.math.BigDecimal;
 
-public class SqlDecimal implements Comparable<SqlDecimal>, SqlType {
+public class SqlDecimal implements SqlType {
     private BigDecimal data=new BigDecimal(0);
     private int scale=-1;
     private int precision=-1;
@@ -45,10 +45,6 @@ public class SqlDecimal implements Comparable<SqlDecimal>, SqlType {
         }
     }
 
-    @Override
-    public int compareTo(SqlDecimal o) {
-        return data.compareTo(o.data);
-    }
 
     public void setData(BigDecimal data) {
         this.data = data;
@@ -87,5 +83,10 @@ public class SqlDecimal implements Comparable<SqlDecimal>, SqlType {
     @Override
     public void setValue(String o) {
         setData(new BigDecimal(Double.parseDouble(o)));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return data.compareTo(((SqlDecimal)o).data);
     }
 }

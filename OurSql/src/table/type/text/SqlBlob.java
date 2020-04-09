@@ -23,4 +23,9 @@ public class SqlBlob implements SqlType {
     public void setValue(String o) {
 
     }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

@@ -2,7 +2,7 @@ package table.type.text;
 
 import table.type.SqlType;
 
-public class SqlVarChar implements Comparable<SqlVarChar>, SqlType {
+public class SqlVarChar implements SqlType {
     private String string=null;
     private int scale=-1;
 
@@ -31,11 +31,11 @@ public class SqlVarChar implements Comparable<SqlVarChar>, SqlType {
         }
     }
 
-    @Override
-    public int compareTo(SqlVarChar o) {
-        int re=this.string.compareTo(o.string);
-        return re;
-    }
+//    @Override
+//    public int compareTo(SqlVarChar o) {
+//        int re=this.string.compareTo(o.string);
+//        return re;
+//    }
 
     public int getLength(){
         return scale;
@@ -61,5 +61,11 @@ public class SqlVarChar implements Comparable<SqlVarChar>, SqlType {
     @Override
     public void setValue(String o) {
         setString(o);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int re=this.string.compareTo(((SqlVarChar)o).string);
+        return re;
     }
 }

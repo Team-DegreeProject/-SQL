@@ -1,5 +1,5 @@
 package table.type;
 
-public interface SqlType {
+public interface SqlType extends Comparable {
     public void setValue(String o);
 }

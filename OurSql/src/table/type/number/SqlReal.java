@@ -7,7 +7,7 @@ package table.type.number;
 
 import table.type.SqlType;
 
-public class SqlReal implements Comparable<SqlReal>, SqlType {
+public class SqlReal implements  SqlType {
     private Float data;
 
     public SqlReal(float f){
@@ -40,10 +40,6 @@ public class SqlReal implements Comparable<SqlReal>, SqlType {
 
     }
 
-    @Override
-    public int compareTo(SqlReal o) {
-        return this.data.compareTo(o.data);
-    }
 
     @Override
     public String toString() {
@@ -53,5 +49,10 @@ public class SqlReal implements Comparable<SqlReal>, SqlType {
     @Override
     public void setValue(String o) {
         setData(Float.parseFloat(o));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.data.compareTo(((SqlReal)o).data);
     }
 }

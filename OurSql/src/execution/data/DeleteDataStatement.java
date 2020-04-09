@@ -5,7 +5,10 @@ import execution.WhereStatament;
 import javafx.scene.control.Tab;
 import parsing.Token;
 import table.Table;
+import table.column.ColumnDescriptor;
+import table.type.SqlType;
 
+import java.util.HashMap;
 import java.util.List;
 
 //1.1 SQL 删除表中的一行
@@ -19,14 +22,20 @@ public class DeleteDataStatement {
         statement=tokens;
     }
 
-    public boolean deleteDataImpl() throws ClassNotFoundException {
+    public boolean deleteDataImpl() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
         List condition= (List) statement.get(4);
         String attribute=((Token)condition.get(0)).image;
-        int type=Integer.parseInt(((Token)condition.get(1)).image);
-        Comparable value= (Comparable) condition.get(2);
+        int type=((Token)condition.get(1)).kind;
+        HashMap propertyMap=table.getPropertyMap();
+        String str= ((Token) condition.get(2)).image;
+        Class c= (Class) propertyMap.get(attribute);
+        SqlType value=(SqlType)c.newInstance();
+        value.setValue(str);
+//        ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
         Table change= WhereStatament.compare(table,attribute,type,value);
+        change.printTable();
         table.deleteRows(change);
         table.printTable();
         return true;

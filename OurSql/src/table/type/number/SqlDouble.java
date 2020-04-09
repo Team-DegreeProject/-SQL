@@ -1,10 +1,11 @@
 package table.type.number;
 
 import table.type.SqlType;
+import table.type.date.SqlDate;
 
 import java.math.BigDecimal;
 
-public class SqlDouble implements Comparable<SqlDouble>, SqlType {
+public class SqlDouble implements SqlType {
     private int scale=-1;
     private int precision=-1;
     private Double data=0.0;
@@ -75,10 +76,6 @@ public class SqlDouble implements Comparable<SqlDouble>, SqlType {
         this.precision = precision;
     }
 
-    @Override
-    public int compareTo(SqlDouble o) {
-        return this.data.compareTo(o.data);
-    }
 
     @Override
     public String toString() {
@@ -88,5 +85,10 @@ public class SqlDouble implements Comparable<SqlDouble>, SqlType {
     @Override
     public void setValue(String o) {
         setData(Double.parseDouble(o));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.data.compareTo(((SqlDouble)o).data);
     }
 }
