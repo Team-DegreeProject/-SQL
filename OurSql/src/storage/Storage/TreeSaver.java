@@ -109,7 +109,7 @@ public class TreeSaver {
         File test = new File("data/"+tn);
         //创建文件夹
         test.mkdir();
-        System.out.println("the file path is: "+new File("").getAbsolutePath());
+        System.out.println("the path of the file is: "+new File("").getAbsolutePath());
         outputter.output(document, new FileOutputStream(new File("data/"+tn+"/"+tn+".xml")));
         }
 
