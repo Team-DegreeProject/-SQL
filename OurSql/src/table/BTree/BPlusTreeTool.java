@@ -16,10 +16,10 @@ public class BPlusTreeTool {
      * @return
      */
     public static BPlusTree listToBplusTree(List<CglibBean> list){
-        BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
+        BPlusTree b = new BPlusTree<>(4);
         for (int i=0;i<list.size();i++){
             CglibBean c=list.get(i);
-            b.insert(c,(Integer)c.getValue("id"));
+            b.insert(c,(Comparable) c.getValue("primary key"));
         }
         return b;
     }

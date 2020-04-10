@@ -2,12 +2,15 @@ package execution.data;
 
 import execution.FromStatement;
 import execution.WhereStatament;
+import javafx.scene.control.Tab;
 import parsing.Token;
 import table.Table;
 import table.type.SqlType;
 
 import java.util.HashMap;
 import java.util.List;
+
+import static parsing.SqlParserConstants.*;
 
 public class DeleteDataStatement {
 
@@ -21,23 +24,82 @@ public class DeleteDataStatement {
     //1.1 SQL 删除表中的一行
     //1.1.1 DELETE FROM departments WHERE department_id = 16;
     //1.1.2 DELETE FROM departments WHERE department_name = ‘a’;
-    public boolean deleteDataImpl() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public Table deleteDataBasicImpl(List condition,Table table) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+//        String tablename=((Token)statement.get(2)).image;
+//        Table table= FromStatement.from(tablename);
+//        ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
+        Table change= WhereStatament.basicCondition(table,condition);
+        return change;
+    }
+
+    //1.2.1 DELETE FROM departments WHERE employee_id IN (100, 101, 102);
+    public Table deleteDataInImpl(List condition,Table table) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Table change=WhereStatament.inCondition(table,condition);
+        return change;
+    }
+
+    //1.2.2 DELETE FROM departments WHERE employee_id BETWEEN 100 AND 102;
+    public  Table deleteDataBetweenImpl(List condition,Table table) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Table change=WhereStatament.betweenCondition(table,condition);
+        return change;
+    }
+
+
+    public boolean deleteDataImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
-        List condition= (List) statement.get(4);
-        String attribute=((Token)condition.get(0)).image;
-        int type=((Token)condition.get(1)).kind;
-        HashMap propertyMap=table.getPropertyMap();
-        String str= ((Token) condition.get(2)).image;
-        Class c= (Class) propertyMap.get(attribute);
-        SqlType value=(SqlType)c.newInstance();
-        value.setValue(str);
-//        ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
-        Table change= WhereStatament.compare(table,attribute,type,value);
+        Table change=null;
+        List conditions= (List) statement.get(4);
+        Object first=statement.get(0);
+        if(first instanceof Token){
+            System.out.println("one condition==========");
+            change=checkAType(conditions,table);
+        }else if (first instanceof List){
+            System.out.println("multiple condition==========");
+            boolean b=false;
+            for(int i=0;i<conditions.size();i++){
+                Object o=conditions.get(i);
+                if(o instanceof List){
+                    Table temp=checkAType((List) o,table);
+                    if(b){
+                        change=WhereStatament.whereAnd(temp,change);
+                    }else{
+                        change=WhereStatament.whereOr(temp,change);
+                    }
+                }else if(o instanceof Token){
+                    int type=((Token)o).kind;
+                    if(type==AND){
+                        b=true;
+                    }else if(type==OR){
+                        b=false;
+                    }
+                }
+            }
+        }
+        System.out.println(table.size());
         change.printTable();
+        System.out.println(change.size());
         table.deleteRows(change);
         table.printTable();
+        System.out.println(table.size());
         return true;
+    }
+
+
+    public Table checkAType(List condition,Table table) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int type=((Token)condition.get(1)).kind;
+        Table change=null;
+        if(type==IN){
+            System.out.println("In===========");
+            change=deleteDataInImpl(condition,table);
+        }else if(type==EQ||type==LQ||type==RQ){
+            System.out.println("Basic===========");
+            change=deleteDataBasicImpl(condition,table);
+        }else if(type==BETWEEN){
+            System.out.println("Between===========");
+            change=deleteDataBetweenImpl(condition,table);
+        }
+        return change;
     }
 
 }

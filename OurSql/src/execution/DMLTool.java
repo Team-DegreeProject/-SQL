@@ -2,6 +2,7 @@ package execution;
 
 import parsing.Token;
 import table.column.DataTypeDescriptor;
+import table.type.SqlType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +65,14 @@ public class DMLTool {
                 System.out.println("Warning:There are two =");
             }
         }
+    }
+
+
+    public static SqlType convertToValue(String att, String str, HashMap propertyMap) throws IllegalAccessException, InstantiationException {
+        Class c= (Class) propertyMap.get(att);
+        SqlType value=(SqlType)c.newInstance();
+        value.setValue(str);
+        return value;
     }
 
 
