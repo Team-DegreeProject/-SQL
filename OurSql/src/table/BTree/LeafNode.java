@@ -208,8 +208,8 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         Object tempKeys[] = new Object[BPlusTree.getmaxKeyNumber()];
         Object tempValues[] = new Object[BPlusTree.getmaxKeyNumber()];
         if(i==0){
-            System.arraycopy(this.keys, 0, tempKeys, 0, i);
-            System.arraycopy(this.values, 0, tempValues, 0, i);
+            System.arraycopy(this.keys, 1, tempKeys, 0, this.keyNumber  -1);
+            System.arraycopy(this.values, 1, tempValues, 0, this.keyNumber  -1);
         }else{
             System.arraycopy(this.keys, 0, tempKeys, 0, i);
             System.arraycopy(this.values, 0, tempValues, 0, i);

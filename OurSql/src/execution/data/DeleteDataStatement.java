@@ -2,18 +2,13 @@ package execution.data;
 
 import execution.FromStatement;
 import execution.WhereStatament;
-import javafx.scene.control.Tab;
 import parsing.Token;
 import table.Table;
-import table.column.ColumnDescriptor;
 import table.type.SqlType;
 
 import java.util.HashMap;
 import java.util.List;
 
-//1.1 SQL 删除表中的一行
-//1.1.1 DELETE FROM departments WHERE department_id = 16;
-//1.1.2 DELETE FROM departments WHERE department_name = ‘a’;
 public class DeleteDataStatement {
 
     List statement;
@@ -22,6 +17,10 @@ public class DeleteDataStatement {
         statement=tokens;
     }
 
+
+    //1.1 SQL 删除表中的一行
+    //1.1.1 DELETE FROM departments WHERE department_id = 16;
+    //1.1.2 DELETE FROM departments WHERE department_name = ‘a’;
     public boolean deleteDataImpl() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);

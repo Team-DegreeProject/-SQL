@@ -23,8 +23,10 @@ public class Test {
             bean.setValue("address", "789");
             b.insert(bean,(Integer) bean.getValue("id"));
         }
-        b.delete(2);
-//        b.getNodes(b.getRoot());
+        b.getNodes(b.getRoot());
+        System.out.println("-----------------------------------------------------");
+        b.delete(0);
+        b.getNodes(b.getRoot());
 //        System.out.println("-----------------------------------------------------");
 
         //测试大于小于
