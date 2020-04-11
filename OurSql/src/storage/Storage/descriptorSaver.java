@@ -1,4 +1,4 @@
-package Storage;
+package storage.Storage;
 
 
 import table.TableDescriptor;
@@ -13,6 +13,5 @@ public class descriptorSaver {
     String tableName = tabledes.getTableName();
     String schema = tabledes.getSchemaName();
     char lockGranularity = tabledes.getLockGranularity();
-    String[] ColumnDescriptorList = tabledes.getColumnDescriptor()
 
 }

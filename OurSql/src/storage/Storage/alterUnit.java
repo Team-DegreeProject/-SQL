@@ -1,6 +1,7 @@
-package Storage;
+package storage.Storage;
 
-import BTree.BPlusTree;
+
+import table.BTree.BPlusTree;
 
 public class alterUnit {
     private String tableName;

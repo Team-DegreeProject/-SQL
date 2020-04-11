@@ -1,7 +1,7 @@
-package Lock_regulator;
+package storage.Lock_regulator;
 
 import java.io.File;
-import Storage.XMLUtils;
+import storage.Storage.XMLUtils;
 
 public class test {
     public static void main(String[] args) {

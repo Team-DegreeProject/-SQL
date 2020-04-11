@@ -1,4 +1,4 @@
-package Lock_regulator;
+package storage.Lock_regulator;
 
 public class Configuration {
     public static final String SHARELOCK = "SHARELOCK";

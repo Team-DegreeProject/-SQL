@@ -5,6 +5,7 @@ import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import table.BTree.BPlusTree;
+import table.BTree.CglibBean;
 import table.BTree.LeafNode;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package Storage;
+package storage.Storage;
 
 public class Student {
     String name;

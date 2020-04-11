@@ -1,4 +1,4 @@
-package Configuration;
+package storage.Configuration;
 
 public class Configuration {
     public static final String SHARELOCK = "SHARELOCK";

@@ -1,10 +1,14 @@
 package table.BTree;
 
-class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
+public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     protected Object values[];
     protected LeafNode left;
     protected LeafNode right;
+
+    public Object[] getValues(){
+        return values;
+    }
 
     public LeafNode(){
         super();

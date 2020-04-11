@@ -1,4 +1,4 @@
-package Lock_regulator;
+package storage.Lock_regulator;
 
 public class LockTableUnit {
     String name;

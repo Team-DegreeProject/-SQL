@@ -1,7 +1,7 @@
-package Storage;
+package storage.Storage;
 
-import BTree.BPlusTree;
 import Configuration.Configuration;
+import table.BTree.BPlusTree;
 
 import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
