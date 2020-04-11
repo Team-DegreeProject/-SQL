@@ -1,7 +1,7 @@
 package storage.Storage;
 
 
-import Configuration.Configuration;
+import storage.Configuration.Configuration;
 import table.BTree.BPlusTree;
 
 import java.io.File;
