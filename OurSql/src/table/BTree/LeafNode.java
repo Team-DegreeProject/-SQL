@@ -49,7 +49,10 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     @Override
     public Node<T, V> insert(T value, V key) {
         //找到插入数据位置
-
+//        System.out.println("当前叶节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//        System.out.println();
         int i = this.keyNumber-1;
 //        if(this.keyNumber==0){
 //            this.keys[0]=key;
@@ -189,14 +192,20 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     @Override
     public boolean delete(V key) {
+//        System.out.println("当前叶节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//        System.out.println();
         V oldKey=(V)this.keys[0];
 
         //找到删除数据位置
         int i = this.keyNumber-1;
         while(i >=0){
             if(key.compareTo((V) this.keys[i]) == 0){
+//                System.out.println("Key:"+key+",this.keys:"+this.keys[i]);
                 break;
             }
+//            System.out.println("Key:"+key+",this.keys:"+this.keys[i]);
             i--;
         }
         if(i==(-1)){
@@ -223,6 +232,10 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         if(i==0 && this.keyNumber!=0){
             changeParentKey(this,oldKey);
         }
+//        System.out.println("当前叶节点key为:");
+//        for(int j = 0; j < this.keyNumber; j++)
+//            System.out.print(this.keys[j] + " ");
+//        System.out.println();
         return false;
     }
 
@@ -262,7 +275,7 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     }
     @Override
     LeafNode<T, V> refreshLeft() {
-        if(this.keyNumber <= 0)
+        if(this.keyNumber < 0)
             return null;
         return this;
     }

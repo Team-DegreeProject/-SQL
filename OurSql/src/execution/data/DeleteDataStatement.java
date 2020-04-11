@@ -50,7 +50,7 @@ public class DeleteDataStatement {
         Table table= FromStatement.from(tablename);
         Table change=null;
         List conditions= (List) statement.get(4);
-        Object first=statement.get(0);
+        Object first=conditions.get(0);
         if(first instanceof Token){
             System.out.println("one condition==========");
             change=checkAType(conditions,table);
@@ -60,6 +60,7 @@ public class DeleteDataStatement {
             for(int i=0;i<conditions.size();i++){
                 Object o=conditions.get(i);
                 if(o instanceof List){
+                    //DELETE FROM departments WHERE employee_id =/> /< 7 AND/OR C = ‘D’;
                     Table temp=checkAType((List) o,table);
                     if(b){
                         change=WhereStatament.whereAnd(temp,change);
@@ -76,12 +77,9 @@ public class DeleteDataStatement {
                 }
             }
         }
-        System.out.println(table.size());
         change.printTable();
-        System.out.println(change.size());
         table.deleteRows(change);
         table.printTable();
-        System.out.println(table.size());
         return true;
     }
 

@@ -149,11 +149,11 @@ public class Table extends SqlConstantImpl {
     }
 
     public void deleteRows(Table t){
+        this.printTable();
         List<CglibBean> list=t.getTree().getDatas();
         for(int i=0;i<t.size();i++){
             CglibBean c=list.get(i);
             Comparable pk= (Comparable) c.getValue("primary key");
-//            System.out.println(pk);
             tree.delete(pk);
         }
     }
