@@ -63,4 +63,13 @@ public class TableStatements {
             e.printStackTrace();
         }
     }
+
+    public static void truncateTable(List tokens){
+        try {
+            TruncateTableStatement truncateTableStatement=new TruncateTableStatement(tokens);
+            truncateTableStatement.truncateTableImpl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

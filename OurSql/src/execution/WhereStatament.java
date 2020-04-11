@@ -118,6 +118,56 @@ public class WhereStatament {
         return table;
     }
 
+    public static Table whereImpl(Table table,List conditions) throws Exception {
+        Table change=null;
+        Object first=conditions.get(0);
+        if(first instanceof Token){
+            System.out.println("one condition==========");
+            change=checkAType(conditions,table);
+        }else if (first instanceof List){
+            System.out.println("multiple condition==========");
+            boolean b=false;
+            for(int i=0;i<conditions.size();i++){
+                Object o=conditions.get(i);
+                if(o instanceof List){
+                    Table temp=checkAType((List) o,table);
+                    if(b){
+                        change=whereAnd(temp,change);
+                    }else{
+                        change=whereOr(temp,change);
+                    }
+                }else if(o instanceof Token){
+                    int type=((Token)o).kind;
+                    if(type==AND){
+                        b=true;
+                    }else if(type==OR){
+                        b=false;
+                    }
+                }
+            }
+        }
+        if(change==null){
+            throw new Exception("There is no change");
+        }
+        change.printTable();
+        return change;
+    }
+
+    public static Table checkAType(List condition,Table table) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int type=((Token)condition.get(1)).kind;
+        Table change=null;
+        if(type==IN){
+            System.out.println("In===========");
+            change=inCondition(table,condition);
+        }else if(type==EQ||type==LQ||type==RQ){
+            System.out.println("Basic===========");
+            change=basicCondition(table,condition);
+        }else if(type==BETWEEN){
+            System.out.println("Between===========");
+            change=betweenCondition(table,condition);
+        }
+        return change;
+    }
 
 
 

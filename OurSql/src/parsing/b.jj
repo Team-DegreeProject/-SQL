@@ -929,7 +929,7 @@ void truncate(Token d) :
 
 
 
-    //{ExecuteStatement.delete(sql);} // %%
+    {ExecuteStatement.truncate(sql);} // %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -1065,7 +1065,7 @@ void update(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-//         {DatabaseStatements.updateDatabase(sql);} // %%
+         {ExecuteStatement.update(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 }

@@ -819,6 +819,7 @@ templist = new ArrayList<Object>();
       jj_consume_token(-1);
       throw new ParseException();
     }
+     ExecuteStatement.truncate(sql);
   }
 
 //2.1.1	DROP DATABSE databse_name;
@@ -1012,6 +1013,7 @@ templist = new ArrayList<Object>();
       jj_consume_token(-1);
       throw new ParseException();
     }
+          ExecuteStatement.update(sql);
   }
 
   final public void alter(Token d) throws ParseException {

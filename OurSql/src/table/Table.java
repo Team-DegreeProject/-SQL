@@ -1,5 +1,6 @@
 package table;
 
+import execution.DMLTool;
 import parsing.Token;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
@@ -127,6 +128,28 @@ public class Table extends SqlConstantImpl {
             CglibBean c= (CglibBean) list1.get(i);
             for(int j=0;j<attributes.size();j++){
                 c.setValue((String) attributes.get(j),values.get(j));
+            }
+        }
+        updatePrimaryKey();
+        return true;
+    }
+
+    public boolean updateTable(List changes,Table t) throws InstantiationException, IllegalAccessException {
+        if(t.getTree().getDataNumber()==0 ){
+            System.out.println("No update");
+            return false;
+        }
+        List list1=t.getTree().getDatas();
+        for(int i=0;i<list1.size();i++){
+            CglibBean c= (CglibBean) list1.get(i);
+//            System.out.println("============="+changes.size());
+            for(int j=0;j<changes.size();j++){
+                List now= (List) changes.get(j);
+                String attribute=((Token)now.get(0)).image;
+                String v=((Token)now.get(2)).image;
+                SqlType value=DMLTool.convertToValue(attribute,v,propertyMap);
+//                System.out.println("value: "+value);
+                c.setValue((String) attribute,value);
             }
         }
         updatePrimaryKey();

@@ -27,6 +27,17 @@ public class DataStatements {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateData(List tokens) {
+        try {
+            UpdateDataStatement updateDataStatement=new UpdateDataStatement(tokens);
+            updateDataStatement.updateDataImpl();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

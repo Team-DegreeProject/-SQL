@@ -73,6 +73,10 @@ public class ExecuteStatement {
 
     public static void delete(List tokens){DataStatements.deleteData(tokens);}
 
+    public static void update(List tokens){DataStatements.updateData(tokens);}
+
+    public static void truncate(List tokens){TableStatements.truncateTable(tokens);};
+
 
 
 }
