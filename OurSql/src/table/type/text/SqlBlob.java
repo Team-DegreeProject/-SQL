@@ -5,6 +5,7 @@ import table.type.SqlType;
 import java.sql.Blob;
 
 public class SqlBlob implements SqlType {
+
     private Blob blob;
 
     public SqlBlob(Blob b){

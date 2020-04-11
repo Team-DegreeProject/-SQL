@@ -1,18 +1,40 @@
 package table.type.date;
-import table.type.SqlType;
 
-import java.sql.Date;
+import table.type.SqlType;
+import java.time.Year;
+
 public class SqlYear implements SqlType {
 
+    private Year year=null;
 
+    public SqlYear(){}
 
-    @Override
-    public void setValue(String o) {
-
+    public SqlYear(String s){
+        this.year=Year.parse(s);
     }
 
     @Override
+    public void setValue(String o) {
+        this.year=Year.parse(o);
+    }
+
+
+    @Override
     public int compareTo(Object o) {
-        return 0;
+        int i=year.compareTo(((SqlYear)o).getYear());
+        return i;
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
+    }
+
+    public Year getYear() {
+        return year;
+    }
+
+    @Override
+    public String toString() {
+        return year.toString();
     }
 }

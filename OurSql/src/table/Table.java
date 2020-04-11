@@ -91,9 +91,8 @@ public class Table extends SqlConstantImpl {
             for(int i=0;i<attributes.size();i++){
                 String name=attributes.get(i).image;
                 String v=values.get(i).get(j).image;
-                Class c= (Class) propertyMap.get(name);
-                SqlType value=(SqlType)c.newInstance();
-                value.setValue(v);
+//                Class c= (Class) propertyMap.get(name);
+                SqlType value=DMLTool.convertToValue(name,v,propertyMap);
                 ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
                 if(cd!=null){
                     pk.addPrimaryKey((Comparable) value);
