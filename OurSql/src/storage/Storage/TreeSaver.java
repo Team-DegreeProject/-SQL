@@ -1,12 +1,11 @@
-package Storage;
+package storage.Storage;
 
-import BTree.BPlusTree;
-import BTree.CglibBean;
-import BTree.LeafNode;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import table.BTree.BPlusTree;
+import table.BTree.LeafNode;
 
 import java.io.File;
 import java.io.FileOutputStream;

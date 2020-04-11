@@ -1,0 +1,47 @@
+
+options{
+//    JDK_VERSION="1.5"; //jdk版本
+//    LOOKAHEAD=1;//LL(1)文法
+    static=false;//语法分析器是否为静态
+}
+
+PARSER_BEGIN(Adder)
+public class Adder{
+    public static void main(String[] args)  throws ParseException, TokenMgrError{
+        Adder adder= new Adder(System.in);
+        int val = adder.Start();
+        System.out.println(val);
+    }
+}
+PARSER_END(Adder)
+
+SKIP:{ " "}
+
+TOKEN : { < PLUS : "+" > }
+TOKEN : { < NUMBER : (["0"-"9"])+ > }
+TOKEN : { < EOL : "\n" | "\r" | "\r\n" > }
+
+int Start() throws NumberFormatException :
+{
+    int i ;
+    int value ;
+}
+{
+
+    value = Primary()
+    (
+        <PLUS>
+        i = Primary()
+        { value += i ; }
+    )*
+    { return value ; }
+}
+
+int Primary() throws NumberFormatException:
+{
+    Token t ;
+}
+{
+    t=<NUMBER>
+    { return Integer.parseInt( t.image ) ; }
+}
