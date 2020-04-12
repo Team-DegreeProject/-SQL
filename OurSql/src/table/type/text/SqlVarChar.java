@@ -1,6 +1,8 @@
 package table.type.text;
 
-public class SqlVarChar implements Comparable<SqlVarChar>{
+import table.type.SqlType;
+
+public class SqlVarChar implements SqlType {
     private String string=null;
     private int scale=-1;
 
@@ -8,8 +10,20 @@ public class SqlVarChar implements Comparable<SqlVarChar>{
 
     }
 
+    public SqlVarChar(String str){
+        changeRange(str);
+    }
+
     public SqlVarChar(int l, String str){
         scale=l;
+        changeRange(str);
+    }
+
+    public void changeRange(String str){
+        if(scale==-1){
+            string=str;
+            return;
+        }
         if(str.length()<=scale){
             string=str;
         }else{
@@ -17,11 +31,11 @@ public class SqlVarChar implements Comparable<SqlVarChar>{
         }
     }
 
-    @Override
-    public int compareTo(SqlVarChar o) {
-        int re=this.string.compareTo(o.string);
-        return re;
-    }
+//    @Override
+//    public int compareTo(SqlVarChar o) {
+//        int re=this.string.compareTo(o.string);
+//        return re;
+//    }
 
     public int getLength(){
         return scale;
@@ -35,12 +49,23 @@ public class SqlVarChar implements Comparable<SqlVarChar>{
         this.scale = length;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setString(String str) {
+        changeRange(str);
     }
 
     @Override
     public String toString() {
         return string.toString();
+    }
+
+    @Override
+    public void setValue(String o) {
+        setString(o);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int re=this.string.compareTo(((SqlVarChar)o).string);
+        return re;
     }
 }

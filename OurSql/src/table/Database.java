@@ -71,7 +71,7 @@ public class Database {
         values.add(t.getTableDescriptor().getName());
         id++;
         String[] attributes=database.getTableDescriptor().getColumnNamesArray();
-        return database.insertRows(values);
+        return database.insertARow(values);
     }
 
     public void printDatabase(){

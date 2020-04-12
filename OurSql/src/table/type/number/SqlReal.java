@@ -5,7 +5,9 @@ package table.type.number;
 //这种数据类型的数据存储范围为从-3.40E+38～3.40E+38。
 
 
-public class SqlReal implements Comparable<SqlReal>{
+import table.type.SqlType;
+
+public class SqlReal implements  SqlType {
     private Float data;
 
     public SqlReal(float f){
@@ -19,6 +21,11 @@ public class SqlReal implements Comparable<SqlReal>{
 
     public void setData(float data) {
         this.data = data;
+        try {
+            changeRange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public float getData() {
@@ -33,13 +40,19 @@ public class SqlReal implements Comparable<SqlReal>{
 
     }
 
-    @Override
-    public int compareTo(SqlReal o) {
-        return this.data.compareTo(o.data);
-    }
 
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public void setValue(String o) {
+        setData(Float.parseFloat(o));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.data.compareTo(((SqlReal)o).data);
     }
 }

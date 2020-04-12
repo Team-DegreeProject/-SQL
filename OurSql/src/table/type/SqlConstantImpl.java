@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class SqlConstantImpl implements SqlConstant{
 
-    protected Map<Integer,String> sqlMap = new HashMap();
+    public Map<Integer,String> sqlMap = new HashMap();
 
     public SqlConstantImpl(){ constructMap(); }
     public final static int TABLE_DESCRIPTOR=500;

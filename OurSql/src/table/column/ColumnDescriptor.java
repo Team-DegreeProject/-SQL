@@ -2,6 +2,7 @@ package table.column;
 
 
 import table.TableDescriptor;
+import table.type.SqlType;
 
 public class ColumnDescriptor{
 
@@ -13,7 +14,7 @@ public class ColumnDescriptor{
     private long autoincInc=0;
     private long autoincValue=0;
     private boolean autoincCycle=false;
-    private Object columnDefaultValue=null;
+    private SqlType columnDefaultValue=null;
 
 
     /**
@@ -28,7 +29,7 @@ public class ColumnDescriptor{
      */
     public ColumnDescriptor(String columnName, int columnPosition,
                             DataTypeDescriptor columnType,
-                            TableDescriptor table, long autoincStart, long autoincInc, boolean autoincCycle,Object columnDefaultInfo) {
+                            TableDescriptor table, long autoincStart, long autoincInc, boolean autoincCycle,SqlType columnDefaultInfo) {
         this.columnName = columnName;
         this.columnPosition = columnPosition;
         this.columnType = columnType;
@@ -146,6 +147,60 @@ public class ColumnDescriptor{
 
     public TableDescriptor getTableDescriptor(){ return table; }
 
+    public boolean isAutoincCycle() {
+        return autoincCycle;
+    }
 
+    public DataTypeDescriptor getColumnType() {
+        return columnType;
+    }
+
+    public SqlType getColumnDefaultValue() {
+        return columnDefaultValue;
+    }
+
+    public void setAutoincCycle(boolean autoincCycle) {
+        this.autoincCycle = autoincCycle;
+    }
+
+    public int getColumnPosition() {
+        return columnPosition;
+    }
+
+    public void setAutoincInc(long autoincInc) {
+        this.autoincInc = autoincInc;
+    }
+
+    public void setAutoincStart(long autoincStart) {
+        this.autoincStart = autoincStart;
+    }
+
+    public void setAutoincValue(long autoincValue) {
+        this.autoincValue = autoincValue;
+    }
+
+    public void setColumnDefaultValue(SqlType columnDefaultValue) {
+        this.columnDefaultValue = columnDefaultValue;
+    }
+
+    public TableDescriptor getTable() {
+        return table;
+    }
+
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
+
+    public void setColumnPosition(int columnPosition) {
+        this.columnPosition = columnPosition;
+    }
+
+    public void setColumnType(DataTypeDescriptor columnType) {
+        this.columnType = columnType;
+    }
+
+    public void setTable(TableDescriptor table) {
+        this.table = table;
+    }
 
 }

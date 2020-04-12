@@ -1,9 +1,41 @@
 package table.type.date;
 
-import java.sql.Timestamp;
+import table.type.SqlType;
 
-public class SqlTimeStamp extends Timestamp {
-    public SqlTimeStamp(int year, int month, int date, int hour, int minute, int second, int nano) {
-        super(year, month, date, hour, minute, second, nano);
+import java.sql.Timestamp;
+//yyyy-[m]m-[d]d hh:mm:ss
+public class SqlTimeStamp implements SqlType {
+
+    private  Timestamp timestamp=null;
+
+    public SqlTimeStamp(){}
+
+    public SqlTimeStamp(String ts){
+        this.timestamp=Timestamp.valueOf(ts);
+    }
+
+   @Override
+    public void setValue(String o) {
+       this.timestamp=Timestamp.valueOf(o);
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        int i=this.timestamp.compareTo(((SqlTimeStamp)o).getTimestamp());
+        return i;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return timestamp.toString();
     }
 }

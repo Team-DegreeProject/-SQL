@@ -64,6 +64,7 @@ public class DataTypeDescriptor implements SqlConstant {
     }
 
 
+
     @Override
     public String toString() {
         return tokenImage[typeId];

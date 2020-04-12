@@ -1,6 +1,7 @@
 package table.BTree;
 
 import table.Table;
+import table.TableDescriptor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,10 +16,10 @@ public class BPlusTreeTool {
      * @return
      */
     public static BPlusTree listToBplusTree(List<CglibBean> list){
-        BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
+        BPlusTree b = new BPlusTree<>(4);
         for (int i=0;i<list.size();i++){
             CglibBean c=list.get(i);
-            b.insert(c,(Integer)c.getValue("id"));
+            b.insert(c,(Comparable) c.getValue("primary key"));
         }
         return b;
     }
@@ -99,32 +100,35 @@ public class BPlusTreeTool {
         printList(list,attribute);
     }
 
-    public static void printList(List list){
-        boolean first=true;
-        List<String> attribute=new ArrayList();
+    public static void printList(List list,TableDescriptor td){
+//        boolean first=true;
+        td.printColumnName();
+        System.out.println("-------------------------------------");
+        String[] attribute=td.getColumnNamesArray();
         for(int i=0;i<list.size();i++){
             CglibBean c= (CglibBean) list.get(i);
-            if(first){
-                Set s=c.beanMap.keySet();
-                Iterator it=  s.iterator();
-                while(it.hasNext()){
-                    String att= (String) it.next();
-                    attribute.add(att);
-                }
-                first=false;
-                for(int j=0;j<attribute.size();j++){
-                    System.out.print(attribute.get(j));
-                    if(j!=attribute.size()-1){
-                        System.out.print(",");
-                    }else{
-                        System.out.println(";");
-                    }
-                }
-                System.out.println("-------------------------------------");
-            }
-            for(int j=0;j<attribute.size();j++){
-                System.out.print(c.getValue(attribute.get(j)));
-                if(j!=attribute.size()-1){
+//            if(first){
+//                Set s=c.beanMap.keySet();
+//                Iterator it=  s.iterator();
+//                while(it.hasNext()){
+//                    String att= (String) it.next();
+//                    attribute.add(att);
+//                }
+//                first=false;
+//                for(int j=0;j<attribute.size();j++){
+//                    System.out.print(attribute.get(j));
+//                    if(j!=attribute.size()-1){
+//                        System.out.print(",");
+//                    }else{
+//                        System.out.println(";");
+//                    }
+//                }
+//                System.out.println("-------------------------------------");
+//            }
+
+            for(int j=0;j<attribute.length;j++){
+                System.out.print(c.getValue(attribute[j]));
+                if(j!=attribute.length-1){
                     System.out.print(",");
                 }else{
                     System.out.println(";");
@@ -133,9 +137,9 @@ public class BPlusTreeTool {
         }
     }
 
-    public static void printBPlusTree(BPlusTree b){
+    public static void printBPlusTree(BPlusTree b, TableDescriptor td){
         List list=b.getDatas();
-        printList(list);
+        printList(list,td);
         System.out.println("-------------------------------------------------------");
     }
 
