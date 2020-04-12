@@ -40,6 +40,7 @@ public class TableStatements {
         }
     }
 
+    
     public static void alterTable(List tokens){
         try {
             AlterTableStatement alterTableStatement=new AlterTableStatement(tokens);

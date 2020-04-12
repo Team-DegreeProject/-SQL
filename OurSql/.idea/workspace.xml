@@ -2,58 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94ecb4c7-e690-4952-91d0-f22ff34b4589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/data/DataStatements.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/data/DataStatements.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/data/InsertDataStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/data/InsertDataStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/table/AlterTableStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/table/AlterTableStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/table/CreateTableStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/table/CreateTableStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/ColumnDescriptorList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/ColumnDescriptorList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/TableDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/TableDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/column/ColumnDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/column/ColumnDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/column/DataTypeDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/column/DataTypeDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/SqlConstantImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/SqlConstantImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/SqlType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/SqlType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlDate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlDate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlTime.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlTimeStamp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlTimeStamp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlYear.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/date/SqlYear.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlDecimal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlDecimal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlDouble.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlDouble.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlFloat.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlFloat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlInt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlInt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlReal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/number/SqlReal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlBlob.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlBlob.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlChar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlChar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlVarChar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/text/SqlVarChar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/test/testDouble.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/test/testDouble.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/DMLTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/DMLTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/data/DataStatements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/data/DataStatements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/data/InsertDataStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/data/InsertDataStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/table/AlterTableStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/table/AlterTableStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/table/CreateTableStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/table/CreateTableStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/table/TableStatements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/table/TableStatements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/ColumnDescriptorList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/ColumnDescriptorList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/TableDescriptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/TableDescriptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/column/ColumnDescriptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/column/ColumnDescriptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/column/DataTypeDescriptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/column/DataTypeDescriptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/SqlType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/SqlType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/date/SqlDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/date/SqlDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/date/SqlTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/date/SqlTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/date/SqlTimeStamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/date/SqlTimeStamp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/date/SqlYear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/date/SqlYear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/number/SqlDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/number/SqlDecimal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/number/SqlDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/number/SqlDouble.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/number/SqlFloat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/number/SqlFloat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/number/SqlInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/number/SqlInt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/number/SqlReal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/number/SqlReal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/text/SqlBlob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/text/SqlBlob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/text/SqlChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/text/SqlChar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/text/SqlVarChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/text/SqlVarChar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/testDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/testDouble.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/execution/table/TableStatements.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+            <state relative-caret-position="211">
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -76,7 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/execution/table/AlterTableStatement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
+            <state relative-caret-position="1025">
               <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
             </state>
           </provider>
@@ -85,17 +34,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/execution/DMLTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
-              <caret line="106" column="45" lean-forward="true" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="45" />
+            <state relative-caret-position="2375">
+              <caret line="106" column="45" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/table/Table.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="156">
-              <caret line="274" column="40" lean-forward="true" selection-start-line="274" selection-start-column="40" selection-end-line="274" selection-end-column="40" />
+              <caret line="274" column="40" selection-start-line="274" selection-start-column="40" selection-end-line="274" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -169,17 +127,17 @@
         <option value="$PROJECT_DIR$/src/table/type/text/SqlBlob.java" />
         <option value="$PROJECT_DIR$/src/table/type/text/SqlChar.java" />
         <option value="$PROJECT_DIR$/src/table/type/text/SqlVarChar.java" />
-        <option value="$PROJECT_DIR$/src/execution/table/TableStatements.java" />
         <option value="$PROJECT_DIR$/src/execution/table/AlterTableStatement.java" />
         <option value="$PROJECT_DIR$/src/execution/DMLTool.java" />
+        <option value="$PROJECT_DIR$/src/execution/table/TableStatements.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="58" />
-    <option name="y" value="15" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="141" />
+    <option name="y" value="91" />
     <option name="width" value="2004" />
-    <option name="height" value="1310" />
+    <option name="height" value="1311" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -187,8 +145,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -301,6 +257,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -371,23 +329,25 @@
       <workItem from="1586574872101" duration="16396000" />
       <workItem from="1586608311098" duration="4066000" />
       <workItem from="1586675003100" duration="17665000" />
+      <workItem from="1586706841975" duration="197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49035000" />
+    <option name="totallyTimeSpent" value="49232000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="39" y="10" width="1336" height="873" extended-state="0" />
+    <frame x="305" y="15" width="1336" height="874" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25508606" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25899842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.39811066" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.39757413" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -487,13 +447,6 @@
             <element signature="e#697#698#0" expanded="true" />
             <element signature="e#741#742#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19475">
-          <caret line="786" selection-start-line="786" selection-end-line="786" />
         </state>
       </provider>
     </entry>
@@ -828,31 +781,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/execution/table/TableStatements.java">
+    <entry file="file://$PROJECT_DIR$/src/execution/table/AlterTableStatement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+        <state relative-caret-position="1025">
+          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/execution/DMLTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="106" column="45" lean-forward="true" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/execution/table/AlterTableStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+        <state relative-caret-position="2375">
+          <caret line="106" column="45" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/table/Table.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
-          <caret line="274" column="40" lean-forward="true" selection-start-line="274" selection-start-column="40" selection-end-line="274" selection-end-column="40" />
+          <caret line="274" column="40" selection-start-line="274" selection-start-column="40" selection-end-line="274" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/execution/table/TableStatements.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
         </state>
       </provider>
     </entry>
