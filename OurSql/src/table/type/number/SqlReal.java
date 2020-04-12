@@ -8,7 +8,8 @@ package table.type.number;
 import table.type.SqlType;
 
 public class SqlReal implements  SqlType {
-    private Float data;
+
+    private Float data=new Float(0);
 
     public SqlReal(float f){
         this.data=f;
@@ -44,6 +45,11 @@ public class SqlReal implements  SqlType {
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public SqlType addOne() throws Exception {
+        return new SqlReal(this.data+1);
     }
 
     @Override

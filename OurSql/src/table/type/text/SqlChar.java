@@ -3,7 +3,7 @@ package table.type.text;
 import table.type.SqlType;
 
 public class SqlChar implements SqlType {
-    private String string=null;
+    private String string="";
     private int scale=-1;
     private int realLength=0;
 
@@ -70,6 +70,12 @@ public class SqlChar implements SqlType {
     @Override
     public String toString() {
         return string.toString();
+    }
+
+    @Override
+    public SqlType addOne() throws Exception {
+
+        return this;
     }
 
     @Override

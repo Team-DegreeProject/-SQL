@@ -2,6 +2,8 @@ package table.column;
 
 import table.type.SqlConstant;
 
+import static table.type.SqlConstantImpl.sqlMap;
+
 public class DataTypeDescriptor implements SqlConstant {
 
     private int typeId;
@@ -92,6 +94,17 @@ public class DataTypeDescriptor implements SqlConstant {
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
+    }
+
+    public void printDataTypeDescriptor(){
+        System.out.println(
+                "Datatypedescriptor=============="+
+                "Type:"+sqlMap.get(typeId)+","+
+                "Precision:"+precision+","+
+                "Scale:"+scale+","+
+                "isNullable:"+isNullable+","+
+                "PrimaryKey:"+primaryKey
+        );
     }
 
 }

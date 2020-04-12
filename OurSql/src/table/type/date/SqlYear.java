@@ -37,4 +37,10 @@ public class SqlYear implements SqlType {
     public String toString() {
         return year.toString();
     }
+
+    @Override
+    public SqlType addOne() {
+
+        return this;
+    }
 }
