@@ -9,7 +9,7 @@ package table.type.number;
 import table.type.SqlType;
 
 public class SqlFloat implements  SqlType {
-    private Float data;
+    private Float data =new Float(0);
 
     public SqlFloat(float f){
         this.data=f;
@@ -28,6 +28,11 @@ public class SqlFloat implements  SqlType {
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public SqlType addOne() {
+        return new SqlFloat(this.data+1);
     }
 
     @Override

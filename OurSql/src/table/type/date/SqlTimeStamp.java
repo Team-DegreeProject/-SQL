@@ -38,4 +38,10 @@ public class SqlTimeStamp implements SqlType {
     public String toString() {
         return timestamp.toString();
     }
+
+    @Override
+    public SqlType addOne() {
+
+        return this;
+    }
 }

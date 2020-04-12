@@ -1,14 +1,17 @@
 package table.type;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class SqlConstantImpl implements SqlConstant{
 
-    public Map<Integer,String> sqlMap = new HashMap();
+    public static Map<Integer,String> sqlMap = new HashMap();
 
     public SqlConstantImpl(){ constructMap(); }
     public final static int TABLE_DESCRIPTOR=500;
+//    public final static int AUTO_START=501;
 
 
     private void constructMap(){

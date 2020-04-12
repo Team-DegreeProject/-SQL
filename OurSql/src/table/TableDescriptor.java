@@ -4,6 +4,8 @@ import table.column.ColumnDescriptor;
 
 import java.util.List;
 
+import static table.type.SqlConstantImpl.sqlMap;
+
 public class TableDescriptor implements TableSchema {
 
     //表所对应的conglom的标识
@@ -18,12 +20,13 @@ public class TableDescriptor implements TableSchema {
     //    private int tableType;
     private int schema;
     private ColumnDescriptorList primaryKey;
-    /**
-     * 根据表描述获取列描述
-     */
     ColumnDescriptorList columnDescriptorList;
 
-
+    public  TableDescriptor(String tableName,int schema,ColumnDescriptorList columnDescriptorList){
+        this.tableName=tableName;
+        this.schema=schema;
+        this.columnDescriptorList=columnDescriptorList;
+    }
 
     public TableDescriptor(String tableName, char lockGranularity,int schema,ColumnDescriptorList primaryKey) {
         this.tableName = tableName;
@@ -164,5 +167,19 @@ public class TableDescriptor implements TableSchema {
             }
         }
     }
+
+    public void printTableDescriptor(){
+        System.out.println("TableDescriptor:");
+        for(int i=0;i<primaryKey.size();i++){
+            ColumnDescriptor c=primaryKey.elementAt(i);
+            System.out.print(c.getColumnName()+",");
+        }
+        System.out.println(' ');
+        for(int i=0;i<columnDescriptorList.size();i++){
+            ColumnDescriptor c=columnDescriptorList.elementAt(i);
+            c.printColumnDescriptor();
+        }
+    }
+
 }
 

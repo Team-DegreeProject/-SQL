@@ -76,6 +76,11 @@ public class SqlInt implements SqlType {
     }
 
     @Override
+    public SqlType addOne() {
+        return new SqlInt((this.data+1),this.scale);
+    }
+
+    @Override
     public void setValue(String o) {
         setData(Integer.parseInt(o));
     }
