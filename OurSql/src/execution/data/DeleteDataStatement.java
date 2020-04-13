@@ -2,12 +2,9 @@ package execution.data;
 
 import execution.FromStatement;
 import execution.WhereStatament;
-import javafx.scene.control.Tab;
 import parsing.Token;
 import table.Table;
-import table.type.SqlType;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static parsing.SqlParserConstants.*;

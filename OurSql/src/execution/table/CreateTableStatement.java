@@ -9,7 +9,6 @@ import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.SqlConstant;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static execution.DMLTool.analyseOneRow;
@@ -23,7 +22,7 @@ public class CreateTableStatement implements SqlConstant {
         statement=l;
     }
 
-    public Table createImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Table createImpl() throws Exception {
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
         ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);

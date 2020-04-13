@@ -73,7 +73,6 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
     }
 
     public boolean checkNotNull(List<Token> columnNames,List<List<Token>> values){
-        System.out.println(this.size());
         for (ColumnDescriptor columnDescriptor : this) {
             System.out.println(columnDescriptor);
             DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
@@ -111,5 +110,14 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return columnDescriptors;
     }
 
+    public  ColumnDescriptorList getUniqueList(){
+        ColumnDescriptorList columnDescriptors=new ColumnDescriptorList();
+        for (ColumnDescriptor columnDescriptor : this) {
+            if(columnDescriptor.isUnique()){
+                columnDescriptors.add(columnDescriptor);
+            }
+        }
+        return columnDescriptors;
+    }
 
 }

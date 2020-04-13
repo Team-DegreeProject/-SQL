@@ -1,10 +1,7 @@
 package execution.table;
 
-import execution.ExecuteStatement;
 import execution.FromStatement;
-import execution.WhereStatament;
 import parsing.Token;
-import table.BTree.CglibBean;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.column.ColumnDescriptor;

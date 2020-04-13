@@ -1,10 +1,7 @@
 package execution.table;
 
-import execution.ExecuteStatement;
 import execution.FromStatement;
 import parsing.Token;
-import table.BTree.BPlusTreeTool;
-import table.BTree.CglibBean;
 import table.Table;
 
 import java.util.List;

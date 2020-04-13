@@ -67,6 +67,17 @@ public class SqlInt implements SqlType {
 
     public void setScale(int scale) {
         this.scale = scale;
+        changeRange();
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Int do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+        changeRange();
     }
 
 

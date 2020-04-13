@@ -15,6 +15,7 @@ public class ColumnDescriptor{
     private long autoincValue=0;
     private SqlType columnDefaultValue=null;
     private String comment=null;
+    private boolean unique=false;
 
 
     /**
@@ -195,6 +196,17 @@ public class ColumnDescriptor{
         this.comment = comment;
     }
 
+    public boolean isUnique() {
+        return unique;
+    }
+
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+        if(unique==true){
+            this.columnType.setNullable(false);
+        }
+    }
+
     public void printColumnDescriptor(){
         System.out.println(
                 "ColumnDescriptor============"+
@@ -202,7 +214,8 @@ public class ColumnDescriptor{
                         "ColumnPosition:"+columnPosition+","+
                         "autoIncrement:"+autoincInc+","+
                         "ColumnDefaultValue:"+columnDefaultValue+","+
-                        "Comment:"+comment
+                        "Comment:"+comment+","+
+                        "unique"+unique
         );
         if (columnType == null) {
             System.out.println("DatatypeDescriptor==============null");

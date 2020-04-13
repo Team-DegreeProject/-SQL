@@ -20,6 +20,10 @@ public class SqlReal implements  SqlType {
         }
     }
 
+
+    public SqlReal(){}
+
+
     public void setData(float data) {
         this.data = data;
         try {
@@ -50,6 +54,20 @@ public class SqlReal implements  SqlType {
     @Override
     public SqlType addOne() throws Exception {
         return new SqlReal(this.data+1);
+    }
+
+    @Override
+    public void setScale(int i) throws Exception {
+        throw new Exception("Real do not need scale.");
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Real do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
     }
 
     @Override

@@ -15,12 +15,14 @@ import execution.ExecuteStatement;
 import execution.database.DatabaseStatements;
 import execution.table.TableStatements;
 
-
 public class SqlParser {
 
     private List<Object> sql = new ArrayList<Object>(); // sql最外层语句
-    private List<Object> list = new ArrayList<Object>();//
+    private List<Object> subquerySql = new ArrayList<Object>();//subquery 存储子select
+    private List<Object> list = new ArrayList<Object>();//内一层
+    private List<Object> alist = new ArrayList<Object>();//子内一层
     private List<Object> templist = new ArrayList<Object>();
+    ArrayList<Object> atemplist = new ArrayList<Object>();
 
     public static void main(String[] args) throws Exception {
 
@@ -295,6 +297,13 @@ TOKEN [IGNORE_CASE]:
 |	<WORK: "work">
 |	<WRITE: "write">
 |	<YEAR: "year">
+|	<WEEK: "week">
+|	<NOW: "now">
+|	<SYSDATE: "sysdate">
+|	<CURDATE: "curdate">
+|	<DATEDIFF: "datediff">
+|	<DATE_FORMAT: "date_fromat">
+
 
 }
 TOKEN [IGNORE_CASE] :
@@ -438,7 +447,6 @@ TOKEN [IGNORE_CASE] :
 {
 	<BOOLEAN: "boolean">
 |	<CALL: "call">
-|	<CURDATE: "curdate">
 |	<CURRENT_ROLE: "current_role">
 |	<CURTIME: "curtime">
 |   <DATABASE: "database">
@@ -464,6 +472,7 @@ TOKEN :
 {
 
 <ID :  <LETTER> (<LETTER>|<DIGIT>)*>
+
 |
 <NAME: <ID> ( "." <ID>)?>
 |
@@ -475,7 +484,9 @@ TOKEN :
 |
 <STRING : "/'" (~["/"])* ("///'")? (~["/"])* "/'">
 |
-<TEXT : <QUOTE><LETTER> (<LETTER>|<DIGIT>)* <QUOTE> >
+<TEXT : <QUOTE> (<LETTER>|<DIGIT>) (<LETTER>|<DIGIT>|(" "))* <QUOTE> >
+|
+<TIMEORDATE: <QUOTE>( (<DIGIT>) (<DIGIT>|("-")|"_"|":"|" ")*   )<QUOTE>   >
 |
 <LIKETEXT:<QUOTE>   ("%"|("_")+)?  (<LETTER>|<DIGIT>) (<LETTER>|<DIGIT>)*   ("%"|("_")+)? <QUOTE>>
 //|
@@ -526,8 +537,6 @@ void parse() :
     //***************6 SELECT**************************************************
     |t = <SELECT> select(t)
 
-
-
     //***************ALTER*******************************************************
     |t = <ALTER>    alter(t)
 
@@ -557,8 +566,6 @@ void select(Token d):
 {
 //    t =<DATABASE>   {saveTokenInSQL(t);}
 
-
-
     (
        (t =<ALL>      {saveTokenInSQL(t);}
         | t =<ASTERISK> {saveTokenInSQL(t);}
@@ -582,12 +589,47 @@ void select(Token d):
 
 
 
-    {   showStructure(); }
+    showStructure()
     (<STATEMENT_END> | <END>)
 
          //{ExecuteStatement.delete(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
+
+}
+void subquerySelect(Token d):
+{
+    subquerySql = new ArrayList<Object>();
+    Token t;
+    t = d;
+    saveTokenInList(t,subquerySql);
+
+
+}
+{
+   // t =<SELECT>   {saveTokenInList(t,list);}
+   (
+     (
+              t =<ALL>      {saveTokenInList(t,subquerySql);}
+            | t =<ASTERISK> {saveTokenInList(t,subquerySql);}
+     )
+     |
+     (
+        subquerySelectResultList()
+     )
+   )
+        t =<FROM>   {saveTokenInList(t,subquerySql);}
+        subqueryFromTables()
+        (subqueryJoin())*
+        (subqueryWhere())?
+        (subqueryGroupBy() ) ?
+        (subqueryOrderBy() ) ?
+
+
+
+
+    //{   showStructure(); }
+    //(<STATEMENT_END> | <END>)
 
 }
 
@@ -690,21 +732,32 @@ void insert(Token d) :
                 //需要接口获得个数，暂时不做这个判断
             //{saveTempListInList(templist,list);}
             {saveTempListInList(list,sql);}
-            t =<VALUES>
-            {
+           (
+            (
+                t =<VALUES>
+                {
                   saveTokenInSQL(t);
-            }
-//            <LBRACKET>
-                  multivalues(i)
-//            <RBRACKET>
-
+                }
+                //<LBRACKET>
+                 multivalues(i)
+                //<RBRACKET>
+            )
+            |
+            (
+                t=<SELECT>
+                subquerySelect(t)
+                {
+                   saveTempListInList(subquerySql,sql);
+                }
+            )
+           )
             (<STATEMENT_END> | <END>)
     )
 
     {   showStructure(); }
     //(<STATEMENT_END> | <END>)
 
-    {ExecuteStatement.insert(sql);} // %%
+     {ExecuteStatement.insert(sql);} // %%
     // {test.testWhereAnd(sql);} // %%
 
 }
@@ -850,7 +903,11 @@ void columnConstration():
     |t = <PRIMARY_KEY>{saveTokenInList(t,templist);}
     |t = <AUTO_INCREMENT>{saveTokenInList(t,templist);}
     |t = <INCREMENT>{saveTokenInList(t,templist);}
-    |t = <COMMENT>{saveTokenInList(t,templist);}
+    |
+    (
+        t = <COMMENT>{saveTokenInList(t,templist);}
+         (t=<TEXT>|t=<NUMBER>){saveTokenInList(t,templist);}
+    )
 
     )+
 
@@ -902,7 +959,7 @@ void delete(Token d) :
 
 
 
-    {ExecuteStatement.delete(sql);} // %%
+  {ExecuteStatement.delete(sql);}// %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -929,7 +986,7 @@ void truncate(Token d) :
 
 
 
-    {ExecuteStatement.truncate(sql);} // %%
+    {ExecuteStatement.truncate(sql);}// %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -972,7 +1029,7 @@ void drop(Token d):
     {System.out.println("------&&&&&&&&&&&&&&&&7--------");}
 
 
-     {ExecuteStatement.drop(sql);} // %%
+     {ExecuteStatement.drop(sql);}// %%
     //    {test.testWhereAnd(sql);} // %%
 }
 
@@ -1015,7 +1072,7 @@ void show(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {DatabaseStatements.showDatabase(sql);} // %%
+         {DatabaseStatements.showDatabase(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 
@@ -1065,7 +1122,7 @@ void update(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.update(sql);} // %%
+     {ExecuteStatement.update(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 }
@@ -1102,7 +1159,18 @@ void alter(Token d):
         (
             (createLine())
         )
-         {saveTempListInList(list,sql);}
+        //{saveTempListInList(list,sql);}
+        (
+            ","
+             t = <MODIFY>                 //{saveTokenInSQL(t);}
+             (
+                //{list = new ArrayList<Object>();}
+                 (createLine()) //{saveTempListInList(list,sql);}
+             )
+            //{saveTempListInList(list,sql);}
+        )*
+        {saveTempListInList(list,sql);}
+
         |
         t = <DROP>  dropColumn(t)
         (
@@ -1180,6 +1248,23 @@ void Join():
     {saveTempListInList(templist,sql);}
 
 }
+void subqueryJoin():
+{
+    Token t;
+    atemplist = new ArrayList<Object>();
+}
+{
+    (t = <INNER>|t=<LEFT>|t =<FULL>|t=<CROSS>)      {saveTokenInList(t,subquerySql);}
+    t = <JOIN>                  {saveTokenInList(t,subquerySql);}
+    (t = <NAME>|t = <ID>)       {saveTokenInList(t,subquerySql);}
+    t = <ON>                    {saveTokenInList(t,subquerySql);}
+
+    (t = <NAME>|t = <ID>)       {saveTokenInList(t,atemplist);}
+    t = <EQ>                    {saveTokenInList(t,atemplist);}
+    (t = <NAME>|t = <ID>)       {saveTokenInList(t,atemplist);}
+    {saveTempListInList(atemplist,subquerySql);}
+
+}
 
 
 //where语句
@@ -1188,11 +1273,15 @@ void where() :
 {
     t = <WHERE>
     {   saveTokenInSQL(t);   }
-
-
     multiCondition()
+}
 
-
+void subqueryWhere() :
+{Token t;}
+{
+    t = <WHERE>
+    {saveTokenInList(t,subquerySql);}
+    subqueryMultiCondition()
 }
 
 // 多条件并列的时候
@@ -1216,15 +1305,15 @@ void multiCondition() :
     (     t = <AND>  {   saveTokenInList(t,list); i = 1; }
         | t = <OR>   {   saveTokenInList(t,list); i = 1;}
     )
-
     (
         condition() | "(" condition() ")"
     )
  )*
+
     {
         if( i == 0)
         {
-           list = templist;
+         //  list = templist;
            saveListInSQL(list);
            System.out.println("Only one condition");
         }
@@ -1235,6 +1324,47 @@ void multiCondition() :
     }
 
 }
+
+void subqueryMultiCondition() :
+{
+    Token t;
+    int i = 0;// i = 0 表示只有一个condition；=1 表示有多个condition
+    alist = new ArrayList<Object>();
+}
+{
+
+ (
+    //好多个小条件
+    subqueryCondition()
+    |
+    "(" subqueryCondition() ")"
+ )
+
+ (
+    // 和或并好多个小条件
+    (     t = <AND>  {   saveTokenInList(t,alist); i = 1; }
+        | t = <OR>   {   saveTokenInList(t,alist); i = 1;}
+    )
+
+    (
+        subqueryCondition() | "(" subqueryCondition() ")"
+    )
+ )*
+    {
+        if( i == 0)
+        {
+           alist = atemplist;
+           {saveTempListInList(alist,subquerySql);}
+           System.out.println("Only one condition");
+        }
+        else
+        {
+           {saveTempListInList(alist,subquerySql);}
+        }
+    }
+
+}
+
 
 //小情况；小条件
 void condition() :
@@ -1250,6 +1380,25 @@ void condition() :
     (simpleCondition()|betweenCondition()|in()|like()|is())
  )
 }
+//小情况；小条件
+void subqueryCondition() :
+{
+    Token t;
+    atemplist = new ArrayList<Object>();
+}
+{
+    (t = <ID>|t =<NAME>|t =<TEXT>)      {saveTokenInList(t,atemplist);}
+   (
+        t = <AS>                           {saveTokenInList(t,atemplist);}
+        (t = <NAME>|t = <ID>)              {saveTokenInList(t,atemplist);}
+   )?
+ (
+    (t=<NOT>    {saveTokenInList(t,atemplist);})?
+    //加减乘除+right   // between & and // in(a,b,c,...)
+    (subquerysimpleCondition()|subqueryBetweenCondition()|subqueryin()|subquerylike()|subqueryis())
+ )
+}
+
 // Between ...  AND ... 条件语句
 void betweenCondition() :
 {Token t;}
@@ -1264,12 +1413,32 @@ void betweenCondition() :
             |   t =<NUMBER>    {saveTokenInList(t,templist);}
         )
 }
+void subqueryBetweenCondition() :
+{Token t;}
+{
+
+    t = <BETWEEN>   {saveTokenInList(t,atemplist);}
+        (       t=<TEXT>       {saveTokenInList(t,atemplist);}
+            |   t =<NUMBER>    {saveTokenInList(t,atemplist);}
+        )
+    t = <AND>   {saveTokenInList(t,atemplist);}
+        (       t=<TEXT>       {saveTokenInList(t,atemplist);}
+            |   t =<NUMBER>    {saveTokenInList(t,atemplist);}
+        )
+}
 
 void like():
 { Token t;}
 {
     t =  <LIKE>    {   saveTokenInList(t,templist);   }
     t = <LIKETEXT> {   saveTokenInList(t,templist);   }
+
+}
+void subquerylike():
+{ Token t;}
+{
+    t =  <LIKE>    {   saveTokenInList(t,atemplist);   }
+    t = <LIKETEXT> {   saveTokenInList(t,atemplist);   }
 
 }
 
@@ -1281,6 +1450,18 @@ void is():
         t = <NOT_NULL> {   saveTokenInList(t,templist);   }
         |
         t =  <NULL>    {   saveTokenInList(t,templist);   }
+   )
+
+
+}
+void subqueryis():
+{ Token t;}
+{
+   t =  <IS>    {   saveTokenInList(t,atemplist);   }
+   (
+        t = <NOT_NULL> {   saveTokenInList(t,atemplist);   }
+        |
+        t =  <NULL>    {   saveTokenInList(t,atemplist);   }
    )
 
 
@@ -1303,17 +1484,97 @@ void in () :
         //templist.add(t);
         saveTokenInList(t,templist);
     }
-    "("
-         (       t=<TEXT>       {saveTokenInList(t,templist1);}
-             |   t =<NUMBER>    {saveTokenInList(t,templist1);}
+    //{
+                //templist.add(t);
+             //saveTempListInList(templist1,templist);
+//             saveTempListInList(templist,list);
+    //    }
 
-             (<COMMA>)?
-         )+
-    ")"
+    <LBRACKET>
+    (
+        (
+
+            (
+                (     t=<TEXT>       {saveTokenInList(t,templist1);}
+                    |   t =<NUMBER>    {saveTokenInList(t,templist1);}
+                )
+                    (<COMMA>)?
+            )+
+
+//            {
+//                  saveTempListInList(templist1,templist);
+//                  saveTempListInList(templist,list);
+//            }
+        )
+        |
+        (
+
+            t=<SELECT>
+            {System.out.println("SUB-SELECT!!");}
+            subquerySelect(t)
+
+           // {saveTempListInList(subquerySql,list);}
+           {
+            saveTempListInList(subquerySql,templist1);
+//            saveTempListInList(templist1,templist);
+//            saveTempListInList(templist,list);
+            }
+
+        )
+    )
+    <RBRACKET>
     {
             //templist.add(t);
          saveTempListInList(templist1,templist);
          saveTempListInList(templist,list);
+    }
+}
+void subqueryin () :
+{
+    Token t;
+    // 新建一个临时的templist1存放小括号内容（）    --->templist1
+    // a in （templiste1）    --->condition ----> templist
+    //condition存放在templist中 conditon
+    //只有一个condition的时候 list = templist
+    //muticondition ---> list 放在sql中
+    List<Object>templist2 = new ArrayList<Object>();
+}
+{
+
+    t = <IN>
+    {
+        //templist.add(t);
+        saveTokenInList(t,atemplist);
+    }
+    //{
+                //templist.add(t);
+             //saveTempListInList(templist1,templist);
+//             saveTempListInList(templist,list);
+    //    }
+
+    <LBRACKET>
+    (
+        (
+
+            (
+                (     t=<TEXT>       {saveTokenInList(t,templist2);}
+                    |   t =<NUMBER>    {saveTokenInList(t,templist2);}
+                )
+                    (<COMMA>)?
+            )+
+
+//            {
+//                  saveTempListInList(templist1,templist);
+//                  saveTempListInList(templist,list);
+//            }
+        )
+//
+    )
+    <RBRACKET>
+    {
+            //templist.add(t);
+         saveTempListInList(templist2,atemplist);
+         saveTempListInList(atemplist,list);
     }
 }
 
@@ -1321,10 +1582,14 @@ void in () :
 void name() :
 {Token t;}
 {
+
+  (<YEAR>)
+  ("(")?
   (t = <ID>|t =<NAME>|t =<TEXT>)
   {
       saveTokenInList(t,templist);
   }
+  (")")?
   ( t = <AS>  {saveTokenInList(t,templist);}
     (t = <NAME>|t = <ID>) {saveTokenInList(t,templist);}
   )?
@@ -1343,6 +1608,16 @@ void simpleCondition() :
     |t =  <LQ>      {   saveTokenInList(t,templist);   }    |   t =  <RQ> {   saveTokenInList(t,templist);   }
     )
     rightCondition()
+}
+void subquerysimpleCondition() :
+{Token t;}
+{
+    //判断条件
+    (t = <EQ>       {   saveTokenInList(t,atemplist);   }    |   t =  <GT> {   saveTokenInList(t,atemplist);   }
+    |t =  <LT>      {   saveTokenInList(t,atemplist);   }    |   t =  <NE> {   saveTokenInList(t,atemplist);   }
+    |t =  <LQ>      {   saveTokenInList(t,atemplist);   }    |   t =  <RQ> {   saveTokenInList(t,atemplist);   }
+    )
+    subqueryrightCondition()
 }
 
 void rightCondition() :
@@ -1368,6 +1643,29 @@ void rightCondition() :
     | function()
 }
 
+void subqueryrightCondition() :
+{Token t;}
+{
+    // “/” ，数字，功能
+      t = <TEXT>
+          {
+              saveTokenInList(t,atemplist);
+              saveTempListInList(atemplist,alist);
+          }
+    | t = <NUMBER>
+          {
+               saveTokenInList(t,atemplist);
+               saveTempListInList(atemplist,alist);
+          }
+    | t = <NAME>
+          {
+               saveTokenInList(t,atemplist);
+               saveTempListInList(atemplist,alist);
+          }
+
+    //| function()
+}
+
 //功能方法
 void function() :
 {Token t;}
@@ -1381,8 +1679,6 @@ void function() :
      }
      (<LBRACKET> arguments() <RBRACKET>)?
 }
-
-
 
 
 
@@ -1414,7 +1710,9 @@ void argument() :
 void selectResultList() :
 {
     Token t;
+    //list = new ArrayList<Object>();
     list = new ArrayList<Object>();
+
 }
 {
     //{   System.out.println("------SELECT METHOD --------"); }
@@ -1424,6 +1722,22 @@ void selectResultList() :
     selectResult()
     )*
     {saveTempListInList(list,sql);}
+}
+
+void subquerySelectResultList() :
+{
+    Token t;
+    alist = new ArrayList<Object>();
+    //subquerySql = new ArrayList<Object>();
+}
+{
+    //{   System.out.println("------SELECT METHOD --------"); }
+    subquerySelectResult()
+    (
+    ","
+    subquerySelectResult()
+    )*
+    {saveTempListInList(alist,subquerySql);}
 }
 
 void selectResult() :
@@ -1440,6 +1754,38 @@ void selectResult() :
     )?
     {saveTempListInList(templist,list);}
 }
+
+void subquerySelectResult() :
+{
+    Token t;
+    ArrayList<Object> atemplist = new ArrayList<Object>();
+}
+{
+    //<ID>(<DOT><ID>)?
+    (   t =<DISTINCT>   {saveTokenInList(t,atemplist);})?
+    (t = <ID>|t = <NAME>){saveTokenInList(t,atemplist);}
+    (   t = <AS>{saveTokenInList(t,atemplist);}
+        (t = <ID>|t = <NAME>)  {saveTokenInList(t,atemplist);}
+    )?
+    {saveTempListInList(atemplist,alist);}
+}
+
+
+void subqueryFromTables() :
+{
+    Token t;
+    alist = new ArrayList<Object>();
+}
+{
+ subqueryTable()
+ (
+    ","
+    subqueryTable()
+ )*
+ {saveTempListInList(alist,subquerySql);}
+
+}
+
 
 void fromTables() :
 {
@@ -1462,12 +1808,28 @@ void table() :
 }
 {
   (t =<NAME>|t =<ID>)    {saveTokenInList(t,templist);}
- ((t =<NAME>|t =<ID>) {saveTokenInList(t,templist);}
-    |(t =<AS>{saveTokenInList(t,templist);}
-        (t =<NAME>|t =<ID>){saveTokenInList(t,templist);}
-      )
+  (
+    (t =<NAME>|t =<ID>) {saveTokenInList(t,templist);}
+    |   (t =<AS>{saveTokenInList(t,templist);}
+             (t =<NAME>|t =<ID>){saveTokenInList(t,templist);}
+        )
  )?
  {saveTempListInList(templist,list);}
+}
+void subqueryTable() :
+{
+    Token t;
+    ArrayList<Object> atemplist = new ArrayList<Object>();
+}
+{
+  (t =<NAME>|t =<ID>)    {saveTokenInList(t,atemplist);}
+  (
+    (t =<NAME>|t =<ID>) {saveTokenInList(t,atemplist);}
+    |   (t =<AS>{saveTokenInList(t,atemplist);}
+             (t =<NAME>|t =<ID>){saveTokenInList(t,atemplist);}
+        )
+ )?
+ {saveTempListInList(atemplist,alist);}
 }
 
 
@@ -1489,10 +1851,11 @@ void multivalues(int a) ://2.2.1	INSERT INTO table1 VALUES (value1, value2,…),
 {int i;}
 {
     {i = a;}
-     values(i){saveTempListInList(list,sql);}
+    values(i){saveTempListInList(list,sql);}
+
     (
-        ","
-        values(i){saveTempListInList(list,sql);}
+        (",")
+        values(i)       {saveTempListInList(list,sql);}
     )*
 
 }
@@ -1511,7 +1874,7 @@ void values(int a) ://2.2.1	INSERT INTO table1 VALUES (value1, value2,…);
         (",")
         value(){saveTempListInList(templist,list);i++;}
     )*
-    (<RBRACKET>) //?
+    (<RBRACKET>)//?
 
     {
         System.out.println("coulmn number："+k);
@@ -1531,6 +1894,7 @@ templist = new ArrayList<Object>();}
 {
     t = <TEXT>{saveTokenInList(t,templist);}
     |t = <NUMBER>{saveTokenInList(t,templist);}
+    | t = <TIMEORDATE>{saveTokenInList(t,templist);}
 }
 
 void groupBy() :
@@ -1544,6 +1908,18 @@ void groupBy() :
            groupsub()
         )*
         {saveTempListInList(list,sql);}
+}
+void subqueryGroupBy() :
+{Token t;   alist = new ArrayList<Object>();}
+{
+    t = <GROUP_BY>              {saveTokenInList(t,subquerySql);}
+    subquerygroupsub()
+    (
+        ","
+        subquerygroupsub()
+    )*
+    {saveTempListInList(alist,subquerySql);}
+    //{saveTempListInList(subquerySql,list);}
 }
 
 
@@ -1559,10 +1935,27 @@ void orderBy() :
         ","
         ordersub()
     )*
+
+
     {saveTempListInList(list,sql);}
 
 
 }
+void subqueryOrderBy() :
+{   Token t;
+    alist = new ArrayList<Object>();
+
+}
+{
+    t = <ORDER_BY>  {saveTokenInList(t,subquerySql);}
+    subqueryordersub()
+    (
+        ","
+        subqueryordersub()
+    )*
+    {saveTempListInList(alist,subquerySql);}
+}
+
 //void innerJoinMethod() :
 //{   Token t;
 //    list = new ArrayList<Object>();
@@ -1587,10 +1980,41 @@ void ordersub() :
 }
 {
     (t = <ID>|t = <NAME>)  {saveTokenInList(t,templist);}
+
+    (
+            t =<LIMIT>  {saveTokenInList(t,templist);}
+            t=<NUMBER>  {saveTokenInList(t,templist);}
+            (
+                t = <OFFSET>{saveTokenInList(t,templist);}
+                t=<NUMBER>  {saveTokenInList(t,templist);}
+            )?
+            (   t =<ROWS>  {saveTokenInList(t,templist);})?
+            (
+                t =<FETCH>  {saveTokenInList(t,templist);}
+                t =<NEXT>   {saveTokenInList(t,templist);}
+                t =<NUMBER> {saveTokenInList(t,templist);}
+                t =<ROWS>   {saveTokenInList(t,templist);}
+                t =<ONLY>   {saveTokenInList(t,templist);}
+             )?
+
+        )?
+
     (t = <ASC>{saveTokenInList(t,templist);}
         |t = <DESC>{saveTokenInList(t,templist);}
     )?
     {saveTempListInList(templist,list);}
+}
+void subqueryordersub() :
+{
+    Token t;
+    //templist = new ArrayList<Object>();
+}
+{
+    (t = <ID>|t = <NAME>)  {saveTokenInList(t,list);}
+    (t = <ASC>{saveTokenInList(t,list);}
+        |t = <DESC>{saveTokenInList(t,list);}
+    )?
+    //{saveTempListInList(templist,list);}
 }
 
 void groupsub() :
@@ -1602,6 +2026,17 @@ void groupsub() :
     (t = <ID>|t = <NAME>)  {saveTokenInList(t,templist);}
 
     {saveTempListInList(templist,list);}
+}
+void subquerygroupsub() :
+{
+    Token t;
+    //atemplist = new ArrayList<Object>();
+}
+{
+    (t = <ID>|t = <NAME>)
+    {saveTokenInList(t,alist);}
+
+    //{saveTempListInList(atemplist,alist);}
 }
 
 
@@ -1642,4 +2077,17 @@ void set() :
     (t = <ID>|t = <NAME>)     {saveTokenInList(t,templist);}
     t = <EQ>     {saveTokenInList(t,templist);}
     rightCondition()
+}
+
+void singlefunction() :
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+    (t = <AVG>|t = <COUNT>|t = <MAX>|t = <MIN>|t = <SUM>)
+    (t = <YEAR>|t = <MONTH>|t = <WEEK>|t = <NOW>
+    |t = <SYSDATE>|t = <CURDATE>|t = <DATEDIFF>|t = <DATE_FORMAT>
+    )
+    {saveTokenInList(t,templist);}
 }
