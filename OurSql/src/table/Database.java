@@ -26,10 +26,12 @@ public class Database {
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor dataType= new DataTypeDescriptor(INT,false);
         ColumnDescriptor columnId=new ColumnDescriptor("id",1,dataType);
+        columnId.setUnique(true);
         dataType= new DataTypeDescriptor(TABLE,false);
         ColumnDescriptor columnTable=new ColumnDescriptor("table",2,dataType);
         dataType= new DataTypeDescriptor(STRING,false);
         ColumnDescriptor columnTableName=new ColumnDescriptor("tablename",3,dataType);
+        columnTableName.setUnique(true);
         DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
         ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
         columns.add(columnp);
@@ -60,7 +62,7 @@ public class Database {
         this.database.getTableDescriptor().setTableName(databaseName);
     }
 
-    public boolean insertTable(Table t) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public boolean insertTable(Table t) throws Exception {
         List values=new ArrayList();
         PrimaryKey pk=new PrimaryKey();
         SqlInt sqlid=new SqlInt(id);

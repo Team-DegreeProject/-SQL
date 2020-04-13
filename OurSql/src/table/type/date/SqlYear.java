@@ -43,4 +43,19 @@ public class SqlYear implements SqlType {
 
         return this;
     }
+
+    @Override
+    public void setScale(int i) throws Exception {
+        throw new Exception("Year do not need scale.");
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Year do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+
+    }
 }

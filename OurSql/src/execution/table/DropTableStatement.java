@@ -4,7 +4,7 @@ import execution.ExecuteStatement;
 import execution.WhereStatament;
 import parsing.Token;
 import table.Table;
-import table.TableDescriptor;
+
 import java.util.List;
 import static parsing.SqlParserConstants.EQ;
 

@@ -1,6 +1,5 @@
 package execution.table;
 
-import parsing.Token;
 import java.util.List;
 import static parsing.SqlParserConstants.*;
 
@@ -16,6 +15,8 @@ public class TableStatements {
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -40,7 +41,7 @@ public class TableStatements {
         }
     }
 
-    
+
     public static void alterTable(List tokens){
         try {
             AlterTableStatement alterTableStatement=new AlterTableStatement(tokens);

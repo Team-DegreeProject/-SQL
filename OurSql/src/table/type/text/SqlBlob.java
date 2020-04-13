@@ -12,6 +12,8 @@ public class SqlBlob implements SqlType {
         this.blob=b;
     }
 
+    public SqlBlob(){}
+
     public void setBlob(Blob blob) {
         this.blob = blob;
     }
@@ -27,9 +29,24 @@ public class SqlBlob implements SqlType {
 
     @Override
     public SqlType addOne() throws Exception {
-
-        return this;
+        throw new Exception("Blob can not auto increment.");
     }
+
+    @Override
+    public void setScale(int i) throws Exception {
+        throw new Exception("Blob do not need scale.");
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Blob do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+
+    }
+
 
     @Override
     public int compareTo(Object o) {

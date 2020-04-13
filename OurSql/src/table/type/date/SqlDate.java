@@ -44,4 +44,19 @@ public class SqlDate implements SqlType {
     public SqlType addOne() {
         return this;
     }
+
+    @Override
+    public void setScale(int i) throws Exception {
+        throw new Exception("Date do not need scale.");
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Date do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+
+    }
 }

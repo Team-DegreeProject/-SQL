@@ -1,9 +1,7 @@
 package execution;
 
-import javafx.scene.control.Tab;
 import parsing.Token;
 import table.ColumnDescriptorList;
-import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.SqlType;
@@ -72,12 +70,22 @@ public class DMLTool {
 //    }
 
 
-    public static SqlType convertToValue(String att, String str, HashMap propertyMap) throws IllegalAccessException, InstantiationException {
+    public static SqlType convertToValue(String att, String str, HashMap propertyMap,ColumnDescriptorList columnDescriptorList) throws Exception {
         Class c= (Class) propertyMap.get(att);
         SqlType value=(SqlType)c.newInstance();
         value.setValue(str);
+        ColumnDescriptor cd=columnDescriptorList.getColumnDescriptor(att);
+        DataTypeDescriptor dataTypeDescriptor=cd.getType();
+        if(dataTypeDescriptor.getScale()!=-1){
+            value.setScale(dataTypeDescriptor.getScale());
+        }
+        if(dataTypeDescriptor.getPrecision()!=-1){
+            value.setPrecision(dataTypeDescriptor.getPrecision());
+        }
+        value.updateValue();
         return value;
     }
+
 
 
 
@@ -116,7 +124,7 @@ public class DMLTool {
         return column;
     }
 
-    public static boolean setType(DataTypeDescriptor d,Token t,ColumnDescriptor cd){
+    public static boolean setType(DataTypeDescriptor d, Token t, ColumnDescriptor cd){
         if(t.kind==PRIMARY_KEY){
             d.setPrimaryKey(true);
         }else if(t.kind==NOT_NULL){

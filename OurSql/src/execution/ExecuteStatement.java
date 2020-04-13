@@ -3,7 +3,6 @@ package execution;
 import execution.data.DataStatements;
 import execution.database.*;
 import execution.table.*;
-import parsing.SqlParserConstants;
 import parsing.Token;
 import system.User;
 import system.UserAccessedDatabases;

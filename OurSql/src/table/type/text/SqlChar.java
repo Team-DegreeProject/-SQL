@@ -7,8 +7,9 @@ public class SqlChar implements SqlType {
     private int scale=-1;
     private int realLength=0;
 
-    public SqlChar(){
-    }
+    public SqlChar(){}
+
+
     public SqlChar(String str){
         changeRange(str);
     }
@@ -76,6 +77,22 @@ public class SqlChar implements SqlType {
     public SqlType addOne() throws Exception {
 
         return this;
+    }
+
+    @Override
+    public void setScale(int i) throws Exception {
+        this.scale=i;
+        changeRange(string);
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Char do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+        changeRange(this.string);
     }
 
     @Override

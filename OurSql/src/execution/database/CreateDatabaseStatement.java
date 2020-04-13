@@ -13,7 +13,7 @@ public class CreateDatabaseStatement{
     }
     public CreateDatabaseStatement(){}
 
-    public boolean createDatabaseImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public boolean createDatabaseImpl() throws Exception {
         if(statement==null){
             return false;
         }

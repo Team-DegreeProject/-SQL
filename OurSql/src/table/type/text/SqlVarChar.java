@@ -64,6 +64,22 @@ public class SqlVarChar implements SqlType {
     }
 
     @Override
+    public void setScale(int i) throws Exception {
+        this.scale=i;
+        changeRange(string);
+    }
+
+    @Override
+    public void setPrecision(int i) throws Exception {
+        throw new Exception("Varchar do not need precision.");
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+        changeRange(this.string);
+    }
+
+    @Override
     public void setValue(String o) {
         setString(o);
     }
