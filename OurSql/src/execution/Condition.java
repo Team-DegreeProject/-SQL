@@ -1,4 +1,4 @@
-package execution.table;
+package execution;
 
 public class Condition {
     private String name;

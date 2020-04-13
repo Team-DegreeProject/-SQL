@@ -1,17 +1,24 @@
 package execution;
 
+import parsing.Token;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.Table;
+import table.type.SqlType;
 
+import java.util.HashMap;
 import java.util.List;
 
+import static execution.DMLTool.convertToValue;
 import static parsing.SqlParserConstants.*;
 
 public class WhereStatament {
 
     public static Table whereAnd(Table t1,Table t2) throws ClassNotFoundException {
+        if(t1==null||t2==null){
+            return null;
+        }
         BPlusTree b1=t1.getTree();
         BPlusTree b2=t2.getTree();
         BPlusTree returnTree= BPlusTreeTool.mergeTreeAnd(b1,b2);
@@ -21,6 +28,11 @@ public class WhereStatament {
 
 
     public static Table whereOr(Table t1,Table t2) throws ClassNotFoundException {
+        if(t1==null){
+            return t2;
+        }else if(t2==null){
+            return t1;
+        }
         BPlusTree b1=t1.getTree();
         BPlusTree b2=t2.getTree();
         BPlusTree returnTree=BPlusTreeTool.mergeTreeOr(b1,b2);
@@ -65,6 +77,99 @@ public class WhereStatament {
         Table t=new Table(table.getTableDescriptor(),returnTree);
         return t;
     }
+
+    public static Table inCondition(Table t,List tokens) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        String att=((Token)tokens.get(0)).image;
+        HashMap propertyMap=t.getPropertyMap();
+        Table change=null;
+        List<Token> conditions= (List) tokens.get(2);
+        for(int i=0;i<conditions.size();i++){
+            String str=conditions.get(i).image;
+            SqlType value=convertToValue(att,str,propertyMap);
+            Table temp=compare(t, att, EQ, value);
+            change=WhereStatament.whereOr(change,temp);
+        }
+        return change;
+    }
+
+    public static Table betweenCondition(Table t,List<Token> tokens) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        String att=((Token)tokens.get(0)).image;
+        HashMap propertyMap=t.getPropertyMap();
+        Table temp=t;
+        String str1=tokens.get(2).image;
+        SqlType value1= convertToValue(att,str1,propertyMap);
+        String str2=tokens.get(4).image;
+        SqlType value2= convertToValue(att,str2,propertyMap);
+        temp=compare(temp, att, LQ, value1);
+        temp=compare(temp, att, RQ, value2);
+        if(t.equals(temp)){
+            System.out.println("There is no change.");
+            return null;
+        }
+        return temp;
+    }
+
+    public static Table basicCondition(Table t,List<Token> tokens) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        String attribute=((Token)tokens.get(0)).image;
+        int type=((Token)tokens.get(1)).kind;
+        String str= ((Token) tokens.get(2)).image;
+        SqlType value=DMLTool.convertToValue(attribute,str,t.getPropertyMap());
+        Table table=compare(t,attribute,type,value);
+        return table;
+    }
+
+    public static Table whereImpl(Table table,List conditions) throws Exception {
+        Table change=null;
+        Object first=conditions.get(0);
+        if(first instanceof Token){
+            System.out.println("one condition==========");
+            change=checkAType(conditions,table);
+        }else if (first instanceof List){
+            System.out.println("multiple condition==========");
+            boolean b=false;
+            for(int i=0;i<conditions.size();i++){
+                Object o=conditions.get(i);
+                if(o instanceof List){
+                    Table temp=checkAType((List) o,table);
+                    if(b){
+                        change=whereAnd(temp,change);
+                    }else{
+                        change=whereOr(temp,change);
+                    }
+                }else if(o instanceof Token){
+                    int type=((Token)o).kind;
+                    if(type==AND){
+                        b=true;
+                    }else if(type==OR){
+                        b=false;
+                    }
+                }
+            }
+        }
+        if(change==null){
+            throw new Exception("There is no change");
+        }
+        change.printTable();
+        return change;
+    }
+
+    public static Table checkAType(List condition,Table table) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int type=((Token)condition.get(1)).kind;
+        Table change=null;
+        if(type==IN){
+            System.out.println("In===========");
+            change=inCondition(table,condition);
+        }else if(type==EQ||type==LQ||type==RQ){
+            System.out.println("Basic===========");
+            change=basicCondition(table,condition);
+        }else if(type==BETWEEN){
+            System.out.println("Between===========");
+            change=betweenCondition(table,condition);
+        }
+        return change;
+    }
+
+
 
 
 }

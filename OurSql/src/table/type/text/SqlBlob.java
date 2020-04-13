@@ -26,6 +26,12 @@ public class SqlBlob implements SqlType {
     }
 
     @Override
+    public SqlType addOne() throws Exception {
+
+        return this;
+    }
+
+    @Override
     public int compareTo(Object o) {
         return 0;
     }

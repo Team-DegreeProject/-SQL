@@ -40,26 +40,37 @@ public class TableStatements {
         }
     }
 
+    
     public static void alterTable(List tokens){
         try {
             AlterTableStatement alterTableStatement=new AlterTableStatement(tokens);
-            Object o=tokens.get(3);
-            if(o instanceof Token){
-                int type=((Token)tokens.get(3)).kind;
-                if (type == MODIFY) {
-                    alterTableStatement.alterModifyImpl();
-                }
-            }else if (o instanceof List){
-                List<List> l= (List) tokens.get(3);
-                int t=((Token)l.get(0).get(0)).kind;
-                if(t== ADD){
-                    alterTableStatement.alterTableAddColumnStatement();
-                }else if (t==DROP){
-                    alterTableStatement.alterTableDropImpl();
-                }
+            alterTableStatement.alterTableImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+//            Object o=tokens.get(3);
+//            if(o instanceof Token){
+//                int type=((Token)tokens.get(3)).kind;
+//                if (type == MODIFY) {
+//                    alterTableStatement.alterModifyImpl();
+//                }
+//            }else if (o instanceof List){
+//                List<List> l= (List) tokens.get(3);
+//                int t=((Token)l.get(0).get(0)).kind;
+//                if(t== ADD){
+//                    alterTableStatement.alterTableAddColumnStatement();
+//                }else if (t==DROP){
+//                    alterTableStatement.alterTableDropImpl();
+//                }
 
-            }
-        }catch (ClassNotFoundException e) {
+//            }
+    }
+
+    public static void truncateTable(List tokens){
+        try {
+            TruncateTableStatement truncateTableStatement=new TruncateTableStatement(tokens);
+            truncateTableStatement.truncateTableImpl();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

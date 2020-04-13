@@ -10,6 +10,7 @@ import table.BTree.CglibBean;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,10 +44,12 @@ public class TreeLoader {
         BPlusTree<CglibBean,String> resultTree = new BPlusTree<>();
         SAXBuilder saxBuilder = new SAXBuilder();
         //你也可以将demo.xml放在resources目录下，然后通过下面方式获取
-        //InputStream resourceAsStream = JDOMParseXml.class.getClassLoader().getResourceAsStream("demo.xml");
+//        InputStream resourceAsStream = JDOMParseXml.class.getClassLoader().getResourceAsStream("demo.xml");
 //        Document document1 = saxBuilder.build(new File("data/"+tableName+"/"+tableName+".xml"));
         Document document1 = saxBuilder.build(new File(filepath));
         Element rootElement = document1.getRootElement();
+
+
         List<Element> elementList = rootElement.getChildren();
         for (Element element : elementList) {
             //获取所有的子节点

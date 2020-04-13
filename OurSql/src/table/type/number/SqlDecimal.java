@@ -30,6 +30,12 @@ public class SqlDecimal implements SqlType {
         }
     }
 
+    public SqlDecimal(Double d,int scale,int precision){
+        this.data=new BigDecimal(d);
+        this.scale=scale;
+        this.precision=precision;
+    }
+
     public void changeRange() throws Exception {
         if(scale==-1&&precision==-1){
         }else if(scale<=precision){
@@ -78,6 +84,11 @@ public class SqlDecimal implements SqlType {
     @Override
     public String toString() {
         return data.toString();
+    }
+
+    @Override
+    public SqlType addOne() throws Exception {
+        return new SqlDecimal((this.data.doubleValue()+1),scale,precision);
     }
 
     @Override

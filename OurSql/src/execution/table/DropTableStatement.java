@@ -25,7 +25,6 @@ public class DropTableStatement {
         List names= (List) statement.get(2);
         for(int i=0;i<names.size();i++){
             String name=((Token)names.get(i)).image;
-            TableDescriptor td=database.getTableDescriptor();
             Table delete= WhereStatament.compare(database,"tablename",EQ,name);
             database.deleteRows(delete);
         }

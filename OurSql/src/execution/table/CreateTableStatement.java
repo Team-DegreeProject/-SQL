@@ -7,27 +7,27 @@ import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-import table.type.PrimaryKey;
 import table.type.SqlConstant;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static execution.table.DMLTool.analyseOneRow;
+import static execution.DMLTool.analyseOneRow;
 import static table.TableSchema.BASE_TABLE_TYPE;
 
 public class CreateTableStatement implements SqlConstant {
+
     List statement;
-    ColumnDescriptorList columns;
-    ColumnDescriptorList primaryKeys;
+
     public CreateTableStatement(List l){
         statement=l;
-        columns=new ColumnDescriptorList();
-        primaryKeys=new ColumnDescriptorList();
     }
 
     public Table createImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        List pk=new ArrayList();
+        ColumnDescriptorList columns=new ColumnDescriptorList();
+        DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
+        ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
+        columns.add(columnp);
         TableDescriptor td=null;
         if(statement==null){
             return null;
@@ -35,33 +35,34 @@ public class CreateTableStatement implements SqlConstant {
         String tableName=((Token)statement.get(2)).image;
         List<List> attributes= (List) statement.get(3);
         for(int i=0;i<attributes.size();i++){
-            DataTypeDescriptor dataTypeDescriptor=analyseOneRow(1,attributes.get(i));
-            String columnName=((Token)attributes.get(i).get(0)).image;
-//            List att= (List) attributes.get(i);
-//            String columnName=((Token)att.get(0)).image;
-//            int type=(Integer) att.get(1);
-//            DataTypeDescriptor dataType= new DataTypeDescriptor(type);
-            ColumnDescriptor column=new ColumnDescriptor(columnName,i,dataTypeDescriptor);
-            columns.add(column);
-            if(dataTypeDescriptor.isPrimaryKey()){
-                primaryKeys.add(column);
+            boolean tc=isTableConstraint(attributes.get(i),columns);
+            if(!tc) {
+                ColumnDescriptor column = analyseOneRow(1, attributes.get(i), i + 1);
+                columns.add(column);
+//                DataTypeDescriptor dataTypeDescriptor = column.getType();
             }
         }
-//        String[] pk=null;
-        td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns,primaryKeys);
+        td=new TableDescriptor(tableName,BASE_TABLE_TYPE,columns);
         td.setTableInColumnDescriptor(td);
-//        ColumnDescriptor cd=td.getColumnDescriptorList().getColumnDescriptor(1);
+        td.updatePriamryKey();
         Table table=new Table(td);
         ExecuteStatement.db.insertTable(table);
-        td.printColumnName();
         table.printTable();
-//        return table;
-        return null;
+        td.printTableDescriptor();
+        return table;
     }
 
-
-//    public Object checkType(){
-//
-//    }
-
+    public boolean isTableConstraint(List row,ColumnDescriptorList columnDescriptorList){
+        boolean b=false;
+        Token t= (Token) row.get(0);
+        if(t.kind==PRIMARY_KEY){
+            for(int i=1;i<row.size();i++){
+                String columnname=((Token)row.get(i)).image;
+                ColumnDescriptor cd=columnDescriptorList.getColumnDescriptor(columnname);
+                cd.getType().setPrimaryKey(true);
+            }
+            b=true;
+        }
+        return b;
+    }
 }

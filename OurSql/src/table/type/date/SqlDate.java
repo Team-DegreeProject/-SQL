@@ -39,4 +39,9 @@ public class SqlDate implements SqlType {
     public String toString() {
         return date.toString();
     }
+
+    @Override
+    public SqlType addOne() {
+        return this;
+    }
 }

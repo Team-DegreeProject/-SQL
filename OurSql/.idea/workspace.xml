@@ -7,6 +7,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -70,7 +77,8 @@
       <workItem from="1586575055312" duration="5369000" />
       <workItem from="1586602001593" duration="1063000" />
       <workItem from="1586656894247" duration="676000" />
-      <workItem from="1586658089025" duration="1176000" />
+      <workItem from="1586658089025" duration="3486000" />
+      <workItem from="1586764427729" duration="6696000" />
     </task>
     <servers />
   </component>
@@ -78,6 +86,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="430" y="230" width="421" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586765873807">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="430" y="230" width="421" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1586765873807" />
     <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1586582352162">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -94,9 +106,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1586582352162" />
-    <state x="337" y="169" key="com.intellij.ide.util.TipDialog" timestamp="1586658088655">
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog" timestamp="1586764430619">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="169" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1586658088655" />
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1586764430619" />
   </component>
 </project>

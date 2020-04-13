@@ -83,6 +83,11 @@ public class SqlDouble implements SqlType {
     }
 
     @Override
+    public SqlType addOne() throws Exception {
+        return new SqlDouble((this.data+1),this.scale,this.precision);
+    }
+
+    @Override
     public void setValue(String o) {
         setData(Double.parseDouble(o));
     }

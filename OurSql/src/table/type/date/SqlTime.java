@@ -40,4 +40,10 @@ public class SqlTime implements SqlType {
     public String toString() {
         return time.toString();
     }
+
+    @Override
+    public SqlType addOne() {
+
+        return this;
+    }
 }

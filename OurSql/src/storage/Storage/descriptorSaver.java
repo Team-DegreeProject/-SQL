@@ -3,21 +3,63 @@ package storage.Storage;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import table.BTree.BPlusTree;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.ColumnDescriptorList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class descriptorSaver {
     TableDescriptor tabledescriptor;
+    HashMap propertyMap;
+    BPlusTree btree;
 
-    public descriptorSaver(TableDescriptor desToBeSaved) {
+    public descriptorSaver(TableDescriptor desToBeSaved,HashMap map, BPlusTree tree) {
         tabledescriptor = desToBeSaved;
+        propertyMap = map;
+        btree = tree;
     }
 
-    public void desToXML() {
+    public void hashmapToXML(String tableName){
+        try {
+            Element table = new Element("table");
+            Document document = new Document(table);
+            Iterator entries = propertyMap.entrySet().iterator();
+
+            while (entries.hasNext()) {
+
+                Map.Entry entry = (Map.Entry) entries.next();
+                String key = (String) entry.getKey();
+                String value = (String) entry.getValue();
+                Element e = new Element(key);
+                e.setText(value);
+                table.addContent(e);
+            }
+            Format format=Format.getCompactFormat();
+            format.setIndent("");
+            //生成不一样的编码
+            format.setEncoding("GBK");
+            //4.创建XMLOutputter的对象
+            XMLOutputter outputter=new XMLOutputter(format);
+            outputter.output(document, new FileOutputStream(new File("data/"+tableName+"/"+tableName+"PropertyMap.xml")));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void descriptorToXML() throws IOException {
         String tableName = tabledescriptor.getTableName();
         Element table = new Element("table");
 
@@ -34,12 +76,20 @@ public class descriptorSaver {
         table.addContent(tableSchemaElement);
         table.addContent(lockGranularityElement);
 
+        Element primaryELement = new Element("primaryKey");
+        table.addContent(primaryELement);
+        //存primarykey的名字
+        for(int j = 0 ; j < tabledescriptor.getPrimaryKey().size(); j++){
+            String primaryColumnName = tabledescriptor.getPrimaryKey().get(j).getColumnName();
+            Element primaryColumnNameELement = new Element("primaryColumnName").setText(primaryColumnName);
+            primaryELement.addContent(primaryColumnNameELement);
+        }
 
         //获取所有的columnDescriptor
         ColumnDescriptorList allDescriptor = tabledescriptor.getColumnDescriptorList();
         for (int i = 0; i < allDescriptor.size(); i++) {
             //columELement
-            Element columnElement = new Element("columnDescriptors");
+            Element columnElement = new Element("columnDescriptor");
             //获取每一列的descriptor
             ColumnDescriptor singleColumn = allDescriptor.getColumnDescriptor(i);
             String columnName = singleColumn.getColumnName();
@@ -72,24 +122,30 @@ public class descriptorSaver {
             long autoincStart = singleColumn.getAutoincStart();
             Element autoincStartElement = new Element("autoincStart").setText(String.valueOf(autoincStart));
             columnElement.addContent(autoincStartElement);
-            long autoincInc = singleColumn.getAutoincInc();
+            boolean autoincInc = singleColumn.isAutoincInc();
             Element autoincIncElement = new Element("autoincInc").setText(String.valueOf(autoincInc));
             columnElement.addContent(autoincIncElement);
             long autoincValue = singleColumn.getAutoincValue();
             Element autoincValueElement = new Element("autoincValue").setText(String.valueOf(autoincValue));
             columnElement.addContent(autoincValueElement);
-            boolean autoincCycle = singleColumn.getAutoincCycle();
-            Element autoincCycleElement = new Element("autoincCycle").setText(String.valueOf(autoincCycle));
-            columnElement.addContent(autoincCycleElement);
+            String comment = singleColumn.getComment();
+            Element commentElement = new Element("comment").setText(String.valueOf(comment));
+            columnElement.addContent(commentElement);
             String columnDefaultValue = singleColumn.getDefaultInfo().toString();
             Element columnDefaultValueElement = new Element("columnDefaultValue").setText(String.valueOf(columnDefaultValue));
             columnElement.addContent(columnDefaultValueElement);
         }
+        //将现有的table存成xml
+        Format format=Format.getCompactFormat();
+        format.setIndent("");
+        //生成不一样的编码
+        format.setEncoding("GBK");
+        //4.创建XMLOutputter的对象
+        XMLOutputter outputter=new XMLOutputter(format);
+        outputter.output(document, new FileOutputStream(new File("data/"+tableName+"/"+tableName+"Descriptor.xml")));
 
-        //存primarykey的名字
-        for(int j = 0 ; j < tabledescriptor.getPrimaryKey().size(); j++){
-            String primaryColumnName = tabledescriptor.getPrimaryKey().get(j).getColumnName();
-        }
+
+
     }
 
 

@@ -11,10 +11,10 @@ public class ColumnDescriptor{
     private int columnPosition;
     private DataTypeDescriptor columnType=null;
     private long autoincStart=0;
-    private long autoincInc=0;
+    private boolean autoincInc=false;
     private long autoincValue=0;
-    private boolean autoincCycle=false;
     private SqlType columnDefaultValue=null;
+    private String comment=null;
 
 
     /**
@@ -29,7 +29,7 @@ public class ColumnDescriptor{
      */
     public ColumnDescriptor(String columnName, int columnPosition,
                             DataTypeDescriptor columnType,
-                            TableDescriptor table, long autoincStart, long autoincInc, boolean autoincCycle,SqlType columnDefaultInfo) {
+                            TableDescriptor table, long autoincStart, boolean autoincInc, SqlType columnDefaultInfo) {
         this.columnName = columnName;
         this.columnPosition = columnPosition;
         this.columnType = columnType;
@@ -39,13 +39,16 @@ public class ColumnDescriptor{
         this.autoincStart = autoincStart;
         this.autoincValue = autoincStart;
         this.autoincInc = autoincInc;
-        this.autoincCycle = autoincCycle;
         this.columnDefaultValue=columnDefaultInfo;
+    }
+
+    public  ColumnDescriptor(int columnPosition){
+        this.columnPosition=columnPosition;
     }
 
     public ColumnDescriptor(String columnName, int columnPosition,
                             DataTypeDescriptor columnType,
-                            TableDescriptor table, long autoincStart, long autoincInc, boolean autoincCycle) {
+                            TableDescriptor table, long autoincStart, boolean autoincInc) {
         this.columnName = columnName;
         this.columnPosition = columnPosition;
         this.columnType = columnType;
@@ -55,7 +58,6 @@ public class ColumnDescriptor{
         this.autoincStart = autoincStart;
         this.autoincValue = autoincStart;
         this.autoincInc = autoincInc;
-        this.autoincCycle = autoincCycle;
     }
 
     public ColumnDescriptor(String columnName, int columnPosition,
@@ -66,10 +68,7 @@ public class ColumnDescriptor{
         if (table != null) {
             this.table = table;
         }
-        this.autoincStart = autoincStart;
         this.autoincValue = autoincStart;
-        this.autoincInc = autoincInc;
-        this.autoincCycle = autoincCycle;
     }
 
 //    long autoinc_create_or_modify_Start_Increment = -1;
@@ -80,6 +79,7 @@ public class ColumnDescriptor{
         this.columnPosition = columnPosition;
         this.columnType = columnType;
     }
+
 
 
 
@@ -95,12 +95,8 @@ public class ColumnDescriptor{
         return autoincStart;
     }
 
-    public boolean getAutoincCycle() {
-        return autoincCycle;
-    }
-
-    public long getAutoincInc() {
-        return autoincInc;
+    public void setAutoincInc(boolean autoincInc) {
+        this.autoincInc = autoincInc;
     }
 
     /**
@@ -114,8 +110,8 @@ public class ColumnDescriptor{
         this.columnPosition = columnPosition;
     }
 
-    public boolean isAutoincrement() {
-        return (autoincInc != 0);
+    public boolean isAutoincInc() {
+        return autoincInc;
     }
 
     public String getColumnName() {
@@ -147,10 +143,6 @@ public class ColumnDescriptor{
 
     public TableDescriptor getTableDescriptor(){ return table; }
 
-    public boolean isAutoincCycle() {
-        return autoincCycle;
-    }
-
     public DataTypeDescriptor getColumnType() {
         return columnType;
     }
@@ -159,17 +151,10 @@ public class ColumnDescriptor{
         return columnDefaultValue;
     }
 
-    public void setAutoincCycle(boolean autoincCycle) {
-        this.autoincCycle = autoincCycle;
-    }
-
     public int getColumnPosition() {
         return columnPosition;
     }
 
-    public void setAutoincInc(long autoincInc) {
-        this.autoincInc = autoincInc;
-    }
 
     public void setAutoincStart(long autoincStart) {
         this.autoincStart = autoincStart;
@@ -203,4 +188,27 @@ public class ColumnDescriptor{
         this.table = table;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void printColumnDescriptor(){
+        System.out.println(
+                "ColumnDescriptor============"+
+                        "ColumnName:"+columnName+","+
+                        "ColumnPosition:"+columnPosition+","+
+                        "autoIncrement:"+autoincInc+","+
+                        "ColumnDefaultValue:"+columnDefaultValue+","+
+                        "Comment:"+comment
+        );
+        if (columnType == null) {
+            System.out.println("DatatypeDescriptor==============null");
+        }else{
+            columnType.printDataTypeDescriptor();
+        }
+    }
 }
