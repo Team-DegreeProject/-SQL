@@ -7,6 +7,8 @@ import table.column.DataTypeDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static table.type.SqlConstantImpl.sqlMap;
+
 public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
 
     public ColumnDescriptor elementAt(int n) {
@@ -72,6 +74,8 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return true;
     }
 
+
+
     public boolean checkNotNull(List<Token> columnNames,List<List<Token>> values){
         for (ColumnDescriptor columnDescriptor : this) {
             DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
@@ -97,6 +101,8 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return true;
     }
 
+
+
     public ColumnDescriptorList getAutoIncrementList(){
         ColumnDescriptorList columnDescriptors=new ColumnDescriptorList();
         for (ColumnDescriptor columnDescriptor : this) {
@@ -106,6 +112,8 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         }
         return columnDescriptors;
     }
+
+
 
     public  ColumnDescriptorList getUniqueList(){
         ColumnDescriptorList columnDescriptors=new ColumnDescriptorList();
@@ -117,4 +125,11 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return columnDescriptors;
     }
 
+
+    public void printColumnDescriptorList(){
+        for (ColumnDescriptor columnDescriptor : this) {
+            DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
+            System.out.println(columnDescriptor.getColumnName()+"-->"+sqlMap.get(dataTypeDescriptor.getTypeId()));
+        }
+    }
 }

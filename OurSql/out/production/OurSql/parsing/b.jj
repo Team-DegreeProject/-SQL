@@ -592,7 +592,7 @@ void select(Token d):
     showStructure()
     (<STATEMENT_END> | <END>)
 
-         //{ExecuteStatement.delete(sql);} // %%
+         {ExecuteStatement.select(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 

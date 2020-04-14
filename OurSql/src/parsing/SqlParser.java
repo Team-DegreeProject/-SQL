@@ -244,6 +244,7 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+          ExecuteStatement.select(sql);
   }
 
   final public void subquerySelect(Token d) throws ParseException {

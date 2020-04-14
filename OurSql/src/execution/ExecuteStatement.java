@@ -76,6 +76,8 @@ public class ExecuteStatement {
 
     public static void truncate(List tokens){TableStatements.truncateTable(tokens);};
 
+    public static void select(List tokens){DataStatements.selectData(tokens);}
+
 
 
 }

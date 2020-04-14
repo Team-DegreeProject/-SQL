@@ -1,12 +1,11 @@
 package table.BTree;
 
+import execution.DMLTool;
+import parsing.Token;
 import table.Table;
 import table.TableDescriptor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class BPlusTreeTool {
 
@@ -104,7 +103,7 @@ public class BPlusTreeTool {
 //        boolean first=true;
         td.printColumnName();
         System.out.println("-------------------------------------");
-        String[] attribute=td.getColumnNamesArray();
+        List attribute=td.getColumnNamesList();
         for(int i=0;i<list.size();i++){
             CglibBean c= (CglibBean) list.get(i);
 //            if(first){
@@ -126,9 +125,9 @@ public class BPlusTreeTool {
 //                System.out.println("-------------------------------------");
 //            }
 
-            for(int j=0;j<attribute.length;j++){
-                System.out.print(c.getValue(attribute[j]));
-                if(j!=attribute.length-1){
+            for(int j=0;j<attribute.size();j++){
+                System.out.print(c.getValue((String) attribute.get(j)));
+                if(j!=attribute.size()-1){
                     System.out.print(",");
                 }else{
                     System.out.println(";");
@@ -156,4 +155,25 @@ public class BPlusTreeTool {
         }
         return returnlist;
     }
+
+    public static BPlusTree getSubAttributes(BPlusTree previous,List<List<Token>> tokens,HashMap property){
+        BPlusTree tree=new BPlusTree();
+//        HashMap property= DMLTool.selectNewPropertyMap(propertyMap,tokens);
+        List<CglibBean> data=previous.getDatas();
+        for(int i=0;i<data.size();i++){
+            CglibBean c=data.get(i);
+            CglibBean n=new CglibBean(property);
+            for(int j=0;j<tokens.size();j++){
+                String columnname=tokens.get(j).get(0).image;
+                Object o=c.getValue(columnname);
+                n.setValue(columnname,o);
+            }
+            Object pk=c.getValue("primary key");
+            n.setValue("primary key",pk);
+            tree.insert(n, (Comparable) n.getValue("primary key"));
+        }
+        return tree;
+    }
+
+
 }

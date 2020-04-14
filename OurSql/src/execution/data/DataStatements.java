@@ -42,4 +42,13 @@ public class DataStatements {
             e.printStackTrace();
         }
     }
+
+    public static void selectData(List tokens){
+        try {
+            SelectDataStatement selectDataStatement=new SelectDataStatement(tokens);
+            selectDataStatement.selectDataImpl();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

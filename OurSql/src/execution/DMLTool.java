@@ -1,11 +1,15 @@
 package execution;
 
+import javafx.scene.control.Tab;
 import parsing.Token;
 import table.ColumnDescriptorList;
+import table.Table;
+import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.SqlType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -146,6 +150,39 @@ public class DMLTool {
     public static String removeQutationMark(String str){
         str=str.substring(1,str.length()-1);
         return str;
+    }
+
+
+    public static HashMap selectNewPropertyMap(HashMap propertyMap,List<List<Token>> tokens){
+        HashMap newProperty=new HashMap();
+        for(int i=0;i<tokens.size();i++){
+            String name=tokens.get(i).get(0).image;
+            Object o=propertyMap.get(name);
+            newProperty.put(name,o);
+        }
+        Object pk=propertyMap.get("primary key");
+        newProperty.put("primary key",pk);
+        return newProperty;
+    }
+
+    //select中对于列操作的支持函数
+    public static TableDescriptor changeTableDescriptor(TableDescriptor td,List<List<Token>> tokens){
+        ColumnDescriptorList list=td.getColumnDescriptorList();
+        ColumnDescriptorList newList=new ColumnDescriptorList();
+        for(int i=0;i<list.size();i++){
+            String name=list.elementAt(i).getColumnName();
+            for(int j=0;j<tokens.size();j++){
+                String com=tokens.get(j).get(0).image;
+                if(name.equals(com)){
+                    newList.add(list.elementAt(i));
+                    break;
+                }
+            }
+        }
+        newList.printColumnDescriptorList();
+//        System.out.println(newList.);
+        TableDescriptor tableDescriptor=new TableDescriptor(td.getName(),td.getSchema(),newList,td.getPrimaryKey());
+        return tableDescriptor;
     }
 
     //    public void setTablePrimaryKey(TableDescriptor td){
