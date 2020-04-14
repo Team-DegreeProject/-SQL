@@ -1,5 +1,6 @@
 package table.type.date;
 
+import execution.DMLTool;
 import table.type.SqlType;
 
 import java.sql.Timestamp;
@@ -16,7 +17,8 @@ public class SqlTimeStamp implements SqlType {
 
    @Override
     public void setValue(String o) {
-       this.timestamp=Timestamp.valueOf(o);
+       o= DMLTool.removeQutationMark(o);
+        this.timestamp=Timestamp.valueOf(o);
     }
 
 
@@ -36,7 +38,7 @@ public class SqlTimeStamp implements SqlType {
 
     @Override
     public String toString() {
-        return timestamp.toString();
+        return "'"+timestamp.toString()+"'";
     }
 
     @Override

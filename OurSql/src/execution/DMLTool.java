@@ -143,7 +143,12 @@ public class DMLTool {
         return false;
     }
 
-//    public void setTablePrimaryKey(TableDescriptor td){
+    public static String removeQutationMark(String str){
+        str=str.substring(1,str.length()-1);
+        return str;
+    }
+
+    //    public void setTablePrimaryKey(TableDescriptor td){
 //        ColumnDescriptorList pk=td.getPrimaryKey();
 //        pk=new ColumnDescriptorList();
 //        ColumnDescriptorList cdl=td.getColumnDescriptorList();

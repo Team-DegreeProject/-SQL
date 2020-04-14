@@ -1,5 +1,6 @@
 package table.type.date;
 
+import execution.DMLTool;
 import table.type.SqlType;
 import java.time.Year;
 
@@ -15,6 +16,7 @@ public class SqlYear implements SqlType {
 
     @Override
     public void setValue(String o) {
+        o= DMLTool.removeQutationMark(o);
         this.year=Year.parse(o);
     }
 
@@ -35,7 +37,7 @@ public class SqlYear implements SqlType {
 
     @Override
     public String toString() {
-        return year.toString();
+        return "'"+year.toString()+"'";
     }
 
     @Override

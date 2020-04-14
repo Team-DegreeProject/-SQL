@@ -1,5 +1,6 @@
 package table.type.date;
 
+import execution.DMLTool;
 import table.type.SqlType;
 
 import java.sql.Time;
@@ -18,6 +19,7 @@ public class SqlTime implements SqlType {
 
     @Override
     public void setValue(String o) {
+        o= DMLTool.removeQutationMark(o);
         this.time=Time.valueOf(o);
     }
 
@@ -38,7 +40,7 @@ public class SqlTime implements SqlType {
 
     @Override
     public String toString() {
-        return time.toString();
+        return "'"+time.toString()+"'";
     }
 
     @Override

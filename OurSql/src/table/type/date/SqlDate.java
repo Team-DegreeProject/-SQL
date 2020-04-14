@@ -1,6 +1,7 @@
 package table.type.date;
 
 
+import execution.DMLTool;
 import table.type.SqlType;
 import java.sql.Date;
 
@@ -17,6 +18,7 @@ public class SqlDate implements SqlType {
 
     @Override
     public void setValue(String o) {
+        o=DMLTool.removeQutationMark(o);
         this.date=Date.valueOf(o);
     }
 
@@ -37,7 +39,7 @@ public class SqlDate implements SqlType {
 
     @Override
     public String toString() {
-        return date.toString();
+        return "'"+date.toString()+"'";
     }
 
     @Override

@@ -74,16 +74,13 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
 
     public boolean checkNotNull(List<Token> columnNames,List<List<Token>> values){
         for (ColumnDescriptor columnDescriptor : this) {
-            System.out.println(columnDescriptor);
             DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
-            System.out.println(dataTypeDescriptor.isNullable());
             if(columnDescriptor.getColumnName()!="primary key") {
                 if (!dataTypeDescriptor.isNullable()) {
                     boolean b = false;
                     for (int i = 0; i < columnNames.size(); i++) {
                         String name = columnNames.get(i).image;
                         if (name.equals(columnDescriptor.getColumnName())) {
-                            System.out.println(values.get(i).get(0).image);
                             if (values.get(i).get(0).image.equals("null")) {
                                 return false;
                             }
