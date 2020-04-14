@@ -1,6 +1,6 @@
 package table.BTree;
 
-class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
+public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     protected Object values[];
     protected LeafNode left;
@@ -11,6 +11,10 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         this.values = new Object[BPlusTree.getmaxKeyNumber()];
         this.left = null;
         this.right = null;
+    }
+
+    public Object[] getValues(){
+        return values;
     }
 
     public LeafNode(Node parent,Object[] values,int keyNumber,Object[] keys){

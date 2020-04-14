@@ -71,7 +71,7 @@ public class UserAccessedDatabases {
         values.add(user);
         values.add(database);
         values.add(database.getDatabaseName());
-        return userAccessedDatabase.insertRows(values);
+        return userAccessedDatabase.insertARow(values);
     }
 
     public void returnUserAccessedDatabaseNames(){

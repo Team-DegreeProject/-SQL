@@ -61,8 +61,8 @@ public class TreeLoader {
                 String varName = innerElement.getName();
                 String varVal = innerElement.getValue();
                 valueMap.put(varName,varVal);
-//                System.out.println("--------------------------");
-//                System.out.println("the name is: "+varName + " - the value is:"+varVal);
+                System.out.println("--------------------------");
+                System.out.println("the name is: "+varName + " - the value is:"+varVal);
                 propertyMap.put(varName, Class.forName(varVal.getClass().getName()));
             }
             //property map已经处理完毕

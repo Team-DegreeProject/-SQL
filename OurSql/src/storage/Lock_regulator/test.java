@@ -3,18 +3,21 @@ package storage.Lock_regulator;
 import java.io.File;
 import storage.Storage.XMLUtils;
 
-public class test {
+public class test implements Runnable{
     public static void main(String[] args) {
-        File file = new File("data/");
-        File[] files = file.listFiles();
-        for (File file2 : files) {
-            if (file2.isDirectory()) {
-                //System.out.println("文件夹:" + file2.getPath().substring(4));
-                File datafile = new File(file2.getPath()+XMLUtils.getFileName(file2.getPath())+".txt");
-                System.out.println(datafile.getPath());
-            } else {
-                System.out.println("文件:" + file2.getPath());
-            }
+//        for(int i = 0; i < 1000 ; i++){
+//            System.out.println("The value of thread 1 is : "+i);
+//        }
+        Thread t1 = new Thread(new test());
+        Thread t2 = new Thread(new test());
+        t1.start();
+        t2.start();
+    }
+
+    @Override
+    public void run() {
+        for(int i = 0; i < 1000 ; i++) {
+            System.out.println("The value of thread 2 is : " + i);
         }
     }
 }
