@@ -6,11 +6,14 @@ import parsing.Token;
 import table.BTree.CglibBean;
 import table.Database;
 import table.Table;
+import table.type.PrimaryKey;
+import table.type.number.SqlInt;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static parsing.SqlParserConstants.EQ;
+import static parsing.SqlParserConstants.PRIMARY_KEY;
 
 public class RenameDatabaseStatement {
     List statement=null;
@@ -18,21 +21,37 @@ public class RenameDatabaseStatement {
         statement=l;
     }
     public boolean renameDatabaseImpl() throws ClassNotFoundException {
+        boolean bool=true;
         String databaseName=((Token)statement.get(2)).image;
         String newDatabaseName=((Token)statement.get(4)).image;
-        List att=new ArrayList();
+        String[] att={"databasename"};
         List values=new ArrayList();
-        att.add("database");
-        att.add("databasename");
+//        att.add("database");
+//        att.add("databasename");
         Table usa=ExecuteStatement.uad.getUserAccessedDatabase();
         Table change=WhereStatament.compare(usa,"databasename",EQ,databaseName);
-        List list= (List) change.getTree().getDatas();
+        List list=  change.getTree().getDatas();
         CglibBean c= (CglibBean) list.get(0);
-        Database database= (Database) c.getValue("database");
-        database.setDatabaseName(newDatabaseName);
-        values.add(database);
+
+
         values.add(newDatabaseName);
-        boolean bool=usa.updateTable(att,values,change);
+        bool=usa.updateTable(att,values,change);
+        if(bool==false){
+            return false;
+        }
+
+        String[] nameatt={"database"};
+        values=new ArrayList();
+        Database database= (Database) c.getValue("database");
+        values.add(database);
+        database.setDatabaseName(newDatabaseName);
+        bool=usa.updateTable(nameatt,values,change);
+
+//        List l=new ArrayList();
+//        l.add(new SqlInt(0));
+//        PrimaryKey pk=new PrimaryKey(l);
+//        CglibBean ct= (CglibBean) usa.getTree().select(pk);
+//        System.out.println("===============================ct:"+((Database)ct.getValue("database")).getDatabaseName());
         return bool;
     }
 

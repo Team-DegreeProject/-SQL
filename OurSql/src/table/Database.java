@@ -9,11 +9,16 @@ import java.util.List;
 import static parsing.SqlParserConstants.*;
 import static table.TableSchema.BASE_TABLE_TYPE;
 
-public class Database {
+public class Database{
     private  int id=0;
     private  Table database;
     public Database(Table t){
         database=t;
+    }
+
+    public Database(Database t){
+        this.id=t.id;
+        this.database=t.database;
     }
 
     public Database(String databasename) throws ClassNotFoundException {
@@ -60,6 +65,7 @@ public class Database {
 
     public void setDatabaseName(String databaseName) {
         this.database.getTableDescriptor().setTableName(databaseName);
+        System.out.println("=========="+database.getTableDescriptor().getName());
     }
 
     public boolean insertTable(Table t) throws Exception {
