@@ -103,37 +103,10 @@ public class Table extends SqlConstantImpl {
         }
 
 
-        boolean ub=checkUniqueOperationInsert(attributes,values);
+        boolean ub=checkUniqueOperationInsert(values);
         if(ub==false){
             return false;
         }
-//        List list=tree.getDatas();
-//        //处理unique
-//        for(int i=0;i<unique.size();i++){
-//            String name=unique.elementAt(i).getColumnName();
-//            int temp=-1;
-//            Object value=null;
-//            SqlType v=null;
-//            for(int j=0;j<attributes.length;j++){
-//                String str=attributes[j];
-//                if(str.equals(name)){
-//                    temp=j;
-//                    break;
-//                }
-//            }
-//            if(temp!=-1){
-//                value=  values.get(temp);
-//                for(int k=0;k<list.size();k++){
-//                    CglibBean bean = (CglibBean) list.get(k);
-//                    Comparable com= (Comparable) bean.getValue(name);
-//                    if(com.compareTo(value)==0){
-//                        System.out.println("Some attribute is unique");
-//                        return false;
-//                    }
-//                }
-//            }
-//
-//        }
 
         CglibBean bean = new CglibBean(propertyMap);
         for(int i=0;i<attributes.length;i++){
@@ -182,40 +155,16 @@ public class Table extends SqlConstantImpl {
         ColumnDescriptorList unique=td.getColumnDescriptorList().getUniqueList();
         int number=values.get(0).size();
 
-//        //处理unique
-//        for(int i=0;i<unique.size();i++){
-//            String name=unique.elementAt(i).getColumnName();
-//            int temp=-1;
-//            String value=null;
-//            SqlType v=null;
-//            for(int j=0;j<attributes.size();j++){
-//                String str=attributes.get(j).image;
-//                if(str.equals(name)){
-//                    temp=j;
-//                    break;
-//                }
-//            }
-//            if(temp!=-1){
-//                value=values.get(temp).get(0).image;
-//                v=DMLTool.convertToValue(name,value,propertyMap,columnDescriptorList);
-//                List list=tree.getDatas();
-//                for(int k=0;k<list.size();k++){
-//                    CglibBean bean = (CglibBean) list.get(k);
-//                    SqlType com= (SqlType) bean.getValue(name);
-//                    if(com.compareTo(v)==0){
-//                        System.out.println("Some attribute is unique");
-//                        return false;
-//                    }
-//                }
-//            }
-//
-//        }
         boolean ub=checkUniqueOperation(attributes,values);
         if(ub==false){
             return false;
         }
 
-
+//        System.out.print("maxValue:");
+//        for(int i=0;i<maxValues.size();i++){
+//            System.out.print(maxValues.get(i));
+//        }
+//        System.out.println("");
 
         for(int j=0;j<number;j++){
             PrimaryKey pk=new PrimaryKey();
@@ -268,7 +217,7 @@ public class Table extends SqlConstantImpl {
             return false;
         }
 
-        boolean ub=checkUniqueOperationUpdate(attributes,values);
+        boolean ub=checkUniqueOperationUpdate(values);
         if(ub==false){
             return false;
         }
@@ -432,17 +381,19 @@ public class Table extends SqlConstantImpl {
 
     public List getMaxValues(ColumnDescriptorList auto) throws IllegalAccessException, InstantiationException {
         List maxValues=new ArrayList();
+        List<CglibBean> list=tree.getDatas();
+//        System.out.println("==============size:"+list.size());
         for(int i=0;i<auto.size();i++){
             boolean first=true;
             String name=auto.get(i).getColumnName();
             Class cl= (Class) propertyMap.get(name);
             SqlType max=(SqlType)cl.newInstance();
-            List<CglibBean> list=tree.getDatas();
             for(int j=0;j<list.size();j++){
                 CglibBean c=list.get(j);
                 SqlType temp= (SqlType) c.getValue(name);
                 if(first){
                     max=temp;
+                    first=false;
                 }else{
                     int out=max.compareTo(temp);
                     if(out<0){
@@ -458,7 +409,7 @@ public class Table extends SqlConstantImpl {
 
 
 
-    public boolean checkUniqueOperationInsert(String[] attrbutes,List values){
+    public boolean checkUniqueOperationInsert(List values){
         ColumnDescriptorList unique=td.getColumnDescriptorList().getUniqueList();
         String[] attributes=td.getColumnNamesArray();
         List list=tree.getDatas();
@@ -479,7 +430,6 @@ public class Table extends SqlConstantImpl {
                 for(int k=0;k<list.size();k++){
                     CglibBean bean = (CglibBean) list.get(k);
                     Comparable com= (Comparable) bean.getValue(name);
-                    System.out.println("==========="+com+","+value);
                     if(com.compareTo(value)==0){
                         System.out.println("Some attribute is unique");
                         return false;
@@ -494,17 +444,16 @@ public class Table extends SqlConstantImpl {
 
 
 
-    public boolean checkUniqueOperationUpdate(String[] attrbutes,List values){
+    public boolean checkUniqueOperationUpdate(List values){
         String[] attributes=td.getColumnNamesArray();
         List list=tree.getDatas();
-        for(int i=0;i<attrbutes.length;i++){
-            boolean uq=td.getColumnDescriptorList().getColumnDescriptor(attrbutes[i]).isUnique();
+        for(int i=0;i<attributes.length;i++){
+            boolean uq=td.getColumnDescriptorList().getColumnDescriptor(attributes[i]).isUnique();
             if(uq){
                 Comparable value= (Comparable) values.get(i);
                 for(int k=0;k<list.size();k++){
                     CglibBean bean = (CglibBean) list.get(k);
-                    Comparable com= (Comparable) bean.getValue(attrbutes[i]);
-                    System.out.println("==========="+com+","+value);
+                    Comparable com= (Comparable) bean.getValue(attributes[i]);
                     if(com.compareTo(value)==0){
                         System.out.println("Some attribute is unique");
                         return false;
@@ -555,13 +504,9 @@ public class Table extends SqlConstantImpl {
     public Table selectSomeColumns(List<List<Token>> tokens) throws ClassNotFoundException {
         TableDescriptor newTD=DMLTool.changeTableDescriptor(td,tokens);
         Table table=new Table();
-//        HashMap property= DMLTool.selectNewPropertyMap(propertyMap,tokens);
-//        table.setPropertyMap(property);
         table.setTd(newTD);
         HashMap property=table.createTable();
         BPlusTree ntree=BPlusTreeTool.getSubAttributes(tree,tokens,property);
-//        List cgs=t.getTree().getDatas();
-//        for()
         table.setTree(ntree);
         return table;
     }

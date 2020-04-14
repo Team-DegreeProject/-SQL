@@ -168,7 +168,9 @@ public class DMLTool {
     //select中对于列操作的支持函数
     public static TableDescriptor changeTableDescriptor(TableDescriptor td,List<List<Token>> tokens){
         ColumnDescriptorList list=td.getColumnDescriptorList();
+        ColumnDescriptor pk=list.getColumnDescriptor("primary key");
         ColumnDescriptorList newList=new ColumnDescriptorList();
+        newList.add(pk);
         for(int i=0;i<list.size();i++){
             String name=list.elementAt(i).getColumnName();
             for(int j=0;j<tokens.size();j++){
