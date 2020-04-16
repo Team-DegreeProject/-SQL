@@ -18,6 +18,19 @@ public class ColumnDescriptor{
     private boolean unique=false;
 
 
+    public ColumnDescriptor(TableDescriptor table,String columnName,int columnPosition,DataTypeDescriptor columnType,long autoincStart,boolean autoincInc,long autoincValue,SqlType columnDefaultValue,String comment,boolean unique){
+        this.table=table;
+        this.columnName=columnName;
+        this.columnPosition=columnPosition;
+        this.columnType=columnType;
+        this.autoincStart=autoincStart;
+        this.autoincInc=autoincInc;
+        this.autoincValue=autoincValue;
+        this.columnDefaultValue=columnDefaultValue;
+        this.comment=comment;
+        this.unique=unique;
+    }
+
     /**
      * ColumnDescriptor的构造器
      *@param columnDefaultInfo 列的默认信息
@@ -222,5 +235,10 @@ public class ColumnDescriptor{
         }else{
             columnType.printDataTypeDescriptor();
         }
+    }
+
+    public ColumnDescriptor getNewColumnDescripter(){
+        ColumnDescriptor c=new ColumnDescriptor(table,columnName,columnPosition,columnType.getNewDataTypeDescripter(),autoincStart,autoincInc,autoincValue,columnDefaultValue,comment,unique);
+        return c;
     }
 }

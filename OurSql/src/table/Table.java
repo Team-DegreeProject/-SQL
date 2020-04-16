@@ -71,6 +71,7 @@ public class Table extends SqlConstantImpl {
 
     public HashMap createTable(TableDescriptor table) throws ClassNotFoundException {
         ColumnDescriptorList list=table.getColumnDescriptorList();
+        propertyMap=new HashMap();
         for(int i=0;i<list.size();i++){
             ColumnDescriptor cd=list.getColumnDescriptor(i);
             DataTypeDescriptor dtd=cd.getType();
@@ -82,7 +83,7 @@ public class Table extends SqlConstantImpl {
 
     public HashMap createTable() throws ClassNotFoundException {
         ColumnDescriptorList list=td.getColumnDescriptorList();
-        list.printColumnDescriptorList();
+//        list.printColumnDescriptorList();
         for(int i=0;i<list.size();i++){
             ColumnDescriptor cd=list.elementAt(i);
             DataTypeDescriptor dtd=cd.getType();
@@ -169,12 +170,7 @@ public class Table extends SqlConstantImpl {
         for(int j=0;j<number;j++){
             PrimaryKey pk=new PrimaryKey();
             CglibBean bean = new CglibBean(propertyMap);
-            //处理自增
-            for(int i=0;i<auto.size();i++){
-                String name=auto.elementAt(i).getColumnName();
-                SqlType value= ((SqlType) maxValues.get(i)).addOne();
-                bean.setValue(name,value);
-            }
+
             //处理输入
             for(int i=0;i<attributes.size();i++){
                 String name=attributes.get(i).image;
@@ -189,6 +185,12 @@ public class Table extends SqlConstantImpl {
                 System.out.println(name+"--->>"+value);
             }
 
+            //处理自增
+            for(int i=0;i<auto.size();i++){
+                String name=auto.elementAt(i).getColumnName();
+                SqlType value= ((SqlType) maxValues.get(i)).addOne();
+                bean.setValue(name,value);
+            }
 
 
             bean.setValue("primary key",pk);
@@ -501,14 +503,26 @@ public class Table extends SqlConstantImpl {
 
 
 
-    public Table selectSomeColumns(List<List<Token>> tokens) throws ClassNotFoundException {
+    public Table selectSomeColumns(List<List<Token>>from,List<List<Token>> tokens) throws ClassNotFoundException {
         TableDescriptor newTD=DMLTool.changeTableDescriptor(td,tokens);
+//        System.out.println("=================");
+//        newTD.printTableDescriptor();
+//        if(newTD==td){
+//            return this;
+//        }
         Table table=new Table();
         table.setTd(newTD);
+        DMLTool.changeAs(table.getTableDescriptor(),tokens);
         HashMap property=table.createTable();
-        BPlusTree ntree=BPlusTreeTool.getSubAttributes(tree,tokens,property);
+//        Iterator it=property.keySet().iterator();
+//        while(it.hasNext()){
+//            System.out.println(it.next());
+//        }
+        BPlusTree ntree=BPlusTreeTool.getSubAttributes(td.getColumnDescriptorList(),newTD.getColumnDescriptorList(),tree,property);
         table.setTree(ntree);
+        DMLTool.checkChangeTableName(table,from);
         return table;
     }
+
 
 }

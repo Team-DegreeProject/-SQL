@@ -132,4 +132,12 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
             System.out.println(columnDescriptor.getColumnName()+"-->"+sqlMap.get(dataTypeDescriptor.getTypeId()));
         }
     }
+
+    public ColumnDescriptorList getNewColumnDescriptorList(){
+        ColumnDescriptorList newl=new ColumnDescriptorList();
+        for (ColumnDescriptor columnDescriptor : this) {
+            newl.add(columnDescriptor.getNewColumnDescripter());
+        }
+        return newl;
+    }
 }

@@ -11,6 +11,7 @@ import table.type.SqlType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import static parsing.SqlParserConstants.*;
@@ -167,6 +168,11 @@ public class DMLTool {
 
     //select中对于列操作的支持函数
     public static TableDescriptor changeTableDescriptor(TableDescriptor td,List<List<Token>> tokens){
+        if(checkAllSelected(tokens)){
+            TableDescriptor tt=new TableDescriptor(td.getName(),td.getSchema(),td.getColumnDescriptorList().getNewColumnDescriptorList());
+            tt.updatePriamryKey();
+            return tt;
+        }
         ColumnDescriptorList list=td.getColumnDescriptorList();
         ColumnDescriptor pk=list.getColumnDescriptor("primary key");
         ColumnDescriptorList newList=new ColumnDescriptorList();
@@ -176,6 +182,7 @@ public class DMLTool {
             for(int j=0;j<tokens.size();j++){
                 String com=tokens.get(j).get(0).image;
                 if(name.equals(com)){
+//                    ColumnDescriptor cc=list.elementAt(i);
                     newList.add(list.elementAt(i));
                     break;
                 }
@@ -183,8 +190,85 @@ public class DMLTool {
         }
         newList.printColumnDescriptorList();
 //        System.out.println(newList.);
-        TableDescriptor tableDescriptor=new TableDescriptor(td.getName(),td.getSchema(),newList,td.getPrimaryKey());
+        TableDescriptor tableDescriptor=new TableDescriptor(td.getName(),td.getSchema(),newList.getNewColumnDescriptorList());
+        tableDescriptor.updatePriamryKey();
+        tableDescriptor.printTableDescriptor();
         return tableDescriptor;
+    }
+
+
+    public static boolean  checkAllSelected(List<List<Token>> tokens){
+        for(int i=0;i<tokens.size();i++){
+            Token t=tokens.get(i).get(0);
+            if(t.kind==ASTERISK ||t.kind==ALL){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void changeAs(TableDescriptor tableDescriptor,List<List<Token>> tokens){
+        int type=0;
+        List<List<Token>> change=new ArrayList<>();
+        ColumnDescriptorList columnDescriptors=tableDescriptor.getColumnDescriptorList();
+        for(int i=0;i<tokens.size();i++){
+            if(tokens.get(i).size()>1){
+                Token a=tokens.get(i).get(1);
+                if(a.kind==AS){
+                    change.add(tokens.get(i));
+                    type=1;
+                }else if(a.kind==ID){
+                    change.add(tokens.get(i));
+                    type=2;
+                }
+            }
+        }
+        if (type==0){
+            return;
+        }
+        for(int i=0;i<change.size();i++){
+            if(type==1){
+                String name=change.get(i).get(0).image;
+                String c=change.get(i).get(2).image;
+                columnDescriptors.getColumnDescriptor(name).setColumnName(c);
+            }else if(type==2){
+                String name=change.get(i).get(0).image;
+                String c=change.get(i).get(1).image;
+                columnDescriptors.getColumnDescriptor(name).setColumnName(c);
+            }
+        }
+    }
+
+    public static List getColumnNamesFromPropertyMap(HashMap propertyMap){
+        List names=new ArrayList();
+        Iterator it=propertyMap.keySet().iterator();
+        while(it.hasNext()){
+            names.add(it.next());
+        }
+        return names;
+    }
+
+    public static void checkChangeTableName(Table t,List<List<Token>> from){
+        for(int i=0;i<from.size();i++){
+            List<Token> l=from.get(i);
+            if(l.size()>1){
+                Token a= l.get(1);
+                if(a.kind==AS){
+                    String oldname=l.get(0).image;
+                    String newname=l.get(2).image;
+                    if(oldname.equals(t.getTableDescriptor().getName())){
+                        t.getTableDescriptor().setTableName(newname);
+                    }
+
+                }else if(a.kind==ID){
+                    String oldname=l.get(0).image;
+                    String newname=l.get(1).image;
+                    if(oldname.equals(t.getTableDescriptor().getName())){
+                        t.getTableDescriptor().setTableName(newname);
+                    }
+                }
+            }
+        }
     }
 
     //    public void setTablePrimaryKey(TableDescriptor td){

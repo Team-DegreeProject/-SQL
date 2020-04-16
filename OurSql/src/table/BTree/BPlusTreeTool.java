@@ -2,8 +2,10 @@ package table.BTree;
 
 import execution.DMLTool;
 import parsing.Token;
+import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
+import table.column.ColumnDescriptor;
 
 import java.util.*;
 
@@ -156,16 +158,20 @@ public class BPlusTreeTool {
         return returnlist;
     }
 
-    public static BPlusTree getSubAttributes(BPlusTree previous,List<List<Token>> tokens,HashMap property){
+    public static BPlusTree getSubAttributes(ColumnDescriptorList co,ColumnDescriptorList cn,BPlusTree previous, HashMap property){
         BPlusTree tree=new BPlusTree();
 //        HashMap property= DMLTool.selectNewPropertyMap(propertyMap,tokens);
         List<CglibBean> data=previous.getDatas();
+        List names=DMLTool.getColumnNamesFromPropertyMap(property);
         for(int i=0;i<data.size();i++){
             CglibBean c=data.get(i);
             CglibBean n=new CglibBean(property);
-            for(int j=0;j<tokens.size();j++){
-                String columnname=tokens.get(j).get(0).image;
-                Object o=c.getValue(columnname);
+            for(int j=0;j<names.size();j++){
+                String columnname= (String) names.get(j);
+                int p1=cn.getColumnDescriptor(columnname).getPosition();
+                String nn=co.getColumnDescriptor(p1).getColumnName();
+                Object o=c.getValue(nn);
+//                System.out.println(columnname+"-->"+o);
                 n.setValue(columnname,o);
             }
             Object pk=c.getValue("primary key");
