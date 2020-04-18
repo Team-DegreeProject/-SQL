@@ -28,6 +28,9 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         int up = this.keyNumber;
         int middle = (low + up) / 2;
         while(low < up){
+//            System.out.println(
+//                    "slkdbksldnblksdnblksdnblsnbl"
+//            );
             V middleKey = (V) this.keys[middle];
             if(key.compareTo(middleKey) == 0)
                 return (T) this.values[middle];

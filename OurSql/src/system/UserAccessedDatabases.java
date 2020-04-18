@@ -66,7 +66,7 @@ public class UserAccessedDatabases {
         length++;
         PrimaryKey pk=new PrimaryKey();
         SqlInt sqlid=new SqlInt(id);
-        pk.addPrimaryKey(sqlid);
+        pk.addPrimaryKey("id",sqlid);
         List values=new ArrayList();
         values.add(pk);
         values.add(sqlid);

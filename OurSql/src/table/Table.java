@@ -18,7 +18,7 @@ import static execution.DMLTool.analyseOneRow;
 public class Table extends SqlConstantImpl {
 
     private TableDescriptor td;
-    private BPlusTree tree;
+    private BPlusTree tree=new BPlusTree<>(4);;
     private HashMap propertyMap = new HashMap();
 
 
@@ -34,7 +34,7 @@ public class Table extends SqlConstantImpl {
 
     public Table(TableDescriptor td) throws ClassNotFoundException {
         this.td=td;
-        tree = new BPlusTree<>(4);
+//        tree = new BPlusTree<>(4);
         createTable(td);
     }
 
@@ -178,7 +178,7 @@ public class Table extends SqlConstantImpl {
                 SqlType value=DMLTool.convertToValue(name,v,propertyMap,columnDescriptorList);
                 ColumnDescriptor cd=td.getPrimaryKey().getColumnDescriptor(name);
                 if(cd!=null){
-                    pk.addPrimaryKey(value);
+                    pk.addPrimaryKey(name,value);
                     System.out.println("primary key: "+value);
                 }
                 bean.setValue(name, value);
@@ -267,8 +267,9 @@ public class Table extends SqlConstantImpl {
             CglibBean c= (CglibBean) list1.get(i);
             PrimaryKey pk=new PrimaryKey();
             for(int k=0;k<pkn.size();k++){
-                Comparable com= (Comparable) c.getValue( pkn.elementAt(k).getColumnName());
-                pk.addPrimaryKey(com);
+                String name=pkn.elementAt(k).getColumnName();
+                Comparable com= (Comparable) c.getValue( name);
+                pk.addPrimaryKey(name,com);
             }
             c.setValue("primary key",pk);
         }

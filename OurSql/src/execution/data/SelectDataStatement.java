@@ -1,11 +1,9 @@
 package execution.data;
 
 import execution.FromStatement;
-import execution.WhereStatament;
-import javafx.scene.control.Tab;
+import execution.InnerJoinStatement;
 import parsing.Token;
 import table.Table;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +19,9 @@ public class SelectDataStatement {
 
     public boolean selectDataImpl() throws ClassNotFoundException {
         List<List<Token>> tablenames= (List<List<Token>>) statement.get(3);
-        String tablename= tablenames.get(0).get(0).image;
-        Table table= FromStatement.from(tablename);
+//        String tablename= tablenames.get(0).get(0).image;
+//        Table table= FromStatement.from(tablename);
+        Table table= InnerJoinStatement.innerJoinImpl(tablenames);
         List<List<Token>> columns= getColumns();
         Table show=table.selectSomeColumns(tablenames,columns);
 
@@ -30,6 +29,8 @@ public class SelectDataStatement {
         table.printTable();
         return true;
     }
+
+
 
     public List<List<Token>> getColumns(){
         Object o=statement.get(1);

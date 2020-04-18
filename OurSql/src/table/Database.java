@@ -72,7 +72,7 @@ public class Database{
         List values=new ArrayList();
         PrimaryKey pk=new PrimaryKey();
         SqlInt sqlid=new SqlInt(id);
-        pk.addPrimaryKey(sqlid);
+        pk.addPrimaryKey("id",sqlid);
         values.add(pk);
         values.add(sqlid);
         values.add(t);

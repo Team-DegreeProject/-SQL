@@ -249,6 +249,9 @@ public class DMLTool {
     }
 
     public static void checkChangeTableName(Table t,List<List<Token>> from){
+        if(from.size()>1){
+            return;
+        }
         for(int i=0;i<from.size();i++){
             List<Token> l=from.get(i);
             if(l.size()>1){
@@ -269,6 +272,22 @@ public class DMLTool {
                 }
             }
         }
+    }
+
+    public static TableDescriptor changeTD(TableDescriptor td1,TableDescriptor td2){
+        ColumnDescriptorList columnDescriptors1=td1.getColumnDescriptorList();
+        ColumnDescriptorList columnDescriptors2=td2.getColumnDescriptorList();
+        ColumnDescriptorList newColums=columnDescriptors1.getNewColumnDescriptorList();
+        for(int i=0;i<columnDescriptors2.size();i++){
+            String name=columnDescriptors2.elementAt(i).getColumnName();
+            if(columnDescriptors1.getColumnDescriptor(name)==null){
+                newColums.add(columnDescriptors2.getColumnDescriptor(i).getNewColumnDescripter());
+            }
+        }
+        TableDescriptor td=new TableDescriptor(td1.getName()+"+"+td2.getName(),td1.getSchema(),newColums);
+        td.updatePriamryKey();
+        return td;
+
     }
 
     //    public void setTablePrimaryKey(TableDescriptor td){
