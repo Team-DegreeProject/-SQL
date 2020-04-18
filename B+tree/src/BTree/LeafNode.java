@@ -36,6 +36,13 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
             else
                 low = middle;
             middle = (low + up) / 2;
+            if(middle==low || middle==(up-1)){
+                middleKey=(V) this.keys[middle];
+                if(key.compareTo(middleKey) == 0)
+                    return (T) this.values[middle];
+                else
+                    break;
+            }
         }
         return null;
     }

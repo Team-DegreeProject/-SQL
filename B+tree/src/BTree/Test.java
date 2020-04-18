@@ -16,13 +16,21 @@ public class Test {
         BPlusTree<CglibBean, Integer> b = new BPlusTree<>(4);
         long time1 = System.nanoTime();
 
-        for (int i = 100; i >=0; i--) {
-            CglibBean bean = new CglibBean(propertyMap);
-            bean.setValue("id", new Integer(i));
-            bean.setValue("name", "test");
-            bean.setValue("address", "789");
-            b.insert(bean,(Integer) bean.getValue("id"));
-        }
+//        for (int i = 100; i >=0; i--) {
+//            CglibBean bean = new CglibBean(propertyMap);
+//            bean.setValue("id", new Integer(i));
+//            bean.setValue("name", "test");
+//            bean.setValue("address", "789");
+//            b.insert(bean,(Integer) bean.getValue("id"));
+//        }
+        CglibBean bean1 = new CglibBean(propertyMap);
+        b.insert(bean1,1);
+
+        CglibBean bean2 = new CglibBean(propertyMap);
+        b.insert(bean2,4);
+        CglibBean bean3 = new CglibBean(propertyMap);
+        b.insert(bean3,8);
+
 //        b.getNodes(b.getRoot());
 //        System.out.println("-----------------------------------------------------");
 
@@ -34,23 +42,23 @@ public class Test {
 //        }
         long time2 = System.nanoTime();
 
-        CglibBean b1 = b.select(23);
+        CglibBean b1 = b.select(1);
         long time3 = System.nanoTime();
 
-        for (int i = 100; i >=0; i--) {
-            b.delete(i);
-        }
+//        for (int i = 100; i >=0; i--) {
+//            b.delete(i);
+//        }
         long time4 = System.nanoTime();
 
-        for (int i = 100; i >=0; i--) {
-            CglibBean bean = new CglibBean(propertyMap);
-            bean.setValue("id", new Integer(i));
-            bean.setValue("name", "test");
-            bean.setValue("address", "789");
-            b.insert(bean,(Integer) bean.getValue("id"));
-//            p = new Product(i, "test", 1.0 * i);
-//            b.insert(p, p.getId());
-        }
+//        for (int i = 100; i >=0; i--) {
+//            CglibBean bean = new CglibBean(propertyMap);
+//            bean.setValue("id", new Integer(i));
+//            bean.setValue("name", "test");
+//            bean.setValue("address", "789");
+//            b.insert(bean,(Integer) bean.getValue("id"));
+////            p = new Product(i, "test", 1.0 * i);
+////            b.insert(p, p.getId());
+//        }
 //        b.getNodes(b.getRoot());
 
         long time5 = System.nanoTime();
