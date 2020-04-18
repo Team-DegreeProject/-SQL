@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94ecb4c7-e690-4952-91d0-f22ff34b4589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/InnerJoinStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/InnerJoinStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/BTree/LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/BTree/LeafNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/PrimaryKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/PrimaryKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/DMLTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/DMLTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/InnerJoinStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/InnerJoinStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/BTree/LeafNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/BTree/LeafNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/BTree/NonLeafNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/BTree/NonLeafNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/PrimaryKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/PrimaryKey.java" afterDir="false" />
-    </list>
+    <list default="true" id="94ecb4c7-e690-4952-91d0-f22ff34b4589" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -334,12 +322,12 @@
       <workItem from="1587024782290" duration="1973000" />
       <workItem from="1587041418417" duration="7465000" />
       <workItem from="1587111200339" duration="6916000" />
-      <workItem from="1587207074479" duration="10338000" />
+      <workItem from="1587207074479" duration="10433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114624000" />
+    <option name="totallyTimeSpent" value="114719000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -361,7 +349,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37484434" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.37484434" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39975095" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
