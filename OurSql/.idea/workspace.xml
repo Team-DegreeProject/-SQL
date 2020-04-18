@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94ecb4c7-e690-4952-91d0-f22ff34b4589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/DMLTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/data/SelectDataStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/data/SelectDataStatement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/system/UserAccessedDatabases.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/system/UserAccessedDatabases.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/BTree/LeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/BTree/LeafNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/BTree/NonLeafNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/BTree/NonLeafNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OurSql/table/type/PrimaryKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/table/type/PrimaryKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/DMLTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/DMLTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/system/UserAccessedDatabases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/system/UserAccessedDatabases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/BTree/LeafNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/BTree/LeafNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/BTree/NonLeafNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/BTree/NonLeafNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/ColumnDescriptorList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/ColumnDescriptorList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/PrimaryKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/PrimaryKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,28 +28,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/table/Table.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="521" column="47" selection-start-line="521" selection-start-column="47" selection-end-line="521" selection-end-column="47" />
-              <folding>
-                <element signature="method#Table#1;class#Table#0" />
-                <element signature="method#insertRows#0;class#Table#0" />
-                <element signature="method#updateTable#1;class#Table#0" />
-                <element signature="method#deleteRows#0;class#Table#0" />
-                <element signature="method#cleanAllData#0;class#Table#0" />
-                <element signature="method#addColumns#0;class#Table#0" />
-                <element signature="method#modifyColumns#0;class#Table#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/execution/InnerJoinStatement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21">
-              <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="204">
+              <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,20 +48,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/table/BTree/LeafNode.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/table/type/PrimaryKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+            <state relative-caret-position="224">
+              <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/table/type/PrimaryKey.java">
+        <entry file="file://$PROJECT_DIR$/src/parsing/SqlParserConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-900">
-              <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+            <state relative-caret-position="18475">
+              <caret line="739" column="14" selection-start-line="739" selection-start-column="11" selection-end-line="739" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/table/type/SqlConstantImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="5" column="52" lean-forward="true" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -207,7 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" />
         <option value="$PROJECT_DIR$/src/table/type/SqlConstant.java" />
         <option value="$PROJECT_DIR$/src/execution/table/DropTableStatement.java" />
         <option value="$PROJECT_DIR$/src/execution/table/TruncateTableStatement.java" />
@@ -256,6 +235,7 @@
         <option value="$PROJECT_DIR$/src/table/type/PrimaryKey.java" />
         <option value="$PROJECT_DIR$/src/table/BTree/NonLeafNode.java" />
         <option value="$PROJECT_DIR$/src/table/BTree/LeafNode.java" />
+        <option value="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" />
       </list>
     </option>
   </component>
@@ -315,22 +295,7 @@
               <item name="OurSql" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="table" type="462c0819:PsiDirectoryNode" />
-              <item name="column" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OurSql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OurSql" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
               <item name="type" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OurSql" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OurSql" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-              <item name="type" type="462c0819:PsiDirectoryNode" />
-              <item name="number" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OurSql" type="b2602c69:ProjectViewProjectNode" />
@@ -426,12 +391,12 @@
       <workItem from="1587024782290" duration="1973000" />
       <workItem from="1587041418417" duration="7465000" />
       <workItem from="1587111200339" duration="6916000" />
-      <workItem from="1587207074479" duration="5252000" />
+      <workItem from="1587207074479" duration="6451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109538000" />
+    <option name="totallyTimeSpent" value="110737000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -446,14 +411,14 @@
     <frame x="-7" y="-7" width="1455" height="935" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32712957" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32712957" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4271482" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4271482" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39975095" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -700,13 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table/type/SqlConstantImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/parsing/SqlParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6025">
@@ -744,13 +702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="74" column="10" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/SqlParserConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="739" column="14" selection-start-line="739" selection-start-column="11" selection-end-line="739" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -876,17 +827,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table/type/PrimaryKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-900">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/table/BTree/BPlusTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/table/BTree/LeafNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="30" selection-start-line="30" selection-end-line="32" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -899,18 +850,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/execution/InnerJoinStatement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        <state relative-caret-position="204">
+          <caret line="49" column="41" lean-forward="true" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table/BTree/LeafNode.java">
+    <entry file="file://$PROJECT_DIR$/src/table/type/PrimaryKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        <state relative-caret-position="224">
+          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/SqlParserConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18475">
+          <caret line="739" column="14" selection-start-line="739" selection-start-column="11" selection-end-line="739" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/table/type/SqlConstantImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="52" lean-forward="true" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
