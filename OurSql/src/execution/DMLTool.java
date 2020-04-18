@@ -290,6 +290,13 @@ public class DMLTool {
 
     }
 
+    public static void updateColumnPosition(Table t){
+        ColumnDescriptorList cd=t.getTableDescriptor().getColumnDescriptorList();
+        for(int i=0;i<cd.size();i++){
+            cd.elementAt(i).setPosition(i);
+        }
+    }
+
     //    public void setTablePrimaryKey(TableDescriptor td){
 //        ColumnDescriptorList pk=td.getPrimaryKey();
 //        pk=new ColumnDescriptorList();

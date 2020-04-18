@@ -32,7 +32,6 @@ public class InnerJoinStatement {
                 up=innerTwoTable(up,now);
             }
         }
-        up.printTable();
         return up;
     }
 
@@ -53,25 +52,24 @@ public class InnerJoinStatement {
             CglibBean c1=l1.get(i);
             Comparable pk= (Comparable) c1.getValue("primary key");
             CglibBean c2= (CglibBean) b2.select(pk);
-//            ((PrimaryKey)pk).printPK();
-            System.out.println(pk);
-//            if(c2!=null){
-//                CglibBean cn=new CglibBean(t3.getPropertyMap());
-//                for(int j=0;j<columns.size();j++){
-//                    String column=columns.get(j);
-//                    if(column.equals("primary key")){
-//                        break;
-//                    }
-//                    if(c2.getValue(column)!=null){
-//                        cn.setValue(column,c2.getValue(column));
-//                    }else{
-//                        cn.setValue(column,c1.getValue(column));
-//                    }
-//                }
-//                cn.setValue("primary key",pk);
-//                b3.insert(cn, pk);
-//            }
+            if(c2!=null){
+                CglibBean cn=new CglibBean(t3.getPropertyMap());
+                for(int j=0;j<columns.size();j++){
+                    String column=columns.get(j);
+                    if(!column.equals("primary key")){
+                        if(c2.getValue(column)!=null){
+                            cn.setValue(column,c2.getValue(column));
+                        }else{
+                            cn.setValue(column,c1.getValue(column));
+                        }
+                    }
+
+                }
+                cn.setValue("primary key",pk);
+                b3.insert(cn, pk);
+            }
         }
+        DMLTool.updateColumnPosition(t3);
         return t3;
 
     }

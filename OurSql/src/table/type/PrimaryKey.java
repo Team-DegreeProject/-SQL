@@ -48,16 +48,14 @@ public class PrimaryKey implements Comparable{
     public int compareTo(Object o) {
         PrimaryKey pk2=(PrimaryKey)o;
         int outcome=0;
-        System.out.println("==============="+names.size());
         for(int i=0;i<names.size();i++){
             Comparable c1= (Comparable) pkmap.get(names.get(i));
             Comparable c2= pk2.getPrimaryKey(names.get(i));
-//            System.out.println(names.get(i)+":"+c1+" "+c2);
             outcome=c1.compareTo(c2);
             if(outcome!=0){
                 return outcome;
             }
-            System.out.println(outcome);
+
         }
         return outcome;
     }

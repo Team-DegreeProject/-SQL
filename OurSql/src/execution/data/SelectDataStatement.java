@@ -24,7 +24,6 @@ public class SelectDataStatement {
         Table table= InnerJoinStatement.innerJoinImpl(tablenames);
         List<List<Token>> columns= getColumns();
         Table show=table.selectSomeColumns(tablenames,columns);
-
         show.printTable();
         table.printTable();
         return true;

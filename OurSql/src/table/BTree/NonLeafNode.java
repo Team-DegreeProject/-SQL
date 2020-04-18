@@ -20,7 +20,6 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
     public T select(V key) {
         int i = this.keyNumber-1;
         while(i >=0){
-            System.out.println("iwbvcwibncwi");
             if(key.compareTo((V) this.keys[i]) >= 0)
                 break;
             i--;
