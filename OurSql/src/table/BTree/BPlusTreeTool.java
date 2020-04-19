@@ -144,6 +144,20 @@ public class BPlusTreeTool {
         System.out.println("-------------------------------------------------------");
     }
 
+    public static void printBPlusTree(BPlusTree b, HashMap property){
+        List list=b.getDatas();
+        for(int i=0;i<list.size();i++){
+            CglibBean c= (CglibBean) list.get(i);
+            Iterator it=property.keySet().iterator();
+            while(it.hasNext()){
+                System.out.println(c.getValue((String) it.next())+",");
+            }
+            System.out.println();
+        }
+
+        System.out.println("-------------------------------------------------------");
+    }
+
     public static void printBPlusTree(List list, TableDescriptor td){
 //        List list=b.getDatas();
         printList(list,td);

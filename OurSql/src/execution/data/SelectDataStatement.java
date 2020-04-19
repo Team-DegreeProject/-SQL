@@ -1,5 +1,6 @@
 package execution.data;
 
+import execution.DistinctStatement;
 import execution.FromStatement;
 import execution.InnerJoinStatement;
 import execution.OrderByStatement;
@@ -19,12 +20,21 @@ public class SelectDataStatement {
     }
 
     public boolean selectDataImpl() throws ClassNotFoundException {
+
         List<List<Token>> tablenames= (List<List<Token>>) statement.get(3);
 //        String tablename= tablenames.get(0).get(0).image;
 //        Table table= FromStatement.from(tablename);
         Table table= InnerJoinStatement.innerJoinImpl(tablenames);
+
+        List distinctNames=checkDistinct();
+        Table show= DistinctStatement.distinctImpl(table,distinctNames);
+        table.printTable(null);
+        show.printTable(null);
+
         List<List<Token>> columns= getColumns();
-        Table show=table.selectSomeColumns(tablenames,columns);
+        show=table.selectSomeColumns(tablenames,columns);
+
+
 
         List<List<Token>> orderbys=getOrderByLists();
         List datas=OrderByStatement.orderByImpl(show,orderbys,table);
@@ -32,6 +42,28 @@ public class SelectDataStatement {
         show.printTable(datas);
         table.printTable(null);
         return true;
+    }
+
+    public List checkDistinct(){
+        List<List<Token>> list= getColumns();
+        List re=new ArrayList();
+        for(int i=0;i<list.size();i++){
+            List<Token> l=list.get(i);
+            Token t=l.get(0);
+            if(t.kind==DISTINCT){
+                String name="";
+                if(l.size()==2){
+                    name=l.get(1).image;
+                }else if(l.size()==3){
+                    name=l.get(3).image;
+                }else if(l.size()==4){
+                    name=l.get(4).image;
+                }
+                re.add(name);
+                l.remove(0);
+            }
+        }
+        return re;
     }
 
 

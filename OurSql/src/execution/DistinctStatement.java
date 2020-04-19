@@ -1,6 +1,7 @@
 package execution;
 
 import table.BTree.BPlusTree;
+import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.Table;
 import table.type.Distinct;
@@ -30,17 +31,27 @@ public class DistinctStatement {
             }
             nc.setValue("distinct",dc);
             nc.setValue("primary key",c.getValue("primary key"));
+            System.out.println(dc+"----------"+c.getValue("primary key"));
             tree.insert(nc,dc);
         }
+//        BPlusTreeTool.printBPlusTree(tree,property);
         BPlusTree nt=new BPlusTree();
         BPlusTree ot=t.getTree();
         List sd=tree.getDatas();
+        System.out.println(sd.size()+"==============");
+        t.printTable(null);
         for(int i=0;i<sd.size();i++){
             CglibBean c= (CglibBean) sd.get(i);
             Comparable pk= (Comparable) c.getValue("primary key");
-            nt.insert(ot.select(pk),pk);
+            CglibBean co= (CglibBean) ot.select(pk);
+            System.out.println(pk);
+            System.out.println(co);
+            if(co!=null){
+                nt.insert(co,pk);
+            }
         }
         t.setTree(nt);
+        t.printTable(null);
         return t;
     }
 
