@@ -75,6 +75,11 @@ public class BPlusTree <T, V extends Comparable<V>> {
         return node;
     }
 
+    public LeafNode<T, V> getRight() {
+        LeafNode node = this.root.refreshRight();
+        return node;
+    }
+
     public int getDataNumber(){
         LeafNode temp = this.getLeft();
         int count=0;
@@ -96,6 +101,19 @@ public class BPlusTree <T, V extends Comparable<V>> {
         }
         return products;
     }
+
+    public List<Object> getReverseDatas() {
+        List<Object> products = new ArrayList<>();
+        LeafNode temp = this.getRight();
+        while (temp != null) {
+            for (int j = temp.keyNumber-1; j>=0; j--) {
+                products.add(temp.values[j]);
+            }
+            temp = temp.left;
+        }
+        return products;
+    }
+
 
     public  List<LeafNode> getLeafNodes(){
         List<LeafNode> leafnodes = new ArrayList<>();
