@@ -3,7 +3,10 @@ package storage.Lock_regulator;
 import java.util.ArrayList;
 
 public class LockTable {
-    private ArrayList<LockTableUnit> unitsList;
+    ArrayList<LockTableUnit> unitsList = new ArrayList<LockTableUnit>();;
+    public LockTable(){
+        ArrayList<LockTableUnit> unitsList = new ArrayList<LockTableUnit>();
+    }
 
     public void addUnit(LockTableUnit newUnit){
         if(unitsList.size() != 0){
@@ -24,12 +27,18 @@ public class LockTable {
     public ArrayList<LockTableUnit> traverseList(String tableName){
         //根据table的名字来遍历这个列表，从而看看这个列表中的到底有没有这个table上锁的信息
         ArrayList<LockTableUnit> resultUnitList = new ArrayList<>();
-        for(int i = 0; i<unitsList.size(); i++){
-            if(unitsList.get(i).getName() == tableName){
-                resultUnitList.add(unitsList.get(i));
+        if(unitsList == null){
+            return null;
+        }else{
+            for(int i = 0; i<unitsList.size(); i++){
+                if(unitsList.get(i).getName() == tableName){
+                    resultUnitList.add(unitsList.get(i));
+                }
             }
+            return resultUnitList;
         }
-        return resultUnitList;
+
+
     }
 
     public void unlock(String tableName){
@@ -39,5 +48,8 @@ public class LockTable {
                 break;
             }
         }
+    }
+    public int getSize(){
+        return unitsList.size();
     }
 }

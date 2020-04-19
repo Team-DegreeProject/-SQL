@@ -11,4 +11,14 @@ public class LockUtils {
         }
         return false;
     }
+
+
+    public static boolean searchExclusiveSub(ArrayList<rowLockTableUnit> array){
+        for(rowLockTableUnit unit : array){
+            if(unit.getLockType() == Configuration.EXCLUSIVELOCK){
+                return true;
+            }
+        }
+        return false;
+    }
 }

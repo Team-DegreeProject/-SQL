@@ -3,9 +3,12 @@ package storage.Lock_regulator;
 import java.util.ArrayList;
 
 public class LockRegulator {
+    public String tableName;
+
     private LockTable locktable;
 
     public LockRegulator(){
+//        tableName = tName;
         locktable = new LockTable();
     }
 
@@ -47,7 +50,12 @@ public class LockRegulator {
         locktable.unlock(tableName);
     }
 
+    public int getSize(){
+        return locktable.getSize();
+    }
 
-
+    public String getTableName() {
+        return tableName;
+    }
 
 }
