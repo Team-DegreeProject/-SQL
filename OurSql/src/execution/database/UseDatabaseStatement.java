@@ -25,7 +25,7 @@ public class UseDatabaseStatement {
         ExecuteStatement.uad.printUserAccessedDatabase();
         CglibBean c= (CglibBean) t.getTree().getDatas().get(0);
         Database database= (Database) c.getValue("database");
-        database.getDatabase().printTable();
+        database.getDatabase().printTable(null);
         ExecuteStatement.db=database;
         return true;
     }

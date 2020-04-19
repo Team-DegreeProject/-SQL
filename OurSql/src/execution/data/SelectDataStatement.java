@@ -2,6 +2,7 @@ package execution.data;
 
 import execution.FromStatement;
 import execution.InnerJoinStatement;
+import execution.OrderByStatement;
 import parsing.Token;
 import table.Table;
 import java.util.ArrayList;
@@ -24,8 +25,12 @@ public class SelectDataStatement {
         Table table= InnerJoinStatement.innerJoinImpl(tablenames);
         List<List<Token>> columns= getColumns();
         Table show=table.selectSomeColumns(tablenames,columns);
-        show.printTable();
-        table.printTable();
+
+        List<List<Token>> orderbys=getOrderByLists();
+        List datas=OrderByStatement.orderByImpl(show,orderbys);
+
+        show.printTable(datas);
+        table.printTable(null);
         return true;
     }
 
@@ -49,6 +54,18 @@ public class SelectDataStatement {
         re.add(o);
         ret.add(re);
         return ret;
+    }
+
+    public List getOrderByLists(){
+        for(int i=0;i<statement.size();i++){
+            Object o=statement.get(i);
+            if(o instanceof Token){
+                if(((Token) o).kind==ORDER_BY){
+                    return (List) statement.get(i+1);
+                }
+            }
+        }
+        return null;
     }
 
 

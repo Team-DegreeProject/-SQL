@@ -144,6 +144,12 @@ public class BPlusTreeTool {
         System.out.println("-------------------------------------------------------");
     }
 
+    public static void printBPlusTree(List list, TableDescriptor td){
+//        List list=b.getDatas();
+        printList(list,td);
+        System.out.println("-------------------------------------------------------");
+    }
+
     public static List<CglibBean> getParticularAttribute(Table t, String attribute, Object value){
         BPlusTree b=t.getTree();
         List<CglibBean> returnlist=new ArrayList();

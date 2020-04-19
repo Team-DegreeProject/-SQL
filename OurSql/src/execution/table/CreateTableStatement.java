@@ -46,7 +46,7 @@ public class CreateTableStatement implements SqlConstant {
         td.updatePriamryKey();
         Table table=new Table(td);
         ExecuteStatement.db.insertTable(table);
-        table.printTable();
+        table.printTable(null);
         td.printTableDescriptor();
         return table;
     }

@@ -78,9 +78,9 @@ public class DeleteDataStatement {
 //                }
 //            }
 //        }
-        change.printTable();
+        change.printTable(null);
         table.deleteRows(change);
-        table.printTable();
+        table.printTable(null);
         return true;
     }
 

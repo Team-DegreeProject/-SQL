@@ -83,6 +83,6 @@ public class Database{
     }
 
     public void printDatabase(){
-        database.printTable();
+        database.printTable(null);
     }
 }

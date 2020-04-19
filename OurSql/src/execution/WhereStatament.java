@@ -149,7 +149,7 @@ public class WhereStatament {
         if(change==null){
             throw new Exception("There is no change");
         }
-        change.printTable();
+        change.printTable(null);
         return change;
     }
 

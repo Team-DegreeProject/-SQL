@@ -20,7 +20,7 @@ public class TruncateTableStatement {
         String name=((Token)statement.get(1)).image;
         Table truncate=FromStatement.from(name);
         truncate.cleanAllData();
-        truncate.printTable();
+        truncate.printTable(null);
         return true;
     }
 }

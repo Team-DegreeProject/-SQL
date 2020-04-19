@@ -28,7 +28,7 @@ public class InsertDataStatement {
         Table table= FromStatement.from(tablename);
         List<Token> attibutes= (List<Token>) statement.get(3);
         table.insertRows(attibutes,statement,5);
-        table.printTable();
+        table.printTable(null);
         return true;
     }
 }

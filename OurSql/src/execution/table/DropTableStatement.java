@@ -28,7 +28,7 @@ public class DropTableStatement {
             Table delete= WhereStatament.compare(database,"tablename",EQ,name);
             database.deleteRows(delete);
         }
-        database.printTable();
+        database.printTable(null);
         return true;
     }
 }

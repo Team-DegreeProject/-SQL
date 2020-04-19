@@ -27,7 +27,7 @@ public class UpdateDataStatement {
         List conditions= (List) statement.get(5);
         Table subTable= WhereStatament.whereImpl(table,conditions);
         table.updateTable(changes,subTable);
-        table.printTable();
+        table.printTable(null);
         return true;
     }
 

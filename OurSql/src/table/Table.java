@@ -201,10 +201,15 @@ public class Table extends SqlConstantImpl {
 
 
 
-    public void printTable(){
+    public void printTable(List list){
         System.out.println("||"+td.getName()+"||");
         System.out.println("-------------------------------------------------------");
-        BPlusTreeTool.printBPlusTree(tree,td);
+        if(list==null){
+            BPlusTreeTool.printBPlusTree(tree,td);
+        }else{
+            BPlusTreeTool.printBPlusTree(list,td);
+        }
+
     }
 
 
@@ -279,7 +284,7 @@ public class Table extends SqlConstantImpl {
 
 
     public void deleteRows(Table t){
-        this.printTable();
+        this.printTable(null);
         List<CglibBean> list=t.getTree().getDatas();
         for(int i=0;i<t.size();i++){
             CglibBean c=list.get(i);

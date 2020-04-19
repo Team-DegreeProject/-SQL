@@ -32,7 +32,7 @@ public class RenameTableStatement {
         values.add(newName);
         boolean bool=database.updateTable(att,values,change);
         if(bool==false){
-            database.printTable();
+            database.printTable(null);
             return false;
         }
 
@@ -45,7 +45,7 @@ public class RenameTableStatement {
         table.getTableDescriptor().setTableName(newName);
         bool=database.updateTable(namestt,values,change);
 
-        database.printTable();
+        database.printTable(null);
         return bool;
     }
 

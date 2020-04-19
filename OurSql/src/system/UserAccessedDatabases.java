@@ -85,7 +85,7 @@ public class UserAccessedDatabases {
     public void printUserAccessedDatabase(){
 //        BPlusTree b=userAccessedDatabase.getTree();
 //        BPlusTreeTool.printBPlusTree(b);
-        userAccessedDatabase.printTable();
+        userAccessedDatabase.printTable(null);
     }
 
     public void setUser(User user) {
