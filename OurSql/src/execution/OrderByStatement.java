@@ -127,22 +127,22 @@ public class OrderByStatement {
         return true;
     }
 
-    public static BPlusTree orderByOneElement(int j,List<List<Token>> lists,List datas){
-        BPlusTree temp=new BPlusTree();
-        sameValue=new HashMap();
-        String name=lists.get(j).get(0).image;
-//        boolean type=checkAsc(lists.get(j));
-        for(int i=0;i<datas.size();i++){
-            CglibBean c= (CglibBean) datas.get(i);
-            Object t=temp.select((Comparable) c.getValue(name));
-            if(t==null){
-                temp.insert(c, (Comparable) c.getValue(name));
-            }else{
-                sameValue.get((Comparable) c.getValue(name)).add(c);
-            }
-        }
-        return temp;
-    }
+//    public static BPlusTree orderByOneElement(int j,List<List<Token>> lists,List datas){
+//        BPlusTree temp=new BPlusTree();
+//        sameValue=new HashMap();
+//        String name=lists.get(j).get(0).image;
+////        boolean type=checkAsc(lists.get(j));
+//        for(int i=0;i<datas.size();i++){
+//            CglibBean c= (CglibBean) datas.get(i);
+//            Object t=temp.select((Comparable) c.getValue(name));
+//            if(t==null){
+//                temp.insert(c, (Comparable) c.getValue(name));
+//            }else{
+//                sameValue.get((Comparable) c.getValue(name)).add(c);
+//            }
+//        }
+//        return temp;
+//    }
 
     public static List sortData(List temp,List<List<Token>> names){
         Collections.sort(temp, new Comparator<CglibBean>() {
