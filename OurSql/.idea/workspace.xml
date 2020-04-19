@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba7200c6-02b2-4fe3-b5cb-7fbd047d07a5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/DistinctStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/DistinctStatement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OurSql/execution/data/SelectDataStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OurSql/execution/data/SelectDataStatement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/DistinctStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/DistinctStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/BTree/BPlusTreeTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/BTree/BPlusTreeTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/SqlParserTokenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/SqlParserTokenManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,16 +21,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/execution/data/SelectDataStatement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state relative-caret-position="196">
+              <caret line="106" column="37" lean-forward="true" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/table/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="537">
               <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
             </state>
           </provider>
@@ -61,20 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/execution/DistinctStatement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/table/BTree/BPlusTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+            <state relative-caret-position="182">
+              <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -119,8 +112,8 @@
         <option value="$PROJECT_DIR$/src/execution/OrderByStatement.java" />
         <option value="$PROJECT_DIR$/src/table/type/SqlConstantImpl.java" />
         <option value="$PROJECT_DIR$/src/table/BTree/BPlusTreeTool.java" />
-        <option value="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" />
         <option value="$PROJECT_DIR$/src/execution/DistinctStatement.java" />
+        <option value="$PROJECT_DIR$/src/execution/data/SelectDataStatement.java" />
       </list>
     </option>
   </component>
@@ -246,12 +239,12 @@
       <updated>1587281407357</updated>
       <workItem from="1587281408655" duration="891000" />
       <workItem from="1587282329057" duration="5531000" />
-      <workItem from="1587301997281" duration="3162000" />
+      <workItem from="1587301997281" duration="5061000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10404000" />
+    <option name="totallyTimeSpent" value="12303000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -264,7 +257,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1455" height="935" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25697923" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -273,7 +265,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.44084683" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.44084683" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -282,7 +274,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32876712" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -369,20 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/table/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/execution/data/SelectDataStatement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/table/BTree/BPlusTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -392,8 +370,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/execution/DistinctStatement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        <state relative-caret-position="182">
+          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/execution/data/SelectDataStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="106" column="37" lean-forward="true" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/table/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
         </state>
       </provider>
     </entry>

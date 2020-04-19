@@ -28,8 +28,8 @@ public class SelectDataStatement {
 
         List distinctNames=checkDistinct();
         Table show= DistinctStatement.distinctImpl(table,distinctNames);
-        table.printTable(null);
-        show.printTable(null);
+//        table.printTable(null);
+//        show.printTable(null);
 
         List<List<Token>> columns= getColumns();
         show=table.selectSomeColumns(tablenames,columns);
@@ -89,6 +89,18 @@ public class SelectDataStatement {
     }
 
     public List getOrderByLists(){
+        for(int i=0;i<statement.size();i++){
+            Object o=statement.get(i);
+            if(o instanceof Token){
+                if(((Token) o).kind==ORDER_BY){
+                    return (List) statement.get(i+1);
+                }
+            }
+        }
+        return null;
+    }
+
+    public List getWhereLists(){
         for(int i=0;i<statement.size();i++){
             Object o=statement.get(i);
             if(o instanceof Token){
