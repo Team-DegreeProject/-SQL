@@ -3,10 +3,8 @@ package execution;
 
 import parsing.Token;
 import table.BTree.BPlusTree;
-import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.Table;
-import table.column.ColumnDescriptor;
 
 import java.util.*;
 
@@ -113,6 +111,20 @@ public class OrderByStatement {
 //        }
 //
 //        return list;
+    }
+
+    public static List returnDatas(Table t,List data){
+        BPlusTree tree=t.getTree();
+        List<CglibBean> list=new ArrayList<>();
+        for(int i=0;i<data.size();i++){
+            CglibBean c= (CglibBean) data.get(i);
+            Comparable pk= (Comparable) c.getValue("primary key");
+            CglibBean c2= (CglibBean) tree.select(pk);
+            if(c2!=null){
+                list.add(c2);
+            }
+        }
+        return list;
     }
 
     public static boolean checkAsc(List<Token> lists){
