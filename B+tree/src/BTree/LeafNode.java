@@ -269,8 +269,11 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     }
     @Override
     LeafNode<T, V> refreshLeft() {
-        if(this.keyNumber <= 0)
-            return null;
+        return this;
+    }
+
+    @Override
+    LeafNode<T, V> refreshRight() {
         return this;
     }
 

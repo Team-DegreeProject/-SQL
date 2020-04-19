@@ -358,4 +358,9 @@ class NonLeafNode<T, V extends Comparable<V>> extends Node<T, V> {
     LeafNode<T, V> refreshLeft() {
         return this.childs[0].refreshLeft();
     }
+
+    @Override
+    LeafNode<T, V> refreshRight() {
+        return this.childs[this.keyNumber-1].refreshRight();
+    }
 }

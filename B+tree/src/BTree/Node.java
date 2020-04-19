@@ -30,4 +30,7 @@ abstract class Node<T, V extends Comparable<V>>{
 
     //最左节点
     abstract LeafNode<T, V> refreshLeft();
+
+    //最右节点
+    abstract LeafNode<T, V> refreshRight();
 }
