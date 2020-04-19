@@ -14,7 +14,7 @@ import static parsing.SqlParserConstants.DESC;
 public class OrderByStatement {
     static HashMap<Comparable,List> sameValue=new HashMap();
 
-    public static List orderByImpl(Table table, List<List<Token>> lists) {
+    public static List orderByImpl(Table table, List<List<Token>> lists,Table t) {
 
 
         if (lists == null) {
@@ -25,9 +25,9 @@ public class OrderByStatement {
 
 
         System.out.println("case change");
-        List datas = table.getTree().getDatas();
+        List datas = t.getTree().getDatas();
         datas=sortData(datas,lists);
-
+        datas=returnDatas(table,datas);
 //        for(int i=0;i<lists.size();i++){
 //            String name=lists.get(i).get(0).image;
 //            if(i==0){

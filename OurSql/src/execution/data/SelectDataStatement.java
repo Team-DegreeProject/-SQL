@@ -27,7 +27,7 @@ public class SelectDataStatement {
         Table show=table.selectSomeColumns(tablenames,columns);
 
         List<List<Token>> orderbys=getOrderByLists();
-        List datas=OrderByStatement.orderByImpl(show,orderbys);
+        List datas=OrderByStatement.orderByImpl(show,orderbys,table);
 
         show.printTable(datas);
         table.printTable(null);
