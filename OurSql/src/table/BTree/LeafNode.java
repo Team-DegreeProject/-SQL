@@ -1,5 +1,7 @@
 package table.BTree;
 
+import table.type.PrimaryKey;
+
 class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     protected Object values[];
@@ -22,26 +24,43 @@ class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     //二分查找
     @Override
     public T select(V key) {
+//        if(key instanceof PrimaryKey){
+//            System.out.println("select :");
+//            ((PrimaryKey) key).printPK();
+//        }
+
         if(this.keyNumber <=0 || key.compareTo((V)this.keys[this.keyNumber-1])>0)
             return null;
         int low = 0;
         int up = this.keyNumber;
         int middle = (low + up) / 2;
         while(low < up){
+//            System.out.println("low:"+low+"up:"+up+"middle: "+middle);
             V middleKey = (V) this.keys[middle];
-            if(key.compareTo(middleKey) == 0)
+            if(key.compareTo(middleKey) == 0) {
+//                System.out.println("case1");
                 return (T) this.values[middle];
-            else if(key.compareTo(middleKey) < 0)
+            }else if(key.compareTo(middleKey) < 0) {
+//                System.out.println("case2");
                 up = middle;
-            else
+            }else {
+//                System.out.println("case3");
                 low = middle;
+            }
             middle = (low + up) / 2;
-            if(middle==low || middle==(up-1)){
+            if(middle==low){
+//                System.out.println("low:"+low+"up:"+up+"middle: "+middle);
                 middleKey=(V) this.keys[middle];
-                if(key.compareTo(middleKey) == 0)
+                if(key.compareTo(middleKey) == 0){
+//                    System.out.println("case4");
                     return (T) this.values[middle];
-                else
+                }
+                else if(key.compareTo((V)this.values[middle+1]) == 0){
+                    return (T)this.values[middle+1];
+                }else{
                     break;
+                }
+
             }
         }
         return null;

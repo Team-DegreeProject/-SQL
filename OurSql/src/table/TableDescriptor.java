@@ -137,16 +137,21 @@ public class TableDescriptor implements TableSchema {
         }
     }
 
-    public void printColumnName(){
+    public String printColumnName(){
+        String str="";
         List columns=this.getColumnNamesList();
         for(int i=0;i<columns.size();i++){
             System.out.print(columns.get(i));
+            str=str+columns.get(i);
             if(i!=columns.size()-1){
                 System.out.print(",");
+                str=str+",";
             }else{
                 System.out.println(";");
+                str=str+";\n";
             }
         }
+        return str;
     }
 
     public String getTableName() {

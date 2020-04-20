@@ -22,7 +22,7 @@ public class CreateTableStatement implements SqlConstant {
         statement=l;
     }
 
-    public Table createImpl() throws Exception {
+    public String createImpl() throws Exception {
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
         ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
@@ -46,9 +46,9 @@ public class CreateTableStatement implements SqlConstant {
         td.updatePriamryKey();
         Table table=new Table(td);
         ExecuteStatement.db.insertTable(table);
-        table.printTable(null);
-        td.printTableDescriptor();
-        return table;
+        String output=ExecuteStatement.db.printDatabase()+"\n"+table.printTable(null);
+//        td.printTableDescriptor();
+        return output;
     }
 
     public boolean isTableConstraint(List row,ColumnDescriptorList columnDescriptorList){

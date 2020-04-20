@@ -303,6 +303,7 @@ TOKEN [IGNORE_CASE]:
 |	<CURDATE: "curdate">
 |	<DATEDIFF: "datediff">
 |	<DATE_FORMAT: "date_fromat">
+|   <FLOOR:"floor">
 
 
 }
@@ -592,7 +593,7 @@ void select(Token d):
     showStructure()
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.select(sql);} // %%
+        {ExecuteStatement.select(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 
@@ -757,7 +758,7 @@ void insert(Token d) :
     {   showStructure(); }
     //(<STATEMENT_END> | <END>)
 
-     {ExecuteStatement.insert(sql);} // %%
+   {ExecuteStatement.insert(sql);}// %%
     // {test.testWhereAnd(sql);} // %%
 
 }
@@ -799,7 +800,7 @@ void create(Token d) :
     (<STATEMENT_END> | <END>)
 
     {System.out.println("------ test interface position --------");}
-    {ExecuteStatement.create(sql);} // %%
+ {ExecuteStatement.create(sql);}// %%
     // {test.testWhereAnd(sql);} // %%
 
 }
@@ -959,7 +960,7 @@ void delete(Token d) :
 
 
 
-  {ExecuteStatement.delete(sql);}// %%
+     {ExecuteStatement.delete(sql);}// %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -986,7 +987,7 @@ void truncate(Token d) :
 
 
 
-    {ExecuteStatement.truncate(sql);}// %%
+   {ExecuteStatement.truncate(sql);} // %%
 
 //    {test.testWhereAnd(sql);} // %%
 
@@ -1029,7 +1030,7 @@ void drop(Token d):
     {System.out.println("------&&&&&&&&&&&&&&&&7--------");}
 
 
-     {ExecuteStatement.drop(sql);}// %%
+     {ExecuteStatement.drop(sql);} // %%
     //    {test.testWhereAnd(sql);} // %%
 }
 
@@ -1052,7 +1053,7 @@ void rename(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.rename(sql);} // %%
+    {ExecuteStatement.rename(sql);} // %%
         //    {test.testWhereAnd(sql);} // %%
 
 }
@@ -1072,7 +1073,7 @@ void show(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {DatabaseStatements.showDatabase(sql);}// %%
+    {ExecuteStatement.show(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 
@@ -1094,7 +1095,7 @@ void use(Token d):
     {   showStructure(); }
         (<STATEMENT_END> | <END>)
 
-    {DatabaseStatements.useDatabase(sql);} // %%
+    {ExecuteStatement.use(sql);}// %%
     //    {test.testWhereAnd(sql);} // %%
 }
 
@@ -1195,7 +1196,7 @@ void alter(Token d):
     {   showStructure(); }
     (<STATEMENT_END> | <END>)
 
-         {ExecuteStatement.alter(sql);} // %%
+{ExecuteStatement.alter(sql);}// %%
         //    {test.testWhereAnd(sql);} // %%
 
 }
@@ -1583,13 +1584,13 @@ void name() :
 {Token t;}
 {
 
-  (<YEAR>)
-  ("(")?
-  (t = <ID>|t =<NAME>|t =<TEXT>)
-  {
-      saveTokenInList(t,templist);
-  }
-  (")")?
+//  (<YEAR>)?
+//  ("(")?
+(
+  (singlefunction())
+  |
+  (t = <ID>|t =<NAME>|t =<TEXT>) {   saveTokenInList(t,templist);}
+ )
   ( t = <AS>  {saveTokenInList(t,templist);}
     (t = <NAME>|t = <ID>) {saveTokenInList(t,templist);}
   )?
@@ -1748,7 +1749,20 @@ void selectResult() :
 {
     //<ID>(<DOT><ID>)?
     (   t =<DISTINCT>   {saveTokenInList(t,templist);})?
-    (t = <ID>|t = <NAME>){saveTokenInList(t,templist);}
+    (
+      (
+        doublefunction()
+
+      )
+      |
+      (
+         singlefunction()
+      )
+      |
+        (t = <ID>|t = <NAME>){saveTokenInList(t,templist);}
+    )
+
+
     (   t = <AS>{saveTokenInList(t,templist);}
         (t = <ID>|t = <NAME>)  {saveTokenInList(t,templist);}
     )?
@@ -2079,15 +2093,76 @@ void set() :
     rightCondition()
 }
 
+
+void purefunction() :
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+
+    (
+       t = <NOW>  |t = <CURDATE> |t = <SYSDATE> //（0-6）  //直接加空括号（）
+    )
+    "("  ")"
+
+
+    {saveTokenInList(t,templist);}
+}
+
 void singlefunction() :
 {
     Token t;
     templist = new ArrayList<Object>();
 }
 {
-    (t = <AVG>|t = <COUNT>|t = <MAX>|t = <MIN>|t = <SUM>)
-    (t = <YEAR>|t = <MONTH>|t = <WEEK>|t = <NOW>
-    |t = <SYSDATE>|t = <CURDATE>|t = <DATEDIFF>|t = <DATE_FORMAT>
+    (
+        t = <AVG>|t = <COUNT>|t = <MAX>|t = <MIN>|t = <SUM>|t = <FLOOR>
+        |
+        t = <YEAR>|t = <MONTH>|t = <WEEK>|t = <DAY>
     )
+    {saveTokenInList(t,templist);}
+    "(" //+id+")"
+        (
+            ((t = <ID>|t = <NAME>){saveTokenInList(t,templist);})
+            |
+            (doublefunction())
+        )
+    ")"
+}
+void doublefunction() :
+{
+    Token t;
+    templist = new ArrayList<Object>();
+}
+{
+
+    (
+        t = <DATEDIFF>//(xxx,xxx)
+        |t = <DATE_FORMAT>//暂时不写
+    )
+    "(" //+xx +, +xx +")"
+    (
+
+                    singlefunction()
+                    |
+                    purefunction()
+                    |
+                    (t = <ID>|t = <NAME>)
+    )
+
+    ","
+
+    (
+                    singlefunction()
+                    |
+                    purefunction()
+                    |
+                    (t = <ID>|t = <NAME>)
+    )
+
+    ")"
+
+
     {saveTokenInList(t,templist);}
 }

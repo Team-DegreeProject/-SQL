@@ -20,7 +20,7 @@ public class DropTableStatement {
         statement=tokens;
     }
 
-    public boolean dropTableImpl() throws ClassNotFoundException {
+    public String dropTableImpl() throws ClassNotFoundException {
         Table database=ExecuteStatement.db.getDatabase();
         List names= (List) statement.get(2);
         for(int i=0;i<names.size();i++){
@@ -28,7 +28,7 @@ public class DropTableStatement {
             Table delete= WhereStatament.compare(database,"tablename",EQ,name);
             database.deleteRows(delete);
         }
-        database.printTable(null);
-        return true;
+        String output=database.printTable(null);
+        return output;
     }
 }

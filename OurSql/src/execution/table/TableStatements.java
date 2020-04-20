@@ -6,10 +6,11 @@ import static parsing.SqlParserConstants.*;
 
 public class TableStatements {
 
-    public static void createTable(List tokens){
+    public static String createTable(List tokens){
+        String out="Wrong: Create Table !";
         try {
             CreateTableStatement createTableStatement=new CreateTableStatement(tokens);
-            createTableStatement.createImpl();
+            out=createTableStatement.createImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -19,36 +20,43 @@ public class TableStatements {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return out;
     }
 
-    public static void dropTable(List tokens){
+    public static String dropTable(List tokens){
+        String out="Wrong: Drop Table !";
         try {
             DropTableStatement dropTableStatement=new DropTableStatement(tokens);
-            dropTableStatement.dropTableImpl();
+            out=dropTableStatement.dropTableImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
     }
 
 
 
-    public static void renameTable(List tokens){
+    public static String renameTable(List tokens){
+        String out="Wrong: Remove Table !";
         try {
             RenameTableStatement renameTableStatement = new RenameTableStatement(tokens);
-            renameTableStatement.renameTableImpl();
+            out=renameTableStatement.renameTableImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
     }
 
 
-    public static void alterTable(List tokens){
+    public static String alterTable(List tokens){
+        String out="Wrong: Alter Table !";
         try {
             AlterTableStatement alterTableStatement=new AlterTableStatement(tokens);
-            alterTableStatement.alterTableImpl();
+            out=alterTableStatement.alterTableImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
 //            Object o=tokens.get(3);
 //            if(o instanceof Token){
 //                int type=((Token)tokens.get(3)).kind;
@@ -67,12 +75,14 @@ public class TableStatements {
 //            }
     }
 
-    public static void truncateTable(List tokens){
+    public static String truncateTable(List tokens){
+        String out="Wrong: Truncate Table !";
         try {
             TruncateTableStatement truncateTableStatement=new TruncateTableStatement(tokens);
-            truncateTableStatement.truncateTableImpl();
+            out=truncateTableStatement.truncateTableImpl();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return out;
     }
 }

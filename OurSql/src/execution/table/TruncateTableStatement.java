@@ -16,11 +16,11 @@ public class TruncateTableStatement {
         statement=tokens;
     }
 
-    public boolean truncateTableImpl() throws Exception {
+    public String truncateTableImpl() throws Exception {
         String name=((Token)statement.get(1)).image;
         Table truncate=FromStatement.from(name);
         truncate.cleanAllData();
-        truncate.printTable(null);
-        return true;
+        String output=truncate.printTable(null);
+        return output;
     }
 }

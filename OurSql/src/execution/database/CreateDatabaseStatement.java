@@ -13,14 +13,15 @@ public class CreateDatabaseStatement{
     }
     public CreateDatabaseStatement(){}
 
-    public boolean createDatabaseImpl() throws Exception {
+    public String createDatabaseImpl() throws Exception {
         if(statement==null){
-            return false;
+            return "Create Database Wrong!";
         }
         String databaseName=  ((Token)statement.get(2)).image;
         Database db=new Database(databaseName);
         ExecuteStatement.uad.insertDatabase(db);
-        return true;
+        String output=ExecuteStatement.uad.getUserAccessedDatabase().printTable(null);
+        return output;
     }
 
 //    public Database createDatabaseImpl(int i) throws ClassNotFoundException, InstantiationException, IllegalAccessException {

@@ -12,10 +12,10 @@ public class ShowDatabaseStatement {
         this.statement=list;
     }
 
-    public boolean showDatabaseStatementImpl(){
+    public String showDatabaseStatementImpl(){
 //        Table usa= ExecuteStatement.uad.getUserAccessedDatabase();
 //        usa.printTable();
-        ExecuteStatement.uad.printUserAccessedDatabase();
-        return true;
+        String output=ExecuteStatement.uad.printUserAccessedDatabase();
+        return output;
     }
 }

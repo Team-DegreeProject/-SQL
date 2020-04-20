@@ -82,7 +82,8 @@ public class Database{
         return database.insertARow(values);
     }
 
-    public void printDatabase(){
-        database.printTable(null);
+    public String printDatabase(){
+        String str=database.printTable(null);
+        return str;
     }
 }

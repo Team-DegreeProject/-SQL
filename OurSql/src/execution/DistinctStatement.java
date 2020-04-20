@@ -5,6 +5,7 @@ import table.BTree.BPlusTreeTool;
 import table.BTree.CglibBean;
 import table.Table;
 import table.type.Distinct;
+import table.type.PrimaryKey;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,24 +35,25 @@ public class DistinctStatement {
 //            System.out.println(dc+"----------"+c.getValue("primary key"));
             tree.insert(nc,dc);
         }
-        BPlusTreeTool.printBPlusTree(tree,property);
+//        BPlusTreeTool.printBPlusTree(tree,property);
         BPlusTree nt=new BPlusTree();
         BPlusTree ot=t.getTree();
         List sd=tree.getDatas();
-        BPlusTreeTool.printBPlusTree(ot,t.getPropertyMap());
+//        BPlusTreeTool.printBPlusTree(ot,t.getPropertyMap());
 //        t.printTable(null);
         for(int i=0;i<sd.size();i++){
             CglibBean c= (CglibBean) sd.get(i);
-            Comparable pk= (Comparable) c.getValue("primary key");
+            PrimaryKey pk= (PrimaryKey) c.getValue("primary key");
             CglibBean co= (CglibBean) ot.select(pk);
-            System.out.println(pk);
-            System.out.println(co);
+//            System.out.println(pk);
+//            pk.printPK();
+//            System.out.println(co);
             if(co!=null){
                 nt.insert(co,pk);
             }
         }
         t.setTree(nt);
-        t.printTable(null);
+//        t.printTable(null);
         return t;
     }
 

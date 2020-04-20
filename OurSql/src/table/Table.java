@@ -201,14 +201,18 @@ public class Table extends SqlConstantImpl {
 
 
 
-    public void printTable(List list){
+    public String printTable(List list){
+        String str="||"+td.getName()+"||\n"+"-------------------------------------------------------\n";
         System.out.println("||"+td.getName()+"||");
         System.out.println("-------------------------------------------------------");
         if(list==null){
-            BPlusTreeTool.printBPlusTree(tree,td);
+            String t=BPlusTreeTool.printBPlusTree(tree,td);
+            str=str+t;
         }else{
-            BPlusTreeTool.printBPlusTree(list,td);
+            String t=BPlusTreeTool.printBPlusTree(list,td);
+            str=str+t;
         }
+        return str;
 
     }
 

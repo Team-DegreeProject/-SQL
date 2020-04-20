@@ -27,57 +27,66 @@ public class ExecuteStatement {
 
 
 
-    public static void rename(List tokens){
+    public static String rename(List tokens){
+        String out="Wrong: Rename !";
         int type=((Token)tokens.get(1)).kind;
         if(type==DATABASE){
-            DatabaseStatements.renameDatabase(tokens);
+            out=DatabaseStatements.renameDatabase(tokens);
         }else{
-            TableStatements.renameTable(tokens);
+            out=TableStatements.renameTable(tokens);
         }
+        return out;
     }
 
-    public static void create(List tokens){
+    public static String create(List tokens){
+        String out="Wrong: Create !";
         int name=((Token)tokens.get(1)).kind;
         if(name==DATABASE){
-            DatabaseStatements.createDatabase(tokens);
+            out=DatabaseStatements.createDatabase(tokens);
         }else if(name==TABLE){
             try {
                 if(db==null){
-                    throw new Exception("There is no database;");
+                    out="Wrong: There is no database !";
                 }
                 TableStatements.createTable(tokens);
-                db.printDatabase();
+                out=db.printDatabase();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return out;
     }
 
-    public static void drop(List tokens){
+    public static String drop(List tokens){
+        String out="Wrong: Drop !";
         int type=((Token)tokens.get(1)).kind;
         if(type==DATABASE){
-            DatabaseStatements.dropDatabase(tokens);
+            out=DatabaseStatements.dropDatabase(tokens);
         }else{
-            TableStatements.dropTable(tokens);
+            out=TableStatements.dropTable(tokens);
         }
+        return out;
     }
 
-    public static void alter(List tokens){
-        TableStatements.alterTable(tokens);
+    public static String alter(List tokens){
+        String out=TableStatements.alterTable(tokens);
+        return out;
     }
 
-    public static void insert(List tokens){
-        DataStatements.insertData(tokens);
+    public static String insert(List tokens){
+        return DataStatements.insertData(tokens);
     }
 
-    public static void delete(List tokens){DataStatements.deleteData(tokens);}
+    public static String delete(List tokens){return DataStatements.deleteData(tokens);}
 
-    public static void update(List tokens){DataStatements.updateData(tokens);}
+    public static String update(List tokens){return DataStatements.updateData(tokens);}
 
-    public static void truncate(List tokens){TableStatements.truncateTable(tokens);};
+    public static String truncate(List tokens){return TableStatements.truncateTable(tokens);};
 
-    public static void select(List tokens){DataStatements.selectData(tokens);}
+    public static String select(List tokens){return DataStatements.selectData(tokens);}
 
+    public static String show(List tokens){return DatabaseStatements.showDatabase(tokens);}
 
+    public static String use(List tokens){return DatabaseStatements.useDatabase(tokens);}
 
 }

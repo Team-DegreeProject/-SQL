@@ -101,9 +101,11 @@ public class BPlusTreeTool {
         printList(list,attribute);
     }
 
-    public static void printList(List list,TableDescriptor td){
+    public static String printList(List list,TableDescriptor td){
+        String str="";
 //        boolean first=true;
-        td.printColumnName();
+        str=td.printColumnName();
+        str=str+"-------------------------------------\n";
         System.out.println("-------------------------------------");
         List attribute=td.getColumnNamesList();
         for(int i=0;i<list.size();i++){
@@ -129,19 +131,25 @@ public class BPlusTreeTool {
 
             for(int j=0;j<attribute.size();j++){
                 System.out.print(c.getValue((String) attribute.get(j)));
+                str=str+c.getValue((String) attribute.get(j));
                 if(j!=attribute.size()-1){
                     System.out.print(",");
+                    str=str+",";
                 }else{
                     System.out.println(";");
+                    str=str+";\n";
                 }
             }
         }
+        return str;
     }
 
-    public static void printBPlusTree(BPlusTree b, TableDescriptor td){
+    public static String printBPlusTree(BPlusTree b, TableDescriptor td){
         List list=b.getDatas();
-        printList(list,td);
+        String str=printList(list,td);
+        str=str+"-------------------------------------------------------\n";
         System.out.println("-------------------------------------------------------");
+        return str;
     }
 
     public static void printBPlusTree(BPlusTree b, HashMap property){
@@ -150,7 +158,8 @@ public class BPlusTreeTool {
             CglibBean c= (CglibBean) list.get(i);
             Iterator it=property.keySet().iterator();
             while(it.hasNext()){
-                System.out.println(c.getValue((String) it.next())+",");
+                String name= (String) it.next();
+                System.out.println(name+":"+c.getValue(name)+",");
             }
             System.out.println();
         }
@@ -158,10 +167,12 @@ public class BPlusTreeTool {
         System.out.println("-------------------------------------------------------");
     }
 
-    public static void printBPlusTree(List list, TableDescriptor td){
+    public static String printBPlusTree(List list, TableDescriptor td){
 //        List list=b.getDatas();
-        printList(list,td);
+        String str=printList(list,td);
+        str=str+"-------------------------------------------------------\n";
         System.out.println("-------------------------------------------------------");
+        return str;
     }
 
     public static List<CglibBean> getParticularAttribute(Table t, String attribute, Object value){

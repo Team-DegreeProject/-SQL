@@ -71,7 +71,7 @@ public class AlterTableStatement {
         return change;
     }
 
-    public void alterTableImpl() throws ClassNotFoundException {
+    public String alterTableImpl() throws ClassNotFoundException {
         Table change=null;
         Object o=statement.get(3);
         if(o instanceof Token){
@@ -89,6 +89,7 @@ public class AlterTableStatement {
             }
         }
         change.getTableDescriptor().printTableDescriptor();
+        return change.printTable(null);
     }
 
 }
