@@ -57,7 +57,7 @@ public class Test {
         TreeSaver TS = new TreeSaver(b);
         TS.SaveAsXML();
         TreeLoader TL = new TreeLoader();
-        BPlusTree testTree = TL.loadFromFile("data/test/test.xml");
+        BPlusTree testTree = TL.loadFromFile("test");
 //        System.out.println((CglibBean)testTree.select(23));
 
 //        System.out.println("field is :" + fields[0].getName());
