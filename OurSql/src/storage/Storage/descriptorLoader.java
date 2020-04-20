@@ -1,10 +1,12 @@
 package storage.Storage;
 
 import execution.DMLTool;
+import javafx.scene.control.Tab;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import table.BTree.BPlusTree;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
@@ -19,12 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class descriptorLoader {
-    public TableDescriptor loadDescriptorFromFile(String tn) {
+
+    public HashMap loadPropertyFromFile(String tn){
+        HashMap propertyMap = new HashMap();
         SAXBuilder saxBuilder = new SAXBuilder();
-        TableDescriptor tableDescriptor = null;
-        HashMap propertyMap = null;
         try {
-            //首先读取propertyMap
             String filepath = "data/" + tn + "/" + tn + "PropertyMap.xml";
             Document document1 = saxBuilder.build(new File(filepath));
             Element rootElement = document1.getRootElement();
@@ -32,12 +33,25 @@ public class descriptorLoader {
             for(Element eachElement : elementList){
                 propertyMap.put(eachElement.getName(),eachElement.getValue());
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return propertyMap;
+    }
 
 
-            filepath = "data/" + tn + "/" + tn + "Descriptor.xml";
-            document1 = saxBuilder.build(new File(filepath));
-            rootElement = document1.getRootElement();
-            elementList = rootElement.getChildren();
+    public TableDescriptor loadDescriptorFromFile(String tn) {
+        SAXBuilder saxBuilder = new SAXBuilder();
+        TableDescriptor tableDescriptor = null;
+        HashMap propertyMap = null;
+        try {
+            //首先读取propertyMap
+            propertyMap = loadPropertyFromFile(tn);
+
+            String filepath = "data/" + tn + "/" + tn + "Descriptor.xml";
+            Document document1 = saxBuilder.build(new File(filepath));
+            Element rootElement = document1.getRootElement();
+            List<Element> elementList = rootElement.getChildren();
 
             //先得到最外层的节点们
             String tableName = rootElement.getChildText("tableName");
@@ -90,5 +104,22 @@ public class descriptorLoader {
             e.printStackTrace();
         }
         return tableDescriptor;
+    }
+
+    public Table loadFromFile(String tableName){
+        try{
+            TreeLoader tl = new TreeLoader();
+            BPlusTree fileTree = tl.loadFromFile(tableName);
+
+            TableDescriptor td = loadDescriptorFromFile(tableName);
+            HashMap propertyMap = loadPropertyFromFile(tableName);
+
+            Table resultTable = new Table(td,fileTree);
+            return resultTable;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

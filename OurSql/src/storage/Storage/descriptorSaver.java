@@ -31,8 +31,24 @@ public class descriptorSaver {
         btree = tree;
     }
 
-    public void hashmapToXML(String tableName){
+    public void saveAll(){
+        try{
+            TreeSaver ts = new TreeSaver();
+            ts.SaveAsXML(btree);
+            hashmapToXML();
+            descriptorToXML();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void hashmapToXML(){
         try {
+            String tableName = tabledescriptor.getTableName();
             Element table = new Element("table");
             Document document = new Document(table);
             Iterator entries = propertyMap.entrySet().iterator();
