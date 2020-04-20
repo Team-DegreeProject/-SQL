@@ -2,12 +2,9 @@ package execution.database;
 
 import execution.ExecuteStatement;
 import execution.WhereStatament;
-import parsing.Token;
 import table.BTree.CglibBean;
 import table.Database;
 import table.Table;
-import table.type.PrimaryKey;
-import table.type.number.SqlInt;
 
 import java.util.ArrayList;
 import java.util.List;

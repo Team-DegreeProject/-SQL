@@ -2,7 +2,6 @@ package execution.table;
 
 import execution.ExecuteStatement;
 import execution.WhereStatament;
-import parsing.Token;
 import table.BTree.CglibBean;
 import table.Table;
 import java.util.ArrayList;

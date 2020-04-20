@@ -473,7 +473,7 @@ public class SqlParser implements SqlParserConstants {
     ExecuteStatement.insert(sql);
   }
 
-  final public void create(Token d) throws ParseException {
+  final public String create(Token d) throws ParseException {
     Token t;
     sql = new ArrayList<Object>();
         t=d;
@@ -513,7 +513,9 @@ public class SqlParser implements SqlParserConstants {
       throw new ParseException();
     }
      System.out.println("------ test interface position --------");
-  ExecuteStatement.create(sql);
+    String a = ExecuteStatement.create(sql);// %%
+    {if (true) return a;}
+    throw new Error("Missing return statement in function");
   }
 
 ////1.1.1	CREATE TABLE table_name

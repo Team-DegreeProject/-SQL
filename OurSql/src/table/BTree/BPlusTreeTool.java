@@ -1,11 +1,9 @@
 package table.BTree;
 
 import execution.DMLTool;
-import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
-import table.column.ColumnDescriptor;
 
 import java.util.*;
 

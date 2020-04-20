@@ -1,7 +1,6 @@
 package execution.table;
 
 import execution.FromStatement;
-import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.column.ColumnDescriptor;

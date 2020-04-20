@@ -1,7 +1,5 @@
 package execution;
 
-import javafx.scene.control.Tab;
-import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;

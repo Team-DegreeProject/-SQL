@@ -1,11 +1,8 @@
 package execution.data;
 
 import execution.DistinctStatement;
-import execution.FromStatement;
 import execution.InnerJoinStatement;
 import execution.OrderByStatement;
-import javafx.scene.control.Tab;
-import parsing.Token;
 import table.Table;
 import java.util.ArrayList;
 import java.util.HashMap;

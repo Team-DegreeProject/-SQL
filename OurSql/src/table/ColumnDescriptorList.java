@@ -1,6 +1,5 @@
 package table;
 
-import parsing.Token;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 
