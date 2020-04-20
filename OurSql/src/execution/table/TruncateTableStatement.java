@@ -1,6 +1,7 @@
 package execution.table;
 
 import execution.FromStatement;
+import parsing.Token;
 import table.Table;
 
 import java.util.List;

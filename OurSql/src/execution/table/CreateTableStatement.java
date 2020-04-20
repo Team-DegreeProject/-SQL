@@ -7,7 +7,7 @@ import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.SqlConstant;
-
+import parsing.Token;
 import java.util.List;
 
 import static execution.DMLTool.analyseOneRow;

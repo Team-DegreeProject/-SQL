@@ -26,6 +26,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="SqlParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="parsing.SqlParser" />
+      <module name="OurSql" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="parsing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SqlParser" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b0797ddc-7518-433c-9e2b-ede1c0bf79a5" name="Default Changelist" comment="" />
@@ -37,7 +57,7 @@
       <workItem from="1587348010130" duration="83000" />
       <workItem from="1587387917328" duration="342000" />
       <workItem from="1587388292679" duration="383000" />
-      <workItem from="1587388711036" duration="1841000" />
+      <workItem from="1587388711036" duration="4179000" />
     </task>
     <servers />
   </component>

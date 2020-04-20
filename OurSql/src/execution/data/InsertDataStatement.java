@@ -1,11 +1,13 @@
 package execution.data;
 
 import execution.FromStatement;
+import parsing.Token;
 import table.Table;
 
 import java.util.List;
 
-public class InsertDataStatement {
+public class
+InsertDataStatement {
 
     List statement;
 
