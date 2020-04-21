@@ -1,20 +1,19 @@
-options
-{
+options {
     static=false;
     IGNORE_CASE=true;
 }
 
 PARSER_BEGIN(SqlParser)
 
-package parsing;
+package com.ucd.oursql.sql.parsing;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.InputStream;
-import execution.ExecuteStatement;
-import execution.database.DatabaseStatements;
-import execution.table.TableStatements;
+import com.ucd.oursql.sql.execution.ExecuteStatement;
+import com.ucd.oursql.sql.execution.database.DatabaseStatements;
+import com.ucd.oursql.sql.execution.table.TableStatements;
 
 public class SqlParser {
 
@@ -44,7 +43,8 @@ public class SqlParser {
         {
 
             SqlParser parser = new SqlParser(System.in);
-            parser.parse();
+            String result=parser.parse();
+            System.out.println("result: "+result);
             System.out.println("sql is correct!");
             System.out.println();
             System.out.println("-----------------------------------------------------------");
@@ -509,16 +509,18 @@ TOKEN :
 <END : "!!">
 }
 
-void parse() :
+String parse() :
 {
     Token t;
     sql = new ArrayList<Object>();
+    String result=null;
 }
 {
+ (
     //***************1	CREATE ************************************************
     //1.1.1	CREATE DATABASE testdb；
     //1.1.1	CREATE TABLE table_name	();
-    t = <CREATE>   create(t)
+    t = <CREATE>   {result=create(t);}
 
     //***************2	DROP***************************************************
     //2.1.1	DROP DATABSE databse_name;
@@ -555,6 +557,9 @@ void parse() :
     |t = <DELETE>   delete(t)
      //***************TRUNCATE*******************************************************
     |t = <TRUNCATE>   truncate(t)
+ )
+    {return result;}
+
 }
 
 void select(Token d):
@@ -805,6 +810,7 @@ String create(Token d) :
 
  {
     String a = ExecuteStatement.create(sql);// %%
+    System.out.println("result: ----------"+a);
     return a;
  }
     // {test.testWhereAnd(sql);} // %%

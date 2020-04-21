@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f1314a47-da34-4f70-acdb-67382de61e18" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1al8JMtbVW8eHhbaIEgcvlshjZN" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../安全与隐私/project2" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\pass\学习\毕设\OurUI\src\main\java\com\ucd\oursql\sql" />
+      <recent name="D:\pass\学习\毕设\OurUI\src\main\java\com\ucd\oursql\sql\system" />
+      <recent name="D:\pass\学习\毕设\OurUI\src\main\java\com\ucd\oursql\sql\test" />
+      <recent name="D:\pass\学习\毕设\OurUI\src\main\java\com\ucd\oursql\sql\table" />
+      <recent name="D:\pass\学习\毕设\OurUI\src\main\java\com\ucd\oursql\sql\parsing" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.OursqlApplication">
+    <configuration name="SqlParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ucd.oursql.sql.parsing.SqlParser" />
+      <module name="OurUI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ucd.oursql.sql.parsing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ucd.oursql.sql.table.BTree.Test" />
+      <module name="OurUI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ucd.oursql.sql.table.BTree.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OursqlApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="OurUI" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ucd.oursql.OursqlApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SqlParser" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f1314a47-da34-4f70-acdb-67382de61e18" name="Default Changelist" comment="" />
+      <created>1587298746967</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587298746967</updated>
+      <workItem from="1587298749780" duration="956000" />
+      <workItem from="1587299953919" duration="7768000" />
+      <workItem from="1587348096152" duration="4701000" />
+      <workItem from="1587359758111" duration="3181000" />
+      <workItem from="1587392696760" duration="4674000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

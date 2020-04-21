@@ -1,5 +1,6 @@
 package table;
 
+import parsing.Token;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 
@@ -75,7 +76,7 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
 
 
 
-    public boolean checkNotNull(List<Token> columnNames,List<List<Token>> values){
+    public boolean checkNotNull(List<Token> columnNames, List<List<Token>> values){
         for (ColumnDescriptor columnDescriptor : this) {
             DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
             if(columnDescriptor.getColumnName()!="primary key") {
