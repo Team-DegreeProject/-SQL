@@ -1,8 +1,7 @@
 package execution.table;
-
+import parsing.Token;
 import execution.ExecuteStatement;
 import execution.WhereStatament;
-import parsing.Token;
 import table.BTree.CglibBean;
 import table.Table;
 import java.util.ArrayList;
@@ -20,24 +19,33 @@ public class RenameTableStatement {
         statement=tokens;
     }
 
-    public boolean renameTableImpl() throws ClassNotFoundException {
+    public String renameTableImpl() throws ClassNotFoundException {
         Table database=ExecuteStatement.db.getDatabase();
         String oldName=((Token)statement.get(1)).image;
         String newName=((Token)statement.get(3)).image;
-        List att=new ArrayList();
+        String[] att={"tablename"};
         List values=new ArrayList();
-        att.add("table");
-        att.add("tablename");
+//        att.add("table");
+//        att.add("tablename");
         Table change= WhereStatament.compare(database,"tablename",EQ,oldName);
-        List list= (List) change.getTree().getDatas();
-        CglibBean c= (CglibBean) list.get(0);
-        Table table= (Table) c.getValue("table");
-        table.getTableDescriptor().setTableName(newName);
-        values.add(table);
         values.add(newName);
         boolean bool=database.updateTable(att,values,change);
-        database.printTable();
-        return bool;
+        if(bool==false){
+            database.printTable(null);
+            return "Rename Table Wrong!";
+        }
+
+        List list= (List) change.getTree().getDatas();
+        CglibBean c= (CglibBean) list.get(0);
+        Table table= new Table((Table) c.getValue("table"));
+        String[] namestt={"table"};
+        values=new ArrayList();
+        values.add(table);
+        table.getTableDescriptor().setTableName(newName);
+        bool=database.updateTable(namestt,values,change);
+
+        String output=database.printTable(null);
+        return output;
     }
 
 }

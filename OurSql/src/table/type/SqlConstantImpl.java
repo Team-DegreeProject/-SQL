@@ -1,7 +1,5 @@
 package table.type;
 
-//import org.omg.CORBA.PUBLIC_MEMBER;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +31,7 @@ public class SqlConstantImpl implements SqlConstant{
         sqlMap.put(TABLE,"table.Table");
         sqlMap.put(DATABASE,"table.Database");
         sqlMap.put(PRIMARY_KEY,"table.type.PrimaryKey");
+        sqlMap.put(DISTINCT,"table.type.Distinct");
     }
 
 

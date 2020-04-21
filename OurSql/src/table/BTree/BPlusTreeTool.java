@@ -1,12 +1,11 @@
 package table.BTree;
 
+import execution.DMLTool;
+import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class BPlusTreeTool {
 
@@ -100,11 +99,13 @@ public class BPlusTreeTool {
         printList(list,attribute);
     }
 
-    public static void printList(List list,TableDescriptor td){
+    public static String printList(List list,TableDescriptor td){
+        String str="";
 //        boolean first=true;
-        td.printColumnName();
+        str=td.printColumnName();
+        str=str+"-------------------------------------\n";
         System.out.println("-------------------------------------");
-        String[] attribute=td.getColumnNamesArray();
+        List attribute=td.getColumnNamesList();
         for(int i=0;i<list.size();i++){
             CglibBean c= (CglibBean) list.get(i);
 //            if(first){
@@ -126,21 +127,50 @@ public class BPlusTreeTool {
 //                System.out.println("-------------------------------------");
 //            }
 
-            for(int j=0;j<attribute.length;j++){
-                System.out.print(c.getValue(attribute[j]));
-                if(j!=attribute.length-1){
+            for(int j=0;j<attribute.size();j++){
+                System.out.print(c.getValue((String) attribute.get(j)));
+                str=str+c.getValue((String) attribute.get(j));
+                if(j!=attribute.size()-1){
                     System.out.print(",");
+                    str=str+",";
                 }else{
                     System.out.println(";");
+                    str=str+";\n";
                 }
             }
         }
+        return str;
     }
 
-    public static void printBPlusTree(BPlusTree b, TableDescriptor td){
+    public static String printBPlusTree(BPlusTree b, TableDescriptor td){
         List list=b.getDatas();
-        printList(list,td);
+        String str=printList(list,td);
+        str=str+"-------------------------------------------------------\n";
         System.out.println("-------------------------------------------------------");
+        return str;
+    }
+
+    public static void printBPlusTree(BPlusTree b, HashMap property){
+        List list=b.getDatas();
+        for(int i=0;i<list.size();i++){
+            CglibBean c= (CglibBean) list.get(i);
+            Iterator it=property.keySet().iterator();
+            while(it.hasNext()){
+                String name= (String) it.next();
+                System.out.println(name+":"+c.getValue(name)+",");
+            }
+            System.out.println();
+        }
+
+        System.out.println("-------------------------------------------------------");
+    }
+
+    public static String printBPlusTree(List list, TableDescriptor td){
+//        List list=b.getDatas();
+        String str=printList(list,td);
+        str=str+"-------------------------------------------------------\n";
+        System.out.println("-------------------------------------------------------");
+        return str;
     }
 
     public static List<CglibBean> getParticularAttribute(Table t, String attribute, Object value){
@@ -156,4 +186,29 @@ public class BPlusTreeTool {
         }
         return returnlist;
     }
+
+    public static BPlusTree getSubAttributes(ColumnDescriptorList co,ColumnDescriptorList cn,BPlusTree previous, HashMap property){
+        BPlusTree tree=new BPlusTree();
+//        HashMap property= DMLTool.selectNewPropertyMap(propertyMap,tokens);
+        List<CglibBean> data=previous.getDatas();
+        List names=DMLTool.getColumnNamesFromPropertyMap(property);
+        for(int i=0;i<data.size();i++){
+            CglibBean c=data.get(i);
+            CglibBean n=new CglibBean(property);
+            for(int j=0;j<names.size();j++){
+                String columnname= (String) names.get(j);
+                int p1=cn.getColumnDescriptor(columnname).getPosition();
+                String nn=co.getColumnDescriptor(p1).getColumnName();
+                Object o=c.getValue(nn);
+//                System.out.println(columnname+"-->"+o);
+                n.setValue(columnname,o);
+            }
+            Object pk=c.getValue("primary key");
+            n.setValue("primary key",pk);
+            tree.insert(n, (Comparable) n.getValue("primary key"));
+        }
+        return tree;
+    }
+
+
 }

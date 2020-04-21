@@ -4,11 +4,14 @@ import table.type.SqlType;
 import table.type.date.SqlDate;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class SqlDouble implements SqlType {
     private int scale=-1;
     private int precision=-1;
     private Double data=0.0;
+
+    public SqlDouble(){}
 
     public SqlDouble(double d){
         data=d;
@@ -34,21 +37,38 @@ public class SqlDouble implements SqlType {
         if(scale==-1&&precision==-1){
         }else if(scale<=precision){
             throw new Exception("Scale should not be smaller than or equal to precision.");
-        }else{
-            int temp=(int)data.doubleValue();
-            int size=scale-String.valueOf(temp).length();
-            BigDecimal bd=BigDecimal.valueOf(data);
-            if(size>=precision){
-                bd.setScale(precision,BigDecimal.ROUND_HALF_UP);
+        }else if(precision==-1){
+            int temp=data.intValue();
+            int length=String.valueOf(temp).length();
+            if(length>=scale){
+                String str=String.valueOf(temp);
+                str=str.substring(0,scale);
+                data=Double.parseDouble(str);
             }else{
-                bd.setScale(size,BigDecimal.ROUND_HALF_UP);
+                int size=scale-String.valueOf(temp).length();
+                NumberFormat nf = NumberFormat.getNumberInstance();
+                nf.setGroupingUsed(false);
+                nf.setMaximumFractionDigits(size);
+                data=Double.parseDouble(nf.format(data));
             }
-            data=bd.doubleValue();
+        }else{
+            int temp=data.intValue();
+            int size=scale-String.valueOf(temp).length();
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            nf.setGroupingUsed(false);
+            if(size>=precision){
+                nf.setMaximumFractionDigits(precision);
+            }else{
+                nf.setMaximumFractionDigits(size);
+            }
+            data=Double.parseDouble(nf.format(data));
         }
     }
 
-    public void setData(double data) {
+    public void setData(double data){
         this.data = data;
+//        this.data = data;
+//        System.out.println("=============setValue"+this.data);
         try {
             changeRange();
         } catch (Exception e) {
@@ -56,7 +76,7 @@ public class SqlDouble implements SqlType {
         }
     }
 
-    public void setScale(int scale) {
+    public void setScale(int scale) throws Exception {
         this.scale = scale;
     }
 
@@ -72,8 +92,13 @@ public class SqlDouble implements SqlType {
         return precision;
     }
 
-    public void setPrecision(int precision) {
+    public void setPrecision(int precision) throws Exception {
         this.precision = precision;
+    }
+
+    @Override
+    public void updateValue() throws Exception {
+        changeRange();
     }
 
 
@@ -88,8 +113,8 @@ public class SqlDouble implements SqlType {
     }
 
     @Override
-    public void setValue(String o) {
-        setData(Double.parseDouble(o));
+    public void setValue(String o){
+        setData(Double.valueOf(o));
     }
 
     @Override

@@ -75,7 +75,7 @@ public class descriptorLoader {
                 String comment = eachColunm.getChildText("comment");
 
                 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                SqlType columnDefaultValue = DMLTool.convertToValue(columnName,eachColunm.getChildText("columnDefaultValue"),propertyMap);
+//                SqlType columnDefaultValue = DMLTool.convertToValue(columnName,eachColunm.getChildText("columnDefaultValue"),propertyMap);
 
                 //DateTypeDescriptor
                 Element dataTypeDescriptor = eachColunm.getChild("DataTypeDescriptor");

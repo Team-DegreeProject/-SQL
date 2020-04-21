@@ -6,7 +6,8 @@ import table.Table;
 
 import java.util.List;
 
-public class InsertDataStatement {
+public class
+InsertDataStatement {
 
     List statement;
 
@@ -23,12 +24,12 @@ public class InsertDataStatement {
     //2.2.1 INSERT INTO table1 VALUES (value1, value2,…), (value1, value2,…),…;
     //2.2.2 INSERT INTO table1 (name1, name2) VALUES (value1, value2), (value1,
     //value2),…;
-    public boolean insertDataImpl() throws Exception {
+    public String insertDataImpl() throws Exception {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
         List<Token> attibutes= (List<Token>) statement.get(3);
         table.insertRows(attibutes,statement,5);
-        table.printTable();
-        return true;
+        String output=table.printTable(null);
+        return output;
     }
 }

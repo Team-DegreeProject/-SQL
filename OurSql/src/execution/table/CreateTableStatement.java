@@ -1,15 +1,13 @@
 package execution.table;
 
 import execution.ExecuteStatement;
-import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
 import table.type.SqlConstant;
-
-import java.util.ArrayList;
+import parsing.Token;
 import java.util.List;
 
 import static execution.DMLTool.analyseOneRow;
@@ -23,7 +21,7 @@ public class CreateTableStatement implements SqlConstant {
         statement=l;
     }
 
-    public Table createImpl() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public String createImpl() throws Exception {
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
         ColumnDescriptor columnp=new ColumnDescriptor("primary key",0,tp);
@@ -47,9 +45,9 @@ public class CreateTableStatement implements SqlConstant {
         td.updatePriamryKey();
         Table table=new Table(td);
         ExecuteStatement.db.insertTable(table);
-        table.printTable();
-        td.printTableDescriptor();
-        return table;
+        String output=ExecuteStatement.db.printDatabase()+"\n"+table.printTable(null);
+//        td.printTableDescriptor();
+        return output;
     }
 
     public boolean isTableConstraint(List row,ColumnDescriptorList columnDescriptorList){

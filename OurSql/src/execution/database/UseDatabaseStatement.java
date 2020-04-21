@@ -17,7 +17,7 @@ public class UseDatabaseStatement {
     public UseDatabaseStatement(List token){
         statement=token;
     }
-    public  boolean useDatabaseStatementImpl() throws ClassNotFoundException {
+    public  String useDatabaseStatementImpl() throws ClassNotFoundException {
         ExecuteStatement.uad.printUserAccessedDatabase();
         Table table=ExecuteStatement.uad.getUserAccessedDatabase();
         String databaseName=((Token)statement.get(1)).image;
@@ -25,8 +25,9 @@ public class UseDatabaseStatement {
         ExecuteStatement.uad.printUserAccessedDatabase();
         CglibBean c= (CglibBean) t.getTree().getDatas().get(0);
         Database database= (Database) c.getValue("database");
-        database.getDatabase().printTable();
+        database.getDatabase().printTable(null);
         ExecuteStatement.db=database;
-        return true;
+        String output=database.printDatabase();
+        return output;
     }
 }

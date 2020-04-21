@@ -16,13 +16,14 @@ public class DropDatabaseStatement {
     public DropDatabaseStatement(List tokens){
         statement=tokens;
     }
-    public boolean dropDatabaseStatementImpl() throws ClassNotFoundException {
+    public String dropDatabaseStatementImpl() throws ClassNotFoundException {
         if(statement==null){
-            return false;
+            return "Drop Database Wrong!";
         }
         String databaseName=((Token)statement.get(2)).image;
         Table delete=WhereStatament.compare(ExecuteStatement.uad.getUserAccessedDatabase(),"databasename",EQ,databaseName);
         ExecuteStatement.uad.getUserAccessedDatabase().deleteRows(delete);
-        return true;
+        String output=ExecuteStatement.uad.printUserAccessedDatabase();
+        return output;
     }
 }

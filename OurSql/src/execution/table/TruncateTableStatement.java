@@ -1,10 +1,7 @@
 package execution.table;
 
-import execution.ExecuteStatement;
 import execution.FromStatement;
 import parsing.Token;
-import table.BTree.BPlusTreeTool;
-import table.BTree.CglibBean;
 import table.Table;
 
 import java.util.List;
@@ -19,11 +16,11 @@ public class TruncateTableStatement {
         statement=tokens;
     }
 
-    public boolean truncateTableImpl() throws Exception {
+    public String truncateTableImpl() throws Exception {
         String name=((Token)statement.get(1)).image;
         Table truncate=FromStatement.from(name);
         truncate.cleanAllData();
-        truncate.printTable();
-        return true;
+        String output=truncate.printTable(null);
+        return output;
     }
 }

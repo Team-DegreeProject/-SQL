@@ -2,12 +2,9 @@ package execution.data;
 
 import execution.FromStatement;
 import execution.WhereStatament;
-import javafx.scene.control.Tab;
 import parsing.Token;
 import table.Table;
-import table.type.SqlType;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static parsing.SqlParserConstants.*;
@@ -49,7 +46,7 @@ public class DeleteDataStatement {
 //    }
 
 
-    public boolean deleteDataImpl() throws Exception {
+    public String deleteDataImpl() throws Exception {
         String tablename=((Token)statement.get(2)).image;
         Table table= FromStatement.from(tablename);
         List conditions= (List) statement.get(4);
@@ -81,10 +78,10 @@ public class DeleteDataStatement {
 //                }
 //            }
 //        }
-        change.printTable();
+        change.printTable(null);
         table.deleteRows(change);
-        table.printTable();
-        return true;
+        String output=table.printTable(null);
+        return output;
     }
 
 

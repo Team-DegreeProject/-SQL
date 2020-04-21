@@ -15,7 +15,21 @@ public class ColumnDescriptor{
     private long autoincValue=0;
     private SqlType columnDefaultValue=null;
     private String comment=null;
+    private boolean unique=false;
 
+
+    public ColumnDescriptor(TableDescriptor table,String columnName,int columnPosition,DataTypeDescriptor columnType,long autoincStart,boolean autoincInc,long autoincValue,SqlType columnDefaultValue,String comment,boolean unique){
+        this.table=table;
+        this.columnName=columnName;
+        this.columnPosition=columnPosition;
+        this.columnType=columnType;
+        this.autoincStart=autoincStart;
+        this.autoincInc=autoincInc;
+        this.autoincValue=autoincValue;
+        this.columnDefaultValue=columnDefaultValue;
+        this.comment=comment;
+        this.unique=unique;
+    }
 
     /**
      * ColumnDescriptor的构造器
@@ -79,7 +93,6 @@ public class ColumnDescriptor{
         this.columnPosition = columnPosition;
         this.columnType = columnType;
     }
-
 
 
 
@@ -196,6 +209,17 @@ public class ColumnDescriptor{
         this.comment = comment;
     }
 
+    public boolean isUnique() {
+        return unique;
+    }
+
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+        if(unique==true){
+            this.columnType.setNullable(false);
+        }
+    }
+
     public void printColumnDescriptor(){
         System.out.println(
                 "ColumnDescriptor============"+
@@ -203,12 +227,18 @@ public class ColumnDescriptor{
                         "ColumnPosition:"+columnPosition+","+
                         "autoIncrement:"+autoincInc+","+
                         "ColumnDefaultValue:"+columnDefaultValue+","+
-                        "Comment:"+comment
+                        "Comment:"+comment+","+
+                        "unique"+unique
         );
         if (columnType == null) {
             System.out.println("DatatypeDescriptor==============null");
         }else{
             columnType.printDataTypeDescriptor();
         }
+    }
+
+    public ColumnDescriptor getNewColumnDescripter(){
+        ColumnDescriptor c=new ColumnDescriptor(table,columnName,columnPosition,columnType.getNewDataTypeDescripter(),autoincStart,autoincInc,autoincValue,columnDefaultValue,comment,unique);
+        return c;
     }
 }

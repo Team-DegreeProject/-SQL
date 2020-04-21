@@ -37,15 +37,6 @@ public class CglibBean {
         beanMap.put(property, value);
     }
 
-    public boolean putValue(String property, Object value) {
-        Object o=beanMap.put(property, value);
-        System.out.println(o);
-        if(o==null){
-            return false;
-        }
-        return true;
-    }
-
     /**
      * 通过属性名得到属性值
      * @param property 属性名

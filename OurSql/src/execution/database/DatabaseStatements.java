@@ -4,48 +4,60 @@ import java.util.List;
 
 public class DatabaseStatements {
 
-    public static void createDatabase(List tokens){
+    public static String createDatabase(List tokens){
+        String out="Wrong: Create Database !";
         try {
             CreateDatabaseStatement cds=new CreateDatabaseStatement(tokens);
-            cds.createDatabaseImpl();
+            out=cds.createDatabaseImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return out;
     }
 
-    public static void renameDatabase(List tokens){
+    public static String renameDatabase(List tokens){
+        String out="Wrong: Rename Database !";
         try {
             RenameDatabaseStatement renameDatabaseStatement=new RenameDatabaseStatement(tokens);
-            renameDatabaseStatement.renameDatabaseImpl();
+            out=renameDatabaseStatement.renameDatabaseImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
     }
 
-    public static void showDatabase(List tokens){
+    public static String showDatabase(List tokens){
+        String out="Wrong: Show Database !";
         ShowDatabaseStatement sds=new ShowDatabaseStatement();
-        sds.showDatabaseStatementImpl();
+        out=sds.showDatabaseStatementImpl();
+        return out;
     }
 
-    public static void dropDatabase(List tokens){
+    public static String dropDatabase(List tokens){
+        String out="Wrong: Drop Database !";
         try {
             DropDatabaseStatement dds=new DropDatabaseStatement(tokens);
-            dds.dropDatabaseStatementImpl();
+            out=dds.dropDatabaseStatementImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
     }
 
-    public static void useDatabase(List tokens){
+    public static String useDatabase(List tokens){
+        String out="Wrong: Use Database !";
         try {
             UseDatabaseStatement uds=new UseDatabaseStatement(tokens);
-            uds.useDatabaseStatementImpl();
+            out=uds.useDatabaseStatementImpl();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return out;
     }
 }

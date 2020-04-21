@@ -1,20 +1,22 @@
 package table.BTree;
 
+import table.type.PrimaryKey;
+
 public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     protected Object values[];
     protected LeafNode left;
     protected LeafNode right;
 
+    public Object[] getValues() {
+        return values;
+    }
+
     public LeafNode(){
         super();
         this.values = new Object[BPlusTree.getmaxKeyNumber()];
         this.left = null;
         this.right = null;
-    }
-
-    public Object[] getValues(){
-        return values;
     }
 
     public LeafNode(Node parent,Object[] values,int keyNumber,Object[] keys){
@@ -26,20 +28,44 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     //二分查找
     @Override
     public T select(V key) {
+//        if(key instanceof PrimaryKey){
+//            System.out.println("select :");
+//            ((PrimaryKey) key).printPK();
+//        }
+
         if(this.keyNumber <=0 || key.compareTo((V)this.keys[this.keyNumber-1])>0)
             return null;
         int low = 0;
         int up = this.keyNumber;
         int middle = (low + up) / 2;
         while(low < up){
+//            System.out.println("low:"+low+"up:"+up+"middle: "+middle);
             V middleKey = (V) this.keys[middle];
-            if(key.compareTo(middleKey) == 0)
+            if(key.compareTo(middleKey) == 0) {
+//                System.out.println("case1");
                 return (T) this.values[middle];
-            else if(key.compareTo(middleKey) < 0)
+            }else if(key.compareTo(middleKey) < 0) {
+//                System.out.println("case2");
                 up = middle;
-            else
+            }else {
+//                System.out.println("case3");
                 low = middle;
+            }
             middle = (low + up) / 2;
+            if(middle==low){
+//                System.out.println("low:"+low+"up:"+up+"middle: "+middle);
+                middleKey=(V) this.keys[middle];
+                if(key.compareTo(middleKey) == 0){
+//                    System.out.println("case4");
+                    return (T) this.values[middle];
+                }
+                else if(key.compareTo((V)this.values[middle+1]) == 0){
+                    return (T)this.values[middle+1];
+                }else{
+                    break;
+                }
+
+            }
         }
         return null;
     }
@@ -53,10 +79,7 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     @Override
     public Node<T, V> insert(T value, V key) {
         //找到插入数据位置
-//        System.out.println("当前叶节点key为:");
-//        for(int j = 0; j < this.keyNumber; j++)
-//            System.out.print(this.keys[j] + " ");
-//        System.out.println();
+
         int i = this.keyNumber-1;
 //        if(this.keyNumber==0){
 //            this.keys[0]=key;
@@ -196,20 +219,14 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
 
     @Override
     public boolean delete(V key) {
-//        System.out.println("当前叶节点key为:");
-//        for(int j = 0; j < this.keyNumber; j++)
-//            System.out.print(this.keys[j] + " ");
-//        System.out.println();
         V oldKey=(V)this.keys[0];
 
         //找到删除数据位置
         int i = this.keyNumber-1;
         while(i >=0){
             if(key.compareTo((V) this.keys[i]) == 0){
-//                System.out.println("Key:"+key+",this.keys:"+this.keys[i]);
                 break;
             }
-//            System.out.println("Key:"+key+",this.keys:"+this.keys[i]);
             i--;
         }
         if(i==(-1)){
@@ -221,8 +238,8 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         Object tempKeys[] = new Object[BPlusTree.getmaxKeyNumber()];
         Object tempValues[] = new Object[BPlusTree.getmaxKeyNumber()];
         if(i==0){
-            System.arraycopy(this.keys, 1, tempKeys, 0, this.keyNumber  -1);
-            System.arraycopy(this.values, 1, tempValues, 0, this.keyNumber  -1);
+            System.arraycopy(this.keys, 0, tempKeys, 0, i);
+            System.arraycopy(this.values, 0, tempValues, 0, i);
         }else{
             System.arraycopy(this.keys, 0, tempKeys, 0, i);
             System.arraycopy(this.values, 0, tempValues, 0, i);
@@ -236,10 +253,6 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
         if(i==0 && this.keyNumber!=0){
             changeParentKey(this,oldKey);
         }
-//        System.out.println("当前叶节点key为:");
-//        for(int j = 0; j < this.keyNumber; j++)
-//            System.out.print(this.keys[j] + " ");
-//        System.out.println();
         return false;
     }
 
@@ -279,8 +292,11 @@ public class LeafNode <T, V extends Comparable<V>> extends Node<T, V> {
     }
     @Override
     LeafNode<T, V> refreshLeft() {
-        if(this.keyNumber < 0)
-            return null;
+        return this;
+    }
+
+    @Override
+    LeafNode<T, V> refreshRight() {
         return this;
     }
 

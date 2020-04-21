@@ -18,6 +18,14 @@ public class DataTypeDescriptor implements SqlConstant {
         this.primaryKey=true;
     }
 
+    public DataTypeDescriptor(int typeId, int precision,int scale,boolean isNullable,boolean primaryKey) {
+        this.typeId = typeId;
+        this.precision=precision;
+        this.scale=scale;
+        this.isNullable = isNullable;
+        this.primaryKey=true;
+    }
+
     public DataTypeDescriptor(int typeId) {
         this.typeId = typeId;
     }
@@ -106,6 +114,12 @@ public class DataTypeDescriptor implements SqlConstant {
                 "PrimaryKey:"+primaryKey
         );
     }
+
+    public DataTypeDescriptor getNewDataTypeDescripter(){
+        DataTypeDescriptor d=new DataTypeDescriptor(this.typeId,this.precision,this.scale,this.isNullable,this.primaryKey);
+        return d;
+    }
+
 
 }
 

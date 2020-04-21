@@ -1,5 +1,4 @@
 package execution;
-
 import parsing.Token;
 import table.BTree.BPlusTree;
 import table.BTree.BPlusTreeTool;
@@ -78,28 +77,28 @@ public class WhereStatament {
         return t;
     }
 
-    public static Table inCondition(Table t,List tokens) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static Table inCondition(Table t,List tokens) throws Exception {
         String att=((Token)tokens.get(0)).image;
         HashMap propertyMap=t.getPropertyMap();
         Table change=null;
         List<Token> conditions= (List) tokens.get(2);
         for(int i=0;i<conditions.size();i++){
             String str=conditions.get(i).image;
-            SqlType value=convertToValue(att,str,propertyMap);
+            SqlType value=convertToValue(att,str,propertyMap,t.getTableDescriptor().getColumnDescriptorList());
             Table temp=compare(t, att, EQ, value);
             change=WhereStatament.whereOr(change,temp);
         }
         return change;
     }
 
-    public static Table betweenCondition(Table t,List<Token> tokens) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static Table betweenCondition(Table t,List<Token> tokens) throws Exception {
         String att=((Token)tokens.get(0)).image;
         HashMap propertyMap=t.getPropertyMap();
         Table temp=t;
         String str1=tokens.get(2).image;
-        SqlType value1= convertToValue(att,str1,propertyMap);
+        SqlType value1= convertToValue(att,str1,propertyMap,t.getTableDescriptor().getColumnDescriptorList());
         String str2=tokens.get(4).image;
-        SqlType value2= convertToValue(att,str2,propertyMap);
+        SqlType value2= convertToValue(att,str2,propertyMap,t.getTableDescriptor().getColumnDescriptorList());
         temp=compare(temp, att, LQ, value1);
         temp=compare(temp, att, RQ, value2);
         if(t.equals(temp)){
@@ -109,11 +108,11 @@ public class WhereStatament {
         return temp;
     }
 
-    public static Table basicCondition(Table t,List<Token> tokens) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static Table basicCondition(Table t,List<Token> tokens) throws Exception {
         String attribute=((Token)tokens.get(0)).image;
         int type=((Token)tokens.get(1)).kind;
         String str= ((Token) tokens.get(2)).image;
-        SqlType value=DMLTool.convertToValue(attribute,str,t.getPropertyMap());
+        SqlType value=DMLTool.convertToValue(attribute,str,t.getPropertyMap(),t.getTableDescriptor().getColumnDescriptorList());
         Table table=compare(t,attribute,type,value);
         return table;
     }
@@ -149,11 +148,11 @@ public class WhereStatament {
         if(change==null){
             throw new Exception("There is no change");
         }
-        change.printTable();
+        change.printTable(null);
         return change;
     }
 
-    public static Table checkAType(List condition,Table table) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static Table checkAType(List condition,Table table) throws Exception {
         int type=((Token)condition.get(1)).kind;
         Table change=null;
         if(type==IN){

@@ -1,11 +1,12 @@
 package table;
 
-import parsing.Token;
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-
+import parsing.Token;
 import java.util.ArrayList;
 import java.util.List;
+
+import static table.type.SqlConstantImpl.sqlMap;
 
 public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
 
@@ -72,19 +73,17 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return true;
     }
 
+
+
     public boolean checkNotNull(List<Token> columnNames,List<List<Token>> values){
-        System.out.println(this.size());
         for (ColumnDescriptor columnDescriptor : this) {
-            System.out.println(columnDescriptor);
             DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
-            System.out.println(dataTypeDescriptor.isNullable());
             if(columnDescriptor.getColumnName()!="primary key") {
                 if (!dataTypeDescriptor.isNullable()) {
                     boolean b = false;
                     for (int i = 0; i < columnNames.size(); i++) {
                         String name = columnNames.get(i).image;
                         if (name.equals(columnDescriptor.getColumnName())) {
-                            System.out.println(values.get(i).get(0).image);
                             if (values.get(i).get(0).image.equals("null")) {
                                 return false;
                             }
@@ -101,6 +100,8 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return true;
     }
 
+
+
     public ColumnDescriptorList getAutoIncrementList(){
         ColumnDescriptorList columnDescriptors=new ColumnDescriptorList();
         for (ColumnDescriptor columnDescriptor : this) {
@@ -111,5 +112,32 @@ public class ColumnDescriptorList extends ArrayList<ColumnDescriptor> {
         return columnDescriptors;
     }
 
+
+
+    public  ColumnDescriptorList getUniqueList(){
+        ColumnDescriptorList columnDescriptors=new ColumnDescriptorList();
+        for (ColumnDescriptor columnDescriptor : this) {
+            if(columnDescriptor.isUnique()){
+                columnDescriptors.add(columnDescriptor);
+            }
+        }
+        return columnDescriptors;
+    }
+
+
+    public void printColumnDescriptorList(){
+        for (ColumnDescriptor columnDescriptor : this) {
+            DataTypeDescriptor dataTypeDescriptor=columnDescriptor.getType();
+            System.out.println(columnDescriptor.getColumnName()+"-->"+sqlMap.get(dataTypeDescriptor.getTypeId()));
+        }
+    }
+
+    public ColumnDescriptorList getNewColumnDescriptorList(){
+        ColumnDescriptorList newl=new ColumnDescriptorList();
+        for (ColumnDescriptor columnDescriptor : this) {
+            newl.add(columnDescriptor.getNewColumnDescripter());
+        }
+        return newl;
+    }
 
 }

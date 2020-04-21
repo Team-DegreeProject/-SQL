@@ -38,6 +38,7 @@ public class UserAccessedDatabases {
         ColumnDescriptorList columns=new ColumnDescriptorList();
         DataTypeDescriptor id= new DataTypeDescriptor(INT,false);
         ColumnDescriptor column=new ColumnDescriptor("id",1,id);
+        column.setUnique(true);
         primaryKey.add(column);
         columns.add(column);
         DataTypeDescriptor user= new DataTypeDescriptor(USER,false);
@@ -48,6 +49,7 @@ public class UserAccessedDatabases {
         columns.add(column);
         DataTypeDescriptor tn= new DataTypeDescriptor(STRING,false);
         column=new ColumnDescriptor("databasename",4,tn);
+        column.setUnique(true);
         columns.add(column);
         DataTypeDescriptor tp=new DataTypeDescriptor(PRIMARY_KEY,false);
         column=new ColumnDescriptor("primary key",0,tp);
@@ -59,12 +61,12 @@ public class UserAccessedDatabases {
         return userAccessedDatabase;
     }
 
-    public boolean insertDatabase(Database database) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public boolean insertDatabase(Database database) throws Exception {
         int id=length;
         length++;
         PrimaryKey pk=new PrimaryKey();
         SqlInt sqlid=new SqlInt(id);
-        pk.addPrimaryKey(sqlid);
+        pk.addPrimaryKey("id",sqlid);
         List values=new ArrayList();
         values.add(pk);
         values.add(sqlid);
@@ -80,10 +82,11 @@ public class UserAccessedDatabases {
         BPlusTreeTool.printBPlusTree(tree,"database");
     }
 
-    public void printUserAccessedDatabase(){
+    public String printUserAccessedDatabase(){
 //        BPlusTree b=userAccessedDatabase.getTree();
 //        BPlusTreeTool.printBPlusTree(b);
-        userAccessedDatabase.printTable();
+        String str=userAccessedDatabase.printTable(null);
+        return str;
     }
 
     public void setUser(User user) {

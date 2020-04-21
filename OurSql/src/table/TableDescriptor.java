@@ -2,6 +2,7 @@ package table;
 
 import table.column.ColumnDescriptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static table.type.SqlConstantImpl.sqlMap;
@@ -83,6 +84,16 @@ public class TableDescriptor implements TableSchema {
         return s;
     }
 
+    public List getColumnNamesList() {
+        int size = getNumberOfColumns();
+        List s=new ArrayList();
+        for (int i = 0; i < size; i++) {
+            s.add(columnDescriptorList.elementAt(i).getColumnName()) ;
+        }
+
+        return s;
+    }
+
     public int[] getColumnIdsArray() {
         int size = getNumberOfColumns();
         int[] s = new int[size];
@@ -126,16 +137,21 @@ public class TableDescriptor implements TableSchema {
         }
     }
 
-    public void printColumnName(){
-        String[] columns=this.getColumnNamesArray();
-        for(int i=0;i<columns.length;i++){
-            System.out.print(columns[i]);
-            if(i!=columns.length-1){
+    public String printColumnName(){
+        String str="";
+        List columns=this.getColumnNamesList();
+        for(int i=0;i<columns.size();i++){
+            System.out.print(columns.get(i));
+            str=str+columns.get(i);
+            if(i!=columns.size()-1){
                 System.out.print(",");
+                str=str+",";
             }else{
                 System.out.println(";");
+                str=str+";\n";
             }
         }
+        return str;
     }
 
     public String getTableName() {
@@ -181,5 +197,8 @@ public class TableDescriptor implements TableSchema {
         }
     }
 
+    public int getSchema() {
+        return schema;
+    }
 }
 
