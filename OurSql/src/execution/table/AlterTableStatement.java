@@ -1,5 +1,5 @@
 package execution.table;
-import parsing.Token;
+
 import execution.FromStatement;
 import table.ColumnDescriptorList;
 import table.Table;

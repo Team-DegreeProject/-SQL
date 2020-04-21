@@ -1,6 +1,5 @@
 package execution;
 
-import parsing.Token;
 import table.ColumnDescriptorList;
 import table.Table;
 import table.TableDescriptor;

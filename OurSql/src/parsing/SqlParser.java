@@ -37,8 +37,7 @@ public class SqlParser implements SqlParserConstants {
         {
 
             SqlParser parser = new SqlParser(System.in);
-            String result=parser.parse();
-            System.out.println("result: "+result);
+            parser.parse();
             System.out.println("sql is correct!");
             System.out.println();
             System.out.println("-----------------------------------------------------------");
@@ -51,17 +50,16 @@ public class SqlParser implements SqlParserConstants {
 
     }
 
-  final public String parse() throws ParseException {
+  final public void parse() throws ParseException {
     Token t;
     sql = new ArrayList<Object>();
-    String result="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case CREATE:
       //***************1	CREATE ************************************************
           //1.1.1	CREATE DATABASE testdbï¼?
           //1.1.1	CREATE TABLE table_name	();
           t = jj_consume_token(CREATE);
-                    result=create(t);
+      create(t);
       break;
     case DROP:
       t = jj_consume_token(DROP);
@@ -109,8 +107,6 @@ public class SqlParser implements SqlParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-     {if (true) return result;}
-    throw new Error("Missing return statement in function");
   }
 
   final public void select(Token d) throws ParseException {
@@ -518,7 +514,6 @@ public class SqlParser implements SqlParserConstants {
     }
      System.out.println("------ test interface position --------");
     String a = ExecuteStatement.create(sql);// %%
-    System.out.println("result: ----------"+a);
     {if (true) return a;}
     throw new Error("Missing return statement in function");
   }

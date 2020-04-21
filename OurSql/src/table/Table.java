@@ -9,7 +9,7 @@ import table.column.DataTypeDescriptor;
 import table.type.PrimaryKey;
 import table.type.SqlConstantImpl;
 import table.type.SqlType;
-import parsing.Token;
+
 import java.util.*;
 
 import static execution.DMLTool.analyseOneRow;

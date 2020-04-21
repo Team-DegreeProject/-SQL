@@ -2,7 +2,7 @@ package table;
 
 import table.column.ColumnDescriptor;
 import table.column.DataTypeDescriptor;
-import parsing.Token;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,5 @@
-options {
+options
+{
     static=false;
     IGNORE_CASE=true;
 }
@@ -43,8 +44,7 @@ public class SqlParser {
         {
 
             SqlParser parser = new SqlParser(System.in);
-            String result=parser.parse();
-            System.out.println("result: "+result);
+            parser.parse();
             System.out.println("sql is correct!");
             System.out.println();
             System.out.println("-----------------------------------------------------------");
@@ -509,18 +509,16 @@ TOKEN :
 <END : "!!">
 }
 
-String parse() :
+void parse() :
 {
     Token t;
     sql = new ArrayList<Object>();
-    String result=null;
 }
 {
- (
     //***************1	CREATE ************************************************
     //1.1.1	CREATE DATABASE testdb；
     //1.1.1	CREATE TABLE table_name	();
-    t = <CREATE>   {result=create(t);}
+    t = <CREATE>   create(t)
 
     //***************2	DROP***************************************************
     //2.1.1	DROP DATABSE databse_name;
@@ -557,9 +555,6 @@ String parse() :
     |t = <DELETE>   delete(t)
      //***************TRUNCATE*******************************************************
     |t = <TRUNCATE>   truncate(t)
- )
-    {return result;}
-
 }
 
 void select(Token d):
@@ -810,7 +805,6 @@ String create(Token d) :
 
  {
     String a = ExecuteStatement.create(sql);// %%
-    System.out.println("result: ----------"+a);
     return a;
  }
     // {test.testWhereAnd(sql);} // %%

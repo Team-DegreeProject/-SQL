@@ -2,7 +2,6 @@ package execution.database;
 
 import execution.ExecuteStatement;
 import execution.WhereStatament;
-import parsing.Token;
 import table.Table;
 
 import java.util.List;
