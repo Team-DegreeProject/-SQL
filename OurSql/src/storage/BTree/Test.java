@@ -54,8 +54,8 @@ public class Test {
 //            System.out.println("name of the variable are : " + varName.substring(12,varName.length()));
 //        }
 
-        TreeSaver TS = new TreeSaver(b);
-        TS.SaveAsXML();
+        TreeSaver TS = new TreeSaver();
+        TS.SaveAsXML(b);
         TreeLoader TL = new TreeLoader();
         BPlusTree testTree = TL.loadFromFile("test");
 //        System.out.println((CglibBean)testTree.select(23));

@@ -50,8 +50,8 @@ public class alterTable {
 
             }
             else if(eachUnit.getAlterType().equals(Configuration.CREATE)){
-                TreeSaver ts = new TreeSaver(eachUnit.getBtree());
-                ts.SaveAsXML();
+                TreeSaver ts = new TreeSaver();
+                ts.SaveAsXML(eachUnit.getBtree());
             }
             else if(eachUnit.getAlterType().equals(Configuration.UPDATE)){
                 String tableName = eachUnit.getTableName();
@@ -61,8 +61,8 @@ public class alterTable {
                 if(file != null){
                     file.delete();
                 }
-                TreeSaver ts = new TreeSaver(eachUnit.getBtree());
-                ts.SaveAsXML();
+                TreeSaver ts = new TreeSaver();
+                ts.SaveAsXML(eachUnit.getBtree());
             }
 
         }
